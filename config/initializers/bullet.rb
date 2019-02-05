@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 if defined?(Bullet) && ENV['ENABLE_BULLET']
   Rails.application.configure do
     config.after_initialize do

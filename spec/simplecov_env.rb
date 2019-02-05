@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'simplecov'
 
 module SimpleCovEnv
-  extend self
+  module_function
 
   def start!
     return unless ENV['SIMPLECOV']

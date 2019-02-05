@@ -1,0 +1,34 @@
+inherit_from: .rubocop_todo.yml
+require: rubocop-rspec
+
+AllCops:
+  TargetRailsVersion: 5.0
+  Exclude:
+    - 'vendor/**/*'
+    - 'node_modules/**/*'
+    - 'db/fixtures/**/*'
+    - 'db/schema.rb'
+    - 'tmp/**/*'
+    - 'bin/**/*'
+  CacheRootDirectory: tmp
+
+# Frozen String Literal
+Style/FrozenStringLiteralComment:
+  Enabled: true
+  Exclude:
+    - 'config.ru'
+    - 'Gemfile'
+    - 'Rakefile'
+    - 'app/views/**/*'
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'lib/tasks/**/*'
+    - 'scripts/**/*'
+    - 'spec/**/*'
+
+# This cop checks whether some constant value isn't a
+# mutable literal (e.g. array or hash).
+Style/MutableConstant:
+  Enabled: true
+  Exclude:
+    - 'db/migrate/**/*'
