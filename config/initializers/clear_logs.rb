@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This snippet simply clears your logs when they are too large.
 # Every time you run rails server or rails console it checks log sizes
 # and clears the logs for you if necessary.
