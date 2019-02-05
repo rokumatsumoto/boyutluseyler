@@ -1,3 +1,18 @@
+# Testing best practices
+
+## Test speed
+
+It's important that we make an effort to write tests that are accurate
+and effective _as well as_ fast.
+
+Here are some things to keep in mind regarding test performance:
+
+- `double` and `spy` are faster than `FactoryBot.build(...)`
+- `FactoryBot.build(...)` and `.build_stubbed` are faster than `.create`.
+- Don't `create` an object when `build`, `build_stubbed`, `attributes_for`,
+  `spy`, or `double` will do. Database persistence is slow!
+- Don't mark a feature as requiring JavaScript (through `:js` in RSpec) unless it's _actually_ required for the test to be valid. Headless browser testing is slow!
+
 #### SQL database
 
 This is managed for us by the `database_cleaner` gem. Each spec is surrounded in
