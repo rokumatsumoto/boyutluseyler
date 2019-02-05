@@ -44,7 +44,7 @@ gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 # Forms
 gem 'simple_form', '~> 4.1'
 # Icons
-gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.4'
+gem 'font-awesome-sass', '~> 5.6', '>= 5.6.1'
 # Clean URL (https://en.wikipedia.org/wiki/Clean_URL)
 gem 'friendly_id', '~> 5.2', '>= 5.2.5'
 # HAML
