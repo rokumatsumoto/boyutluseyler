@@ -146,6 +146,9 @@ GEM
       pry (>= 0.9.12)
       shellany (~> 0.0)
       thor (>= 0.18.1)
+    guard-annotate (2.3)
+      annotate (~> 2.4, >= 2.4.0)
+      guard-compat (~> 1.2, >= 1.2.1)
     guard-brakeman (0.8.3)
       brakeman (>= 2.1.1)
       guard (>= 2.0.0)
@@ -418,7 +421,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  annotate (~> 2.7, >= 2.7.4)
   better_errors (~> 2.5)
   binding_of_caller (~> 0.8.0)
   bootsnap (>= 1.1.0)
@@ -436,6 +438,7 @@ DEPENDENCIES
   font-awesome-sass (~> 5.6, >= 5.6.1)
   friendly_id (~> 5.2, >= 5.2.5)
   guard (~> 2.15)
+  guard-annotate (~> 2.3)
   guard-brakeman (~> 0.8.3)
   guard-rspec (~> 4.7, >= 4.7.3)
   guard-rubocop (~> 1.3)

@@ -26,6 +26,7 @@
 #  * zeus: 'zeus rspec' (requires the server to be started separately)
 #  * 'just' rspec: 'rspec'
 
+# rubocop:disable Metrics/BlockLength
 group 'specs', halt_on_fail: true do
   guard :rspec, cmd: 'bin/rspec', failed_mode: :keep, all_on_start: true do
     require 'guard/rspec/dsl'
@@ -71,12 +72,27 @@ group 'specs', halt_on_fail: true do
       Dir[File.join("**/#{m[1]}.feature")][0] || 'spec/acceptance'
     end
   end
+  # rubocop:enable Metrics/BlockLength
 
   guard :rubocop, all_on_start: false, cmd: 'rubocop --format fuubar -F' do
     watch(/.+\.rb$/)
     watch(%r{(?:.+/)?\.rubocop(?:_todo)?\.yml$}) { |m| File.dirname(m[0]) }
   end
 
+  guard 'annotate' do
+    watch('db/schema.rb')
+
+    # Uncomment the following line if you also want to run annotate anytime
+    # a model file changes
+    # watch( 'app/models/**/*.rb' )
+
+    # Uncomment the following line if you are running routes annotation
+    # with the ":routes => true" option
+    # watch( 'config/routes.rb' )
+  end
+end
+
+group 'security' do
   guard :brakeman, run_on_start: true, quiet: true do
     watch(%r{^app/.+\.(erb|haml|rhtml|rb)$})
     watch(%r{^config/.+\.rb$})
@@ -85,4 +101,4 @@ group 'specs', halt_on_fail: true do
   end
 end
 
-scope group: :specs
+scope groups: %i[specs security]
