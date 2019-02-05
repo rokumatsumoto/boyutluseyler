@@ -95,8 +95,8 @@ group :development do
   gem 'meta_request', '~> 0.6.0'
 
   # Security
-  gem 'brakeman', '~> 4.4', require: false
-
+  # gem 'brakeman', '~> 4.4', require: false
+  gem 'guard-brakeman', '~> 0.8.3', require: false
   # Catch unsafe migrations at dev time
   gem 'strong_migrations', '~> 0.3.1'
 
