@@ -12,6 +12,8 @@
 # the additional setup, and require it from the spec files that actually need
 # it.
 
+require './spec/simplecov_env'
+SimpleCovEnv.start!
 
 ENV["RAILS_ENV"] = 'test'
 require File.expand_path('../../config/environment', __FILE__)
