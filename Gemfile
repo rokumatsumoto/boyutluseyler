@@ -112,6 +112,7 @@ group :test do
   gem 'shoulda-matchers', '4.0.0.rc1', require: false
   gem 'rails-controller-testing'
   gem 'pundit-matchers', '~> 1.6'
+  gem 'timecop', '~> 0.9.1'
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
