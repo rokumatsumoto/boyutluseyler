@@ -58,7 +58,7 @@ group :development, :test do
   # Formatter
   gem 'fivemat', '~> 1.3', '>= 1.3.7'
   # RSpec BDD & TDD
-  gem 'database_cleaner', '~> 1.7'
+  # gem 'database_cleaner', '~> 1.7' # see /spec/support/db_cleaner.rb
   gem 'factory_bot_rails', '~> 5.0'
   gem 'rspec-rails', '~> 3.8', '>= 3.8.2'
   # gem 'vcr', '~> 4.0'
@@ -115,6 +115,7 @@ group :test do
   gem 'timecop', '~> 0.9.1'
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
+  gem 'capybara-screenshot', '~> 1.0', '>= 1.0.22'
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
