@@ -70,7 +70,7 @@ group :development, :test do
 
   # Lints
   gem 'rubocop', '~> 0.63.1', require: false
-  gem 'rubocop-rspec', '~> 1.32'
+  gem 'rubocop-rspec', '~> 1.32', require: false
 
   gem 'haml_lint', '~> 0.28.0', require: false
 
