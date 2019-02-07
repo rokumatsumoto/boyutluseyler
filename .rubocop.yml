@@ -12,7 +12,6 @@ AllCops:
     - 'bin/**/*'
   CacheRootDirectory: tmp
 
-# Frozen String Literal
 Style/FrozenStringLiteralComment:
   Enabled: true
   Exclude:
@@ -25,10 +24,20 @@ Style/FrozenStringLiteralComment:
     - 'lib/tasks/**/*'
     - 'scripts/**/*'
     - 'spec/**/*'
-
-# This cop checks whether some constant value isn't a
-# mutable literal (e.g. array or hash).
 Style/MutableConstant:
   Enabled: true
   Exclude:
     - 'db/migrate/**/*'
+Style/Documentation:
+  Enabled: false
+Metrics/LineLength:
+  Enabled: true
+  Max: 100
+  AllowURI: true
+  IgnoreCopDirectives: true
+  Exclude:
+    - config/routes.rb
+Metrics/MethodLength:
+  Enabled: true
+  CountComments: false
+  Max: 100

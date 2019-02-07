@@ -1,2 +1,9 @@
 inherits_from: .haml-lint_todo.yml
 # https://github.com/brigade/haml-lint/blob/master/config/default.yml
+
+linters:
+  LineLength:
+    enabled: false
+    max: 80
+  # MultilinePipe:
+  #   enabled: true

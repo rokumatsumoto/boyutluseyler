@@ -8,22 +8,6 @@
 
 linters:
 
-  # Offense count: 35
-  LineLength:
-    exclude:
-      - "app/views/devise/confirmations/new.html.haml"
-      - "app/views/devise/mailer/confirmation_instructions.html.haml"
-      - "app/views/devise/mailer/reset_password_instructions.html.haml"
-      - "app/views/devise/passwords/edit.html.haml"
-      - "app/views/devise/passwords/new.html.haml"
-      - "app/views/devise/registrations/edit.html.haml"
-      - "app/views/devise/registrations/new.html.haml"
-      - "app/views/devise/sessions/new.html.haml"
-      - "app/views/devise/shared/_links.html.haml"
-      - "app/views/devise/unlocks/new.html.haml"
-      - "app/views/layouts/application.html.haml"
-      - "app/views/layouts/mailer.html.haml"
-
   # Offense count: 7
   MultilinePipe:
     exclude:

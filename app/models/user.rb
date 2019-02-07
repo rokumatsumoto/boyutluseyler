@@ -26,7 +26,6 @@
 #  updated_at             :datetime         not null
 #
 
-
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
