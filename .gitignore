@@ -7,6 +7,7 @@ tmp/
 /public/system
 /coverage/
 /spec/tmp
+/spec/examples.txt
 *.orig
 rerun.txt
 pickle-email-*.html
