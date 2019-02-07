@@ -101,10 +101,10 @@ group :development do
   # Catch unsafe migrations at dev time
   gem 'strong_migrations', '~> 0.3.1'
 
-  # Activate this gem when you need to hamlit:html2haml rake task.
+  # Activate this gem when you need to hamlit:erb2haml rake task.
   # gem 'html2haml', '~> 2.2'
   # Provides hamlit generators for Rails 4. It also enables hamlit as the templating
-  # engine and "hamlit:html2haml" rake task that converts erb files to haml.
+  # engine and "hamlit:erb2haml" rake task that converts erb files to haml.
   # gem 'hamlit-rails', '~> 0.2.0'
 end
 
