@@ -22,6 +22,7 @@ abort('The Rails environment is running in production mode!') if Rails.env.produ
 
 require 'rspec/rails'
 require 'pundit/matchers'
+require 'pundit/rspec'
 require 'shoulda/matchers'
 
 # Add additional requires below this line. Rails is not loaded until this point!
