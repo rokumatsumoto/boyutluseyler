@@ -105,7 +105,7 @@ group :development do
   # gem 'html2haml', '~> 2.2'
   # Provides hamlit generators for Rails 4. It also enables hamlit as the templating
   # engine and "hamlit:erb2haml" rake task that converts erb files to haml.
-  # gem 'hamlit-rails', '~> 0.2.0'
+  gem 'hamlit-rails', '~> 0.2.0', require: false
 end
 
 group :test do
