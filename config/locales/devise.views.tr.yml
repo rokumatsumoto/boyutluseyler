@@ -25,6 +25,8 @@ tr:
         unconfirmed_email:
         unlock_token:
         updated_at:
+        username: Kullanıcı Adı
+        login: Kullanıcı Adı veya E-Posta
     models:
       user: Kullanıcı
   devise:

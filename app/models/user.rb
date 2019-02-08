@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: users
@@ -24,10 +23,35 @@
 #  locked_at              :datetime
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  username               :string
 #
 
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable, :trackable
+
+  # Virtual attribute for authenticating by either username or email
+  attr_accessor :login
+
+  # Validations
+  #
+  # Note: devise :validatable above adds validations for :email and :password
+
+  validates :username, presence: true, uniqueness: { case_sensitive: false }
+  # Only allow letter, number, underscore and punctuation.
+  validates_format_of :username, with: /\A[a-zA-Z0-9_\.]*\z/
+
+  class << self
+    # Devise method overridden to allow sign in with email or username
+    def find_for_database_authentication(warden_conditions)
+      conditions = warden_conditions.dup
+      if (login = conditions.delete(:login))
+        where(conditions).find_by('lower(username) = :value OR lower(email) =
+                                   :value', value: login.downcase.strip)
+      else
+        find_by(conditions)
+      end
+    end
+  end
 end
