@@ -14,3 +14,6 @@ You can test that your migration is reversible by running
 
 We use Strong Migrations gem for catching unsafe migrations at dev time
 
+#### Best Practices
+
+https://thoughtbot.com/blog/how-to-create-postgres-indexes-concurrently-in
