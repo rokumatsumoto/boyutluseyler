@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'pages#home'
   devise_for :users, path: '', controllers: { registrations: :registrations,
                                               passwords: :passwords,
                                               sessions: :sessions,
