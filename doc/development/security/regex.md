@@ -1,4 +1,4 @@
-## Regex
+## Regex (Ruby)
 
 [Regular Expressions](https://guides.rubyonrails.org/security.html#regular-expressions)
 
