@@ -92,7 +92,7 @@ group 'specs', halt_on_fail: true do
   end
 end
 
-group 'security' do
+group 'sec' do
   guard :brakeman, run_on_start: true, quiet: true do
     watch(%r{^app/.+\.(erb|haml|rhtml|rb)$})
     watch(%r{^config/.+\.rb$})
@@ -101,4 +101,4 @@ group 'security' do
   end
 end
 
-scope groups: %i[specs security]
+scope groups: :specs
