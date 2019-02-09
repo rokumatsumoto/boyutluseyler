@@ -33,9 +33,10 @@
                 %a.dropdown-item{ :href => '#' } Çıkış Yap
           - if header_link?(:sign_in)
             %li.nav-item
-              %a.nav-link.custom-link{ href: '#' } Giriş Yap
+              = link_to t('devise.sessions.new.sign_in'), new_user_session_path, class: 'nav-link custom-link'
             %li.nav-item
-              %a.nav-link.custom-link{ href: '#' } Kayıt Ol
+              = link_to t('devise.registrations.new.sign_up'), new_user_registration_path, class: 'nav-link custom-link'
+
 
 
 
