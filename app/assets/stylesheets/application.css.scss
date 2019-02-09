@@ -19,3 +19,9 @@
  /* Font awesome icons */
  @import "font-awesome-sprockets";
  @import "font-awesome";
+
+ @import "partials/layout/*";
+
+.top_bar {
+  border-top:0.25rem solid #32c8fa;
+}
