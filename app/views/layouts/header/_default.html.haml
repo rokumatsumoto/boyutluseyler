@@ -8,24 +8,35 @@
       'aria-expanded' => 'false', 'aria-label' => 'Toggle navigation' }
         %span.navbar-toggler-icon
       .collapse.navbar-collapse#navbar-responsive
-        %form.mx-2.my-auto.d-inline.w-50.search
-          %input.form-control{ 'aria-label' => 'Search',
-            placeholder: 'rick and morty, stranger things, v.s..', type: 'search' }/
+        - if header_link?(:search)
+          %form.mx-2.my-auto.d-inline.w-50.search
+            %input.form-control{ 'aria-label' => 'Search',
+              placeholder: 'rick and morty, stranger things, v.s..', type: 'search' }/
         %ul.nav.navbar-nav.ml-auto
-          %li.nav-item
-            %a.nav-link.custom-link{ href: '#' } Yükle
-          %li.nav-item
-            %a.nav-link.custom-link{ href: '#' } Tasarımlar
-          %li.nav-item
-            %a.nav-link.custom-link{ href: '#' } Koleksiyonlar
-          %li.nav-item.dropdown
-            %a.nav-link.dropdown-user-toggle#navbar-dropdown{ :href => '#', :role => 'button',
-             'data-toggle' => 'dropdown', 'aria-haspopup' => 'true', 'aria-expanded' => 'false' }
-              %i.fas.fa-user.fa-lg
-            .dropdown-menu.dropdown-menu-right{ 'aria-labelledby' => 'navbar-dropdown' }
-              %a.dropdown-item{ :href => '#' } Profil
-              %a.dropdown-item{ :href => '#' } Ayarlar
-              %a.dropdown-item{ :href => '#' } Çıkış Yap
+          - if header_link?(:upload)
+            %li.nav-item
+              %a.nav-link.custom-link{ href: '#' } Yükle
+          - if header_link?(:designs)
+            %li.nav-item
+              %a.nav-link.custom-link{ href: '#' } Tasarımlar
+          - if header_link?(:collections)
+            %li.nav-item
+              %a.nav-link.custom-link{ href: '#' } Koleksiyonlar
+          - if header_link?(:user_dropdown)
+            %li.nav-item.dropdown
+              %a.nav-link.dropdown-user-toggle#navbar-dropdown{ :href => '#', :role => 'button',
+               'data-toggle' => 'dropdown', 'aria-haspopup' => 'true', 'aria-expanded' => 'false' }
+                %i.fas.fa-user.fa-lg
+              .dropdown-menu.dropdown-menu-right{ 'aria-labelledby' => 'navbar-dropdown' }
+                %a.dropdown-item{ :href => '#' } Profil
+                %a.dropdown-item{ :href => '#' } Ayarlar
+                %a.dropdown-item{ :href => '#' } Çıkış Yap
+          - if header_link?(:sign_in)
+            %li.nav-item
+              %a.nav-link.custom-link{ href: '#' } Giriş Yap
+            %li.nav-item
+              %a.nav-link.custom-link{ href: '#' } Kayıt Ol
+
 
 
 
