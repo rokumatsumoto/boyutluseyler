@@ -22,6 +22,9 @@ change this by setting
 
 `Capybara.javascript_driver = :chrome`
 
+#### Rubocop Cops
+
+https://rubocop-rspec.readthedocs.io/en/latest/cops_capybara/
 
 #### Performance tweak
 
