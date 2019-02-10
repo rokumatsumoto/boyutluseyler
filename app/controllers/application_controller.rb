@@ -3,13 +3,14 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception, prepend: true
 
+  include ApplicationHelper
   include Pundit
+
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :store_user_location!, if: :storable_location?
   # The callback which stores the current location must be added before you authenticate
   # the user as `authenticate_user!` (or whatever your resource is) will halt the filter
   # chain and redirect before the location can be stored.
-  include ApplicationHelper
 
   def after_sign_in_path_for(resource_or_scope)
     stored_location_for(resource_or_scope) || super
