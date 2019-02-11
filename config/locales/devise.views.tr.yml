@@ -105,6 +105,7 @@ tr:
         we_need_your_current_password_to_confirm_your_changes: değişikleri onaylamak için şu anki parolanız gerekli
       new:
         sign_up: Kaydol
+        sign_up_by_email: E-posta ile kayıt ol
       signed_up: Başarıyla giriş yaptınız. Hoşgeldiniz!
       signed_up_but_inactive: Kaydınız başarıyla gerçekleşti. Fakat, hesabınız aktifleştirilmediği için siteye giriş yapamadınız.
       signed_up_but_locked: Kaydınız başarıyla gerçekleşti. Fakat, hesabınız kilitlendiği için siteye giriş yapamadınız.

@@ -1,14 +1,20 @@
-.container
-  %h2= t('.sign_up')
-  = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-    = f.error_notification
-    .form-inputs
-      = f.input :username, required: true, autofocus: true, input_html: { autocomplete: 'username' }
-      = f.input :email, required: true, input_html: { autocomplete: 'email' }
-      = f.input :password, required: true, hint: (t('devise.shared.minimum_password_length',
-        count: @minimum_password_length) if @minimum_password_length),
-        input_html: { autocomplete: 'new-password' }
-      = f.input :password_confirmation, required: true, input_html: { autocomplete: 'new-password' }
-    .form-actions
-      = f.button :submit, t('.sign_up')
-  = render 'devise/shared/links'
+%section
+  .card
+    .card-body
+      .row.grid-divider
+        .col-md-6.col-lg-6.px-lg-5
+          %h5.card-title.text-center= t('.sign_up_by_email')
+          = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+            = f.error_notification
+            .form-inputs
+              = f.input :username, required: true, autofocus: true, input_html: { autocomplete: 'username' }
+              = f.input :email, required: true, input_html: { autocomplete: 'email' }
+              = f.input :password, required: true, hint: (t('devise.shared.minimum_password_length',
+                count: @minimum_password_length) if @minimum_password_length),
+                input_html: { autocomplete: 'new-password' }
+              = f.input :password_confirmation, required: true, input_html: { autocomplete: 'new-password' }
+            .form-actions
+              = f.button :submit, t('.sign_up'), class: 'btn btn-info'
+        .col-md-6.col-lg-6.px-lg-5.mx-3.my-4.py-3.mx-sm-3.my-md-0.py-md-0.mx-md-0
+          %h5.card-title.text-center= t('.sign_up_by_email')
+

@@ -2,7 +2,7 @@
 
 module NavHelper
   def header_links
-    @header_links ||= pick_header_links
+    @header_links ||= fetch_header_links
   end
 
   def header_link?(link)
@@ -11,7 +11,7 @@ module NavHelper
 
   private
 
-  def pick_header_links
+  def fetch_header_links
     links = if user_signed_in?
               %i[user_dropdown upload]
             else

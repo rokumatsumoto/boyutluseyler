@@ -3,6 +3,7 @@
   = render 'layouts/head'
   %body.top_bar
     = render partial: 'layouts/header/default'
-    %p.notice= notice
-    %p.alert= alert
-    = yield
+    .container
+      %p.notice= notice
+      %p.alert= alert
+      = yield

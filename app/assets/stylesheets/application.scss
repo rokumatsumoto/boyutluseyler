@@ -14,15 +14,22 @@
  /* https://github.com/rails/sass-rails#features */
  /* https://guides.rubyonrails.org/asset_pipeline.html#manifest-files-and-directives */
 
- /* Custom bootstrap variables must be set or imported *before* bootstrap. */
- @import "bootstrap";
- /* Font awesome icons */
+
+
+ /*
+  * boyutluseyler UI framework
+  */
+ @import "framework";
+ /*
+  * Font icons
+  */
  @import "font-awesome-sprockets";
  @import "font-awesome";
-
- @import "variables";
+ /*
+  * Page specific
+  */
+ @import "partials/*";
+ /*
+  * Layout specific
+  */
  @import "partials/layout/*";
-
-.top_bar {
-  border-top:0.25rem solid #32c8fa;
-}

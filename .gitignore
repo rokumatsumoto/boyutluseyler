@@ -59,4 +59,6 @@ yarn-debug.log*
 /storage/*
 !/storage/.keep
 
+# Ignore icon for now
+/app/assets/images/icon.png
 

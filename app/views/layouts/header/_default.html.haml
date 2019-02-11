@@ -1,8 +1,8 @@
 .header
   %nav.navbar.navbar-default.navbar-light.navbar-expand-lg
     .container
-      = link_to root_path, class: 'navbar-brand' do
-        %i.fas.fa-cube.fa-2x
+      / OPTIMIZE: height 65 to 60
+      = link_to image_tag('icon.png', height: '60', width: '36'), root_path, class: 'navbar-brand'
       %button.navbar-toggler{ :type => 'button', 'data-toggle' => 'collapse',
       'data-target' => '#navbar-responsive', 'aria-controls' => 'navbar-responsive',
       'aria-expanded' => 'false', 'aria-label' => 'Toggle navigation' }
@@ -28,9 +28,9 @@
                'data-toggle' => 'dropdown', 'aria-haspopup' => 'true', 'aria-expanded' => 'false' }
                 %i.fas.fa-user.fa-lg
               .dropdown-menu.dropdown-menu-right{ 'aria-labelledby' => 'navbar-dropdown' }
-                %a.dropdown-item{ :href => '#' } Profil
-                %a.dropdown-item{ :href => '#' } Ayarlar
-                %a.dropdown-item{ :href => '#' } Çıkış Yap
+                = link_to 'Profil', edit_user_registration_path, class: 'dropdown-item'
+                %a.dropdown-item{ href: '#' } Ayarlar
+                = link_to t('devise.sessions.destroy.log_out'), destroy_user_session_path, method: :delete, class: 'dropdown-item'
           - if header_link?(:sign_in)
             %li.nav-item
               = link_to t('devise.sessions.new.sign_in'), new_user_session_path, class: 'nav-link custom-link'
