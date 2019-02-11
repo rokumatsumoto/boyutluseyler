@@ -15,8 +15,6 @@ linters:
       - "app/views/devise/passwords/edit.html.haml"
       - "app/views/devise/passwords/new.html.haml"
       - "app/views/devise/registrations/edit.html.haml"
-      - "app/views/devise/registrations/new.html.haml"
-      - "app/views/devise/sessions/new.html.haml"
       - "app/views/devise/unlocks/new.html.haml"
 
   # Offense count: 52
@@ -26,8 +24,6 @@ linters:
       - "app/views/devise/passwords/edit.html.haml"
       - "app/views/devise/passwords/new.html.haml"
       - "app/views/devise/registrations/edit.html.haml"
-      - "app/views/devise/registrations/new.html.haml"
-      - "app/views/devise/sessions/new.html.haml"
       - "app/views/devise/shared/_links.html.haml"
       - "app/views/devise/unlocks/new.html.haml"
       - "app/views/layouts/application.html.haml"
@@ -36,5 +32,4 @@ linters:
   # Offense count: 4
   SpaceInsideHashAttributes:
     exclude:
-      - "app/views/layouts/application.html.haml"
       - "app/views/layouts/mailer.html.haml"

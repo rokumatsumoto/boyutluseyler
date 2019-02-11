@@ -10,9 +10,15 @@ class RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    # To avoid duplicate form fields on the login page, the registration form
+    # names fields using `new_user`, but Devise still wants the params in
+    # `user`.
+    if params["new_#{resource_name}"].present? && params[resource_name].blank?
+      params[resource_name] = params.delete(:"new_#{resource_name}")
+    end
+    super
+  end
 
   # GET /resource/edit
   # def edit
@@ -59,4 +65,10 @@ class RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  private
+
+  def resource_name
+    :user
+  end
 end

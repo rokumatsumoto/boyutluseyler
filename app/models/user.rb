@@ -40,8 +40,9 @@ class User < ApplicationRecord
   # Note: devise :validatable above adds validations for :email and :password
 
   validates :username, presence: true, uniqueness: { case_sensitive: false }
-  # Only allow letter, number, underscore and punctuation.
-  validates_format_of :username, with: /\A[a-zA-Z0-9_\.]*\z/
+  # Only allow letter, number, underscore, hyphen and punctuation.
+  validates_format_of :username,
+                      with: /\A(?:[a-zA-Z0-9_\.][a-zA-Z0-9_\-\.]*[a-zA-Z0-9_\-]|[a-zA-Z0-9_])\z/
 
   class << self
     # Devise method overridden to allow sign in with email or username
