@@ -1,0 +1,44 @@
+/*
+* Sign up form
+*/
+.text-sign-up-form {
+  color: #999999;
+}
+
+.link-sign-up-form {
+  color: #2FBEED;
+  &:hover {
+    color: #17a2b8;
+  }
+}
+
+.btn-twitter-auth {
+  color: #fff;
+  background-color: #1DA1F2;
+  border-color: #1DA1F2;
+  &:hover {
+    color: #fff;
+  }
+}
+
+.btn-facebook-auth {
+  color: #fff;
+  background-color: #4267B2;
+  border-color: #4267B2;
+  &:hover {
+    color: #fff;
+  }
+}
+
+.btn-google-auth {
+  color: #fff;
+  background-color: #CC4932;
+  border-color: #CC4932;
+  &:hover {
+    color: #fff;
+  }
+}
+
+div.text-motto-sign-up-form p span {
+  color: #A7A7A6;
+}
