@@ -3,14 +3,19 @@
     %h5.card-title.text-center= t('.sign_up_by_email')
     .row.px-4
       .col.bg-light.text-sign-up-form.px-5.py-4
-        = simple_form_for(resource, validate: true, as: resource_name, url: registration_path(resource_name)) do |f|
+        = simple_form_for(resource, validate: true, as: resource_name,
+        url: registration_path(resource_name)) do |f|
           .form-inputs
-            = f.input :username, required: true, input_html: { autocomplete: 'username' }, validate: true
-            = f.input :email, required: true, input_html: { autocomplete: 'email' }, validate: true
-            = f.input :password, required: true, hint: (t('devise.shared.minimum_password_length',
-              count: @minimum_password_length) if @minimum_password_length), validate: true,
-              input_html: { autocomplete: 'new-password' }
-            = f.input :password_confirmation, required: true, input_html: { autocomplete: 'new-password' }
+            = f.input :username, required: true,
+            input_html: { autocomplete: 'username' }, validate: true
+            = f.input :email, required: true, input_html: { autocomplete: 'email' },
+            validate: true
+            = f.input :password, required: true, validate: true,
+            hint: (t('devise.shared.minimum_password_length',
+            count: @minimum_password_length) if @minimum_password_length),
+            input_html: { autocomplete: 'new-password' }
+            = f.input :password_confirmation, required: true,
+            input_html: { autocomplete: 'new-password' }
           .form-actions
             = f.button :submit, t('.sign_up'), class: 'btn btn-info', id: 'btn_sign_up'
   .col-md-6.col-lg-6.px-lg-5.mx-3.my-4.py-3.mx-sm-3.my-md-0.py-md-0.mx-md-0

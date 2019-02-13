@@ -35,6 +35,10 @@ class User < ApplicationRecord
 
   # Virtual attribute for authenticating by either username or email
   attr_accessor :login
+  # Add an accessor so you can have a field to validate
+  # that is seperate from password, password_confirmation or
+  # password_digest...
+  attr_accessor :current_password
 
   # Validations
   #
@@ -44,7 +48,6 @@ class User < ApplicationRecord
                        uniqueness: { case_sensitive: false },
                        length: { in: 3..30 }
   validates_confirmation_of :password # override only: create
-  # validates :current_password, presence: true
   # Only allow letter, number, underscore, hyphen and punctuation.
   validates_format_of :username,
                       with: /\A(?:[a-zA-Z0-9_\.][a-zA-Z0-9_\-\.]*[a-zA-Z0-9_\-]|[a-zA-Z0-9_])\z/
