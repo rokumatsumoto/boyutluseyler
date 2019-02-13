@@ -8,7 +8,7 @@ require 'spec_helper'
 #     end
 
 #     it 'does not show an error border if the username is available' do
-#       fill_in 'new_user_username', with: 'new-user'
+#       fill_in 'user_username', with: 'new-user'
 #     end
 #   end
 # end
@@ -18,12 +18,12 @@ RSpec.describe 'Users can sign up', type: :feature do
   it 'when providing valid details' do
     # TODO: context with errors, with no errors
     visit root_path
-    click_link 'Kaydol'
-    fill_in 'new_user_username', with: 'new-user'
-    fill_in 'new_user_email', with: 'test@example.com'
-    fill_in 'new_user_password', with: 'password'
-    fill_in 'new_user_password_confirmation', with: 'password'
-    click_button 'Kaydol'
+    click_link 'nav_sign_up'
+    fill_in 'user_username', with: 'new-user'
+    fill_in 'user_email', with: 'test@example.com'
+    fill_in 'user_password', with: 'password'
+    fill_in 'user_password_confirmation', with: 'password'
+    click_button 'btn_sign_up'
     msg = 'E-posta adresinize hesap aktifleştirme linkini içeren bir e-posta gönderdik.'
     expect(page).to have_content(msg)
   end

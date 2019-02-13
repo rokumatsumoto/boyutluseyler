@@ -6,7 +6,8 @@ Rails.application.routes.draw do
                                               sessions: :sessions,
                                               confirmations: :confirmations,
                                               unlocks: :unlocks }
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  get 'username_validator/:username', to: 'users#username_validator'
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 end
