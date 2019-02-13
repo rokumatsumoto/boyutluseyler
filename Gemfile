@@ -41,7 +41,10 @@ gem 'pundit', '~> 2.0', '>= 2.0.1'
 gem 'bootstrap', '~> 4.2', '>= 4.2.1'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 # Forms
+gem 'client_side_validations', '~> 12.1'
+gem 'client_side_validations-simple_form', '~> 6.8'
 gem 'simple_form', '~> 4.1'
+
 # Icons
 gem 'font-awesome-sass', '~> 5.6', '>= 5.6.1'
 # Clean URL (https://en.wikipedia.org/wiki/Clean_URL)
