@@ -61,7 +61,8 @@ group :development, :test do
   # Formatter
   gem 'fivemat', '~> 1.3', '>= 1.3.7'
   # RSpec BDD & TDD
-  # gem 'database_cleaner', '~> 1.7' # see /spec/support/db_cleaner.rb
+  # see /spec/support/db_cleaner.rb, /lib/tasks/factory_bot_lint.rake
+  gem 'database_cleaner', '~> 1.7', require: false
   gem 'factory_bot_rails', '~> 5.0'
   gem 'rspec-rails', '~> 3.8', '>= 3.8.2'
   # gem 'vcr', '~> 4.0'

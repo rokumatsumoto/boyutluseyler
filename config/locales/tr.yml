@@ -1,7 +1,15 @@
+# https://guides.rubyonrails.org/i18n.html#error-message-scopes
 ---
 tr:
   activerecord:
     errors:
+      models:
+        user:
+          attributes:
+            username:
+              invalid: Lütfen yalnızca alfanumerik karakterlerle bir kullanıcı adı oluşturun.
+            email:
+              invalid: Lütfen geçerli bir e-posta adresi girin.
       messages:
         record_invalid: 'Doğrulama başarısız oldu: %{errors}'
         restrict_dependent_destroy:
@@ -110,7 +118,7 @@ tr:
     format: "%{attribute} %{message}"
     messages:
       accepted: kabul edilmeli
-      blank: doldurulmalı
+      blank: Bu alan gereklidir.
       confirmation: "%{attribute} teyidiyle uyuşmuyor"
       empty: doldurulmalı
       equal_to: tam olarak %{count} olmalı
@@ -134,8 +142,8 @@ tr:
         one: çok uzun (en fazla 1 karakter)
         other: çok uzun (en fazla %{count} karakter)
       too_short:
-        one: çok kısa (en az 1 karakter)
-        other: çok kısa (en az %{count} karakter)
+        one: Çok kısa (en az 1 karakter)
+        other: Çok kısa (en az %{count} karakter)
       wrong_length:
         one: hatalı uzunlukta (1 karakter olmalı)
         other: hatalı uzunlukta (%{count} karakter olmalı)

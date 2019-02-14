@@ -11,7 +11,14 @@ AllCops:
     - 'tmp/**/*'
     - 'bin/**/*'
   CacheRootDirectory: tmp
-
+Naming/FileName:
+  ExpectMatchingDefinition: true
+  Exclude:
+    - 'db/**/*'
+    - 'spec/**/*'
+    - 'config/**/*'
+    - 'lib/tasks/*'
+    - 'test/**/*'
 Style/FrozenStringLiteralComment:
   Enabled: true
   Exclude:
@@ -41,3 +48,5 @@ Metrics/MethodLength:
   Enabled: true
   CountComments: false
   Max: 100
+Style/AsciiComments:
+  Enabled: false

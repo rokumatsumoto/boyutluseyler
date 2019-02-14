@@ -13,7 +13,7 @@ Capybara.server = :puma, { Silent: true }
 
 Capybara.register_driver :chrome do |app|
   options = Selenium::WebDriver::Chrome::Options.new(
-    args: %w[headless no-sandbox]
+    args: %w[headless no-sandbox window-size=1240,1400]
   )
   Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
 end
