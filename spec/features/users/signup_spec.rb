@@ -55,11 +55,10 @@ RSpec.describe 'Signup' do
     it 'does not reload the page if the username already exists' do
       existing_user = create(:user)
 
-      fill_in 'user_username', with: existing_user.username
+      fill_in 'user_username',              with: existing_user.username
       fill_in 'user_email',                 with: new_user.email
       fill_in 'user_password',              with: new_user.password
       fill_in 'user_password_confirmation', with: new_user.password
-      wait_for_requests
 
       expect_page_to_not_reload do
         click_button 'btn_sign_up'
