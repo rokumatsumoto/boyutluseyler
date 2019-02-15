@@ -12,7 +12,7 @@ module NavHelper
   private
 
   def fetch_header_links
-    links = if user_signed_in?
+    links = if current_user
               %i[user_dropdown upload]
             else
               [:sign_in]
