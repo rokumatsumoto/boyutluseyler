@@ -7,8 +7,8 @@ Rails.application.routes.draw do
                                               confirmations: :confirmations,
                                               unlocks: :unlocks }
 
-  get 'username_validator/:username', to: 'users#username_validator',
-                                      username: /(?:[a-zA-Z0-9_\.][a-zA-Z0-9_\-\.]*[a-zA-Z0-9_\-]|[a-zA-Z0-9_])/
+  get 'exists/:username', to: 'users#exists',
+                          username: /(?:[a-zA-Z0-9_\.][a-zA-Z0-9_\-\.]*[a-zA-Z0-9_\-]|[a-zA-Z0-9_])/
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 end

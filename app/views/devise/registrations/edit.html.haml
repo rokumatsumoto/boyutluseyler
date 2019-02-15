@@ -3,7 +3,8 @@
                   html: { method: :put }) do |f|
   = f.error_notification
   .form-inputs
-    = f.input :username, required: true, validate: true
+    = f.input :username, required: true, validate: true,
+    input_html: { data_username: current_user.username }
     = f.input :email, required: true
     - if devise_mapping.confirmable? && resource.pending_reconfirmation?
       %p= t('.currently_waiting_confirmation_for_email',

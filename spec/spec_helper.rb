@@ -40,6 +40,7 @@ RSpec.configure do |config|
   config.include WaitForRequests, :js
   config.include PageReload, :js
   config.include FactoryBot::Syntax::Methods
+  config.include Devise::Test::ControllerHelpers, type: :controller
 
   # TODO: Activate when it is needed
   # config.before(:suite) do

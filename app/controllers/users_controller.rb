@@ -1,25 +1,12 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  def username_validator
-    return if current_user_username?
-
+  def exists
     if User.find_by('lower(username) = :username', username: params[:username].downcase)
-      # TODO: return valid with message and set correspond translation(i18n)
-      render json: { valid: false }
+      message = t('activerecord.errors.models.user.attributes.username.taken')
+      render json: { exists: true, message: message }
     else
-      render json: { valid: true }
-    end
-  end
-
-  private
-
-  # OPTIMIZE: access session info from js
-  def current_user_username?
-    if user_signed_in? &&
-       current_user.username == params[:username]
-      # TODO: return valid with message and set correspond translation(i18n)
-      render json: { valid: true }
+      render json: { exists: false }
     end
   end
 end

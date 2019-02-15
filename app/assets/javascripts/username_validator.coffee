@@ -4,26 +4,29 @@ ready = ->
 
   $('#user_username').on 'blur', (event) ->
     username = $('#user_username')
+    if (username.attr('data_username') != undefined &&
+       username.attr('data_username') == $('#user_username').val())
+      event.stopImmediatePropagation()
+      return false
     div_username = username.parent().closest('div')
     div_feedback = div_username.find('.invalid-feedback')
     if (div_feedback != undefined && div_feedback.length == 0)
       $.ajax
-        url: '/username_validator/' + $('#user_username').val()
+        url: '/exists/' + $('#user_username').val()
         type: 'GET'
         dataType: 'json'
         error: (jqXHR, textStatus, errorThrown) ->
         success: (data, textStatus, jqXHR) ->
-          if data.valid == true
-            username.toggleClass('is-valid', data.valid)
-                    .toggleClass('is-invalid', !data.valid)
+          if data.exists == false
+            username.toggleClass('is-valid', !data.exists)
+                    .toggleClass('is-invalid', data.exists)
             username[0].setCustomValidity('')
-          else if data.valid == false
-            username.toggleClass('is-invalid', !data.valid)
-                    .toggleClass('is-valid', data.valid)
-            feedback_msg = 'Kullanıcı Adı hali hazırda kullanılmakta'
-            div_username.append('<div class="invalid-feedback">' + feedback_msg + '</div>')
+          else if data.exists == true
+            username.toggleClass('is-invalid', data.exists)
+                    .toggleClass('is-valid', !data.exists)
+            div_username.append('<div class="invalid-feedback">' + data.message + '</div>')
             div_username.addClass('form-group-invalid')
-            username[0].setCustomValidity(feedback_msg)
+            username[0].setCustomValidity(data.message)
       event.stopImmediatePropagation()
       false
   false
