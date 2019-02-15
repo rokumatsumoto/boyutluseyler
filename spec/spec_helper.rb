@@ -38,6 +38,7 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
 
   config.include WaitForRequests, :js
+  config.include PageReload, :js
   config.include FactoryBot::Syntax::Methods
 
   # TODO: Activate when it is needed
