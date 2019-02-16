@@ -29,6 +29,16 @@ tr:
         login: Kullanıcı Adı veya E-Posta
     models:
       user: Kullanıcı
+    errors:
+      models:
+        user:
+          attributes:
+            username:
+              invalid: Lütfen yalnızca alfanumerik karakterlerle bir kullanıcı adı oluşturun.
+              taken: Kullanıcı Adı hali hazırda kullanılmakta.
+            email:
+              invalid: Lütfen geçerli bir e-posta adresi girin.
+              taken: E-Posta hali hazırda kullanılmakta.
   devise:
     confirmations:
       # confirmed: Hesabınız başarıyla onaylandı. Şu an giriş yapmış bulunuyorsunuz.

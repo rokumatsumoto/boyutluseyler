@@ -3,14 +3,6 @@
 tr:
   activerecord:
     errors:
-      models:
-        user:
-          attributes:
-            username:
-              invalid: Lütfen yalnızca alfanumerik karakterlerle bir kullanıcı adı oluşturun.
-              taken: Kullanıcı Adı hali hazırda kullanılmakta.
-            email:
-              invalid: Lütfen geçerli bir e-posta adresi girin.
       messages:
         record_invalid: 'Doğrulama başarısız oldu: %{errors}'
         restrict_dependent_destroy:

@@ -49,7 +49,7 @@ RSpec.describe 'Signup' do
       wait_for_requests
 
       click_button 'btn_sign_up'
-      expect(page).to have_content('Lütfen yalnızca alfanumerik karakterlerle')
+      expect(page).to have_content(invalid_message_for_username)
     end
 
     it 'does not reload the page if the username already exists' do
@@ -79,7 +79,7 @@ RSpec.describe 'Signup' do
         expect { click_button 'btn_sign_up' }.to change(User, :count).by(1)
 
         expect(page).to have_current_path root_path
-        expect(page).to have_content('E-posta adresinize hesap aktifleştirme linkini')
+        expect(page).to have_content(unconfirmed_message_for_user)
       end
 
       # rubocop:enable RSpec/MultipleExpectations
@@ -98,7 +98,7 @@ RSpec.describe 'Signup' do
       click_button 'btn_sign_up'
 
       expect(page).to have_current_path user_registration_path
-      expect(page).to have_content('E-Posta hali hazırda kullanılmakta')
+      expect(page).to have_content(taken_message_for_email)
     end
 
     it 'does not redisplay the password' do
@@ -111,6 +111,18 @@ RSpec.describe 'Signup' do
       expect(page).to have_current_path user_registration_path
       expect(page.body).not_to match(/#{new_user.password}/)
     end
+  end
+
+  def invalid_message_for_username
+    I18n.t('activerecord.errors.models.user.attributes.username.invalid')
+  end
+
+  def unconfirmed_message_for_user
+    I18n.t('devise.registrations.signed_up_but_unconfirmed')
+  end
+
+  def taken_message_for_email
+    I18n.t('activerecord.errors.models.user.attributes.email.taken')
   end
 end
 # rubocop:enable Metrics/BlockLength

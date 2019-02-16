@@ -31,6 +31,16 @@ en:
       user:
         one: User
         other: Users
+    errors:
+      models:
+        user:
+          attributes:
+            username:
+              invalid: Please create a username with only alphanumeric characters.
+              taken: Username has already been taken.
+            email:
+              invalid: Please provide a valid email address.
+              taken: Email has already been taken.
   devise:
     confirmations:
       confirmed: Your email address has been successfully confirmed.
