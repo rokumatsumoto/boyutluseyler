@@ -108,7 +108,7 @@ tr:
       month: Ay
       year: Yıl
   errors:
-    format: "%{attribute} %{message}"
+    format: "%{message}" # default "%{attribute} %{message}"
     messages:
       accepted: kabul edilmeli
       blank: Bu alan gereklidir.

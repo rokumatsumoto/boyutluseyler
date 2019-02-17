@@ -108,7 +108,7 @@ en:
       month: Month
       year: Year
   errors:
-    format: "%{attribute} %{message}"
+    format: "%{message}" # default "%{attribute} %{message}"
     messages:
       accepted: must be accepted
       blank: This field is required.
