@@ -41,7 +41,7 @@ RSpec.describe User, type: :model do
       end
 
       it 'validates minimum length' do
-        expect(user).to validate_length_of(:username).is_at_most(30).with_short_message(too_short_message_for_username)
+        expect(user).to validate_length_of(:username).is_at_least(3).with_short_message(too_short_message_for_username)
       end
 
       it 'validates maximum length' do
