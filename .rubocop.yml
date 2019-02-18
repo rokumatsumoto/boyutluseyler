@@ -19,6 +19,7 @@ Naming/FileName:
     - 'config/**/*'
     - 'lib/tasks/*'
     - 'test/**/*'
+    - 'config.ru'
 Style/FrozenStringLiteralComment:
   Enabled: true
   Exclude:

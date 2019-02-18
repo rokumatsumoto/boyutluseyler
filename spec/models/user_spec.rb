@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+# rubocop:disable Metrics/BlockLength
 RSpec.describe User, type: :model do
   describe 'modules' do
     # rubocop:disable RSpec/ExampleLength
@@ -53,11 +54,13 @@ RSpec.describe User, type: :model do
       end
 
       it 'validates minimum length' do
-        expect(user).to validate_length_of(:username).is_at_least(3).with_short_message(too_short_message_for_username)
+        expect(user).to validate_length_of(:username)
+          .is_at_least(3).with_short_message(too_short_message_for_username)
       end
 
       it 'validates maximum length' do
-        expect(user).to validate_length_of(:username).is_at_most(30).with_long_message(too_long_message_for_username)
+        expect(user).to validate_length_of(:username)
+          .is_at_most(30).with_long_message(too_long_message_for_username)
       end
     end
 
@@ -74,23 +77,6 @@ RSpec.describe User, type: :model do
     it_behaves_like 'an object with email-formated attributes', :email do
       subject { build_stubbed(:user) }
     end
-
-    def taken_message_for_username
-      I18n.t('activerecord.errors.models.user.attributes.username.taken')
-    end
-
-    def too_short_message_for_username
-      I18n.t('errors.messages.too_short.other', count: 3)
-    end
-
-    def too_long_message_for_username
-      I18n.t('errors.messages.too_long.other', count: 30)
-    end
-
-    def confirmation_message_for_password
-      I18n.t('errors.messages.confirmation', attribute:
-      I18n.t('activerecord.attributes.user.password'))
-    end
   end
 
   describe '.find_for_database_authentication' do
@@ -101,4 +87,24 @@ RSpec.describe User, type: :model do
       " #{user.username} ")).to eq user
     end
   end
+end
+# rubocop:enable Metrics/BlockLength
+
+private
+
+def taken_message_for_username
+  I18n.t('activerecord.errors.models.user.attributes.username.taken')
+end
+
+def too_short_message_for_username
+  I18n.t('errors.messages.too_short.other', count: 3)
+end
+
+def too_long_message_for_username
+  I18n.t('errors.messages.too_long.other', count: 30)
+end
+
+def confirmation_message_for_password
+  I18n.t('errors.messages.confirmation', attribute:
+  I18n.t('activerecord.attributes.user.password'))
 end

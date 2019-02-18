@@ -51,7 +51,7 @@ RSpec.describe 'Signup' do
       click_button 'btn_sign_up'
       expect(page).to have_content(invalid_message_for_username)
     end
-
+    # rubocop:disable RSpec/ExampleLength
     it 'does not reload the page if the username already exists' do
       existing_user = create(:user)
 
@@ -64,6 +64,7 @@ RSpec.describe 'Signup' do
         click_button 'btn_sign_up'
       end
     end
+    # rubocop:enable RSpec/ExampleLength
   end
 
   context 'with no errors' do
@@ -90,27 +91,25 @@ RSpec.describe 'Signup' do
   context 'with errors' do
     let(:existing_user) { create(:user) }
 
-    it 'displays the errors' do
+    before do
       fill_in 'user_username', with: new_user.username
       fill_in 'user_email',    with: existing_user.email
       fill_in 'user_password', with: new_user.password
       fill_in 'user_password_confirmation', with: new_user.password
       click_button 'btn_sign_up'
+    end
 
+    # rubocop:disable RSpec/MultipleExpectations
+    it 'displays the errors' do
       expect(page).to have_current_path user_registration_path
       expect(page).to have_content(taken_message_for_email)
     end
 
     it 'does not redisplay the password' do
-      fill_in 'user_username', with: new_user.username
-      fill_in 'user_email',    with: existing_user.email
-      fill_in 'user_password', with: new_user.password
-      fill_in 'user_password_confirmation', with: new_user.password
-      click_button 'btn_sign_up'
-
       expect(page).to have_current_path user_registration_path
       expect(page.body).not_to match(/#{new_user.password}/)
     end
+    # rubocop:enable RSpec/MultipleExpectations
   end
 
   def invalid_message_for_username

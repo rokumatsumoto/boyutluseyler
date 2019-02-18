@@ -4,6 +4,7 @@
 #   Note: You have access to `email_value` which is the email address value
 #         being currently tested).
 
+# rubocop:disable Metrics/BlockLength
 shared_examples 'an object with email-formated attributes' do |*attributes|
   attributes.each do |attribute|
     describe "specifically its :#{attribute} attribute" do
@@ -42,3 +43,4 @@ shared_examples 'an object with email-formated attributes' do |*attributes|
     end
   end
 end
+# rubocop:enable Metrics/BlockLength
