@@ -212,3 +212,6 @@ tr:
       long: "%e %B %Y, %A, %H:%M"
       short: "%e %B, %H:%M"
     pm: öğleden sonra
+  recaptcha:
+    errors:
+      verification_failed: Lütfen güvenlik doğrulamasını (captcha) yapınız.

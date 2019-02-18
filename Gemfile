@@ -51,6 +51,8 @@ gem 'font-awesome-sass', '~> 5.6', '>= 5.6.1'
 gem 'friendly_id', '~> 5.2', '>= 5.2.5'
 # HAML
 gem 'hamlit', '~> 2.9', '>= 2.9.2'
+# Spam and anti-bot protection
+gem 'recaptcha', '~> 4.13', '>= 4.13.1'
 
 group :development, :test do
   # n+1 Queries
