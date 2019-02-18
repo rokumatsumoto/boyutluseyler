@@ -32,12 +32,24 @@ RSpec.describe User, type: :model do
 
         before { create(:user, username: username) }
 
-        it 'is invalid ' do
+        it 'is invalid' do
           user = build_stubbed(:user, username: username)
 
-          expect(user).not_to be_valid
-          expect(user.errors.full_messages).to eq([taken_message_for_username])
+          expect(user).to validate_uniqueness_of(:username).case_insensitive
+                                                           .with_message(taken_message_for_username)
         end
+
+        it 'is invalid even if the casing is different' do
+          user = build_stubbed(:user, username: username.capitalize)
+
+          expect(user).to validate_uniqueness_of(:username).case_insensitive
+                                                           .with_message(taken_message_for_username)
+        end
+      end
+
+      context 'when contains special characters like below' do
+        it { is_expected.not_to allow_value('user@example.org').for(:username) }
+        it { is_expected.not_to allow_value('new$user!username').for(:username) }
       end
 
       it 'validates minimum length' do
@@ -47,6 +59,12 @@ RSpec.describe User, type: :model do
       it 'validates maximum length' do
         expect(user).to validate_length_of(:username).is_at_most(30).with_long_message(too_long_message_for_username)
       end
+    end
+
+    it 'validates confirmation of password' do
+      expect(user).to validate_confirmation_of(:password).with_message(
+        confirmation_message_for_password
+      )
     end
 
     it 'has a compatible email regex with Javascript' do
@@ -67,6 +85,11 @@ RSpec.describe User, type: :model do
 
     def too_long_message_for_username
       I18n.t('errors.messages.too_long.other', count: 30)
+    end
+
+    def confirmation_message_for_password
+      I18n.t('errors.messages.confirmation', attribute:
+      I18n.t('activerecord.attributes.user.password'))
     end
   end
 

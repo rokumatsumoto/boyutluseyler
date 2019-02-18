@@ -12,7 +12,7 @@ RSpec::Matchers.define :have_accessor_attribute do |field|
     "expected attr_accessor for #{field} not to be defined on #{object_instance}"
   end
 
-  description do
-    'assert there is an attr_accessor of the given name on the supplied object'
+  description do |object_instance|
+    "assert there is an attr_accessor #{field} on the #{object_instance}"
   end
 end

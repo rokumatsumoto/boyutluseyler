@@ -47,7 +47,7 @@ class User < ApplicationRecord
   validates :username, presence: true,
                        uniqueness: { case_sensitive: false },
                        length: { in: 3..30 }
-  validates_confirmation_of :password # override only: create
+  validates_confirmation_of :password # override only: create (devise)
   # Only allow letter, number, underscore, hyphen and punctuation.
   validates_format_of :username,
                       with: /\A(?:[a-zA-Z0-9_\.][a-zA-Z0-9_\-\.]*[a-zA-Z0-9_\-]|[a-zA-Z0-9_])\z/
@@ -56,12 +56,9 @@ class User < ApplicationRecord
     # Devise method overridden to allow sign in with email or username
     def find_for_database_authentication(warden_conditions)
       conditions = warden_conditions.dup
-      if (login = conditions.delete(:login))
-        where(conditions).find_by('lower(username) = :value OR lower(email) =
-                                   :value', value: login.downcase.strip)
-      else
-        find_by(conditions)
-      end
+      login = conditions.delete(:login)
+      where(conditions).find_by('lower(username) = :value OR lower(email) =
+                                 :value', value: login.downcase.strip)
     end
   end
 end
