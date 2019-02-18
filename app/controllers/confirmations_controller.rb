@@ -27,4 +27,12 @@ class ConfirmationsController < Devise::ConfirmationsController
   # def after_confirmation_path_for(resource_name, resource)
   #   super(resource_name, resource)
   # end
+
+  protected
+
+  def after_confirmation_path_for(resource_name, resource)
+    flash[:success] = flash[:notice]
+    flash.delete :notice
+    super(resource_name, resource)
+  end
 end

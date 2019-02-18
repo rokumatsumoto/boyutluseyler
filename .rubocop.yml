@@ -36,6 +36,11 @@ Style/MutableConstant:
   Enabled: true
   Exclude:
     - 'db/migrate/**/*'
+Layout/EmptyLineAfterGuardClause:
+  Enabled: true
+  Exclude:
+    - 'app/views/**/*'
+
 Style/Documentation:
   Enabled: false
 Metrics/LineLength:

@@ -16,6 +16,8 @@
             input_html: { autocomplete: 'new-password' }
             = f.input :password_confirmation, required: true,
             input_html: { autocomplete: 'new-password' }
+          .captcha
+            = recaptcha_tags hl: 'tr'
           .form-actions
             = f.button :submit, t('.sign_up'), class: 'btn btn-info', id: 'btn_sign_up'
   .col-md-6.col-lg-6.px-lg-5.mx-3.my-4.py-3.mx-sm-3.my-md-0.py-md-0.mx-md-0
