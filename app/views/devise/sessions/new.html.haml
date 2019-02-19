@@ -12,3 +12,4 @@
               = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
             .form-actions
               = f.button :submit, t('.sign_in')
+          = render 'devise/shared/links'
