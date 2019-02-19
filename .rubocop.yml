@@ -40,7 +40,10 @@ Layout/EmptyLineAfterGuardClause:
   Enabled: true
   Exclude:
     - 'app/views/**/*'
-
+Style/UnneededInterpolation:
+  Enabled: true
+  Exclude:
+    - 'app/views/**/*'
 Style/Documentation:
   Enabled: false
 Metrics/LineLength:

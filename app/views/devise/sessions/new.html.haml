@@ -1,15 +1,35 @@
-%section
-  .card
-    .card-block
-      .row
-        .col
-          %h4= t('.sign_in')
-          %br/
-          = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-            .form-inputs
-              = f.input :login, autofocus: true, input_html: { autocomplete: 'email' }
-              = f.input :password, input_html: { autocomplete: 'current-password' }
-              = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
-            .form-actions
-              = f.button :submit, t('.sign_in')
-          = render 'devise/shared/links'
+.row.grid-divider
+  .col-md-6.col-lg-6.px-lg-5
+    %h5.card-title.text-center= t('.sign_in')
+    .row.px-4
+      .col.bg-light.text-sign-in-form.px-5.py-4
+        = simple_form_for(resource, as: resource_name, html: { id: 'form_sign_in' },
+        url: session_path(resource_name)) do |f|
+          .form-inputs
+            = f.input :login, autofocus: true, input_html: { autocomplete: 'email' }
+            = f.input :password, input_html: { autocomplete: 'current-password' }
+            = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
+          .form-actions
+            = f.button :submit, t('.sign_in'), class: 'btn btn-info', id: 'btn_sign_in'
+        .d-flex.py-4
+          %hr.my-auto.flex-grow-1/
+        = render partial: 'devise/shared/links', locals: { css_class: 'link-sign-in-form' }
+  .col-md-6.col-lg-6.px-lg-5.mx-3.my-4.py-3.mx-sm-3.my-md-0.py-md-0.mx-md-0
+    .row.mt-md-5.ml-md-2
+      .col-12
+        .btn-group-vertical.btn-group-sm
+          %button.btn.btn-facebook-auth
+            %i.fab.fa-facebook.fa-lg
+            %span.p-3 Facebook ile Giriş Yap
+          %button.btn.btn-twitter-auth.mt-2
+            %i.fab.fa-twitter.fa-lg
+            %span.p-3 Twitter ile Giriş Yap
+          %button.btn.btn-google-auth.mt-2
+            %i.fab.fa-google.fa-lg
+            %span.p-3 Google ile Giriş Yap
+        .row.mt-4
+          .col-12
+            %span Henüz bir hesabınız yok mu?
+          .col-12
+            = link_to 'Buradan kayıt olabilirsiniz', new_user_registration_path,
+            class: 'link-light-sign-in-form'

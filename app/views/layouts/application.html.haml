@@ -4,7 +4,8 @@
   %body.top_bar
     = render partial: 'layouts/header/default'
     .container
-      = render "layouts/flash"
-      %p.notice= notice
-      %p.alert= alert
+      = render 'layouts/flash'
+      .space-body
+      / %p.notice= notice
+      / %p.alert= alert
       = yield
