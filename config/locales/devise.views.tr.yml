@@ -39,6 +39,7 @@ tr:
             email:
               invalid: Lütfen geçerli bir e-posta adresi girin.
               taken: E-Posta hali hazırda kullanılmakta.
+              not_found: E-Posta bulunamadı.
   devise:
     confirmations:
       # confirmed: Hesabınız başarıyla onaylandı. Şu an giriş yapmış bulunuyorsunuz.

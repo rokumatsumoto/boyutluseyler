@@ -41,6 +41,7 @@ en:
             email:
               invalid: Please provide a valid email address.
               taken: Email has already been taken.
+              not_found: E-mail not found.
   devise:
     confirmations:
       confirmed: Your email address has been successfully confirmed.
