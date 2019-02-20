@@ -20,7 +20,7 @@ tr:
         remember_created_at:
         remember_me: Beni Hatırla
         reset_password_sent_at:
-        reset_password_token:
+        reset_password_token: Şifreyi Yenileme Jetonu
         sign_in_count:
         unconfirmed_email:
         unlock_token:
