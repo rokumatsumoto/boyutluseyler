@@ -1,13 +1,25 @@
-%h2= t(".resend_confirmation_instructions")
-= simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
-  = f.error_notification
-  = f.full_error :confirmation_token
-  .form-inputs
-    = f.input :email,                                                                          |
-      required: true,                                                                          |
-      autofocus: true,                                                                         |
-      value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), |
-      input_html: { autocomplete: "email" }                                                    |
-  .form-actions
-    = f.button :submit, t(".resend_confirmation_instructions")
-= render "devise/shared/links"
+.row.grid-divider
+  .col-md-6.col-lg-6.px-lg-5
+    %h5.card-title.text-center= t('.resend_confirmation_instructions')
+    .row.px-4
+      .col.bg-light.text-resend-conf-form.px-5.py-4
+        = simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name),
+        html: { method: :post }, validate: true) do |f|
+          .form-inputs
+            = f.input :email, required: true, validate: true,
+            input_html: { autocomplete: 'email', value: params[:user_email] },
+            value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email)
+          .form-actions
+            = f.button :submit, t('.resend'), id: 'btn_resend_conf',
+            class: 'btn btn-info'
+        .d-flex.py-4
+          %hr.my-auto.flex-grow-1/
+        = render partial: 'devise/shared/links', locals: { css_class: 'link-resend-conf-form' }
+  .col-md-6.col-lg-6.px-lg-5.mx-3.my-4.py-3.mx-sm-3.my-md-0.py-md-0.mx-md-0
+    .row.mt-md-5.ml-md-2
+      .col-12
+        .row.mt-4
+          .col-12
+            %span Zaten kayıtlı mısınız?
+          .col-12
+            = link_to 'Buradan giriş yapabilirsiniz', new_user_session_path, class: 'link-light-resend-conf-form'

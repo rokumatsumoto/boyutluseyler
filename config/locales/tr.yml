@@ -120,7 +120,7 @@ tr:
       greater_than: "%{count} sayısından büyük olmalı"
       greater_than_or_equal_to: "%{count} sayısına eşit veya büyük olmalı"
       inclusion: kabul edilen bir kelime değil
-      invalid: geçersiz
+      invalid: geçersiz.
       less_than: "%{count} sayısından küçük olmalı"
       less_than_or_equal_to: "%{count} sayısına eşit veya küçük olmalı"
       model_invalid: 'Doğrulama başarısız oldu: %{errors}'

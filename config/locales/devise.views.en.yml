@@ -42,11 +42,13 @@ en:
               invalid: Please provide a valid email address.
               taken: Email has already been taken.
               not_found: E-mail not found.
+              already_confirmed: E-mail was already confirmed, please try signing in.
   devise:
     confirmations:
       confirmed: Your email address has been successfully confirmed.
       new:
         resend_confirmation_instructions: Resend confirmation instructions
+        resend: Resend
       send_instructions: You will receive an email with instructions for how to confirm your email address in a few minutes.
       send_paranoid_instructions: If your email address exists in our database, you will receive an email with instructions for how to confirm your email address in a few minutes.
     failure:
