@@ -26,7 +26,7 @@ class PasswordsController < Devise::PasswordsController
       ).first_or_initialize
 
       unless user.reset_password_period_valid?
-        flash[:alert] = expired_message_for_reset_password_token
+        flash[:alert] = expired_or_invalid_message_for_reset_password_token(user)
         redirect_to(new_user_password_url(user_email: user['email']))
       end
     end
@@ -49,7 +49,7 @@ class PasswordsController < Devise::PasswordsController
       end
       respond_with resource, location: after_resetting_password_path_for(resource)
     else
-      flash[:alert] = expired_message_for_reset_password_token
+      flash[:alert] = expired_or_invalid_message_for_reset_password_token(resource)
       redirect_to(new_user_password_url(user_email: resource['email']))
     end
   end
@@ -67,8 +67,24 @@ class PasswordsController < Devise::PasswordsController
 
   private
 
-  def expired_message_for_reset_password_token
-    t('activerecord.attributes.user.reset_password_token') + ' ' +
-      t('errors.messages.expired')
+  def expired_or_invalid_message_for_reset_password_token(resource)
+    if resource.email?
+      expired_or_invalid = resource.errors.full_messages.to_sentence
+      expired_or_invalid = t('errors.messages.expired') if resource.errors.messages.empty?
+
+      reset_password_token_translation + ' ' + expired_or_invalid
+    else
+      reset_password_token_translation + ' ' +
+        t('errors.messages.invalid')
+    end
   end
+
+  def reset_password_token_translation
+    t('activerecord.attributes.user.reset_password_token')
+  end
+
+  # def invalid_message_for_reset_password_token(resource)
+  #   t('activerecord.attributes.user.reset_password_token') + ' ' +
+  #     t('errors.messages.invalid')
+  # end
 end
