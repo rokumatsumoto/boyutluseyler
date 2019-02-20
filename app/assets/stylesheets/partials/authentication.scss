@@ -37,31 +37,48 @@ div.text-motto-sign-up-form p span {
 }
 
 /*
-* Password reset form
+* Reset password form
 */
 
-.text-pass-reset-form {
+.text-reset-pass-form {
     @extend .text-sign-up-form;
 }
 
-.link-pass-reset-form {
+.link-reset-pass-form {
     @extend .link-sign-in-form;
 }
 
-.link-light-pass-reset-form {
+
+.link-light-reset-pass-form {
+    @extend .link-light-sign-up-form;
+}
+
+/*
+* Forgot password form
+*/
+
+.text-forgot-pass-form {
+    @extend .text-sign-up-form;
+}
+
+.link-forgot-pass-form {
+    @extend .link-sign-in-form;
+}
+
+.link-light-forgot-pass-form {
     @extend .link-light-sign-up-form;
 }
 
 @include media-breakpoint-between(xs,sm){
   /* change .btn-password-reset to .btn-sm size on xs */
-  .btn-password-reset {
+  .btn-forgot-pass {
       @include button-size($input-btn-padding-y-sm, $input-btn-padding-x-sm, $font-size-sm, $line-height-sm, $btn-border-radius-sm);
   }
 }
 
 @include media-breakpoint-between(sm,md){
   /* change .btn-password-reset to .btn-sm size on sm */
-  .btn-password-reset {
+  .btn-forgot-pass {
       @include button-size($input-btn-padding-y-sm, $input-btn-padding-x-sm, $font-size-sm, $line-height-sm, $btn-border-radius-sm);
   }
 }

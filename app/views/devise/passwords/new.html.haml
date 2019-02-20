@@ -2,18 +2,18 @@
   .col-md-6.col-lg-6.px-lg-5
     %h5.card-title.text-center= t('.forgot_your_password')
     .row.px-4
-      .col.bg-light.text-pass-reset-form.px-5.py-4
+      .col.bg-light.text-forgot-pass-form.px-5.py-4
         = simple_form_for(resource, as: resource_name, url: password_path(resource_name),
         html: { method: :post }, validate: true) do |f|
           .form-inputs
-            = f.input :email, required: true, input_html: { autocomplete: 'email' },
-            validate: true
+            = f.input :email, required: true, validate: true, autofocus: true,
+            input_html: { autocomplete: 'email', value: params[:user_email] }
           .form-actions
-            = f.button :submit, t('.send_me_reset_password_instructions'), id: 'btn_reset_password',
-            class: 'btn btn-info btn-password-reset'
+            = f.button :submit, t('.send_me_reset_password_instructions'), id: 'btn_forgot_password',
+            class: 'btn btn-info btn-forgot-pass'
         .d-flex.py-4
           %hr.my-auto.flex-grow-1/
-        = render partial: 'devise/shared/links', locals: { css_class: 'link-pass-reset-form' }
+        = render partial: 'devise/shared/links', locals: { css_class: 'link-forgot-pass-form' }
   .col-md-6.col-lg-6.px-lg-5.mx-3.my-4.py-3.mx-sm-3.my-md-0.py-md-0.mx-md-0
     .row.mt-md-5.ml-md-2
       .col-12
@@ -22,4 +22,4 @@
             %span Henüz bir hesabınız yok mu?
           .col-12
             = link_to 'Buradan kayıt olabilirsiniz', new_user_registration_path,
-            class: 'link-light-pass-reset-form'
+            class: 'link-light-forgot-pass-form'

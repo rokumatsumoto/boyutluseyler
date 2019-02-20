@@ -1,16 +1,29 @@
-%h2= t(".change_your_password")
-= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
-  = f.error_notification
-  = f.input :reset_password_token, as: :hidden
-  = f.full_error :reset_password_token
-  .form-inputs
-    = f.input :password,                                                                                               |
-      label: t(".new_password"),                                                                                       |
-      required: true,                                                                                                  |
-      autofocus: true,                                                                                                 |
-      hint: (t('devise.shared.minimum_password_length', count: @minimum_password_length) if @minimum_password_length), |
-      input_html: { autocomplete: "new-password" }                                                                     |
-    = f.input :password_confirmation, label: t(".confirm_new_password"), required: true
-  .form-actions
-    = f.button :submit, t(".change_my_password")
-/ = render "devise/shared/links"
+.row.grid-divider
+  .col-md-6.col-lg-6.px-lg-5
+    %h5.card-title.text-center= t('.change_your_password')
+    .row.px-4
+      .col.bg-light.text-reset-pass-form.px-5.py-4
+        = simple_form_for(resource, as: resource_name, url: password_path(resource_name),
+        html: { method: :put }, validate: true) do |f|
+          = f.input :reset_password_token, as: :hidden, error: false
+          = f.full_error :reset_password_token
+          .form-inputs
+            = f.input :password, label: t('.new_password'), required: true, autofocus: true,
+              hint: (t('devise.shared.minimum_password_length', count: @minimum_password_length) if @minimum_password_length), input_html: { autocomplete: 'new-password' },
+              validate: true
+            = f.input :password_confirmation, label: t('.confirm_new_password'), required: true
+          .form-actions
+            = f.button :submit, t('.change_my_password'), id: 'btn_reset_password',
+            class: 'btn btn-info'
+        .d-flex.py-4
+          %hr.my-auto.flex-grow-1/
+        = render partial: 'devise/shared/links', locals: { css_class: 'link-forgot-pass-form' }
+  .col-md-6.col-lg-6.px-lg-5.mx-3.my-4.py-3.mx-sm-3.my-md-0.py-md-0.mx-md-0
+    .row.mt-md-5.ml-md-2
+      .col-12
+        .row.mt-4
+          .col-12
+            %span Henüz bir hesabınız yok mu?
+          .col-12
+            = link_to 'Buradan kayıt olabilirsiniz', new_user_registration_path,
+            class: 'link-light-forgot-pass-form'
