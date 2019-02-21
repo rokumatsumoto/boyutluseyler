@@ -100,6 +100,23 @@ div.text-motto-sign-up-form p span {
 }
 
 /*
+* Resend unlock instructions form
+*/
+
+.text-resend-unlck-form {
+  @extend .text-sign-up-form;
+}
+
+.link-resend-unlck-form {
+  @extend .link-sign-in-form;
+}
+
+.link-light-resend-unlck-form {
+  @extend .link-light-sign-up-form;
+}
+
+
+/*
 * Sign up, sign in forms
 */
 

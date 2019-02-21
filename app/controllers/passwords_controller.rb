@@ -82,9 +82,4 @@ class PasswordsController < Devise::PasswordsController
   def reset_password_token_translation
     t('activerecord.attributes.user.reset_password_token')
   end
-
-  # def invalid_message_for_reset_password_token(resource)
-  #   t('activerecord.attributes.user.reset_password_token') + ' ' +
-  #     t('errors.messages.invalid')
-  # end
 end

@@ -23,7 +23,7 @@ tr:
         reset_password_token: Şifreyi Yenileme Jetonu
         sign_in_count:
         unconfirmed_email:
-        unlock_token:
+        unlock_token: Hesap Geri Açma Jetonu
         updated_at:
         username: Kullanıcı Adı
         login: Kullanıcı Adı veya E-Posta
@@ -41,6 +41,7 @@ tr:
               taken: E-Posta hali hazırda kullanılmakta.
               not_found: E-Posta bulunamadı.
               already_confirmed: E-Posta zaten onaylanmış, lütfen giriş yapmayı deneyin.
+              not_locked: Hesabınız kilitlenmemiş.
   devise:
     confirmations:
       # confirmed: Hesabınız başarıyla onaylandı. Şu an giriş yapmış bulunuyorsunuz.
@@ -148,6 +149,7 @@ tr:
     unlocks:
       new:
         resend_unlock_instructions: Hesap geri açma talimatlarını tekrar gönder
+        resend: Yeniden gönder
       send_instructions: Birkaç dakika içerisinde hesap kilidi açma talimatlarını içeren bir e-posta alacaksınız.
       send_paranoid_instructions: Eğer hesabınız varsa, birkaç dakika içerisinde hesap kilidi açma talimatlarını içeren bir e-posta alacaksınız.
       unlocked: Hesabınızın kilidi başarıyla açıldı. Devam etmek için lütfen giriş yapın.
@@ -157,5 +159,5 @@ tr:
       confirmation_period_expired: "%{period} içinde onaylanması gerekmektedir, lütfen yeni bir tane isteyiniz."
       expired: süresi doldu, lütfen yeni bir tane isteyin.
       not_found: bulunamadı
-      not_locked: kilitlenmemiş
+      not_locked: kilitlenmemiş.
       not_saved: "%{count} tane hata %{resource}'ın kaydını engelledi."

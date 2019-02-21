@@ -43,6 +43,7 @@ en:
               taken: Email has already been taken.
               not_found: E-mail not found.
               already_confirmed: E-mail was already confirmed, please try signing in.
+              not_locked: Your account was not locked.
   devise:
     confirmations:
       confirmed: Your email address has been successfully confirmed.
