@@ -42,6 +42,8 @@ tr:
               not_found: E-Posta bulunamadı.
               already_confirmed: E-Posta zaten onaylanmış, lütfen giriş yapmayı deneyin.
               not_locked: Hesabınız kilitlenmemiş.
+            current_password:
+              invalid: Geçerli parola hatalı.
   devise:
     confirmations:
       # confirmed: Hesabınız başarıyla onaylandı. Şu an giriş yapmış bulunuyorsunuz.
@@ -114,9 +116,13 @@ tr:
         currently_waiting_confirmation_for_email: 'Doğrulama için bekleniyor : %{email}'
         leave_blank_if_you_don_t_want_to_change_it: değiştirmek istemiyorsanız boş bırakın
         title: "%{resource} düzenle"
+        edit_your_profile: Profilinizi düzenleyin
+        password_change: Parola değişimi
         unhappy: Mutsuz
         update: Güncelle
-        we_need_your_current_password_to_confirm_your_changes: değişikleri onaylamak için şu anki parolanız gerekli
+        we_need_your_current_password_to_confirm_your_changes: değişikleri onaylamak için şu anki parolanız
+        we_need_your_current_password_to_confirm_your_password_changes: Parola değişikliklerinizi onaylamak için şu anki parolanız gerekli.
+
       new:
         sign_up: Kaydol
         sign_up_by_email: E-posta ile kayıt ol

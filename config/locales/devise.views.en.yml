@@ -44,6 +44,8 @@ en:
               not_found: E-mail not found.
               already_confirmed: E-mail was already confirmed, please try signing in.
               not_locked: Your account was not locked.
+            current_password:
+              invalid: Current password is invalid.
   devise:
     confirmations:
       confirmed: Your email address has been successfully confirmed.
@@ -114,9 +116,12 @@ en:
         currently_waiting_confirmation_for_email: 'Currently waiting confirmation for: %{email}'
         leave_blank_if_you_don_t_want_to_change_it: leave blank if you don't want to change it
         title: Edit %{resource}
+        edit_your_profile: Edit your profile
+        password_change: Password change
         unhappy: Unhappy?
         update: Update
         we_need_your_current_password_to_confirm_your_changes: we need your current password to confirm your changes
+        we_need_your_current_password_to_confirm_your_password_changes: We need your current password to confirm your password changes.
       new:
         sign_up: Sign up
         sign_up_by_email: Sign up by email
