@@ -38,7 +38,7 @@ gem 'devise-i18n', '~> 1.7', '>= 1.7.1'
 # Authorization
 gem 'pundit', '~> 2.0', '>= 2.0.1'
 # CSS & JS Framework
-gem 'bootstrap', '~> 4.2', '>= 4.2.1'
+gem 'bootstrap', '~> 4.3', '>= 4.3.1'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 # Forms
 gem 'client_side_validations', '~> 12.1'
