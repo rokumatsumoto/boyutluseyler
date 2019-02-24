@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class PasswordsController < Devise::PasswordsController
+  before_action :resource_from_email, only: [:create]
+  before_action :throttle_reset, only: [:create]
   # GET /resource/password/new
   # def new
   #   super
@@ -64,6 +66,22 @@ class PasswordsController < Devise::PasswordsController
   # def after_sending_reset_password_instructions_path_for(resource_name)
   #   super(resource_name)
   # end
+
+  protected
+
+  def resource_from_email
+    email = resource_params[:email]
+    self.resource = resource_class.find_by_email(email)
+  end
+
+  def throttle_reset
+    return unless resource&.recently_sent_password_reset?
+
+    # Throttle reset attempts, but return a normal message to
+    # avoid user enumeration attack.
+    redirect_to new_user_session_path,
+                notice: t('devise.passwords.send_instructions')
+  end
 
   private
 

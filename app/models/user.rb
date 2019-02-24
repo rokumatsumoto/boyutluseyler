@@ -61,4 +61,8 @@ class User < ApplicationRecord
                                  :value', value: login.downcase.strip)
     end
   end
+
+  def recently_sent_password_reset?
+    reset_password_sent_at.present? && reset_password_sent_at >= 1.minute.ago
+  end
 end
