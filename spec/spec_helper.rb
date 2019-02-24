@@ -39,8 +39,10 @@ RSpec.configure do |config|
 
   config.include WaitForRequests, :js
   config.include PageReload, :js
+  config.include LoginHelpers, type: :feature
   config.include FactoryBot::Syntax::Methods
   config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include AbstractController::Translation
 
   # TODO: Activate when it is needed
   # config.before(:suite) do
@@ -68,6 +70,16 @@ RSpec.configure do |config|
   # end of the spec run, to help surface which specs are running
   # particularly slow.
   config.profile_examples = 2
+
+  config.filter_run_excluding tag: lambda { |tag|
+    case tag
+    when :devise_default
+      # Always run :devise_default tests on CI. Only run locally if RUN_DEVISE_DEFAULT_TESTS
+      !ENV['CI'] && !ENV['RUN_DEVISE_DEFAULT_TESTS']
+    else
+      false
+    end
+  }
 end
 
 Shoulda::Matchers.configure do |config|

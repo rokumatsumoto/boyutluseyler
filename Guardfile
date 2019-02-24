@@ -28,7 +28,7 @@
 
 # rubocop:disable Metrics/BlockLength
 group 'specs', halt_on_fail: true do
-  guard :rspec, cmd: 'bin/rspec', failed_mode: :keep, all_on_start: true do
+  guard :rspec, cmd: 'bin/rspec --tag ~devise_default', failed_mode: :keep, all_on_start: true do
     require 'guard/rspec/dsl'
     dsl = Guard::RSpec::Dsl.new(self)
 
