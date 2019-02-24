@@ -87,24 +87,22 @@ RSpec.describe User, type: :model do
       " #{user.username} ")).to eq user
     end
   end
+
+  def taken_message_for_username
+    t('activerecord.errors.models.user.attributes.username.taken')
+  end
+
+  def too_short_message_for_username
+    t('errors.messages.too_short.other', count: 3)
+  end
+
+  def too_long_message_for_username
+    t('errors.messages.too_long.other', count: 30)
+  end
+
+  def confirmation_message_for_password
+    t('errors.messages.confirmation', attribute:
+    t('activerecord.attributes.user.password'))
+  end
 end
 # rubocop:enable Metrics/BlockLength
-
-private
-
-def taken_message_for_username
-  I18n.t('activerecord.errors.models.user.attributes.username.taken')
-end
-
-def too_short_message_for_username
-  I18n.t('errors.messages.too_short.other', count: 3)
-end
-
-def too_long_message_for_username
-  I18n.t('errors.messages.too_long.other', count: 30)
-end
-
-def confirmation_message_for_password
-  I18n.t('errors.messages.confirmation', attribute:
-  I18n.t('activerecord.attributes.user.password'))
-end

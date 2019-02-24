@@ -44,7 +44,7 @@ RSpec.describe UsersController, type: :controller do
   end
 
   def exists_message_for_username
-    I18n.t('activerecord.errors.models.user.attributes.username.taken')
+    t('activerecord.errors.models.user.attributes.username.taken')
   end
 end
 # rubocop:enable Metrics/BlockLength

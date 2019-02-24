@@ -18,7 +18,7 @@ class UnlocksController < Devise::UnlocksController
 
     if resource.errors.empty?
       set_flash_message! :notice, :unlocked
-      respond_with_navigational(resource){ redirect_to after_unlock_path_for(resource) }
+      respond_with_navigational(resource) { redirect_to after_unlock_path_for(resource) }
     else
       flash[:alert] = expired_or_invalid_message_for_unlock_token(resource)
       redirect_to(new_user_unlock_url(user_email: resource['email']))

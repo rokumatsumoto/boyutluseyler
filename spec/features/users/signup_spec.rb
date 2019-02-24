@@ -113,15 +113,15 @@ RSpec.describe 'Signup' do
   end
 
   def invalid_message_for_username
-    I18n.t('activerecord.errors.models.user.attributes.username.invalid')
+    t('activerecord.errors.models.user.attributes.username.invalid')
   end
 
   def unconfirmed_message_for_user
-    I18n.t('devise.registrations.signed_up_but_unconfirmed')
+    t('devise.registrations.signed_up_but_unconfirmed')
   end
 
   def taken_message_for_email
-    I18n.t('activerecord.errors.models.user.attributes.email.taken')
+    t('activerecord.errors.models.user.attributes.email.taken')
   end
 end
 # rubocop:enable Metrics/BlockLength

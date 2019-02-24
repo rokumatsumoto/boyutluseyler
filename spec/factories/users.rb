@@ -30,5 +30,15 @@ FactoryBot.define do
     email { generate(:email) }
     username { generate(:username) }
     password { '123456' }
+    confirmed_at { Time.now }
+    confirmation_token { nil }
+
+    trait :unconfirmed do
+      confirmed_at { nil }
+    end
+
+    trait :locked do
+      locked_at { Time.now }
+    end
   end
 end
