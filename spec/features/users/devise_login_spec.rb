@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 # rubocop:disable RSpec/DescribeClass
-RSpec.describe 'DeviseLogin', tag: :devise_default do
+RSpec.describe 'Devise login', tag: :devise_default do
   describe 'with unconfirmed account' do
     let(:user) { create(:user, :unconfirmed) }
 
