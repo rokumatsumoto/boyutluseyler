@@ -9,9 +9,15 @@ class SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    super do |resource|
+      # User has successfully signed in, so clear any unused reset token
+      if resource.reset_password_token.present?
+        resource.update(reset_password_token: nil,
+                        reset_password_sent_at: nil)
+      end
+    end
+  end
 
   # DELETE /resource/sign_out
   # def destroy
