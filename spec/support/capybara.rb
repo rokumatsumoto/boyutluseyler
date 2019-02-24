@@ -1,6 +1,7 @@
 require 'capybara/rspec'
 require 'capybara-screenshot'
 require 'capybara-screenshot/rspec'
+require 'capybara/email/rspec'
 require 'selenium-webdriver'
 
 ## Configure capybara
@@ -28,4 +29,8 @@ Capybara::Screenshot.prune_strategy = :keep_last_run
 # From https://github.com/mattheworiordan/capybara-screenshot/issues/84#issuecomment-41219326
 Capybara::Screenshot.register_driver(:chrome) do |driver, path|
   driver.browser.save_screenshot(path)
+end
+
+RSpec.configure do |config|
+  config.include CapybaraHelpers, type: :feature
 end

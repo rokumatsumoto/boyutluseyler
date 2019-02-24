@@ -118,7 +118,8 @@ group :test do
   gem 'shoulda-matchers', '4.0.0.rc1', require: false
   gem 'timecop', '~> 0.9.1'
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
+  gem 'capybara', '~> 3.13', '>= 3.13.2'
+  gem 'capybara-email', '~> 3.0', '>= 3.0.1'
   gem 'capybara-screenshot', '~> 1.0', '>= 1.0.22'
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
