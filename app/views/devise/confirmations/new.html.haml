@@ -10,7 +10,7 @@
             input_html: { autocomplete: 'email', value: params[:user_email] },
             value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email)
           .form-actions
-            = f.button :submit, t('.resend'), id: 'btn_resend_conf',
+            = f.button :submit, t('.resend'), id: 'btn_resend_confirmation',
             class: 'btn btn-info'
         .d-flex.py-4
           %hr.my-auto.flex-grow-1/
