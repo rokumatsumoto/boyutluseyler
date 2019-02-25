@@ -2,6 +2,7 @@ require 'spec_helper'
 
 # rubocop:disable RSpec/DescribeClass
 RSpec.describe 'Password reset' do
+  include PasswordResetHelpers
   describe 'throttling' do
     it 'sends reset instructions when not previously sent' do
       user = create(:user)
@@ -47,16 +48,74 @@ RSpec.describe 'Password reset' do
     # rubocop:enable RSpec/MultipleExpectations
   end
 
-  def forgot_password(user, user_reload = true)
-    visit new_user_session_path
-    click_link 'link-forgot-your-password'
-    fill_in 'user_email', with: user.email
-    click_button 'btn_forgot_password'
-    user.reload if user_reload
+  describe 'token' do
+    context 'with valid token' do
+      it 'renders change password page' do
+        user = create(:user)
+
+        render_change_password_with_valid_token(user)
+      end
+    end
+
+    context 'with expired token' do
+      let(:user) { create(:user) }
+
+      before do
+        token = user.send_reset_password_instructions
+        user.update_attribute(:reset_password_sent_at, 3.days.ago)
+
+        visit(edit_user_password_path(reset_password_token: token))
+      end
+
+      it 'redirects to forgot your password page' do
+        expect(page).to have_current_path new_user_password_url(user_email: user['email'])
+        expect(page).to have_content(expired_message_for_reset_password_token)
+      end
+
+      it 'fills email field on forgot your password page' do
+        expect(page).to have_field('user_email', with: user.email)
+      end
+    end
+
+    context 'with invalid token' do
+      before do
+        visit(edit_user_password_path(reset_password_token: 'invalid-token'))
+      end
+
+      it 'redirects to forgot your password page' do
+        expect(page).to have_current_path new_user_password_url(user_email: '')
+        expect(page).to have_content(invalid_message_for_reset_password_token)
+      end
+
+      it 'does not fill email field on forgot your password page' do
+        expect(page).to have_field('user_email', with: '')
+      end
+    end
   end
 
-  def not_found_message_for_email
-    t('activerecord.errors.models.user.attributes.email.not_found')
+  describe 'change your password' do
+    context 'with valid token' do
+      let(:user) { create(:user) }
+
+      context 'with token expires while filling in the form' do
+        before do
+          render_change_password_with_valid_token(user)
+
+          user.update_attribute(:reset_password_sent_at, 3.days.ago)
+
+          change_password(user)
+        end
+
+        it 'redirects to forgot your password page' do
+          expect(page).to have_content(expired_message_for_reset_password_token)
+          expect(page).to have_current_path new_user_password_url(user_email: user['email'])
+        end
+
+        it 'fills email field on forgot your password page' do
+          expect(page).to have_field('user_email', with: user.email)
+        end
+      end
+    end
   end
 end
 # rubocop:enable RSpec/DescribeClass
