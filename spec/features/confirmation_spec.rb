@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 # rubocop:disable RSpec/DescribeClass
+# rubocop:disable RSpec/MultipleExpectations
+# rubocop:disable Metrics/BlockLength
 RSpec.describe 'Confirmation' do
   include ConfirmationHelpers
   context 'with errors' do
@@ -8,25 +10,21 @@ RSpec.describe 'Confirmation' do
     let(:user) { create(:user) }
 
     context 'when email not found' do
-      # rubocop:disable RSpec/MultipleExpectations
       it 'displays not found message' do
         resend(unregistered_user)
 
         expect(page).not_to have_current_path new_user_session_path
         expect(page).to have_content(not_found_message_for_email)
       end
-      # rubocop:enable RSpec/MultipleExpectations
     end
 
     context 'when email already confirmed' do
-      # rubocop:disable RSpec/MultipleExpectations
       it 'displays already confirmed message' do
         resend(user)
 
         expect(page).not_to have_current_path new_user_session_path
         expect(page).to have_content(already_confirmed_message_for_email)
       end
-      # rubocop:enable RSpec/MultipleExpectations
     end
   end
 
@@ -58,4 +56,6 @@ RSpec.describe 'Confirmation' do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength
+# rubocop:enable RSpec/MultipleExpectations
 # rubocop:enable RSpec/DescribeClass

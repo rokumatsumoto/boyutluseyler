@@ -7,22 +7,9 @@
 # versions of Haml-Lint, may require this file to be generated again.
 
 linters:
-
-  # Offense count: 7
-  MultilinePipe:
-    exclude:
-      - "app/views/devise/confirmations/new.html.haml"
-      - "app/views/devise/registrations/edit.html.haml"
-      - "app/views/devise/unlocks/new.html.haml"
-
   # Offense count: 52
   RuboCop:
     exclude:
-      - "app/views/devise/confirmations/new.html.haml"
-      - "app/views/devise/passwords/edit.html.haml"
-      - "app/views/devise/passwords/new.html.haml"
-      - "app/views/devise/registrations/edit.html.haml"
-      - "app/views/devise/unlocks/new.html.haml"
       - "app/views/layouts/mailer.html.haml"
 
   # Offense count: 4

@@ -1,8 +1,11 @@
 require 'spec_helper'
 
 # rubocop:disable RSpec/DescribeClass
+# rubocop:disable Metrics/BlockLength
+# rubocop:disable RSpec/MultipleExpectations
 RSpec.describe 'Login' do
   describe 'password reset token after successful sign in' do
+    # rubocop:disable RSpec/ExampleLength
     it 'invalidates password reset token' do
       user = create(:user)
 
@@ -21,6 +24,7 @@ RSpec.describe 'Login' do
       user.reload
       expect(user.reset_password_token).to be_nil
     end
+    # rubocop:enable RSpec/ExampleLength
   end
 
   describe 'with correct username and password' do
@@ -44,4 +48,6 @@ RSpec.describe 'Login' do
     end
   end
 end
+# rubocop:enable RSpec/MultipleExpectations
+# rubocop:enable Metrics/BlockLength
 # rubocop:enable RSpec/DescribeClass

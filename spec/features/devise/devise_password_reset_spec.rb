@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 # rubocop:disable RSpec/DescribeClass
+# rubocop:disable Metrics/BlockLength
 RSpec.describe 'Devise password reset', tag: :devise_default do
   include PasswordResetHelpers
   context 'with no errors' do
@@ -24,10 +25,12 @@ RSpec.describe 'Devise password reset', tag: :devise_default do
         change_password(user)
       end
 
+      # rubocop:disable RSpec/MultipleExpectations
       it 'allows to change the password' do
         expect(page).to have_current_path new_user_session_path
         expect(page).to have_content(t('devise.passwords.updated_not_active'))
       end
+      # rubocop:enable RSpec/MultipleExpectations
 
       it 'sends email notification on password change' do
         open_email(user.email)
@@ -37,4 +40,5 @@ RSpec.describe 'Devise password reset', tag: :devise_default do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength
 # rubocop:enable RSpec/DescribeClass

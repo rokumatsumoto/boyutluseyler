@@ -11,6 +11,7 @@ class UnlocksController < Devise::UnlocksController
   #   super
   # end
 
+  # rubocop:disable Metrics/AbcSize
   # GET /resource/unlock?unlock_token=abcdef
   def show
     self.resource = resource_class.unlock_access_by_token(params[:unlock_token])
@@ -24,6 +25,7 @@ class UnlocksController < Devise::UnlocksController
       redirect_to(new_user_unlock_url(user_email: resource['email']))
     end
   end
+  # rubocop:enable Metrics/AbcSize
 
   # protected
 

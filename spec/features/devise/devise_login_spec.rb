@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 # rubocop:disable RSpec/DescribeClass
+# rubocop:disable Metrics/BlockLength
+# rubocop:disable RSpec/MultipleExpectations
 RSpec.describe 'Devise login', tag: :devise_default do
   describe 'with unconfirmed account' do
     let(:user) { create(:user, :unconfirmed) }
@@ -84,4 +86,6 @@ RSpec.describe 'Devise login', tag: :devise_default do
     end
   end
 end
+# rubocop:enable RSpec/MultipleExpectations
+# rubocop:enable Metrics/BlockLength
 # rubocop:enable RSpec/DescribeClass

@@ -28,6 +28,7 @@ RSpec.describe User, type: :model do
         expect(user).to validate_presence_of(:username)
       end
 
+      # rubocop:disable RSpec/NestedGroups
       context 'when in use by another user' do
         let(:username) { 'foo' }
 
@@ -47,11 +48,14 @@ RSpec.describe User, type: :model do
                                                            .with_message(taken_message_for_username)
         end
       end
+      # rubocop:enable RSpec/NestedGroups
 
-      context 'when contains special characters like below' do
+      # rubocop:disable RSpec/NestedGroups
+      context 'when contains special characters' do
         it { is_expected.not_to allow_value('user@example.org').for(:username) }
         it { is_expected.not_to allow_value('new$user!username').for(:username) }
       end
+      # rubocop:enable RSpec/NestedGroups
 
       it 'validates minimum length' do
         expect(user).to validate_length_of(:username)

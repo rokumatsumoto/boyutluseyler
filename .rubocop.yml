@@ -44,6 +44,10 @@ Style/UnneededInterpolation:
   Enabled: true
   Exclude:
     - 'app/views/**/*'
+Metrics/BlockLength:
+  Enabled: true
+  Exclude:
+    - 'spec/spec_helper.rb'
 Style/Documentation:
   Enabled: false
 Metrics/LineLength:

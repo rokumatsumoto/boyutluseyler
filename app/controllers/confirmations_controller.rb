@@ -11,6 +11,7 @@ class ConfirmationsController < Devise::ConfirmationsController
   #   super
   # end
 
+  # rubocop:disable Metrics/AbcSize
   # GET /resource/confirmation?confirmation_token=abcdef
   def show
     self.resource = resource_class.confirm_by_token(params[:confirmation_token])
@@ -18,12 +19,15 @@ class ConfirmationsController < Devise::ConfirmationsController
 
     if resource.errors.empty?
       set_flash_message!(:notice, :confirmed)
-      respond_with_navigational(resource) { redirect_to after_confirmation_path_for(resource_name, resource) }
+      respond_with_navigational(resource) do
+        redirect_to after_confirmation_path_for(resource_name, resource)
+      end
     else
       flash[:alert] = expired_or_invalid_message_for_confirmation_token(resource)
       redirect_to(new_user_confirmation_url(user_email: resource['email']))
     end
   end
+  # rubocop:enable Metrics/AbcSize
 
   # protected
 
