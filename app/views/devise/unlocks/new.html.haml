@@ -9,7 +9,7 @@
             = f.input :email, required: true, autofocus: true, validate: true,
             input_html: { autocomplete: 'email', value: params[:user_email] }
           .form-actions
-            = f.button :submit, t('.resend'), id: 'btn_resend_unlck',
+            = f.button :submit, t('.resend'), id: 'btn_resend_unlock',
             class: 'btn btn-info'
         .d-flex.py-4
           %hr.my-auto.flex-grow-1/
