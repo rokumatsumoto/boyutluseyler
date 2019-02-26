@@ -44,10 +44,9 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include AbstractController::Translation
 
-  # TODO: Activate when it is needed
-  # config.before(:suite) do
-  #   Timecop.safe_mode = true
-  # end
+  config.before(:suite) do
+    Timecop.safe_mode = true
+  end
 
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
