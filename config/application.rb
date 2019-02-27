@@ -19,5 +19,8 @@ module Boyutluseyler
     # rails time:zones
     config.time_zone = 'Istanbul'
     config.i18n.default_locale = :tr
+
+    # Disable animations, only for test environments
+    config.disable_animations = false
   end
 end
