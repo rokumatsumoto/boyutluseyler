@@ -6,6 +6,7 @@ ready = ->
     username = $('#user_username')
     if (username.attr('data_username') != undefined &&
        username.attr('data_username') == $('#user_username').val())
+      username[0].setCustomValidity('')
       event.stopImmediatePropagation()
       return false
     div_username = username.parent().closest('div')

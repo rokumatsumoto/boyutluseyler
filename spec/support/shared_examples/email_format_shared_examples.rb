@@ -5,7 +5,7 @@
 #         being currently tested).
 
 # rubocop:disable Metrics/BlockLength
-shared_examples 'an object with email-formated attributes' do |*attributes|
+RSpec.shared_examples 'an object with email-formated attributes' do |*attributes|
   attributes.each do |attribute|
     describe "specifically its :#{attribute} attribute" do
       %w[

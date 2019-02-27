@@ -9,48 +9,11 @@ RSpec.describe 'Signup' do
     click_link 'nav_sign_up'
   end
 
+  it_behaves_like 'validates username' do
+    let(:form_submit_button_id) { 'btn_sign_up' }
+  end
+
   describe 'username validation', :js do
-    it 'does not show an error border if the username is available' do
-      fill_in 'user_username', with: 'new-user'
-      wait_for_requests
-      page.find('body').click # simulate blur event
-
-      expect(find('.user_username')).not_to have_css '.is-invalid'
-    end
-
-    it 'does not show an error border if the username contains dots (.)' do
-      fill_in 'user_username', with: 'new.user.username'
-      wait_for_requests
-      page.find('body').click
-
-      expect(find('.user_username')).not_to have_css '.is-invalid'
-    end
-
-    it 'shows an error border if the username already exists' do
-      existing_user = create(:user)
-
-      fill_in 'user_username', with: existing_user.username
-      wait_for_requests
-      page.find('body').click
-
-      expect(find('.user_username')).to have_css '.is-invalid'
-    end
-
-    it 'shows an error border if the username contains special characters' do
-      fill_in 'user_username', with: 'new$user!username'
-      wait_for_requests
-      page.find('body').click
-
-      expect(find('.user_username')).to have_css '.is-invalid'
-    end
-
-    it 'shows an error message on submit if the username contains special characters' do
-      fill_in 'user_username', with: 'new$user!username'
-      wait_for_requests
-
-      click_button 'btn_sign_up'
-      expect(page).to have_content(invalid_message_for_username)
-    end
     # rubocop:disable RSpec/ExampleLength
     it 'does not reload the page if the username already exists' do
       existing_user = create(:user)
@@ -59,6 +22,8 @@ RSpec.describe 'Signup' do
       fill_in 'user_email',                 with: new_user.email
       fill_in 'user_password',              with: new_user.password
       fill_in 'user_password_confirmation', with: new_user.password
+
+      wait_for_requests
 
       expect_page_to_not_reload do
         click_button 'btn_sign_up'
@@ -110,10 +75,6 @@ RSpec.describe 'Signup' do
       expect(page.body).not_to match(/#{new_user.password}/)
     end
     # rubocop:enable RSpec/MultipleExpectations
-  end
-
-  def invalid_message_for_username
-    t('activerecord.errors.models.user.attributes.username.invalid')
   end
 
   def unconfirmed_message_for_user

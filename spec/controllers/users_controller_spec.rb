@@ -1,7 +1,5 @@
 require 'rails_helper'
 
-# TODO: Add test to user profile spec
-# Check if data_username == username.val() blur event does not trigger ajax
 # rubocop:disable Metrics/BlockLength
 RSpec.describe UsersController, type: :controller do
   let(:user) { create(:user) }
