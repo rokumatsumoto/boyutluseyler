@@ -6,6 +6,9 @@ require 'selenium-webdriver'
 
 ## Configure capybara
 
+# Give CI some extra time
+timeout = ENV['CI'] ? 60 : 30
+
 # If using Rails 5.0+, but not using the Rails system tests from 5.1, you'll
 # probably also want to swap the "server" used to launch your app to Puma in
 # order to match Rails defaults.
@@ -20,7 +23,7 @@ Capybara.register_driver :chrome do |app|
 end
 
 Capybara.javascript_driver = :chrome
-Capybara.default_max_wait_time = 5
+Capybara.default_max_wait_time = timeout
 
 ## Configure capybara-screenshot
 
