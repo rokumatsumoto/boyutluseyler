@@ -1,0 +1,27 @@
+version: "2"
+plugins:
+  rubocop:
+    enabled: true
+  brakeman:
+    enabled: true
+  bundler-audit:
+    enabled: true
+  eslint:
+    enabled: true
+  scss-lint:
+    enabled: true
+  coffeelint:
+    enabled: true
+exclude_patterns:
+  - "config/"
+  - "db/"
+  - "dist/"
+  - "features/"
+  - "**/node_modules/"
+  - "script/"
+  - "**/spec/"
+  - "**/test/"
+  - "**/tests/"
+  - "**/vendor/"
+  - "**/*.d.ts"
+  - "app/assets/javascripts/lib/"
