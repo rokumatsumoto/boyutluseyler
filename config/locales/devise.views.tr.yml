@@ -43,7 +43,8 @@ tr:
               already_confirmed: E-Posta zaten onaylanmış, lütfen giriş yapmayı deneyin.
               not_locked: Hesabınız kilitlenmemiş.
             current_password:
-              invalid: Geçerli parola hatalı.
+              invalid: Geçerli Parola hatalı.
+              blank: Geçerli Parola doldurulmalı.
   devise:
     confirmations:
       # confirmed: Hesabınız başarıyla onaylandı. Şu an giriş yapmış bulunuyorsunuz.
@@ -122,7 +123,6 @@ tr:
         update: Güncelle
         we_need_your_current_password_to_confirm_your_changes: değişikleri onaylamak için şu anki parolanız
         we_need_your_current_password_to_confirm_your_password_changes: Parola değişikliklerinizi onaylamak için şu anki parolanız gerekli.
-
       new:
         sign_up: Kaydol
         sign_up_by_email: E-posta ile kayıt ol

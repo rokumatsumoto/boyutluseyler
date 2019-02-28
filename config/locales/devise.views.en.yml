@@ -46,6 +46,7 @@ en:
               not_locked: Your account was not locked.
             current_password:
               invalid: Current password is invalid.
+              blank: Current password is required.
   devise:
     confirmations:
       confirmed: Your email address has been successfully confirmed.

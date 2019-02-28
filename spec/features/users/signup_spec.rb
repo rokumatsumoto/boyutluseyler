@@ -80,10 +80,6 @@ RSpec.describe 'Signup' do
   def unconfirmed_message_for_user
     t('devise.registrations.signed_up_but_unconfirmed')
   end
-
-  def taken_message_for_email
-    t('activerecord.errors.models.user.attributes.email.taken')
-  end
 end
 # rubocop:enable Metrics/BlockLength
 # rubocop:enable RSpec/DescribeClass

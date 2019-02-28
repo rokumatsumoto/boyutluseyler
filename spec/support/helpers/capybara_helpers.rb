@@ -13,4 +13,13 @@ module CapybaraHelpers
       raise "Don't know how to clear cookies. Weird driver?"
     end
   end
+
+  # rubocop:disable Lint/Debugger
+  def down_the_rabbit_hole
+    return if Capybara.current_driver == :rack_test
+
+    puts current_url
+    binding.pry
+  end
+  # rubocop:enable Lint/Debugger
 end

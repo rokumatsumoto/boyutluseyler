@@ -2,7 +2,7 @@
 
 class UsersController < ApplicationController
   def exists
-    if User.find_by('lower(username) = :username', username: params[:username].downcase)
+    if User.exists?(['lower(username) = :username', username: params[:username].downcase])
       render json: { exists: true, message: taken_message_for_username }
     else
       render json: { exists: false }

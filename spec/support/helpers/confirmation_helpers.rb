@@ -6,10 +6,6 @@ module ConfirmationHelpers
     click_button 'btn_resend_confirmation'
   end
 
-  def not_found_message_for_email
-    t('activerecord.errors.models.user.attributes.email.not_found')
-  end
-
   def already_confirmed_message_for_email
     t('activerecord.errors.models.user.attributes.email.already_confirmed')
   end

@@ -21,10 +21,6 @@ module PasswordResetHelpers
     click_button 'btn_reset_password'
   end
 
-  def not_found_message_for_email
-    t('activerecord.errors.models.user.attributes.email.not_found')
-  end
-
   def expired_message_for_reset_password_token
     t('errors.messages.expired', attribute:
       t('activerecord.attributes.user.reset_password_token'))

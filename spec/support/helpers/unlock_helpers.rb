@@ -6,10 +6,6 @@ module UnlockHelpers
     click_button 'btn_resend_unlock'
   end
 
-  def not_found_message_for_email
-    t('activerecord.errors.models.user.attributes.email.not_found')
-  end
-
   def not_locked_message_for_account
     t('activerecord.errors.models.user.attributes.email.not_locked')
   end
