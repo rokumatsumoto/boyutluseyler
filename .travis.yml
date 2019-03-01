@@ -17,6 +17,7 @@ branches:
 cache:
   directories:
     - vendor/bundle
+dist: xenial
 env:
   global:
     - CI=true
