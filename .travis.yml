@@ -30,7 +30,7 @@ language: ruby
 rvm:
   - "2.5.3"
 services:
-    - postgresql
+  - postgresql
 script:
   - "bundle exec rake db:schema:load"
   - "./cc-test-reporter before-build"
