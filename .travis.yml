@@ -1,44 +1,41 @@
----
 addons:
   chrome: stable
-  code_climate:
-    repo_token:
-      secure: TdVzlfGmh4BPi7oXyvg20KrCsD8y8tultRThs8mxgTE14Hiozrc55HfrkhG7fiv/29ZPrLWpanYjbRE+4efHtsTBK6Z27HycIqtwyu/cUnK7cwtGsPyjvTQbqPf0rLlGPhqTDzMeornDj4u3/Cq5YBHBEnBVqyjZqAXkjABePymfiSB+W0hKONpOgdBpGrEwnwPviAv/CiFszR/oY8csHvVL6q9TLW06L7VKf85yBQ/qTotn2kRqKYLLLSsFHCLhX7memnnxmBqbKa9FHVVNMCpP3c+oaTp/ceCWR2TGxTSUv9mnDzefzo6MiYkcUDKNdEdCQ61HBOdM8ciXRqDMwcuPLWUUvyQe3GYcuCji4WXz6pi5ZyYfQNYX4GMrkHYWuog3WZXMCDkCq69VI+ParFEr+91kU8EGbG8dmbzA6qCAg04uM3xfMmTDFo9bG0ERC6SCOEO2i3c6nzIjZK7xrXuWi1FMXbnjmnq1Er3ZDyohCwsbhOBdzs+DGdFNtZ532ZZK3SGJEo5BqrvwdavAtconYw3+iDyQMYUIG4CLBpYtdGS0ORYMwDJb/VkZpF34lliD3ZlyDoHNSOH6Tx4j0I2ERQeqFXio7gqekAmp9U4Ndcjd/rf7SX9z5xc79orW2GcM6jpiRn+zaO1B0lS5DEnFNmyFw2CtfrtuBB1aPZk=
-  postgresql: "10"
+  postgresql: '10'
 before_install:
-  - "gem update --system"
-  - "gem install bundler"
+- gem update --system
+- gem install bundler
 before_script:
-  - "cp config/database.yml.travis config/database.yml"
-  - "psql -c 'create database travis_ci_test;' -U postgres"
+- cp config/database.yml.travis config/database.yml
+- psql -c 'create database travis_ci_test;' -U postgres
 branches:
   only:
-    - master
+  - master
 cache:
   directories:
-    - vendor/bundle
+  - vendor/bundle
 dist: xenial
 env:
   global:
-    - CI=true
-    - RAILS_ENV=test
-    - SIMPLECOV=true
+  - CI=true
+  - RAILS_ENV=test
+  - SIMPLECOV=true
+  - secure: BR96SqaoI5r/Px8VlkhmTkMHBex9f5+wBhVDP84niUZWmKc6h92n9OJW76iSbQCGZZmW7r5k29MU5WMH1MGvcyj0WMP9TRkf2QzKfChlpRxJpdbe3/0Ko9Y2OUbtCW5nGaKliq3wkY0Nw8MsL21Enobp9iCr8v+3w5/AF0koEyUtLxPozJSusdMdfd+7lWX5k9u2a+OQowQMR1W2Amh3YOM5IeIWOrxe8xtypv0b6RBe4E9hT0QZi2d7YZumf/Ncnf9YvqVQkAQqAT0JlQJX3OfYkMYgCGS3XR5wClPX9H2QiXlAZL1gu55/c221tcNRMxjJRdPYlVQOfVrmeEasTuTo/bEYCqnryT2y5KiV9WzHB1tFdz2lOA3/eHpHK5dSaie6NIofAHwvnzkU7Qy0Te2BvAlEqqTABdOQ4XU0ZbOr9fsj7iF+jbFSDFgvd5FKyP9SH8Y/u+E+QTNfK+c1mADAM547bjoTSopYXsuSZ8u2l2LRMQxHOogt3bEaaZtT/E949w5fUXjk8OUwLwQkWKBmMhBKg42ZgG5ba/vZatuMjN14e4Lh2Q8LvqWpLNNI0mG8iPOm/tuS4UWpivt+pU43Z2tddmu7mCuBYohvWuqd0dMb8TeMELx3EyqvPKKsw/bHw0YqyXxFyL/GE2If9LzZHpCOTHaLBSmw7ZhoWGQ=
 install:
-  - "bundle install --path vendor/bundle"
-  - "bundle exec chromedriver-update"
-  - "curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter"
-  - "chmod +x ./cc-test-reporter"
+- bundle install --path vendor/bundle
+- bundle exec chromedriver-update
+- curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
+  > ./cc-test-reporter
+- chmod +x ./cc-test-reporter
 language: ruby
 rvm:
-  - "2.5.3"
+- 2.5.3
 services:
-  - postgresql
+- postgresql
 script:
-  - "bundle exec rake db:schema:load"
-  - "./cc-test-reporter before-build"
-  - "bundle exec rspec spec"
-  - "./cc-test-reporter format-coverage -t simplecov -o coverage/codeclimate.simplecov.json"
-  - "./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.lcov.json"
-  - "./cc-test-reporter sum-coverage coverage/codeclimate.*.json"
-  - "./cc-test-reporter upload-coverage"
-  - "bundle exec bundle-audit check --update"
+- bundle exec rake db:schema:load
+- "./cc-test-reporter before-build"
+- bundle exec rspec spec
+- "./cc-test-reporter format-coverage -t simplecov -o coverage/codeclimate.simplecov.json"
+- "./cc-test-reporter sum-coverage coverage/codeclimate.*.json"
+- "./cc-test-reporter upload-coverage"
+- bundle exec bundle-audit check --update
