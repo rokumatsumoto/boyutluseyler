@@ -35,6 +35,7 @@ notifications:
     rooms:
       secure: OfIFa1u7oAsBLrtlNVa8UTnNUmzG/xO627Zcs7+gV8mZcyoP5pue83GNlZ9qAxGBEA1LOeFo7PkmguDYohe1mbhYbWrNGOUSaekF/6H5NV7lruY7NWdcIfE/5qsgIdDq8wwBKUaoMRcD6EQxodTkpMfK1J69QRfIM1WAN6KASZIMcsspcF/rXUPT4+lAboS5sdfcQsbVd0wvYC8ZnK7r88zHPeJ+bYZl95Yf6uQ/vr080P+fXtK5rUhjCWyI813c++Te75O+Ac/GD8uBlq9qiCOGKSX/mkqexTUbpOXySmj5IoBruNuRjcA8QK+VtjcvJs1iXMXPmPY338mFiFmwvJlpsKQr/VCr0dLW9sCFh/YIBDJooIdBVbiN2+t3VXnzyEXFR4WrAcr//kob3/F6v2ZsN1LBWh9uuXwxc3flJuGIdDYpZwWYwTYNv6z4eYF54ASA9EgpCyUjSRq8pzpO9ZonUcgV0q9R1wn5tWsHUO2LzmmjmQ3nXld9T7DoazKJU+WHTx8zmo653mXo/in/PBWTbo0g+5hfihVWKbHI3ZxpKiUD+nHigvbzlFgWEui75d++7BgmYOYJtXIzykdx1U+H8KPyES2XCKSL2NTPdjsXqfAMYjO6qQn23e9lmFzbaxLxYKZlkQfxgHTCwVSxYY7DltBzZvJTYZXHlxPJHuo=
     on_success: always
+    on_failure: always
     template:
       - "Repo `%{repository_slug}` *%{result}* build (<%{build_url}|#%{build_number}>) for commit (<%{compare_url}|%{commit}>) on branch `%{branch}`."
       - "Execution time: *%{duration}*"
