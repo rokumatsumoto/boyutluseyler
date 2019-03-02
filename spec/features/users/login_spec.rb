@@ -34,7 +34,7 @@ RSpec.describe 'Login' do
       boyutluseyler_sign_in(user)
 
       expect(page).to have_current_path root_path
-      expect(page).not_to have_content(t('devise.sessions.signed_in'))
+      expect(page).to have_content(t('devise.sessions.signed_in'))
     end
   end
 
