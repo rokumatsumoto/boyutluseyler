@@ -9,6 +9,8 @@ require 'selenium-webdriver'
 # Give CI some extra time
 timeout = ENV['CI'] ? 60 : 30
 
+Capybara.server_port = 9887 + ENV['TEST_ENV_NUMBER'].to_i
+
 # If using Rails 5.0+, but not using the Rails system tests from 5.1, you'll
 # probably also want to swap the "server" used to launch your app to Puma in
 # order to match Rails defaults.
