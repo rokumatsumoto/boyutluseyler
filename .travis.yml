@@ -33,10 +33,11 @@ notifications:
   - false
   slack:
     secure: PwisNSmwK/vjCsB3Yc0m9udkMuDr9anPHnIL8ZmiKNjhghYFLJbTIwSFqZ+N/5M60H/dvQT915mfk+AFiZKBY9pvtXisEAViuPFg7Oc0reWjXJnEBid8F8oCYmuQIXbyg6DRb3Tq6K5jlk4qEy8AwcXHjHfsJtP9hYWsT7y345gqPGYyvIkNJl2iZibSXB0vQB8OuNba4SC0McqpW6Ks5F8T1q1jgfqWLxGfsgMHdmHuR9L4uTbPi6iSgS+YlWpEPMNkFLpRREPIabAyPupIz6G4rvqU2wfqKjc6Qm+Qwh5Qru/y5Wn0BRe7tm9meISiFJ2u/8VHDDbRWqkEIOTMwWN8M9cZOXG6oH6zleavhutLzpRt6Hauy2Qdf4UASLb/FLTQiUdoE7ZPIiuIouiAowYPT4NMnEiELrgV2YZJQUGQXT2E9rJpKlvQLdzQwgXEvoH6Gv8D7FxVKaLITZ6S6nHZdT7zhZkLCPK4XCdPVtFRltDt2Ul9qgPw1GZDyASITww2PqGYqK4rJVzzkeIZ8ttX9Mi8XCaSL1J8Jv7cmtZybEO5jo4ALzWYL4aQ5/nv6/0Gtq60E2a2nx5iIZViCHVKNk1YZk7q0bOCjsHvl52Oapt1U+pV244hzAHnYLinPF7s8ZnscIJVqouXAzXvWJNZHB1sqVS6ZqlBQpsZ9BM=
+    on_success: always
+    on_failure: always
     template:
-      - "Repo %{repository_slug} *%{result}* build *<%{build_url}|#%{build_number}>* for commit (<%{compare_url}|%{commit}>) on branch %{branch}."
-      - "Execution time: *%{duration}*"
-      - "Message: %{message}"
+      - "Build *<%{build_url}|#%{build_number}>* (<%{compare_url}|%{commit}>) of %{repository_slug}@%{branch} "
+      - "by _%{author}_ %{result} in %{duration}"
 rvm:
 - 2.5.3
 services:
