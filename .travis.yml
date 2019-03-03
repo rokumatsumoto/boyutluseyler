@@ -5,8 +5,7 @@ addons:
 after_deploy:
   - "echo \"done deploying\""
 before_install:
-  - "sudo apt-get update"
-  - "sudo apt-get install language-pack-tr"
+  - "sudo locale-gen tr_TR.UTF-8"
   - "sudo /etc/init.d/postgresql stop"
   - "sudo /etc/init.d/postgresql start 9.6"
   - "gem update --system"
