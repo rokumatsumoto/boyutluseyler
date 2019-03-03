@@ -9,6 +9,7 @@ before_install:
   - "gem install bundler"
 before_script:
   - "sudo locale-gen tr_TR.UTF-8"
+  - "sudo service postgresql restart"
   - "bundle exec rake db:create"
 branches:
   only:
