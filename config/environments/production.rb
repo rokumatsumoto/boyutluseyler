@@ -94,4 +94,23 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.action_mailer.default_url_options = {
+    host: Rails.application.credentials[:send_grid_host]
+  }
+
+  config.action_mailer.perform_deliveries = true
+
+  # https://sendgrid.com/docs/API_Reference/SMTP_API/errors_and_troubleshooting.html
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.sendgrid.net',
+    port: 587,
+    authentication: :plain,
+    user_name: Rails.application.credentials[:send_grid_user_name],
+    password: Rails.application.credentials[:send_grid_password],
+    domain: Rails.application.credentials[:send_grid_domain],
+    enable_starttls_auto: true
+  }
+  config.action_mailer.raise_delivery_errors = false # true for debug
 end
