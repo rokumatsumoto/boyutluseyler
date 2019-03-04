@@ -2,8 +2,8 @@
   overflow-x: hidden; //quickfix to hide divider on left side
   position: relative;
 
-  & > [class*="col-"]:nth-child(n + 2)::after {
-    background-color: $heather_approx;
+  > [class*="col-"]:nth-child(n + 2)::after {
+    background-color: $heather-approx;
     bottom: 0;
     content: '';
     position: absolute;
