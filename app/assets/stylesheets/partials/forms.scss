@@ -2,6 +2,12 @@
   margin-bottom: 3.625rem
 }
 
+.form-control:focus {
+  outline: none;
+  box-shadow:none !important;
+  border:1px solid #66afe9;
+}
+
 .captcha {
   margin-bottom: 1rem;
 }

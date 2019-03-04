@@ -1,26 +1,26 @@
 .grid-divider {
   overflow-x: hidden; //quickfix to hide divider on left side
   position: relative;
-}
 
-.grid-divider > [class*="col-"]:nth-child(n + 2)::after {
-  content: '';
-  background-color: #c3cfd9;
-  position: absolute;
-  top: 0;
-  bottom: 0;
+  & > [class*="col-"]:nth-child(n + 2)::after {
+    background-color: $heather_approx;
+    bottom: 0;
+    content: '';
+    position: absolute;
+    top: 0;
 
-  @media (max-width: 767px) {
-    height: 1px;
-    left: 0;
-    top: -4px; // quickfix to center line between columns
-    width: 100%;
-  }
+    @media (max-width: 767px) {
+      height: 1px;
+      left: 0;
+      top: -4px; // quickfix to center line between columns
+      width: 100%;
+    }
 
-  @media (min-width: 768px) {
-    height: auto;
-    left: -1px; // quickfix to hide divider on left side
-    width: 1px;
+    @media (min-width: 768px) {
+      height: auto;
+      left: -1px; // quickfix to hide divider on left side
+      width: 1px;
+    }
   }
 }
 
