@@ -34,32 +34,17 @@ class PasswordsController < Devise::PasswordsController
     redirect_to(new_user_password_url(user_email: user['email']))
   end
 
-  # rubocop:disable Metrics/AbcSize
-  # rubocop:disable Metrics/PerceivedComplexity
+  # https://github.com/plataformatec/devise/blob/master/app/controllers/
+  # devise/passwords_controller.rb
   # PUT /resource/password
   def update
-    self.resource = resource_class.reset_password_by_token(resource_params)
-    yield resource if block_given?
-
-    if resource.errors.empty?
-      resource.unlock_access! if unlockable?(resource)
-      if Devise.sign_in_after_reset_password
-        flash_message = resource.active_for_authentication? ? :updated : :updated_not_active
-        set_flash_message!(:notice, flash_message)
-        resource.after_database_authentication
-        sign_in(resource_name, resource)
-      else
-        set_flash_message!(:notice, :updated_not_active)
+    super do |resource|
+      unless resource.errors.empty?
+        flash[:alert] = expired_or_invalid_message_for_reset_password_token(resource)
+        redirect_to(new_user_password_url(user_email: resource['email'])) && return
       end
-      respond_with resource, location: after_resetting_password_path_for(resource)
-    else
-      flash[:alert] = expired_or_invalid_message_for_reset_password_token(resource)
-      redirect_to(new_user_password_url(user_email: resource['email']))
     end
   end
-  # rubocop:enable Metrics/PerceivedComplexity
-  # rubocop:enable Metrics/AbcSize
-
   # protected
 
   # def after_resetting_password_path_for(resource)

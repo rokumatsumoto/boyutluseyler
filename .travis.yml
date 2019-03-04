@@ -30,6 +30,7 @@ deploy:
     secure: $AWS_SECRET_ACCESS_KEY
   on:
     repo: rokumatsumoto/boyutluseyler
+    branch: master
 dist: xenial
 env:
   global:
@@ -46,8 +47,6 @@ install:
 language: ruby
 notifications:
   email: false
-  matrix:
-    - false
   slack:
     on_failure: always
     on_success: always

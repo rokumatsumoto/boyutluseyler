@@ -11,23 +11,17 @@ class ConfirmationsController < Devise::ConfirmationsController
   #   super
   # end
 
-  # rubocop:disable Metrics/AbcSize
+  # https://github.com/plataformatec/devise/blob/master/app/controllers/
+  # devise/confirmations_controller.rb
   # GET /resource/confirmation?confirmation_token=abcdef
   def show
-    self.resource = resource_class.confirm_by_token(params[:confirmation_token])
-    yield resource if block_given?
-
-    if resource.errors.empty?
-      set_flash_message!(:notice, :confirmed)
-      respond_with_navigational(resource) do
-        redirect_to after_confirmation_path_for(resource_name, resource)
+    super do |resource|
+      unless resource.errors.empty?
+        flash[:alert] = expired_or_invalid_message_for_confirmation_token(resource)
+        redirect_to(new_user_confirmation_url(user_email: resource['email'])) && return
       end
-    else
-      flash[:alert] = expired_or_invalid_message_for_confirmation_token(resource)
-      redirect_to(new_user_confirmation_url(user_email: resource['email']))
     end
   end
-  # rubocop:enable Metrics/AbcSize
 
   # protected
 
