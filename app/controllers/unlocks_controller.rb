@@ -16,7 +16,7 @@ class UnlocksController < Devise::UnlocksController
   def show
     super do |resource|
       unless resource.errors.empty?
-        flash[:alert] = expired_or_invalid_message_for_unlock_token(resource)
+        flash[:alert] = invalid_message_for_unlock_token
         redirect_to(new_user_unlock_url(user_email: resource['email'])) && return
       end
     end
@@ -35,8 +35,8 @@ class UnlocksController < Devise::UnlocksController
 
   private
 
-  def expired_or_invalid_message_for_unlock_token(resource)
-    t('activerecord.attributes.user.unlock_token') + ' ' +
-      resource.errors.full_messages.to_sentence
+  def invalid_message_for_unlock_token
+    t('errors.messages.invalid', attribute:
+      t('activerecord.attributes.user.unlock_token'))
   end
 end

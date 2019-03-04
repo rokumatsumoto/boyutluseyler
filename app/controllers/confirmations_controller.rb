@@ -46,7 +46,21 @@ class ConfirmationsController < Devise::ConfirmationsController
   private
 
   def expired_or_invalid_message_for_confirmation_token(resource)
-    t('activerecord.attributes.user.confirmation_token') + ' ' +
+    if resource.email?
+      expired_message_for_confirmation_token
+    else
+      invalid_message_for_confirmation_token
+    end
+  end
+
+  def expired_message_for_confirmation_token
+    t('activerecord.attributes.user.confirmation_token') +
       resource.errors.full_messages.to_sentence
+    # errors.messages.confirmation_period_expired
+  end
+
+  def invalid_message_for_confirmation_token
+    t('errors.messages.invalid', attribute:
+      t('activerecord.attributes.user.confirmation_token'))
   end
 end

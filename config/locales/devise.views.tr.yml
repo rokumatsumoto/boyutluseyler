@@ -162,8 +162,8 @@ tr:
   errors:
     messages:
       already_confirmed: zaten onaylanmış, lütfen giriş yapmayı deneyin
-      confirmation_period_expired: "%{period} içinde onaylanması gerekmektedir, lütfen yeni bir tane isteyiniz."
-      expired: süresi doldu, lütfen yeni bir tane isteyin.
+      confirmation_period_expired: " %{period} içinde onaylanması gerekmektedir, lütfen yeni bir tane isteyiniz."
+      expired: "%{attribute} süresi doldu, lütfen yeni bir tane isteyin."
       not_found: bulunamadı
       not_locked: kilitlenmemiş.
       not_saved: "%{count} tane hata %{resource}'ın kaydını engelledi."
