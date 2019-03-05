@@ -14,5 +14,8 @@ http://beautifytools.com/scss-compiler.php
 Color
 http://chir.ag/projects/name-that-color
 
+SCSS Lint
+https://github.com/brigade/scss-lint
 
+`scss-lint app/assets/stylesheets/partials/authentication.scss`
 

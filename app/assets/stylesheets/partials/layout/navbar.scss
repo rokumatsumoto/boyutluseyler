@@ -1,5 +1,5 @@
 .top-bar {
-  border-top: .25rem solid $dodger-blue-approx-2;
+  border-top: .25rem solid $dodger-blue-3;
 }
 
 .header .navbar {
@@ -27,7 +27,7 @@
   max-width: 40%;
 }
 
-.header .navbar-nav a.custom-link {
+.header .navbar-nav .custom-link {
   background: transparent;
   color: $navbar-link;
   font-size: 16px;
@@ -35,25 +35,17 @@
   line-height: 25px;
   padding: 23px 18px;
   text-transform: uppercase;
-  -moz-transition: background .5s ease-in-out;
-  -ms-transition: background .5s ease-in-out;
-  -o-transition: background .5s ease-in-out;
-  -webkit-transition: background .5s ease-in-out;
   transition: background .5s ease-in-out;
 }
 
-.header .navbar-nav a.custom-link:hover,
-.header .navbar-nav a.custom-link:focus {
+.header .navbar-nav .custom-link:hover,
+.header .navbar-nav .custom-link:focus {
   background: $navbar-link-active-bg !important;
   color: $navbar-link-active !important;
-  -moz-transition: background .5s ease-in-out;
-  -ms-transition: background .5s ease-in-out;
-  -o-transition: background .5s ease-in-out;
-  -webkit-transition: background .5s ease-in-out;
   transition: background .5s ease-in-out;
 }
 
-.header .navbar-nav a.dropdown-user-toggle {
+.header .navbar-nav .dropdown-user-toggle {
   line-height: 25px;
   padding: 23px 18px;
 }
@@ -64,11 +56,11 @@
   }
 
   .dropdown-menu {
+    border-width: 0;
     display: block;
     margin: 0;
     padding: 0;
     position: relative;
-    border-width: 0;
   }
 
   .dropdown-item {
@@ -76,17 +68,17 @@
     padding: .5rem 0;
   }
 
-  .header .navbar-nav a.custom-link {
+  .header .navbar-nav .custom-link {
     color: $mw992-navbar-link;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    padding: .5rem 0rem;
+    padding: .5rem 0;
     text-transform: capitalize;
   }
 
-  .header .navbar-nav a.custom-link:hover,
-  .header .navbar-nav a.custom-link:focus {
+  .header .navbar-nav .custom-link:hover,
+  .header .navbar-nav .custom-link:focus {
     background: $mw992-navbar-link-active-bg !important;
     color: $mw992-navbar-link-active !important;
   }
