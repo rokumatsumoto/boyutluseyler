@@ -2,7 +2,8 @@
   %nav.navbar.navbar-default.navbar-light.navbar-expand-lg
     .container
       / OPTIMIZE: height 65 to 60
-      = link_to image_tag('icon.png', height: '60', width: '36'), root_path, class: 'navbar-brand'
+      = link_to image_tag('icon.png', height: '60', width: '36'), root_path,
+      class: 'navbar-brand'
       %button.navbar-toggler{ :type => 'button', 'data-toggle' => 'collapse',
       'data-target' => '#navbar-responsive', 'aria-controls' => 'navbar-responsive',
       'aria-expanded' => 'false', 'aria-label' => 'Toggle navigation' }

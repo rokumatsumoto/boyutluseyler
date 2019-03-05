@@ -11,11 +11,11 @@
   padding: 0 1rem;
 }
 
-.navbar-brand {
-  color: $navbar-brand !important;
+.navbar-default .navbar-brand {
+  color: $navbar-brand;
 
   a {
-    color: $navbar-brand-link !important;
+    color: $navbar-brand-link;
   }
 }
 
@@ -40,8 +40,8 @@
 
 .header .navbar-nav .custom-link:hover,
 .header .navbar-nav .custom-link:focus {
-  background: $navbar-link-active-bg !important;
-  color: $navbar-link-active !important;
+  background: $navbar-link-active-bg;
+  color: $navbar-link-active;
   transition: background .5s ease-in-out;
 }
 
@@ -79,7 +79,7 @@
 
   .header .navbar-nav .custom-link:hover,
   .header .navbar-nav .custom-link:focus {
-    background: $mw992-navbar-link-active-bg !important;
-    color: $mw992-navbar-link-active !important;
+    background: $mw992-navbar-link-active-bg;
+    color: $mw992-navbar-link-active;
   }
 }
