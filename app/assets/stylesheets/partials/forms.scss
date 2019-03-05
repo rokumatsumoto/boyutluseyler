@@ -1,22 +1,20 @@
 .space-body {
-  margin-bottom: 3.625rem
+  margin-bottom: 3.625rem;
 }
 
 .form-control:focus {
+  border: 1px solid $cornflower-blue-2;
+  box-shadow: none !important;
   outline: none;
-  box-shadow:none !important;
-  border:1px solid #66afe9;
 }
 
 .captcha {
   margin-bottom: 1rem;
 }
 
-@media screen and (max-width: 992px){
+@media screen and (max-width: 992px) {
   .g-recaptcha {
-    transform:scale(0.85);
-    -webkit-transform:scale(0.85);
-    transform-origin:0 0;
-    -webkit-transform-origin:0 0;
+    transform: scale(.85);
+    transform-origin: 0 0;
   }
 }

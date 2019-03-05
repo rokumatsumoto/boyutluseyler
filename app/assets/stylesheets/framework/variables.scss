@@ -1,14 +1,10 @@
-/*
-* Body
-*/
+// Body
 $body-bg: #fff;
 
-/*
-* Header - Navbar
-*/
+// Header - Navbar
 $navbar-bg: #fff;
 $navbar-link: #777;
-$navbar-box-shadow: rgba(0, 0, 0, 0.2);
+$navbar-box-shadow: rgba(0, 0, 0, .2);
 
 $navbar-link-active: #fff;
 $navbar-link-active-bg: #32c8fa;
@@ -17,11 +13,9 @@ $navbar-toggler-bg: #fff;
 $navbar-brand: #32c8fa;
 $navbar-brand-link: #32c8fa;
 
-/*
-* Header - Navbar @media (max-width: 992px)
-*/
+// Header - Navbar @media (max-width: 992px)
 
-$mw992-dropdown-item: rgba(0,0,0,.5);
-$mw992-navbar-link: rgba(0, 0, 0, 0.5);
-$mw992-navbar-link-active: rgba(0, 0, 0, 0.5);
+$mw992-dropdown-item: rgba(0, 0, 0, .5);
+$mw992-navbar-link: rgba(0, 0, 0, .5);
+$mw992-navbar-link-active: rgba(0, 0, 0, .5);
 $mw992-navbar-link-active-bg: transparent;

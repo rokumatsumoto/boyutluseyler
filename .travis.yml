@@ -15,6 +15,7 @@ before_script:
 branches:
   only:
     - master
+    - scss-linting-issues
 cache:
   directories:
     - vendor/bundle

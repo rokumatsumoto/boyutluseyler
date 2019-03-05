@@ -1,25 +1,21 @@
-/*
-* Sign up form
-*/
-.text-sign-up-form  {
-  color: #999999;
+// Sign up form
+.text-sign-up-form {
+  color: $dusty_gray;
 }
 
 .link-light-sign-up-form {
-  color: #2FBEED;
+  color: $picton-blue-approx;
+
   &:hover {
-    color: #17a2b8;
+    color: $eastern-blue-approx;
   }
 }
 
 div.text-motto-sign-up-form p span {
-  color: #A7A7A6;
+  color: $delta-approx;
 }
 
-/*
-* Sign in form
-*/
-
+// Sign in form
 .text-sign-in-form {
   @extend .text-sign-up-form;
 }
@@ -29,17 +25,15 @@ div.text-motto-sign-up-form p span {
 }
 
 .link-sign-in-form {
-  color: #555;
-  font-size: 0.9rem;
+  color: $emperor-approx;
+  font-size: .9rem;
+
   &:hover {
-    color: #555;
+    color: $emperor-approx;
   }
 }
 
-/*
-* Reset password form
-*/
-
+// Reset password form
 .text-reset-pass-form {
   @extend .text-sign-up-form;
 }
@@ -53,10 +47,7 @@ div.text-motto-sign-up-form p span {
   @extend .link-light-sign-up-form;
 }
 
-/*
-* Forgot password form
-*/
-
+// Forgot password form
 .text-forgot-pass-form {
   @extend .text-sign-up-form;
 }
@@ -69,24 +60,21 @@ div.text-motto-sign-up-form p span {
   @extend .link-light-sign-up-form;
 }
 
-@include media-breakpoint-between(xs,sm){
-  /* change .btn-password-reset to .btn-sm size on xs */
+@include media-breakpoint-between(xs, sm) {
+  // change .btn-password-reset to .btn-sm size on xs
   .btn-forgot-pass {
     @include button-size($input-btn-padding-y-sm, $input-btn-padding-x-sm, $font-size-sm, $line-height-sm, $btn-border-radius-sm);
   }
 }
 
-@include media-breakpoint-between(sm,md){
-  /* change .btn-password-reset to .btn-sm size on sm */
+@include media-breakpoint-between(sm, md) {
+  // change .btn-password-reset to .btn-sm size on sm
   .btn-forgot-pass {
     @include button-size($input-btn-padding-y-sm, $input-btn-padding-x-sm, $font-size-sm, $line-height-sm, $btn-border-radius-sm);
   }
 }
 
-/*
-* Resend confirmation instructions form
-*/
-
+// Resend confirmation instructions form
 .text-resend-conf-form {
   @extend .text-sign-up-form;
 }
@@ -99,10 +87,7 @@ div.text-motto-sign-up-form p span {
   @extend .link-light-sign-up-form;
 }
 
-/*
-* Resend unlock instructions form
-*/
-
+// Resend unlock instructions form
 .text-resend-unlck-form {
   @extend .text-sign-up-form;
 }
@@ -115,41 +100,35 @@ div.text-motto-sign-up-form p span {
   @extend .link-light-sign-up-form;
 }
 
-
-/*
-* Sign up, sign in forms
-*/
-
+// Sign up, sign in forms
 .btn-twitter-auth {
-  color: #fff;
-  background-color: #1DA1F2;
-  border-color: #1DA1F2;
+  color: $white;
+  background-color: $dodger-blue-approx;
+  border-color: $dodger-blue-approx;
   &:hover {
-    color: #fff;
+    color: $white;
   }
 }
 
 .btn-facebook-auth {
-  color: #fff;
-  background-color: #4267B2;
-  border-color: #4267B2;
+  color: $white;
+  background-color: $san-marino-approx;
+  border-color: $san-marino-approx;
   &:hover {
-    color: #fff;
+    color: $white;
   }
 }
 
 .btn-google-auth {
-  color: #fff;
-  background-color: #CC4932;
-  border-color: #CC4932;
+  color: $white;
+  background-color: $mojo-approx;
+  border-color: $mojo-approx;
   &:hover {
-    color: #fff;
+    color: $white;
   }
 }
 
-/*
-* All authentication forms
-*/
+// All authentication forms
 .alert-notice {
   @extend .alert-info;
 }
@@ -157,4 +136,3 @@ div.text-motto-sign-up-form p span {
 .alert-alert {
   @extend .alert-danger;
 }
-
