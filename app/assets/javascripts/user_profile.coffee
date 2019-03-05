@@ -14,7 +14,8 @@ ready = ->
         current_password.toggleClass('is-invalid', true)
                         .toggleClass('is-valid', false)
         feedback_msg = 'Geçerli Parola doldurulmalı.'
-        div_current_password.append('<div class="invalid-feedback">' + feedback_msg + '</div>')
+        div_current_password.append(
+          '<div class="invalid-feedback">' + feedback_msg + '</div>')
         div_current_password.addClass('form-group-invalid')
       event.stopImmediatePropagation()
       false

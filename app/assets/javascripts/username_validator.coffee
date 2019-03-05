@@ -20,14 +20,15 @@ ready = ->
         success: (data, textStatus, jqXHR) ->
           if data.exists == false
             username.toggleClass('is-valid', !data.exists)
-                    .toggleClass('is-invalid', data.exists)
-            username[0].setCustomValidity('')
+                    .toggleClass 'is-invalid', data.exists
+            username[0].setCustomValidity ''
           else if data.exists == true
             username.toggleClass('is-invalid', data.exists)
-                    .toggleClass('is-valid', !data.exists)
-            div_username.append('<div class="invalid-feedback">' + data.message + '</div>')
-            div_username.addClass('form-group-invalid')
-            username[0].setCustomValidity(data.message)
+                    .toggleClass 'is-valid', !data.exists
+            div_username.append(
+              '<div class="invalid-feedback">' + data.message + '</div>')
+            div_username.addClass 'form-group-invalid'
+            username[0].setCustomValidity data.message
       event.stopImmediatePropagation()
       false
   false
