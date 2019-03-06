@@ -16,6 +16,7 @@ abort('The Rails environment is running in production mode!') if Rails.env.produ
 
 require 'rspec/rails'
 require 'shoulda/matchers'
+require 'zonebie/rspec'
 # TODO: Activate when they are needed
 # require 'pundit/matchers'
 # require 'pundit/rspec'

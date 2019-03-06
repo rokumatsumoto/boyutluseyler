@@ -54,6 +54,8 @@ gem 'hamlit', '~> 2.9', '>= 2.9.2'
 # Spam and anti-bot protection
 gem 'recaptcha', '~> 4.13', '>= 4.13.1'
 
+gem 'local_time', '~> 2.1'
+
 group :development, :test do
   # n+1 Queries
   gem 'bullet', '~> 5.9'
@@ -118,6 +120,7 @@ group :test do
   gem 'rails-controller-testing'
   gem 'shoulda-matchers', '4.0.0.rc1', require: false
   gem 'timecop', '~> 0.9.1'
+  gem 'zonebie', '~> 0.6.1'
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 3.13', '>= 3.13.2'
   gem 'capybara-email', '~> 3.0', '>= 3.0.1'

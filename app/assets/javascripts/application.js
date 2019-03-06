@@ -18,4 +18,5 @@
 //= require turbolinks
 //= require lib/rails.validations
 //= require lib/rails.validations.simple_form.bootstrap4
+//= require local-time
 //= require_tree .

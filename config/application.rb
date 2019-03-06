@@ -16,8 +16,6 @@ module Boyutluseyler
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
-    # rails time:zones
-    config.time_zone = 'Istanbul'
     config.i18n.default_locale = :tr
 
     # Disable animations, only for test environments
