@@ -1,4 +1,4 @@
-  require 'spec_helper'
+require 'spec_helper'
 # rubocop:disable RSpec/DescribeClass
 # rubocop:disable Metrics/BlockLength
 RSpec.describe 'Signup' do
