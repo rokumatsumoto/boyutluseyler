@@ -22,11 +22,11 @@ ActiveStorage.start();
 import Turbolinks from 'turbolinks';
 Turbolinks.start();
 import 'bootstrap/dist/js/bootstrap';
-import '../lib/rails.validations.js';
-import '../lib/rails.validations.simple_form.bootstrap4.js'
+require('../lib/rails.validations');
+require('../lib/rails.validations.simple_form.bootstrap4');
 import LocalTime from 'local-time';
 LocalTime.start();
-import 'username_validator.coffee'
-import 'user_profile.coffee'
+require('../username_validator');
+require('../user_profile');
 
 

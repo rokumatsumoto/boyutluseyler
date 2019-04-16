@@ -74,3 +74,6 @@ cc-test-reporter
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+# Webpack Bundle Analyzer
+stats.json
