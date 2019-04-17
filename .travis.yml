@@ -5,20 +5,27 @@ addons:
 after_deploy:
   - "echo \"done deploying\""
 before_install:
+  - "nvm install node"
+  - "node --version"
+  - "yarn policies set-version"
+  - "yarn --version"
   - "sudo locale-gen tr_TR.UTF-8"
   - "sudo /etc/init.d/postgresql stop"
   - "sudo /etc/init.d/postgresql start 9.6"
   - "gem update --system"
-  - "gem install bundler"
+  - "gem install bundler -v 1.17.3"
 before_script:
   - "bundle exec rake db:create"
 branches:
   only:
     - master
-    - scss-linting-issues
+    - migrate-to-webpacker
 cache:
   directories:
     - vendor/bundle
+    - node_modules
+    - $HOME/.nvm
+    - yarn
 deploy:
   access_key_id:
     secure: $AWS_ACCESS_KEY_ID
@@ -43,6 +50,7 @@ env:
 install:
   - "bundle install --path vendor/bundle"
   - "bundle exec chromedriver-update"
+  - "yarn"
   - "curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter"
   - "chmod +x ./cc-test-reporter"
 language: ruby
@@ -60,6 +68,7 @@ notifications:
 rvm:
   - "2.5.3"
 script:
+  - "bundle exec rails webpacker:compile"
   - "bundle exec rake db:schema:load"
   - "./cc-test-reporter before-build"
   - "bundle exec rspec spec"
