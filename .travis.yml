@@ -19,7 +19,7 @@ before_script:
 branches:
   only:
     - master
-    - migrate-to-webpacker
+    - staging
 cache:
   directories:
     - vendor/bundle
