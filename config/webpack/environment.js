@@ -1,5 +1,6 @@
 const { environment } = require('@rails/webpacker')
 const coffee =  require('./loaders/coffee')
+const file = require('./loaders/file')
 
 const webpack = require('webpack')
 environment.plugins.append('Provide', new webpack.ProvidePlugin({
@@ -8,6 +9,8 @@ environment.plugins.append('Provide', new webpack.ProvidePlugin({
   Popper: ['popper.js', 'default']
 }))
 
-
 environment.loaders.prepend('coffee', coffee)
+
+// environment.loaders.prepend('file', file)
+
 module.exports = environment

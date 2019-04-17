@@ -15,4 +15,4 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 
 Rails.application.config.assets.precompile += %w[disable_animations.scss] if Rails.env.test?
 
-Rails.application.config.assets.precompile << /\.(?:svg|eot|woff|woff2|ttf)\z/
+# Rails.application.config.assets.precompile << /\.(?:svg|eot|woff|woff2|ttf)\z/
