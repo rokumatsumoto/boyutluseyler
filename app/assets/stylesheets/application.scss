@@ -15,14 +15,8 @@
 // https://guides.rubyonrails.org/asset_pipeline.html#manifest-files-and-directives
 
 
-// Font icons
-// $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
-// @import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
-// @import '~@fortawesome/fontawesome-free/scss/solid.scss';
-// @import '~@fortawesome/fontawesome-free/scss/brands.scss';
-
 // boyutluseyler UI framework
-@import 'framework';;
+@import 'framework';
 
 // Page specific
 @import 'partials/*';

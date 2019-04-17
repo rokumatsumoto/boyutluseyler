@@ -1,6 +1,6 @@
 const { environment } = require('@rails/webpacker')
 const coffee =  require('./loaders/coffee')
-const file = require('./loaders/file')
+// const file = require('./loaders/file')
 
 const webpack = require('webpack')
 environment.plugins.append('Provide', new webpack.ProvidePlugin({

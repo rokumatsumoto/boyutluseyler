@@ -15,6 +15,12 @@
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
+
+
+
+
+
+// https://github.com/rails/webpacker/blob/master/docs/assets.md
 import '../styles';
 
 import Rails from 'rails-ujs';
