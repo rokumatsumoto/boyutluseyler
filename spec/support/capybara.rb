@@ -26,7 +26,7 @@ end
 
 Capybara.javascript_driver = :chrome
 Capybara.default_max_wait_time = timeout
-Capybara.raise_server_errors = true
+Capybara.raise_server_errors = false
 
 ## Configure capybara-screenshot
 

@@ -68,6 +68,7 @@ yarn-debug.log*
 # Code Climate
 cc-test-reporter
 
+# Webpack
 /public/packs
 /public/packs-test
 /node_modules
