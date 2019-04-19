@@ -42,9 +42,6 @@ bower.json
 # Ignore Byebug command history file.
 .byebug_history
 
-# Ignore node_modules
-node_modules/
-
 # Ignore precompiled javascript packs
 /public/packs
 /public/packs-test
@@ -78,3 +75,6 @@ yarn-debug.log*
 
 # Webpack Bundle Analyzer
 stats.json
+
+# Stl model files for development purpose
+/public/models

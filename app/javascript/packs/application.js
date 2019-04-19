@@ -37,4 +37,7 @@ LocalTime.start();
 require('../username_validator');
 require('../user_profile');
 
+import 'intersection-observer/intersection-observer';
+import '@justinribeiro/stl-part-viewer';
+
 
