@@ -38,20 +38,32 @@
 
 
 / Swiper
-.swiper-container
-  .swiper-wrapper
-    .swiper-slide
-      %img{:alt => "", :src => "http://placehold.it/500x400&text=1 slider"}/
-    .swiper-slide
-      %img{:alt => "", :src => "http://placehold.it/500x400&text=2 slider"}/
-    .swiper-slide
-      %img{:alt => "", :src => "http://placehold.it/500x400&text=3 slider"}/
-    .swiper-slide
-      %stl-part-viewer{ src: 'models/skull.stl' }
-    .swiper-slide
-      %img{:alt => "", :src => "http://placehold.it/500x400&text=4 slider"}/
-  .swiper-button-next
-  .swiper-button-prev
-%p.append-buttons
-  %a.photos{:href => "#"} Fotoğraflar
-  %a.3D-view{:href => "#"} 3D Görünüm
+.wrapper
+  %button#btnPhotos.btn.btn-outline-secondary.btn-sm{:type => "button"} Fotoğraflar
+  %button#btn3DView.btn.btn-outline-secondary.btn-sm{:type => "button"} 3D Görünüm
+  .swiper-container.gallery-top
+    .swiper-wrapper
+      .swiper-slide
+        %img{:alt => "", :src => "http://placehold.it/500x400&text=1 slider"}/
+      .swiper-slide
+        %img{:alt => "", :src => "http://placehold.it/500x400&text=2 slider"}/
+      .swiper-slide
+        %img{:alt => "", :src => "http://placehold.it/500x400&text=3 slider"}/
+      .swiper-slide
+        %stl-part-viewer{ src: 'models/skull.stl' }
+      .swiper-slide
+        %stl-part-viewer{ src: 'models/treefrog.stl' }
+    .swiper-button-next.swiper-button-white
+    .swiper-button-prev.swiper-button-white
+  .swiper-container.gallery-thumbs
+    .swiper-wrapper
+      .swiper-slide
+        %img{:alt => "", :src => "http://placehold.it/125x75&text=1"}/
+      .swiper-slide
+        %img{:alt => "", :src => "http://placehold.it/125x75&text=2"}/
+      .swiper-slide
+        %img{:alt => "", :src => "http://placehold.it/125x75&text=3"}/
+      .swiper-slide
+        %img{:alt => "", :src => "http://placehold.it/125x75/0ebbe4/000000&text=3D Görünüm"}/
+      .swiper-slide
+        %img{:alt => "", :src => "http://placehold.it/125x75/0ebbe4/000000&text=3D Görünüm"}/

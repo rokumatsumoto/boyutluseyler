@@ -45,24 +45,107 @@ import Swiper from 'swiper';
 
 document.addEventListener("turbolinks:load", () => {
 
-     var swiper = new Swiper('.swiper-container', {
-       centeredSlides: false,
-       simulateTouch: false,
-       navigation: {
-         nextEl: '.swiper-button-next',
-         prevEl: '.swiper-button-prev',
-       }
-     });
-     $( ".photos" ).click(function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          swiper.slideTo(0, 3);
-     });
-     $( ".3D-view" ).click(function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          swiper.slideTo(3, 5);
-     });
+   // var swiper = new Swiper('.swiper-container', {
+   //   centeredSlides: false,
+   //   simulateTouch: false,
+   //   navigation: {
+   //     nextEl: '.swiper-button-next',
+   //     prevEl: '.swiper-button-prev',
+   //   }
+   // });
+   var thumbsProperties = {
+         watchSlidesVisibility: true,
+         watchSlidesProgress: true,
+         centerInsufficientSlides: true,
+         slidesPerColumn: 2,
+         slidesPerColumnFill: 'row',
+         slidesPerView: 4,
+         touchRatio: 0.5,
+         // observer: true,
+         // observeParents: true,
+         spaceBetween: 5
+         // on: {
+         //     init: function () {
+         //       console.log('swiper thumbs initialized');
+         //       $(this.slides[3]).removeClass("swiper-slide").hide();
+         //       this.update();
+         //     },
+         //   },
+
+   };
+
+   // thumbsProperties.on = {
+   //    init: function () {
+   //            $(this.slides[3]).removeClass("swiper-slide").hide();
+   //            this.update();
+   //    }
+   // };
+   var galleryThumbs = new Swiper('.gallery-thumbs', thumbsProperties);
+
+   var topProperties = {
+         spaceBetween: 10,
+         simulateTouch: false,
+         navigation: {
+           nextEl: '.swiper-button-next',
+           prevEl: '.swiper-button-prev',
+         },
+         thumbs: {
+           swiper: galleryThumbs
+        }
+      };
+      // topProperties.on = {
+      //   init: function () {
+      //           $(this.slides[3]).removeClass("swiper-slide").hide();
+      //           this.update();
+      //   }
+      // }
+       var galleryTop = new Swiper('.gallery-top', topProperties
+         // on: {
+         //     init: function () {
+         //       console.log('swiper  initialized');
+         //       $(this.slides[3]).removeClass("swiper-slide").hide();
+         //       this.update();
+         //     },
+         //   },
+       );
+       $( "#btnPhotos" ).on("click", function(e) {
+            // var galleryTop = document.querySelector('.swiper-container, .gallery-top').swiper;
+            // var galleryThumbs = document.querySelector('.swiper-container, .gallery-thumbs').swiper;
+            // galleryThumbs.destroy();
+            // galleryTop.destroy();
+            // thumbsProperties.slidesPerColumn = 1;
+            // var galleryThumbs = new Swiper('.gallery-thumbs', thumbsProperties);
+            // var galleryTop = new Swiper('.gallery-top', topProperties);
+            // $(galleryTop.slides[3]).removeClass("swiper-slide").hide();
+            // $(galleryThumbs.slides[3]).removeClass("swiper-slide").hide();
+            // galleryTop.update();
+            // galleryThumbs.update();
+            galleryTop.slideTo(0, 3);
+            galleryThumbs.slideTo(0, 3);
+       });
+       $( "#btn3DView" ).click(function(e) {
+        // var galleryTop = document.querySelector('.swiper-container, .gallery-top').swiper;
+        // var galleryThumbs = document.querySelector('.swiper-container, .gallery-thumbs').swiper;
+        // galleryThumbs.destroy();
+        // galleryTop.destroy();
+        // thumbsProperties.slidesPerColumn = 1;
+        // var galleryThumbs = new Swiper('.gallery-thumbs', thumbsProperties);
+        // var galleryTop = new Swiper('.gallery-top', topProperties);
+        // $(galleryThumbs.slides[3]).addClass("swiper-slide").show();
+        // $(galleryTop.slides[3]).addClass("swiper-slide").show();
+        // $(galleryTop.slides[0]).removeClass("swiper-slide").hide();
+        // $(galleryTop.slides[1]).removeClass("swiper-slide").hide();
+        // $(galleryTop.slides[2]).removeClass("swiper-slide").hide();
+        // $(galleryTop.slides[4]).removeClass("swiper-slide").hide();
+        // $(galleryThumbs.slides[0]).removeClass("swiper-slide").hide();
+        // $(galleryThumbs.slides[1]).removeClass("swiper-slide").hide();
+        // $(galleryThumbs.slides[2]).removeClass("swiper-slide").hide();
+        // $(galleryThumbs.slides[4]).removeClass("swiper-slide").hide();
+        // galleryTop.update();
+        // galleryThumbs.update();
+            galleryTop.slideTo(3, 5);
+            galleryThumbs.slideTo(3, 5);
+       });
      // document.querySelector('.3D-view').addEventListener('click', function (e) {
 
      // });
