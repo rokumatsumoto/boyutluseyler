@@ -1,6 +1,57 @@
-test stl viewer
-%div{ style: 'width:300px;height:300px;' }
-  %stl-part-viewer{ src: 'models/skull.stl' }
+/ test stl viewer
+/ %div{ style: 'width:600px;height:600px;' }
+/   %stl-part-viewer{ src: 'models/skull.stl' }
+/ %button#btnPhotos.btn.btn-outline-secondary.btn-sm{:type => "button"} Fotoğraflar
+/ %button#btn3DView.btn.btn-outline-secondary.btn-sm{:type => "button"} 3D Görünüm
+
+/ .wrapper
+/   .portfolio-item-slider
+/     .slick-slider-item
+/       %img{:alt => "", :src => "http://placehold.it/500x400&text=1 slider"}/
+/     .slick-slider-item
+/       %img{:alt => "", :src => "http://placehold.it/500x400&text=2 slider"}/
+/     .slick-slider-item
+/       %img{:alt => "", :src => "http://placehold.it/500x400&text=3 slider"}/
+/     .slick-slider-item
+/       %img{:alt => "", :src => "http://placehold.it/500x400&text=4 slider"}/
+/     .slick-slider-item
+/       %img{:alt => "", :src => "http://placehold.it/500x400&text=5 slider"}/
+/     .slick-slider-item
+/       %img{:alt => "", :src => "http://placehold.it/500x400&text=6 slider"}/
+/     .slick-slider-item
+/       %stl-part-viewer{ src: 'models/skull.stl' }
+/   .portfolio-thumb-slider
+/     .slick-slider-item
+/       %img{:alt => "", :src => "http://placehold.it/150x75&text=1"}/
+/     .slick-slider-item
+/       %img{:alt => "", :src => "http://placehold.it/150x75&text=2"}/
+/     .slick-slider-item
+/       %img{:alt => "", :src => "http://placehold.it/150x75&text=3"}/
+/     .slick-slider-item
+/       %img{:alt => "", :src => "http://placehold.it/150x75&text=4"}/
+/     .slick-slider-item
+/       %img{:alt => "", :src => "http://placehold.it/150x75&text=5"}/
+/     .slick-slider-item
+/       %img{:alt => "", :src => "http://placehold.it/150x75&text=6"}/
+/     .slick-slider-item
+/       %img{:alt => "", :src => "http://placehold.it/150x75/0ebbe4/000000&text=3D Görünüm"}/
 
 
-
+/ Swiper
+.swiper-container
+  .swiper-wrapper
+    .swiper-slide
+      %img{:alt => "", :src => "http://placehold.it/500x400&text=1 slider"}/
+    .swiper-slide
+      %img{:alt => "", :src => "http://placehold.it/500x400&text=2 slider"}/
+    .swiper-slide
+      %img{:alt => "", :src => "http://placehold.it/500x400&text=3 slider"}/
+    .swiper-slide
+      %stl-part-viewer{ src: 'models/skull.stl' }
+    .swiper-slide
+      %img{:alt => "", :src => "http://placehold.it/500x400&text=4 slider"}/
+  .swiper-button-next
+  .swiper-button-prev
+%p.append-buttons
+  %a.photos{:href => "#"} Fotoğraflar
+  %a.3D-view{:href => "#"} 3D Görünüm

@@ -1,3 +1,50 @@
 .c-pointer {
   cursor: pointer;
 }
+
+.wrapper { max-width:500px; border:1px solid #ddd; margin-top:5px; }
+.portfolio-item-slider img { max-width:100%; height:400px; }
+.portfolio-thumb-slider img { max-width:100%; height:auto; }
+.portfolio-thumb-slider .slick-slider-item { padding: 5px; }
+.portfolio-thumb-slider { margin: 0 -5px 5px -5px; }
+// .portfolio-thumb-slider .slick-active img { outline: 2px solid transparent; }
+// .portfolio-thumb-slider .slick-current img { outline-color: green; }
+.slick-slider { margin-bottom: 0px; }
+.controls { text-align: center; padding: 10px; font-family: monospace; font-weight: bold; }
+
+.swiper-container {
+  max-width:500px;
+  height: 300px;
+}
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+.append-buttons {
+  text-align: center;
+  margin-top: 20px;
+}
+.append-buttons a {
+  display: inline-block;
+  border: 1px solid #007aff;
+  color: #007aff;
+  text-decoration: none;
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin: 0 10px;
+  font-size: 13px;
+}
