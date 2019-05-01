@@ -38,7 +38,7 @@ deploy:
     secure: $AWS_SECRET_ACCESS_KEY
   on:
     repo: rokumatsumoto/boyutluseyler
-    branch: staging
+    branch: master
 dist: xenial
 env:
   global:
