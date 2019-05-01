@@ -2,4 +2,6 @@
 
 class PagesController < ApplicationController
   def home; end
+
+  def test_stl_viewer; end
 end
