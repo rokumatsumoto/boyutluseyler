@@ -21,11 +21,11 @@ branches:
     - master
     - staging
 cache:
+  yarn: true
   directories:
     - vendor/bundle
     - node_modules
     - $HOME/.nvm
-    - yarn
 deploy:
   access_key_id:
     secure: $AWS_ACCESS_KEY_ID
