@@ -44,46 +44,28 @@ import '@justinribeiro/stl-part-viewer';
 import Swiper from 'swiper';
 
 document.addEventListener("turbolinks:load", () => {
-
-   // var swiper = new Swiper('.swiper-container', {
-   //   centeredSlides: false,
-   //   simulateTouch: false,
-   //   navigation: {
-   //     nextEl: '.swiper-button-next',
-   //     prevEl: '.swiper-button-prev',
-   //   }
-   // });
+  $(function() {
+      $( "#btnPhotos" ).trigger( "click" );
+  });
    var thumbsProperties = {
          watchSlidesVisibility: true,
          watchSlidesProgress: true,
-         centerInsufficientSlides: true,
-         slidesPerColumn: 2,
-         slidesPerColumnFill: 'row',
+         slideToClickedSlide: true,
+         // slidesPerColumn: 2,
+         // slidesPerColumnFill: 'row',
          slidesPerView: 4,
-         touchRatio: 0.5,
-         // observer: true,
-         // observeParents: true,
-         spaceBetween: 5
-         // on: {
-         //     init: function () {
-         //       console.log('swiper thumbs initialized');
-         //       $(this.slides[3]).removeClass("swiper-slide").hide();
-         //       this.update();
-         //     },
-         //   },
-
+         observer: true,
+         observeParents: true,
+         observeSlideChildren: true,
+         preventClicks: false,
+         preventClicksPropagation: false
+         // spaceBetween: 5
    };
-
-   // thumbsProperties.on = {
-   //    init: function () {
-   //            $(this.slides[3]).removeClass("swiper-slide").hide();
-   //            this.update();
-   //    }
-   // };
    var galleryThumbs = new Swiper('.gallery-thumbs', thumbsProperties);
 
    var topProperties = {
-         spaceBetween: 10,
+         watchSlidesVisibility: true,
+         watchSlidesProgress: true,
          simulateTouch: false,
          navigation: {
            nextEl: '.swiper-button-next',
@@ -91,166 +73,58 @@ document.addEventListener("turbolinks:load", () => {
          },
          thumbs: {
            swiper: galleryThumbs
-        }
+        },
+        observer: true,
+        observeParents: true,
+        observeSlideChildren: true,
+        preventClicks: false,
+        preventClicksPropagation: false
       };
-      // topProperties.on = {
-      //   init: function () {
-      //           $(this.slides[3]).removeClass("swiper-slide").hide();
-      //           this.update();
-      //   }
-      // }
-       var galleryTop = new Swiper('.gallery-top', topProperties
-         // on: {
-         //     init: function () {
-         //       console.log('swiper  initialized');
-         //       $(this.slides[3]).removeClass("swiper-slide").hide();
-         //       this.update();
-         //     },
-         //   },
-       );
+       var galleryTop = new Swiper('.gallery-top', topProperties);
+
        $( "#btnPhotos" ).on("click", function(e) {
-            // var galleryTop = document.querySelector('.swiper-container, .gallery-top').swiper;
-            // var galleryThumbs = document.querySelector('.swiper-container, .gallery-thumbs').swiper;
-            // galleryThumbs.destroy();
-            // galleryTop.destroy();
-            // thumbsProperties.slidesPerColumn = 1;
-            // var galleryThumbs = new Swiper('.gallery-thumbs', thumbsProperties);
-            // var galleryTop = new Swiper('.gallery-top', topProperties);
-            // $(galleryTop.slides[3]).removeClass("swiper-slide").hide();
-            // $(galleryThumbs.slides[3]).removeClass("swiper-slide").hide();
-            // galleryTop.update();
-            // galleryThumbs.update();
-            galleryTop.slideTo(0, 3);
-            galleryThumbs.slideTo(0, 3);
+        var galleryTop = document.querySelector('.gallery-top').swiper;
+        var galleryThumbs = document.querySelector('.gallery-thumbs').swiper;
+        galleryThumbs.destroy();
+        galleryTop.destroy();
+        // thumbsProperties.slidesPerColumn = 1;
+        $(".swiper-slide").not("[data-filter=image]").addClass("non-swiper-slide").removeClass("swiper-slide").hide();
+        $("[data-filter=image]").removeClass("non-swiper-slide").addClass("swiper-slide").show();
+        var galleryThumbs = new Swiper('.gallery-thumbs', thumbsProperties);
+        galleryThumbs.update();
+        topProperties.thumbs.swiper = galleryThumbs;
+        var galleryTop = new Swiper('.gallery-top', topProperties);
+        galleryTop.update();
+
+        // galleryTop.slideTo(0);
+        // galleryThumbs.slideTo(0);
        });
        $( "#btn3DView" ).click(function(e) {
-        // var galleryTop = document.querySelector('.swiper-container, .gallery-top').swiper;
-        // var galleryThumbs = document.querySelector('.swiper-container, .gallery-thumbs').swiper;
-        // galleryThumbs.destroy();
-        // galleryTop.destroy();
+        var galleryTop = document.querySelector('.gallery-top').swiper;
+        var galleryThumbs = document.querySelector('.gallery-thumbs').swiper;
+        galleryThumbs.destroy();
+        galleryTop.destroy();
         // thumbsProperties.slidesPerColumn = 1;
-        // var galleryThumbs = new Swiper('.gallery-thumbs', thumbsProperties);
-        // var galleryTop = new Swiper('.gallery-top', topProperties);
-        // $(galleryThumbs.slides[3]).addClass("swiper-slide").show();
-        // $(galleryTop.slides[3]).addClass("swiper-slide").show();
-        // $(galleryTop.slides[0]).removeClass("swiper-slide").hide();
-        // $(galleryTop.slides[1]).removeClass("swiper-slide").hide();
-        // $(galleryTop.slides[2]).removeClass("swiper-slide").hide();
-        // $(galleryTop.slides[4]).removeClass("swiper-slide").hide();
-        // $(galleryThumbs.slides[0]).removeClass("swiper-slide").hide();
-        // $(galleryThumbs.slides[1]).removeClass("swiper-slide").hide();
-        // $(galleryThumbs.slides[2]).removeClass("swiper-slide").hide();
-        // $(galleryThumbs.slides[4]).removeClass("swiper-slide").hide();
-        // galleryTop.update();
-        // galleryThumbs.update();
-            galleryTop.slideTo(3, 5);
-            galleryThumbs.slideTo(3, 5);
+        $(".swiper-slide").not("[data-filter=model]").addClass("non-swiper-slide").removeClass("swiper-slide").hide();
+        $("[data-filter=model]").removeClass("non-swiper-slide").addClass("swiper-slide").show();
+
+        var galleryThumbs = new Swiper('.gallery-thumbs', thumbsProperties);
+        galleryThumbs.update();
+        topProperties.thumbs.swiper = galleryThumbs;
+        // galleryThumbs.on('click', function (e) {
+        //   console.log(this.clickedIndex);
+        // });
+        var galleryTop = new Swiper('.gallery-top', topProperties);
+        galleryTop.update();
+        console.log('hi');
+
+
+
+        // debugger;
+        // galleryTop.slideTo(3);
+        // galleryThumbs.slideTo(3);
        });
-     // document.querySelector('.3D-view').addEventListener('click', function (e) {
 
-     // });
-     // document.querySelector('.photos').addEventListener('click', function (e) {
-
-     // });
-
-  // $('.portfolio-item-slider').on('init', function(event, slick, currentSlide){
-  //   var nrCurrentSlide = slick.currentSlide + 1, // din cauza ca e array si incepe de la 0
-  //       totalSlidesPerPage = nrCurrentSlide + 3; // daca ai 5 thumb-uri pe pagina pui + 4
-  //   // $('.controls').html(nrCurrentSlide + " - " + totalSlidesPerPage + " of " + slick.slideCount);
-
-  // });
-
-
-  // $('#btnPhotos, #btn3DView').on('click',filterSlider);
-
-  // function filterSlider(e){
-
-  //   var $slider = $('.portfolio-item-slider, .portfolio-thumb-slider');
-  //   var clickedBtnId = $(e.currentTarget).attr('id');
-
-  //   $slider.each(function(){
-  //     var $slick = $(this);
-  //     unfilterSlick($slick);
-
-  //     var $slide = $slick.find('.slick-slide');
-  //     var filter = (clickedBtnId == 'btnPhotos') ? $slide.slice(0,6) : $slide.slice(6,7);
-  //     filterSlick($slick,filter);
-  //   });
-
-  // }
-
-  // function unfilterSlick($slick){
-  //   $slick.slick('slickUnfilter');
-  // }
-
-  // function filterSlick($slick,filter){
-  //   $slick.slick('slickFilter',filter);
-  //   reIndexSlide($slick);
-  // }
-
-  // function reIndexSlide($slick){
-  //   var $slides = $slick.find('.slick-active');
-  //   $slides.each(function(index, slide) {
-  //     $(slide).attr('data-slick-index', index);
-  //   });
-  //   $slick.slick('slickGoTo',0,true);
-  //   var $slider = $('.portfolio-item-slider, .portfolio-thumb-slider');
-  // }
-
-  // $( "#btnPhotos, #btn3DView" ).click(function() {
-  //   if (!$(this).hasClass('current')) {
-
-  //     var filterName = undefined;
-  //     if (this.id == 'btnPhotos'){
-  //       filterName = '.photos';
-  //       $(this).addClass('current');
-  //       $('#btn3DView').removeClass('current');
-  //     } else {
-  //       filterName = '.3DView';
-  //       $(this).addClass('current');
-  //       $('#btnPhotos').removeClass('current');
-  //     }
-  //     // $('.portfolio-item-slider, .portfolio-thumb-slider').slick('slickUnfilter');
-  //     $('.portfolio-item-slider, .portfolio-thumb-slider').slick('slickFilter', $(filterName).parent().parent()).slick('refresh');
-  //     $('.portfolio-item-slider, .portfolio-thumb-slider').slick('slickGoTo', 0);
-  //   };
-  // });
-  //
-
-
-  // $('.portfolio-item-slider').slick({
-  //   slidesToShow: 1,
-  //   slidesToScroll: 1,
-  //   asNavFor: '.portfolio-thumb-slider',
-  //   infinite: false,
-  //   draggable: false,
-  //   arrows: false
-  // });
-
-  // $('.portfolio-thumb-slider').slick({
-  //   slidesToShow: 4,
-  //   slidesToScroll: 1,
-  //   asNavFor: '.portfolio-item-slider',
-  //   arrows: true,
-  //   focusOnSelect: true,
-  //   infinite: false
-  // });
-
-  // var current = 0; // current slider dupa refresh
-  // $('.portfolio-thumb-slider .slick-slide:not(.slick-cloned)').eq(current).addClass('slick-current');
-  // $('.portfolio-item-slider').on('afterChange', function(event, slick, currentSlide, nextSlide){
-  //   current = currentSlide;
-  //   $('.portfolio-thumb-slider .slick-slide').removeClass('slick-current');
-  //   $('.portfolio-thumb-slider .slick-slide:not(.slick-cloned)').eq(current).addClass('slick-current');
-  //   var nrCurrentSlide = slick.currentSlide + 1, // din cauza ca e array si incepe de la 0
-  //       totalSlidesPerPage = nrCurrentSlide + 3; // daca ai 5 thumb-uri pe pagina pui + 4
-
-  //   if(totalSlidesPerPage > slick.slideCount) {
-  //     // $('.controls').html(nrCurrentSlide + " - " + slick.slideCount + " of " + slick.slideCount);
-  //   } else {
-  //     // $('.controls').html(nrCurrentSlide + " - " + totalSlidesPerPage + " of " + slick.slideCount);
-  //   }
-  // });
 });
 
 
