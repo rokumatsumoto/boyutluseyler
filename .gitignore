@@ -77,4 +77,4 @@ yarn-debug.log*
 stats.json
 
 # Stl model files for development purpose
-/public/models
+/public/models-dev
