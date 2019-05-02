@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   root 'pages#home'
 
-  get 'test_stl_viewer', to: 'pages#test_stl_viewer'
-  get 'test_slider', to: 'pages#test_slider'
+  # get 'test_stl_viewer', to: 'pages#test_stl_viewer'
+  # get 'test_slider', to: 'pages#test_slider'
 
   devise_for :users, path: '', controllers: { registrations: :registrations,
                                               passwords: :passwords,
