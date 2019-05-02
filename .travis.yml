@@ -67,7 +67,7 @@ notifications:
       - "Execution time: *%{duration}*"
       - "Message: %{message}"
 rvm:
-  - "2.5.3"
+  - "2.5.5"
 script:
   - "bundle exec rails webpacker:compile"
   - "bundle exec rake db:schema:load"
