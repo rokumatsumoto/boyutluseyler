@@ -40,7 +40,9 @@ require('../user_profile');
 import 'intersection-observer/intersection-observer';
 import '@justinribeiro/stl-part-viewer';
 
-require('../slider');
+import Swiper from 'swiper/dist/js/swiper';
+
+// require('../slider');
 
 
 
