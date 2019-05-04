@@ -11,6 +11,7 @@
     "coffeescript": "1.12.7",
     "jquery": "^3.4.0",
     "local-time": "^2.1.0",
+    "node-sass": "^4.12",
     "popper.js": "^1.15.0",
     "rails-ujs": "^5.2.3",
     "swiper": "^4.5.0",
