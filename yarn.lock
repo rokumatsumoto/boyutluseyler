@@ -680,10 +680,10 @@
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-5.8.1.tgz#cbafbfe8894c4e3e3c3a9da6774e249ac1f2da8b"
   integrity sha512-GJtx6e55qLEOy2gPOsok2lohjpdWNGrYGtQx0FFT/++K4SYx+Z8LlPHdQBaFzKEwH5IbBB4fNgb//uyZjgYXoA==
 
-"@justinribeiro/stl-part-viewer@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@justinribeiro/stl-part-viewer/-/stl-part-viewer-1.0.1.tgz#41d7cfd523bd3abd91254414244e2b76d12a02d0"
-  integrity sha512-Bu6UUMkgJwjkDVOPyg8Ezf+HReA9TKJ2uLqk3j0yaiEI4g4k/iNTNGMwW7HSNClZStQrt5k8TqHVC/3Jfuh0AA==
+"@justinribeiro/stl-part-viewer@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@justinribeiro/stl-part-viewer/-/stl-part-viewer-1.0.2.tgz#f7398af59c21866e9c7f50fe238da69a1e08dbe9"
+  integrity sha512-HxdVlbFYuK0O8grqMteyj34eH2bvJQt4cBehO1+1EHVBf4EPD3nasrssrkOrDuixvVICF6ahPzRTt8ru6TEiiQ==
   dependencies:
     intersection-observer "^0.5.0"
     lit-element "^2.1.0"
