@@ -18,7 +18,6 @@ before_script:
   - "bundle exec rake db:create"
 branches:
   only:
-    - master
     - staging
 cache:
   yarn: true
