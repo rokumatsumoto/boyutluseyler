@@ -10,18 +10,18 @@ RSpec.describe NavHelper do
       end
 
       it 'has all the expected links by default' do
-        menu_items = %i[user_dropdown upload search designs collections]
+        menu_items = %i[user_dropdown search upload designs collections]
 
         expect(helper.header_links).to contain_exactly(*menu_items)
       end
     end
 
-    it 'returns sign in, search, designs and collections links when the user is
+    it 'returns sign in, search, upload, designs and collections links when the user is
         not logged in' do
       allow(helper).to receive(:current_user).and_return(nil)
 
-      expect(helper.header_links).to contain_exactly(:sign_in, :search, :designs,
-                                                     :collections)
+      expect(helper.header_links).to contain_exactly(:sign_in, :search, :upload,
+                                                     :designs, :collections)
     end
   end
 end
