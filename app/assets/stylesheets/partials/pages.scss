@@ -1,60 +1,25 @@
+a {
+  text-decoration: none;
+  color: $white;
+
+  &:hover {
+    color: $white;
+    text-decoration: none;
+  }
+}
+
 .c-pointer {
   cursor: pointer;
 }
 
-.wrapper { max-width:550px; margin-top:5px;}
+// Upload page
 
-.swiper-container {
-  max-width:500px;
-  height: 400px;
-  margin-left: auto;
-  margin-right: auto;
+.btn-add-3d-model {
+  background-color: $mercury-2;
+  color: $bondi-blue;
 }
 
-.swiper-container-thumbs {
- max-width:500px;
- margin-left: auto;
- margin-right: auto;
-}
-
-.swiper-slide {
-   background-size: cover;
-   background-position: center;
- }
-
- .gallery-top {
-    height: 100%;
-    width: 100%;
-    margin-top:5px;
-  }
-
-.gallery-thumbs {
-  height: 20%;
-  box-sizing: border-box;
-  padding: 10px 0;
-}
-
-.gallery-thumbs .swiper-slide {
-  width: 100%;
-  height: 100%;
-  margin-right: 4px;
-  opacity: 0.4;
-}
-.gallery-thumbs .swiper-slide-thumb-active {
-  opacity: 1;
-}
-
-.append-buttons {
-  text-align: center;
-  margin-top: 20px;
-}
-.append-buttons a {
-  display: inline-block;
-  border: 1px solid #007aff;
-  color: #007aff;
-  text-decoration: none;
-  padding: 4px 10px;
-  border-radius: 4px;
-  margin: 0 10px;
-  font-size: 13px;
+.btn-add-make {
+  background-color: $mercury-2;
+  color: $pale-sky;
 }

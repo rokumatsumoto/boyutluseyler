@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   get 'test_stl_viewer', to: 'pages#test_stl_viewer'
   get 'test_slider', to: 'pages#test_slider'
+  get 'upload', to: 'pages#upload'
 
   devise_for :users, path: '', controllers: { registrations: :registrations,
                                               passwords: :passwords,

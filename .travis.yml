@@ -19,6 +19,7 @@ before_script:
 branches:
   only:
     - staging
+    - upload-page
 cache:
   yarn: true
   directories:

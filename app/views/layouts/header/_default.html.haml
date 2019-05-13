@@ -12,11 +12,11 @@
         - if header_link?(:search)
           %form.mx-2.my-auto.d-inline.w-50.search
             %input.form-control{ 'aria-label' => 'Search',
-              placeholder: 'rick and morty, stranger things, v.s..', type: 'search' }/
+              placeholder: 'ara..', type: 'search' }/
         %ul.nav.navbar-nav.ml-auto
           - if header_link?(:upload)
             %li.nav-item
-              %a.nav-link.custom-link{ href: '#' } Yükle
+              %a.nav-link.custom-link{ href: 'upload' } Yükle
           - if header_link?(:designs)
             %li.nav-item
               %a.nav-link.custom-link{ href: '#' } Tasarımlar
