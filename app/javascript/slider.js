@@ -108,8 +108,8 @@ ready = function() {
 
          var galleryTop = new Swiper('.gallery-top', topProperties);
          var content = '';
-         content += '<div class="swiper-slide"><stl-part-viewer src= "https://s3.eu-west-3.amazonaws.com/sametg/skull.stl"></stl></div>';
-         content += '<div class="swiper-slide"><stl-part-viewer src= "https://s3.eu-west-3.amazonaws.com/sametg/skull2.stl"></stl></div>';
+         content += '<div class="swiper-slide"><stl-part-viewer src= "https://s3.eu-west-3.amazonaws.com/sametg/bowser_low_poly_flowalistik.STL"></stl></div>';
+         content += '<div class="swiper-slide"><stl-part-viewer src= "https://s3.eu-west-3.amazonaws.com/sametg/bowser_low_poly_flowalistik_2.STL"></stl></div>';
 
          galleryTop.appendSlide(content);
          galleryTop.update();
