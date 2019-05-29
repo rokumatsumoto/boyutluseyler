@@ -43,7 +43,7 @@ gem 'friendly_id', '~> 5.2', '>= 5.2.5'
 # HAML
 gem 'hamlit', '~> 2.9', '>= 2.9.2'
 # Spam and anti-bot protection
-gem 'recaptcha', '~> 4.13', '>= 4.13.1'
+gem 'recaptcha', '~> 4.14'
 
 gem 'local_time', '~> 2.1'
 
