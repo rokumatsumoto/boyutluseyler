@@ -86,4 +86,8 @@ class RegistrationsController < Devise::RegistrationsController
     set_minimum_password_length
     respond_with_navigational(resource) { render :new }
   end
+
+  def sign_up_params
+    params.require(:user).permit(:username, :email, :password, :password_confirmation)
+  end
 end
