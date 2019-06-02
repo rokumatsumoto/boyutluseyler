@@ -13,7 +13,12 @@ module WaitForRequests
   def finished_all_js_requests?
     return true unless javascript_test?
 
-    finished_all_ajax_requests?
+    finished_all_ajax_requests? &&
+      finished_all_axios_requests?
+  end
+
+  def finished_all_axios_requests?
+    Capybara.page.evaluate_script('window.activeAxios || 0').zero?
   end
 
   # Waits until the passed block returns true

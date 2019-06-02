@@ -37,7 +37,11 @@ en:
           attributes:
             username:
               invalid: Please create a username with only alphanumeric characters.
-              taken: Username has already been taken.
+              taken: Username is already taken.
+              available: Username is available.
+              checking_availability: Checking username availability...
+              already_taken: It's you!
+              error: An error occurred while validating username
             email:
               invalid: Please provide a valid email address.
               taken: Email has already been taken.

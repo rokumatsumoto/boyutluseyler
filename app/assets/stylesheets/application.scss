@@ -18,7 +18,12 @@
 // boyutluseyler UI framework
 @import 'framework';
 
-@import "swiper/dist/css/swiper.min";
+// Swiper slider
+@import 'swiper/dist/css/swiper.min';
+
+// Noty notification
+@import 'noty/src/noty';
+@import 'noty/src/themes/mint';
 
 // Page specific
 @import 'partials/*';

@@ -44,6 +44,30 @@
   color: $delta-2;
 }
 
+%username-validation {
+  font-size: 80%;
+}
+
+.username .validation-success {
+  @extend %username-validation;
+  color: $eucalyptus-2;
+}
+
+.username .validation-alreadytaken {
+  @extend %username-validation;
+  color: $eucalyptus-2;
+}
+
+.username .validation-error {
+  @extend %username-validation;
+  color: $red-punch;
+}
+
+.username .validation-pending {
+  @extend %username-validation;
+  color: $black;
+}
+
 // Sign in form
 .text-sign-in-form {
   @extend %text-auth-form;

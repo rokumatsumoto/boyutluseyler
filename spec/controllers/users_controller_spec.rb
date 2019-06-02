@@ -13,7 +13,7 @@ RSpec.describe UsersController, type: :controller do
       it 'returns JSON indicating the user exists' do
         get :exists, params: { username: user.username }
 
-        expected_json = { exists: true, message: exists_message_for_username }.to_json
+        expected_json = { exists: true }.to_json
         expect(response.body).to eq(expected_json)
       end
 
@@ -24,7 +24,7 @@ RSpec.describe UsersController, type: :controller do
         it 'returns JSON indicating the user exists' do
           get :exists, params: { username: user.username.downcase }
 
-          expected_json = { exists: true, message: exists_message_for_username }.to_json
+          expected_json = { exists: true }.to_json
           expect(response.body).to eq(expected_json)
         end
       end
@@ -39,10 +39,6 @@ RSpec.describe UsersController, type: :controller do
         expect(response.body).to eq(expected_json)
       end
     end
-  end
-
-  def exists_message_for_username
-    t('activerecord.errors.models.user.attributes.username.taken')
   end
 end
 # rubocop:enable Metrics/BlockLength

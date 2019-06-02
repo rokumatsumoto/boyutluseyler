@@ -26,17 +26,6 @@ RSpec.describe 'User edit profile' do
     end
 
     context 'when form submission' do
-      # rubocop:disable RSpec/ExampleLength
-      it 'does not reload the page if the username already exists' do
-        fill_in 'user_username', with: existing_user.username
-        page.find('body').click
-        wait_for_requests
-
-        expect_page_to_not_reload do
-          click_button 'btn_edit_profile'
-        end
-      end
-      # rubocop:enable RSpec/ExampleLength
       it 'allows form submission if the username is already used' do
         fill_in 'user_username', with: user.username
         page.find('body').click

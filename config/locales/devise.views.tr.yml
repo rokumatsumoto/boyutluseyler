@@ -35,7 +35,11 @@ tr:
           attributes:
             username:
               invalid: Lütfen yalnızca alfanumerik karakterlerle bir kullanıcı adı oluşturun.
-              taken: Kullanıcı Adı hali hazırda kullanılmakta.
+              taken: Kullanıcı adı zaten alınmış.
+              available: Kullanıcı adı uygun.
+              checking_availability: Kontrol ediliyor...
+              already_taken: Bu sensin!
+              error: Kullanıcı adı doğrulanırken bir hata oluştu
             email:
               invalid: Lütfen geçerli bir e-posta adresi girin.
               taken: E-Posta hali hazırda kullanılmakta.
