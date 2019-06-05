@@ -34,9 +34,9 @@ gem 'devise-i18n', '~> 1.7', '>= 1.7.1'
 # Authorization
 gem 'pundit', '~> 2.0', '>= 2.0.1'
 # Forms
-gem 'client_side_validations', '~> 12.1'
-gem 'client_side_validations-simple_form', '~> 6.8'
 gem 'simple_form', '~> 4.1'
+gem 'client_side_validations', '~> 15.0'
+gem 'client_side_validations-simple_form', '~> 7.0'
 
 # Clean URL (https://en.wikipedia.org/wiki/Clean_URL)
 gem 'friendly_id', '~> 5.2', '>= 5.2.5'

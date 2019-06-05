@@ -1,8 +1,8 @@
 
 /*!
- * Client Side Validations - v12.1.0 (https://github.com/DavyJonesLocker/client_side_validations)
+ * Client Side Validations - v15.0.0 (https://github.com/DavyJonesLocker/client_side_validations)
  * Copyright (c) 2019 Geremia Taglialatela, Brian Cardarella
- * Licensed under MIT (http://opensource.org/licenses/mit-license.php)
+ * Licensed under MIT (https://opensource.org/licenses/mit-license.php)
  */
 
 (function() {
@@ -535,8 +535,14 @@
               form = element.closest('form');
               valid = true;
               form.find(":input[name^=\"" + name_prefix + "\"][name$=\"" + name_suffix + "\"]").each(function() {
+                var other_value;
+                other_value = $(this).val();
+                if (!options.case_sensitive) {
+                  value = value.toLowerCase();
+                  other_value = other_value.toLowerCase();
+                }
                 if ($(this).attr('name') !== name) {
-                  if ($(this).val() === value) {
+                  if (other_value === value) {
                     valid = false;
                     return $(this).data('notLocallyUnique', true);
                   } else {
