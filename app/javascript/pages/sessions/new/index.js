@@ -1,1 +1,1 @@
-import './username_validator'
+import 'pages/shared/username_validator';

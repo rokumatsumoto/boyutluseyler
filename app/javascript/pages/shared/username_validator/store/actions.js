@@ -12,7 +12,7 @@ export default {
     commit('setAlreadyTakenState', payload);
 
     // let client_side_validations gem do his job
-    // presence, length and format validations)
+    // (presence, length and format validations)
     if (state.empty || !state.valid) {
       commit('clearFieldValidationMessage', payload);
     }

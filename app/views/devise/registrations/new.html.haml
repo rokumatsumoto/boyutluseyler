@@ -1,5 +1,6 @@
 - content_for :head do
   %meta{ content: 'no-cache', name: 'turbolinks-cache-control' }/
+  = javascript_pack_tag 'session'
 .row.grid-divider
   .col-md-6.col-lg-6.px-lg-5
     %h5.card-title.text-center= t('.sign_up_by_email')
@@ -54,4 +55,5 @@
               %span 3D tasarımcı olun
             %p
               %i.fas.fa-cube.fa-lg
-              %span Çıktı alabileceğiniz onlarca 3D tasarıma erişin
+              %span Çıktı alabileceğiniz onlarca 3D tasarıma erişi
+

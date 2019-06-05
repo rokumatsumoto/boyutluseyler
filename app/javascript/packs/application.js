@@ -34,10 +34,6 @@ require('rails.validations.simple_form.bootstrap4');
 require('../slider');
 require('../user_profile');
 
-// Modules
-import '../pages/sessions/new'
-
-
 
 
 

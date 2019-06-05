@@ -9,6 +9,7 @@ import {
   USERNAME_FORM_GROUP_CLASS
 } from '../constants';
 
+
 export default {
   setAvailabilityState(state, payload) {
     state.available = payload.available;
@@ -16,7 +17,7 @@ export default {
   setValidState(state, payload) {
     // look form group username element (div) for valid state
     // for presence, length and format validations we use client_side_validations gem
-    state.valid = !payload.target.parentNode.classList.contains('form-group-invalid');
+    state.valid = !payload.target.parentNode.classList.contains(INVALID_FORM_GROUP_CLASS);
   },
   setPendingState(state, payload) {
     state.pending = payload.pending;
@@ -29,15 +30,11 @@ export default {
       payload.target.attributes.data_username.value == payload.target.value : false;
   },
   clearFieldValidationState(state, payload){
-    Array.from($(payload.target.closest('div')).siblings('p')).forEach((el) => {
-      el.style.display = 'none';
-    });
+    $(payload.target.closest('div')).siblings('p').hide();
     payload.target.classList.remove(INVALID_INPUT_CLASS, SUCCESS_INPUT_CLASS);
   },
   clearFieldValidationMessage(state, payload){
-    Array.from($(payload.target.closest('div')).siblings('p')).forEach((el) => {
-      el.style.display = 'none';
-    });
+    $(payload.target.closest('div')).siblings('p').hide();
     // reset username form-group element margin-bottom value
     this.commit('setMarginBottomUsernameFormGroup', {
       margin: '1rem'
