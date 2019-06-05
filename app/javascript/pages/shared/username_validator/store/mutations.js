@@ -9,9 +9,8 @@ import {
   USERNAME_FORM_GROUP_CLASS
 } from '../constants';
 
-
 export default {
-  setAvailabilityState(state, payload) {
+  setAvailableState(state, payload) {
     state.available = payload.available;
   },
   setValidState(state, payload) {
@@ -60,7 +59,6 @@ export default {
     payload.target.classList.add(SUCCESS_INPUT_CLASS);
     payload.target.classList.remove(INVALID_INPUT_CLASS);
     $usernameAvailableMessage.style.display = 'block';
-
   },
   renderAlreadyTakenState(state, payload) {
     const $usernameAlreadyTakenMessage = document.querySelector(ALREADY_TAKEN_MESSAGE_SELECTOR);
