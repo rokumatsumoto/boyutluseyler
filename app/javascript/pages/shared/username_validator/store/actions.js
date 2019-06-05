@@ -79,7 +79,6 @@ export default {
       dispatch('renderState', payload);
     }
     if (state.valid && !state.empty && !state.alreadyTaken) {
-      dispatch('renderState', payload);
       dispatch('validateUsername', payload);
     }
   },
