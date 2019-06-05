@@ -33,7 +33,7 @@ export default {
     $(payload.target.closest('div')).siblings('p').hide();
     payload.target.classList.remove(INVALID_INPUT_CLASS, SUCCESS_INPUT_CLASS);
   },
-  clearFieldValidationMessage(state, payload){
+  clearFieldValidationStateMessage(state, payload){
     $(payload.target.closest('div')).siblings('p').hide();
     // reset username form-group element margin-bottom value
     this.commit('setMarginBottomUsernameFormGroup', {

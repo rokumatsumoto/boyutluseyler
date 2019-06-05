@@ -9,7 +9,6 @@ Vue.use(TurbolinksAdapter)
 document.addEventListener('turbolinks:load', () => {
   const usernameElement = document.getElementById('user_username');
   if (usernameElement != null){
-    console.log('username_validator');
     const app = new Vue({
       store,
       el: '[data-behavior="vue"]',

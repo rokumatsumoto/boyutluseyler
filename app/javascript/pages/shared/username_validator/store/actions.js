@@ -14,7 +14,7 @@ export default {
     // let client_side_validations gem do his job
     // (presence, length and format validations)
     if (state.empty || !state.valid) {
-      commit('clearFieldValidationMessage', payload);
+      commit('clearFieldValidationStateMessage', payload);
     }
     if (state.alreadyTaken) {
       dispatch('renderState', payload);
