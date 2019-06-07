@@ -1,14 +1,15 @@
 import Vue from 'vue/dist/vue.esm'
 import Vuex from 'vuex'
-import state from './state'
+import * as actions from './actions'
 import mutations from './mutations'
-import actions from './actions'
+import state from './state'
 
-Vue.use(Vuex)
+
+Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: state(),
   actions,
   mutations,
+  state: state(),
   strict: process.env.NODE_ENV !== 'production'
 })
