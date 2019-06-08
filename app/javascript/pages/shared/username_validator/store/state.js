@@ -4,4 +4,5 @@ export default () => ({
   pending: false,
   empty: true,
   alreadyTaken: false,
+  fetch: false
 })

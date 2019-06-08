@@ -19,6 +19,9 @@ export const clearFieldValidationState = ({ commit }, payload) =>
 export const clearFieldValidationStateMessage = ({ commit }, payload) =>
   commit(types.CLEAR_FIELD_VALIDATION_STATE_MESSAGE, payload);
 
+export const setMarginBottomUsernameFormGroup = ({ commit }, payload) =>
+  commit(types.SET_MARGIN_BOTTOM_USERNAME_FORM_GROUP, payload);
+
 export const renderAlreadyTakenState = ({ commit }, payload) =>
   commit(types.RENDER_ALREADY_TAKEN_STATE, payload);
 
@@ -51,7 +54,22 @@ export const renderState = ({ dispatch, state }, payload) => {
   }
 };
 
-export const setAvailabilityState = ({ dispatch }, payload) =>  {
+export const receiveUsernameError = ({ dispatch }, payload) =>  {
+  dispatch('setPendingState', {
+    pending: false
+  });
+  dispatch('clearFieldValidationState', payload);
+  dispatch('setMarginBottomUsernameFormGroup', {
+    margin: '1rem'
+  });
+  new Noty({
+    type: 'error',
+    layout: 'top',
+    text: payload.error.response.data.message,
+  }).show();
+};
+
+export const receiveUsernameSuccess = ({ dispatch }, payload) =>  {
   dispatch('setAvailableState', payload);
   dispatch('setPendingState', {
     pending: false
@@ -59,30 +77,10 @@ export const setAvailabilityState = ({ dispatch }, payload) =>  {
   dispatch('renderState', payload);
 };
 
-export const validateUsername = ({ dispatch }, payload) => {
-  dispatch('setPendingState', {
-    pending: true
-  });
-  dispatch('renderState', payload);
-  axios
-    .get(`/exists/${payload.value}`)
-    .then(({ data }) => dispatch('setAvailabilityState', {
-      available: !data.exists,
-      target: payload.target
-    }))
-    .catch((error) => {
-      new Noty({
-        type: 'error',
-        layout: 'top',
-        text: error.response.data.message,
-      }).show();
-    });
-};
-
-export const usernameCheck = ({ dispatch, state }, payload) => {
+export const requestUsername = ({ dispatch, state }, payload) => {
   dispatch('setValidState', payload);
   dispatch('setEmptyState', payload);
-  // reset availability state to false on every request
+  // reset availability state on every request
   dispatch('setAvailableState', {
     available: false
   });
@@ -97,6 +95,25 @@ export const usernameCheck = ({ dispatch, state }, payload) => {
     dispatch('renderState', payload);
   }
   if (state.valid && !state.empty && !state.alreadyTaken) {
-    dispatch('validateUsername', payload);
+    dispatch('setPendingState', {
+      pending: true
+    });
+    dispatch('renderState', payload);
+  }
+};
+
+export const fetchUsername = ({ dispatch, state }, payload) => {
+  dispatch('requestUsername', payload);
+  if (state.pending){
+    axios
+      .get(`/exists/${payload.value}`)
+      .then(({ data }) => dispatch('receiveUsernameSuccess', {
+        available: !data.exists,
+        target: payload.target
+      }))
+      .catch((error) => {
+        payload.error = error;
+        dispatch('receiveUsernameError', payload);
+      });
   }
 };

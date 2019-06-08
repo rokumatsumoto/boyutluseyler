@@ -13,20 +13,20 @@ document.addEventListener('turbolinks:load', () => {
       store,
       el: '[data-behavior="vue"]',
       mounted() {
-        this.getUsernameElement().addEventListener('blur', this.usernameCheck, false);
+        this.getUsernameElement().addEventListener('blur', this.fetchUsername, false);
         Vue.nextTick(() => {
           $(this.getUsernameElement()).enableClientSideValidations();
         });
       },
       destroyed() {
-        this.getUsernameElement().removeEventListener('blur', this.usernameCheck, false);
+        this.getUsernameElement().removeEventListener('blur', this.fetchUsername, false);
       },
       methods: {
         getUsernameElement(e) {
           return document.getElementById('user_username');
         },
-        usernameCheck(e) {
-          this.$store.dispatch('usernameCheck', {
+        fetchUsername(e) {
+          this.$store.dispatch('fetchUsername', {
             value: e.target.value,
             target: e.target
           });
