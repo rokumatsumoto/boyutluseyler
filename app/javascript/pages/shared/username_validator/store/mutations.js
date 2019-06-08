@@ -3,7 +3,7 @@ import {
   UNAVAILABLE_MESSAGE_SELECTOR,
   SUCCESS_MESSAGE_SELECTOR,
   PENDING_MESSAGE_SELECTOR,
-  ALREADY_TAKEN_MESSAGE_SELECTOR,
+  YOURS_MESSAGE_SELECTOR,
   INVALID_INPUT_CLASS,
   SUCCESS_INPUT_CLASS,
   INVALID_FORM_GROUP_CLASS,
@@ -29,8 +29,8 @@ export default {
     state.empty = !payload.target.value.length;
   },
 
-  [types.SET_ALREADY_TAKEN_STATE](state, payload) {
-    state.alreadyTaken = payload.target.attributes.data_username !== undefined ?
+  [types.SET_YOURS_STATE](state, payload) {
+    state.yours = payload.target.attributes.data_username !== undefined ?
       payload.target.attributes.data_username.value == payload.target.value : false;
   },
 
@@ -72,12 +72,12 @@ export default {
     $usernameAvailableMessage.style.display = 'block';
   },
 
-  [types.RENDER_ALREADY_TAKEN_STATE](state, payload) {
-    const $usernameAlreadyTakenMessage = document.querySelector(ALREADY_TAKEN_MESSAGE_SELECTOR);
+  [types.RENDER_YOURS_STATE](state, payload) {
+    const $usernameYoursMessage = document.querySelector(YOURS_MESSAGE_SELECTOR);
     payload.target.classList.add(SUCCESS_INPUT_CLASS);
     payload.target.classList.remove(INVALID_INPUT_CLASS);
-    $usernameAlreadyTakenMessage.style.display = 'block';
-    // fix state message (already taken) position
+    $usernameYoursMessage.style.display = 'block';
+    // fix state message (yours) position
     this.commit(types.SET_MARGIN_BOTTOM_USERNAME_FORM_GROUP, {
       margin: 0
     });

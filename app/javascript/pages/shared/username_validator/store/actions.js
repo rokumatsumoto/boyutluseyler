@@ -10,8 +10,8 @@ export const setPendingState = ({ commit }, payload) => commit(types.SET_PENDING
 
 export const setAvailableState = ({ commit }, payload) => commit(types.SET_AVAILABLE_STATE, payload);
 
-export const setAlreadyTakenState = ({ commit }, payload) =>
-  commit(types.SET_ALREADY_TAKEN_STATE, payload);
+export const setYoursState = ({ commit }, payload) =>
+  commit(types.SET_YOURS_STATE, payload);
 
 export const clearFieldValidationState = ({ commit }, payload) =>
   commit(types.CLEAR_FIELD_VALIDATION_STATE, payload);
@@ -22,8 +22,8 @@ export const clearFieldValidationStateMessage = ({ commit }, payload) =>
 export const setMarginBottomUsernameFormGroup = ({ commit }, payload) =>
   commit(types.SET_MARGIN_BOTTOM_USERNAME_FORM_GROUP, payload);
 
-export const renderAlreadyTakenState = ({ commit }, payload) =>
-  commit(types.RENDER_ALREADY_TAKEN_STATE, payload);
+export const renderYoursState = ({ commit }, payload) =>
+  commit(types.RENDER_YOURS_STATE, payload);
 
 export const renderAvailableState = ({ commit }, payload) =>
   commit(types.RENDER_AVAILABLE_STATE, payload);
@@ -37,8 +37,8 @@ export const renderUnavailableState = ({ commit }, payload) =>
 export const renderState = ({ dispatch, state }, payload) => {
   dispatch('clearFieldValidationState', payload);
 
-  if (state.alreadyTaken) {
-    dispatch('renderAlreadyTakenState', payload);
+  if (state.yours) {
+    dispatch('renderYoursState', payload);
   }
   if (state.available) {
     dispatch('renderAvailableState', payload);
@@ -49,7 +49,7 @@ export const renderState = ({ dispatch, state }, payload) => {
   if (state.pending) {
     dispatch('renderPendingState', payload);
   }
-  if (!state.pending && !state.alreadyTaken && !state.available) {
+  if (!state.pending && !state.yours && !state.available) {
     dispatch('renderUnavailableState', payload);
   }
 };
@@ -84,17 +84,17 @@ export const requestUsername = ({ dispatch, state }, payload) => {
   dispatch('setAvailableState', {
     available: false
   });
-  dispatch('setAlreadyTakenState', payload);
+  dispatch('setYoursState', payload);
 
   // let client_side_validations gem do his job
   // (presence, length and format validations)
   if (state.empty || !state.valid) {
     dispatch('clearFieldValidationStateMessage', payload);
   }
-  if (state.alreadyTaken) {
+  if (state.yours) {
     dispatch('renderState', payload);
   }
-  if (state.valid && !state.empty && !state.alreadyTaken) {
+  if (state.valid && !state.empty && !state.yours) {
     dispatch('setPendingState', {
       pending: true
     });

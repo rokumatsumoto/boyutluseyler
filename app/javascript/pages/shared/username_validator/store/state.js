@@ -3,6 +3,5 @@ export default () => ({
   valid: false,
   pending: false,
   empty: true,
-  alreadyTaken: false,
-  fetch: false
+  yours: false
 })

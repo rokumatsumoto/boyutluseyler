@@ -38,7 +38,7 @@ tr:
               taken: Kullanıcı adı zaten alınmış.
               available: Kullanıcı adı uygun.
               checking_availability: Kontrol ediliyor...
-              already_taken: Bu sensin!
+              yours: Bu sensin!
               error: Kullanıcı adı doğrulanırken bir hata oluştu
             email:
               invalid: Lütfen geçerli bir e-posta adresi girin.
