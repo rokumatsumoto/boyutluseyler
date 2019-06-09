@@ -8,10 +8,10 @@ export const setEmptyState = ({ commit }, payload) => commit(types.SET_EMPTY_STA
 
 export const setPendingState = ({ commit }, payload) => commit(types.SET_PENDING_STATE, payload);
 
-export const setAvailableState = ({ commit }, payload) => commit(types.SET_AVAILABLE_STATE, payload);
+export const setAvailableState = ({ commit }, payload) =>
+  commit(types.SET_AVAILABLE_STATE, payload);
 
-export const setYoursState = ({ commit }, payload) =>
-  commit(types.SET_YOURS_STATE, payload);
+export const setYoursState = ({ commit }, payload) => commit(types.SET_YOURS_STATE, payload);
 
 export const clearFieldValidationState = ({ commit }, payload) =>
   commit(types.CLEAR_FIELD_VALIDATION_STATE, payload);
@@ -22,8 +22,7 @@ export const clearFieldValidationStateMessage = ({ commit }, payload) =>
 export const setMarginBottomUsernameFormGroup = ({ commit }, payload) =>
   commit(types.SET_MARGIN_BOTTOM_USERNAME_FORM_GROUP, payload);
 
-export const renderYoursState = ({ commit }, payload) =>
-  commit(types.RENDER_YOURS_STATE, payload);
+export const renderYoursState = ({ commit }, payload) => commit(types.RENDER_YOURS_STATE, payload);
 
 export const renderAvailableState = ({ commit }, payload) =>
   commit(types.RENDER_AVAILABLE_STATE, payload);
@@ -54,13 +53,13 @@ export const renderState = ({ dispatch, state }, payload) => {
   }
 };
 
-export const receiveUsernameError = ({ dispatch }, payload) =>  {
+export const receiveUsernameError = ({ dispatch }, payload) => {
   dispatch('setPendingState', {
-    pending: false
+    pending: false,
   });
   dispatch('clearFieldValidationState', payload);
   dispatch('setMarginBottomUsernameFormGroup', {
-    margin: '1rem'
+    margin: '1rem',
   });
   new Noty({
     type: 'error',
@@ -69,10 +68,10 @@ export const receiveUsernameError = ({ dispatch }, payload) =>  {
   }).show();
 };
 
-export const receiveUsernameSuccess = ({ dispatch }, payload) =>  {
+export const receiveUsernameSuccess = ({ dispatch }, payload) => {
   dispatch('setAvailableState', payload);
   dispatch('setPendingState', {
-    pending: false
+    pending: false,
   });
   dispatch('renderState', payload);
 };
@@ -82,7 +81,7 @@ export const requestUsername = ({ dispatch, state }, payload) => {
   dispatch('setEmptyState', payload);
   // reset availability state on every request
   dispatch('setAvailableState', {
-    available: false
+    available: false,
   });
   dispatch('setYoursState', payload);
 
@@ -96,7 +95,7 @@ export const requestUsername = ({ dispatch, state }, payload) => {
   }
   if (state.valid && !state.empty && !state.yours) {
     dispatch('setPendingState', {
-      pending: true
+      pending: true,
     });
     dispatch('renderState', payload);
   }
@@ -104,16 +103,18 @@ export const requestUsername = ({ dispatch, state }, payload) => {
 
 export const fetchUsername = ({ dispatch, state }, payload) => {
   dispatch('requestUsername', payload);
-  if (state.pending){
+  if (state.pending) {
     axios
       .get(`/exists/${payload.value}`)
-      .then(({ data }) => dispatch('receiveUsernameSuccess', {
-        available: !data.exists,
-        target: payload.target
-      }))
-      .catch((error) => {
-        payload.error = error;
-        dispatch('receiveUsernameError', payload);
+      .then(({ data }) =>
+        dispatch('receiveUsernameSuccess', {
+          available: !data.exists,
+          target: payload.target,
+        }),
+      )
+      .catch(error => {
+        const errorPayload = Object.assign(payload, { 'error': error });
+        dispatch('receiveUsernameError', errorPayload);
       });
   }
 };

@@ -3,5 +3,5 @@ export default () => ({
   valid: false,
   pending: false,
   empty: true,
-  yours: false
-})
+  yours: false,
+});

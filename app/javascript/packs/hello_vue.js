@@ -61,16 +61,16 @@ import App from '../app.vue'
 Vue.use(TurbolinksAdapter)
 
 document.addEventListener('turbolinks:load', () => {
-  let element = document.getElementById('hello')
+  const element = document.getElementById('hello')
   if (element != null){
     const app = new Vue({
       el: '#hello',
+      components: { App },
       data: () => {
         return {
           message: "Can you say hello?"
         }
       },
-      components: { App }
     })
   }
 })

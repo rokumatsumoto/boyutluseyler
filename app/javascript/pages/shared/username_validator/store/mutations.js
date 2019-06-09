@@ -7,7 +7,7 @@ import {
   INVALID_INPUT_CLASS,
   SUCCESS_INPUT_CLASS,
   INVALID_FORM_GROUP_CLASS,
-  USERNAME_FORM_GROUP_CLASS
+  USERNAME_FORM_GROUP_CLASS,
 } from '../constants';
 
 export default {
@@ -30,20 +30,26 @@ export default {
   },
 
   [types.SET_YOURS_STATE](state, payload) {
-    state.yours = payload.target.attributes.data_username !== undefined ?
-      payload.target.attributes.data_username.value == payload.target.value : false;
+    state.yours =
+      payload.target.attributes.data_username !== undefined
+        ? payload.target.attributes.data_username.value === payload.target.value
+        : false;
   },
 
-  [types.CLEAR_FIELD_VALIDATION_STATE](state, payload){
-    $(payload.target.closest('div')).siblings('p').hide();
+  [types.CLEAR_FIELD_VALIDATION_STATE](state, payload) {
+    $(payload.target.closest('div'))
+      .siblings('p')
+      .hide();
     payload.target.classList.remove(INVALID_INPUT_CLASS, SUCCESS_INPUT_CLASS);
   },
 
-  [types.CLEAR_FIELD_VALIDATION_STATE_MESSAGE](state, payload){
-    $(payload.target.closest('div')).siblings('p').hide();
+  [types.CLEAR_FIELD_VALIDATION_STATE_MESSAGE](state, payload) {
+    $(payload.target.closest('div'))
+      .siblings('p')
+      .hide();
     // reset username form-group element margin-bottom value
     this.commit(types.SET_MARGIN_BOTTOM_USERNAME_FORM_GROUP, {
-      margin: '1rem'
+      margin: '1rem',
     });
   },
 
@@ -52,13 +58,13 @@ export default {
       payload.margin;
   },
 
-  [types.RENDER_PENDING_STATE](state, payload) {
+  [types.RENDER_PENDING_STATE](state) {
     const $usernamePendingMessage = document.querySelector(PENDING_MESSAGE_SELECTOR);
     if (state.pending) {
       $usernamePendingMessage.style.display = 'block';
       // fix state messages (pending, unavailable, available) positions
       this.commit(types.SET_MARGIN_BOTTOM_USERNAME_FORM_GROUP, {
-        margin: 0
+        margin: 0,
       });
     } else {
       $usernamePendingMessage.style.display = 'none';
@@ -79,7 +85,7 @@ export default {
     $usernameYoursMessage.style.display = 'block';
     // fix state message (yours) position
     this.commit(types.SET_MARGIN_BOTTOM_USERNAME_FORM_GROUP, {
-      margin: 0
+      margin: 0,
     });
   },
 
@@ -88,5 +94,5 @@ export default {
     payload.target.classList.add(INVALID_INPUT_CLASS);
     payload.target.classList.remove(SUCCESS_INPUT_CLASS);
     $usernameUnavailableMessage.style.display = 'block';
-  }
-}
+  },
+};
