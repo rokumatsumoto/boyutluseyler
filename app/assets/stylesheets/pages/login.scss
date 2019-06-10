@@ -1,15 +1,5 @@
 // All authentication forms
 
-// scss-lint:disable PlaceholderInExtend
-.alert-notice {
-  @extend .alert-info;
-}
-
-.alert-alert {
-  @extend .alert-danger;
-}
-// scss-lint:enable PlaceholderInExtend
-
 %text-auth-form {
   color: $dusty-gray-2;
 }
@@ -48,24 +38,26 @@
   font-size: 80%;
 }
 
-.username .validation-success {
-  @extend %username-validation;
-  color: $eucalyptus-2;
-}
+.username {
+  .validation-success {
+    @extend %username-validation;
+    color: $eucalyptus-2;
+  }
 
-.username .validation-yours {
-  @extend %username-validation;
-  color: $eucalyptus-2;
-}
+  .validation-yours {
+    @extend %username-validation;
+    color: $eucalyptus-2;
+  }
 
-.username .validation-error {
-  @extend %username-validation;
-  color: $red-punch;
-}
+  .validation-error {
+    @extend %username-validation;
+    color: $red-punch;
+  }
 
-.username .validation-pending {
-  @extend %username-validation;
-  color: $black;
+  .validation-pending {
+    @extend %username-validation;
+    color: $black;
+  }
 }
 
 // Sign in form

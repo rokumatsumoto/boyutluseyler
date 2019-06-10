@@ -14,19 +14,14 @@
 // https://github.com/rails/sass-rails#features
 // https://guides.rubyonrails.org/asset_pipeline.html#manifest-files-and-directives
 
-
-// boyutluseyler UI framework
-@import 'framework';
-
 // Swiper slider
 @import 'swiper/dist/css/swiper.min';
-
 // Noty notification
 @import 'noty/src/noty';
 @import 'noty/src/themes/mint';
 
-// Page specific
-@import 'partials/*';
+// boyutluseyler UI framework
+@import 'framework';
 
-// Layout specific
-@import 'partials/layout/*';
+// Page specific styles (login, upload etc):
+@import "pages/**/*";

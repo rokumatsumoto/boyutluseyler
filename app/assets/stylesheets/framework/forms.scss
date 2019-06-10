@@ -1,6 +1,12 @@
-.space-body {
-  margin-bottom: 3.625rem;
+// scss-lint:disable PlaceholderInExtend
+.alert-notice {
+  @extend .alert-info;
 }
+
+.alert-alert {
+  @extend .alert-danger;
+}
+// scss-lint:enable PlaceholderInExtend
 
 .form-control:focus {
   border: 1px solid $cornflower-blue-2;
