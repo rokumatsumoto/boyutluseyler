@@ -1,0 +1,27 @@
+.btn-light {
+  background-color: grey;
+  color: white;
+}
+
+.btn-drop {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0 1rem;
+
+  p {
+    margin: .7rem 0;
+  }
+
+  input {
+    all: inherit;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+}
