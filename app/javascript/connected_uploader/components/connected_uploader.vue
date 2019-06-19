@@ -1,4 +1,7 @@
 <script>
+import { mapActions } from 'vuex';
+import 'blueimp-file-upload/js/jquery.fileupload'
+
   export default {
     name: 'ConnectedUploader',
     components: {
@@ -45,19 +48,58 @@
       };
     },
     computed: {
+      hovering() {
+        return this.$store.state.hovering;
+      }
     },
     watch: {
     },
+    mounted() {
+      const $fileUploadInput = $(this.$refs.fileUploadInput);
+      this.$nextTick(() => {
+        $fileUploadInput.fileupload({
+            url: this.directUrl,
+            dataType: "XML",
+            paramName: "file",
+            add: this.handleUploadAdd,
+            dropZone: this
+        });
+        $fileUploadInput.on("dragover", this.handleDragOver);
+        $fileUploadInput.on("dragleave", this.handleDragLeave);
+        $(document).bind('drop dragover', this.handleDocumentDropAndDragOver);
+      })
+    },
+    destroyed() {
+      $(this.$refs.fileUploadInput).fileupload("destroy");
+      $(document).unbind("drop dragover", this.handleDocumentDropAndDragOver);
+    },
     methods: {
+      ...mapActions([
+        'dragOver',
+        'dragLeave',
+      ]),
+      handleUploadAdd(e, data) {
+        console.log('add');
+        // data.submit();
+      },
+      handleDragOver() {
+        this.dragOver();
+      },
+      handleDragLeave() {
+        this.dragLeave();
+      },
+      handleDocumentDropAndDragOver(e) {
+        e.target.type !== 'file' && e.preventDefault()
+      }
     },
   };
 </script>
 
 <template>
 <div>
-  <div role="button" class="btn btn-light btn-drop">
+  <div role="button" class="btn btn-grey btn-drop" :class="{'btn-drop--over': hovering}" tabindex="0">
     <p>{{ addButtonText }}</p>
-    <input type="file" multiple :accept="accept">
+    <input ref="fileUploadInput" class="btn-drop--input" type="file" multiple :accept="accept" tabindex="-1">
   </div>
   <div>
 

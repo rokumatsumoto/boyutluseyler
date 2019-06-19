@@ -1,6 +1,7 @@
-.btn-light {
-  background-color: grey;
-  color: white;
+.btn-grey {
+  background-color: #e2e6ea;
+  border-color: #dae0e5;
+  color: #212529;
 }
 
 .btn-drop {
@@ -8,20 +9,25 @@
   overflow: hidden;
   display: block;
   width: 100%;
-  height: 100%;
   padding: 0 1rem;
 
   p {
-    margin: .7rem 0;
+    margin: .5rem 0;
   }
 
-  input {
-    all: inherit;
+  &--input {
     position: absolute;
     top: 0;
     right: 0;
     margin: 0;
+    padding-right: 100%;
     opacity: 0;
+    font-size: 200px;
     cursor: pointer;
   }
+
+  &--over, &:focus {
+    box-shadow:0 0 1rem $dodger-blue-3;
+  }
 }
+

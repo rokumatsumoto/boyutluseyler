@@ -1,25 +1,24 @@
 - content_for :head do
   = javascript_pack_tag 'design'
 
-test
-
-#hello
-  {{message}}
-  %app
-
 Dosyalar
-.js-connected-uploader{ data: { behavior: 'vue' } }
-  %connected-uploader{ "accept" => ".jpg,.jpeg,.gif,.png,.JPG,.JPEG,.GIF,.PNG",
-    "add-button-text" => "Add or drop JPG, GIF or PNG files…",
-    "remove-button-text" => "Remove",
-    "direct-url" => "https://s3.eu-west-3.amazonaws.com",
-    "uploader-url" => "/file_uploaders/new?design=true",
-    "create-url" => "/designs",
-    "input-name" => "design[design_ids][]" }
-  %connected-uploader{ "accept" => ".jpg,.jpeg,.gif,.png,.JPG,.JPEG,.GIF,.PNG",
-    "add-button-text" => "(2) Add or drop JPG, GIF or PNG files…",
-    "remove-button-text" => "Remove",
-    "direct-url" => "https://s3.eu-west-3.amazonaws.com",
-    "uploader-url" => "/file_uploaders/new?design=true",
-    "create-url" => "/designs",
-    "input-name" => "design[design_ids][]" }
+.row
+  .col-md-6
+    .js-connected-uploader{ data: { behavior: 'vue' } }
+      %connected-uploader{ "accept" => ".jpg,.jpeg,.gif,.png,.JPG,.JPEG,.GIF,.PNG",
+        "add-button-text" => "Add or drop JPG, GIF or PNG files…",
+        "remove-button-text" => "Remove",
+        "direct-url" => "https://boyutluseyler-staging.s3.eu-central-1.amazonaws.com",
+        "uploader-url" => "/file_uploaders/new?design=true",
+        "create-url" => "/designs",
+        "input-name" => "design[design_ids][]" }
+    %br/
+    .js-connected-uploader{ data: { behavior: 'vue' } }
+      %connected-uploader{ "accept" => ".jpg,.jpeg,.gif,.png,.JPG,.JPEG,.GIF,.PNG",
+        "add-button-text" => "Clone Add or drop JPG, GIF or PNG files…",
+        "remove-button-text" => "Remove",
+        "direct-url" => "https://boyutluseyler-staging.s3.eu-central-1.amazonaws.com",
+        "uploader-url" => "/file_uploaders/new?design=true",
+        "create-url" => "/designs",
+        "input-name" => "design[design_ids][]" }
+  .col-md-6
