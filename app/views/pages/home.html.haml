@@ -1,7 +1,24 @@
-Test newly generated aws iam user access key, secret access key
+- content_for :head do
+  = javascript_pack_tag 'design'
 
-
-#hello
-  {{message}}
-  %app
-
+Dosyalar
+.row
+  .col-md-6
+    .js-connected-uploader{ data: { behavior: 'vue' } }
+      %connected-uploader{ "accept" => ".jpg,.jpeg,.gif,.png,.JPG,.JPEG,.GIF,.PNG",
+        "add-button-text" => "Add or drop JPG, GIF or PNG files…",
+        "remove-button-text" => "Remove",
+        "direct-url" => "https://boyutluseyler-staging.s3.eu-central-1.amazonaws.com",
+        "uploader-url" => "/file_uploaders/new?design=true",
+        "create-url" => "/designs",
+        "input-name" => "design[design_ids][]" }
+    %br/
+    .js-connected-uploader{ data: { behavior: 'vue' } }
+      %connected-uploader{ "accept" => ".jpg,.jpeg,.gif,.png,.JPG,.JPEG,.GIF,.PNG",
+        "add-button-text" => "Clone Add or drop JPG, GIF or PNG files…",
+        "remove-button-text" => "Remove",
+        "direct-url" => "https://boyutluseyler-staging.s3.eu-central-1.amazonaws.com",
+        "uploader-url" => "/file_uploaders/new?design=true",
+        "create-url" => "/designs",
+        "input-name" => "design[design_ids][]" }
+  .col-md-6
