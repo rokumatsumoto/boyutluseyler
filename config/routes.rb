@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   get 'test_slider', to: 'pages#test_slider'
   get 'upload', to: 'pages#upload'
 
+  resources :file_uploaders
+
+  resources :illustrations
+
   devise_for :users, path: '', controllers: { registrations: :registrations,
                                               passwords: :passwords,
                                               sessions: :sessions,

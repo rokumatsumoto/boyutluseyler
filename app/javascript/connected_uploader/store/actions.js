@@ -14,9 +14,9 @@ export const updateFileList = ({ commit }, fileList) => commit(types.UPDATE_FILE
 export const setFileStatus = ({ commit }, payload) => commit(types.SET_FILE_STATUS, payload);
 
 export const receivePresignedPostError = ({ dispatch }, payload) => {
-// TODO:
-//
-//
+  // TODO:
+  //
+  //
 };
 
 export const receivePresignedPostSuccess = ({ dispatch }, payload) => {
@@ -53,9 +53,9 @@ export const fetchPresignedPost = ({ dispatch }, payload) => {
 };
 
 export const receiveCreateFileResourceError = ({ dispatch }, payload) => {
-//TODO:
-//
-//
+  //TODO:
+  //
+  //
 };
 
 export const receiveCreateFileResource = ({ dispatch }, payload) => {
@@ -69,7 +69,7 @@ export const receiveCreateFileResource = ({ dispatch }, payload) => {
 export const createNewFileResource = ({ dispatch }, payload) => {
   axios
     .post(payload.createUrl, {
-      key: payload.key
+      illustration: { key: payload.key },
     })
     .then(response => {
       dispatch('receiveCreateFileResource', {
@@ -80,6 +80,4 @@ export const createNewFileResource = ({ dispatch }, payload) => {
     .catch(() => {
       dispatch('receiveCreateFileResourceError');
     });
-
-
 };
