@@ -62,4 +62,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.perform_deliveries = true
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  # If you want to whitelist the whole private network
+  config.web_console.whitelisted_ips = '192.168.0.0/16'
 end
