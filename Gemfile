@@ -51,6 +51,8 @@ gem 'webpacker', '~> 4.0', '>= 4.0.2'
 
 gem 'aws-sdk-s3', '~> 1.43'
 
+gem 'acts-as-taggable-on', '~> 6.0'
+
 group :development, :test do
   # n+1 Queries
   gem 'bullet', '~> 5.9'
