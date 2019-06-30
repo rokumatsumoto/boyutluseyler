@@ -14,12 +14,12 @@
 
 FactoryBot.define do
   factory :illustration do
-    filename { "MyString" }
+    filename { 'MyString' }
     size { 1 }
-    url { "MyString" }
-    url_path { "MyString" }
-    content_type { "MyString" }
-    image_url { "MyString" }
-    string { "MyString" }
+    url { 'MyString' }
+    url_path { 'MyString' }
+    content_type { 'MyString' }
+    image_url { 'MyString' }
+    string { 'MyString' }
   end
 end
