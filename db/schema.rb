@@ -10,10 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_29_101923) do
+ActiveRecord::Schema.define(version: 2019_06_29_164450) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name", limit: 50, null: false
+    t.text "description"
+    t.integer "list_order", limit: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "designs", force: :cascade do |t|
+    t.string "name", limit: 120, null: false
+    t.text "description", null: false
+    t.text "printing_settings"
+    t.string "model_file_format"
+    t.string "license_type", null: false
+    t.boolean "allow_comments", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_designs_on_category_id"
+    t.index ["user_id"], name: "index_designs_on_user_id"
+  end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
@@ -84,4 +107,6 @@ ActiveRecord::Schema.define(version: 2019_06_29_101923) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "designs", "categories", on_delete: :cascade
+  add_foreign_key "designs", "users", on_delete: :cascade
 end
