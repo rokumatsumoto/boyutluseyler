@@ -13,10 +13,10 @@ class CreateDesigns < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    add_reference :designs, :user, index: false, foreign_key: { on_delete: :cascade }
+    add_reference :designs, :user, index: false, null: false, foreign_key: { on_delete: :cascade }
     add_index :designs, :user_id, algorithm: :concurrently
 
-    add_reference :designs, :category, index: false, foreign_key: { on_delete: :cascade }
+    add_reference :designs, :category, index: false, null: false, foreign_key: { on_delete: :cascade }
     add_index :designs, :category_id, algorithm: :concurrently
   end
 end
