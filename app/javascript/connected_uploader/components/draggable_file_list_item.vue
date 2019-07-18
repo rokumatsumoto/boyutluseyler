@@ -1,4 +1,7 @@
 <script>
+import numberToHumanSize from 'lib/utils/number_utils';
+import sanitize from 'sanitize-html';
+
 export default {
   name: 'DraggableFileListItem',
   props: {
@@ -15,12 +18,17 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      anchoredFileName: `<a target='_blank' href='${this.file.url}' class='up-link' rel='noopener'>${this.file.filename}</a>`
+    };
+  },
   computed: {
     isLoading() {
       return this.file.loading;
     },
     hasError() {
-      return this.file.error;
+      return this.file.error !== null && this.file.error !== ''
     },
     iconClass() {
       return this.isLoading ? 'up-icon--loading' : 'up-icon--file';
@@ -29,13 +37,21 @@ export default {
       if (this.hasError) {
         return this.file.error;
       }
+      if (this.file.url) {
+        return sanitize(this.anchoredFileName, {
+          allowedTags: [ 'a' ],
+          allowedAttributes: {
+            'a': [ 'target', 'href', 'rel', 'class' ]
+          },
+        });
+      }
       return this.file.filename;
     },
     size() {
       if (this.hasError) {
         return this.file.filename;
       }
-      return this.file.size;
+      return numberToHumanSize(this.file.size);
     },
     progress() {
       const progress = parseFloat(this.file.loaded / this.file.size);
@@ -49,9 +65,9 @@ export default {
 };
 </script>
 <template>
-  <div class="up-container">
-    <div class="up up--draggable" :class="{ 'up--error': hasError }">
-      <div
+  <div class="up-container" :class="{ 'js-draggable-file-list-item': !isLoading }">
+    <div class="up" :class="{ 'up--error': hasError, 'up--draggable': !isLoading }">
+      <div v-if="!hasError"
         class="up-progress"
         role="bar"
         aria-valuemin="0"
@@ -64,7 +80,7 @@ export default {
           <div :class="iconClass"></div>
         </div>
         <div class="up-text">
-          <div class="up-title">{{ filename }}</div>
+          <div class="up-title" v-html="filename"></div>
           <div class="up-size">{{ size }}</div>
         </div>
       </div>

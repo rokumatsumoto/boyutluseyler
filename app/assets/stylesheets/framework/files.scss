@@ -1,5 +1,9 @@
 .up-container {
   padding:.5rem 0 0 0;
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
 }
 
 .up {
@@ -78,6 +82,16 @@
 
 .up-text {
   padding: .5rem;
+
+  a {
+    color: white;
+    text-decoration:underline;
+
+    &:active,
+    &:focus {
+      outline: 1px dotted;
+    }
+  }
 }
 
 .up-title {
