@@ -11,16 +11,16 @@
 #  allow_comments    :boolean          default(TRUE), not null
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  user_id           :bigint(8)
-#  category_id       :bigint(8)
+#  user_id           :bigint(8)        not null
+#  category_id       :bigint(8)        not null
 #
 
 FactoryBot.define do
   factory :design do
-    name { "MyString" }
-    description { "MyText" }
-    printing_settings { "MyText" }
-    model_file_format { "MyString" }
+    name { 'MyString' }
+    description { 'MyText' }
+    printing_settings { 'MyText' }
+    model_file_format { 'MyString' }
     category { 1 }
     license { 1 }
     activate_comments { false }

@@ -11,8 +11,8 @@
 #  allow_comments    :boolean          default(TRUE), not null
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  user_id           :bigint(8)
-#  category_id       :bigint(8)
+#  user_id           :bigint(8)        not null
+#  category_id       :bigint(8)        not null
 #
 
 require 'rails_helper'
