@@ -18,13 +18,18 @@ export default {
       type: String,
       required: true,
     },
+    originFiles: {
+      type: Array,
+      default: () => [],
+      required: false,
+    },
   },
   computed: {
     ...mapState(['files']),
     hasFiles() {
       return this.files.length > 0;
     },
-    myList: {
+    draggableList: {
       get() {
         return this.files;
       },
@@ -33,8 +38,22 @@ export default {
       },
     },
   },
+  mounted() {
+    if (this.originFiles.length > 0) {
+      Array.from(this.originFiles).forEach((originFile) => {
+        this.addFile({
+          uniqueId: originFile.id,
+          id: originFile.id,
+          filename: originFile.filename,
+          size: originFile.size,
+          url: originFile.url,
+          image: originFile.image_url,
+        });
+      });
+    }
+  },
   methods: {
-    ...mapActions(['removeFile', 'updateFileList']),
+    ...mapActions(['removeFile', 'updateFileList', 'addFile']),
     handleRemove(uniqueId) {
       this.removeFile(uniqueId);
       this.$emit('on-remove');
@@ -44,7 +63,7 @@ export default {
 </script>
 <template>
   <div v-if="hasFiles">
-    <draggable v-model="myList" animation=200>
+    <draggable v-model="draggableList" draggable=".js-draggable-file-list-item" animation=200>
       <draggable-file-list-item
         v-for="file in files"
         :key="file.uniqueId"
