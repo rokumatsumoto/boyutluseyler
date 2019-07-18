@@ -9,6 +9,10 @@ Rails.application.routes.draw do
 
   resources :illustrations
 
+  resources :blueprints
+
+  resources :designs
+
   devise_for :users, path: '', controllers: { registrations: :registrations,
                                               passwords: :passwords,
                                               sessions: :sessions,

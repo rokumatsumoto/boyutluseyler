@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: categories
@@ -11,4 +13,5 @@
 #
 
 class Category < ApplicationRecord
+  has_many :designs
 end
