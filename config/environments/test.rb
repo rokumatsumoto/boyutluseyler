@@ -28,6 +28,10 @@ Rails.application.configure do
   # Disable request forgery protection in test environment.
   config.action_controller.allow_forgery_protection = false
 
+  # Rails will now throw a big nasty exception if you pass unpermitted params to your
+  # params.permit method
+  config.action_controller.action_on_unpermitted_parameters = :raise
+
   # Store uploaded files on the local file system in a temporary directory
   config.active_storage.service = :test
 

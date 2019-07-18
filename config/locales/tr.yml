@@ -2,12 +2,42 @@
 ---
 tr:
   activerecord:
+    attributes:
+      design:
+        license_types:
+          license_none: "Yok"
+          cc_by: "CC BY - Attribution"
+          cc_by_sa: "CC BY-SA - Attribution - Share Alike"
+          cc_by_nd: "CC BY-ND - Attribution - No Derivatives"
+          cc_by_nc: "CC BY-NC - Attribution - Non commercial"
+          cc_by_nc_sa: "CC BY-NC-SA - Attribution - Non Commercial - Share Alike"
+          cc_by_nc_nd: "CC BY-NC-ND - Attribution - Non Commercial - No Derivatives"
     errors:
       messages:
         record_invalid: 'Doğrulama başarısız oldu: %{errors}'
         restrict_dependent_destroy:
           has_one: Bağlı bir kayıt %{record} bulunduğu için kayıt silinemedi
           has_many: Bağlı kayıtlar %{record} bulunduğu için kayıt silinemedi
+      models:
+        design:
+          attributes:
+            design_illustrations:
+              blank: Fotoğraflar eklenmeli
+            design_blueprints:
+              blank: Dosyalar eklenmeli
+        illustration:
+          attributes:
+              url_path:
+                invalid: Dosya uzantısı geçersiz
+              filename:
+                empty: Dosya adı boş olamaz
+        blueprint:
+          attributes:
+              url_path:
+                invalid: Dosya uzantısı geçersiz
+              filename:
+                empty: Dosya adı boş olamaz
+
   date:
     abbr_day_names:
     - Pzr

@@ -12,6 +12,12 @@ a {
   cursor: pointer;
 }
 
+
+.c-grabbing {
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+}
+
 .hide {
   display: none;
 }

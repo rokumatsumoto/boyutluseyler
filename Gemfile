@@ -34,9 +34,9 @@ gem 'devise-i18n', '~> 1.7', '>= 1.7.1'
 # Authorization
 gem 'pundit', '~> 2.0', '>= 2.0.1'
 # Forms
-gem 'simple_form', '~> 4.1'
 gem 'client_side_validations', '~> 15.0'
 gem 'client_side_validations-simple_form', '~> 7.0'
+gem 'simple_form', '~> 4.1'
 
 # Clean URL (https://en.wikipedia.org/wiki/Clean_URL)
 gem 'friendly_id', '~> 5.2', '>= 5.2.5'
@@ -45,9 +45,22 @@ gem 'hamlit', '~> 2.9', '>= 2.9.2'
 # Spam and anti-bot protection
 gem 'recaptcha', '~> 4.14'
 
+# Catch unsafe migrations at dev time
+gem 'strong_migrations', '~> 0.3.1'
+
 gem 'local_time', '~> 2.1'
 
 gem 'webpacker', '~> 4.0', '>= 4.0.2'
+
+gem 'aws-sdk-s3', '~> 1.43'
+
+gem 'gutentag', '~> 2.5', '>= 2.5.1'
+
+gem 'mini_mime', '~> 1.0', '>= 1.0.1'
+
+gem 'acts_as_list', '~> 0.9.19'
+
+gem 'sanitize', '~> 5.0'
 
 group :development, :test do
   # n+1 Queries
@@ -98,9 +111,6 @@ group :development do
 
   # Security
   gem 'guard-brakeman', '~> 0.8.3', require: false
-  # Catch unsafe migrations at dev time
-  gem 'strong_migrations', '~> 0.3.1'
-
   # Activate this gem when you need to hamlit:erb2haml rake task.
   # gem 'html2haml', '~> 2.2'
   # Provides hamlit generators for Rails 4. It also enables hamlit as the templating

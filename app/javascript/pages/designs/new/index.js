@@ -1,6 +1,6 @@
 import TurbolinksAdapter from 'vue-turbolinks';
 import Vue from 'vue/dist/vue.esm';
-import ConnectedUploader from 'connected_uploader/components/connected_uploader.vue'
+import ConnectedUploader from 'connected_uploader/components/connected_uploader.vue';
 import makeStore from 'connected_uploader/store';
 
 Vue.use(TurbolinksAdapter);
