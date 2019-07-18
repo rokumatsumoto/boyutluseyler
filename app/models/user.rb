@@ -33,6 +33,8 @@ class User < ApplicationRecord
          :confirmable, :lockable, :trackable,
          email_regexp: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
 
+  has_many :designs
+
   # Virtual attribute for authenticating by either username or email
   attr_accessor :login
   # Add an accessor so you can have a field to validate

@@ -1,0 +1,108 @@
+.up-container {
+  padding:.5rem 0 0 0;
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+}
+
+.up {
+  display: flex;
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+  background: #828282;
+  color: $white;
+  line-height: normal;
+}
+
+.up--error{
+    background-color: #DE636F;
+}
+
+.up-progress {
+  position: absolute;
+  width: 0;
+  height: 100%;
+  background: $dodger-blue-3;
+  transition: width 1s ease-out;
+}
+
+.up-content {
+  display: flex;
+  flex: 2;
+  z-index: 1;
+}
+
+.up--draggable .up-content{
+  cursor: move;
+
+  &:active {
+    cursor: -webkit-grabbing;
+    cursor: grabbing;
+  }
+}
+
+.up-image {
+
+}
+
+%up-icon {
+  margin: .5rem;
+  padding-left: 32px;
+  position: relative;
+}
+
+%up-icon-before {
+  position: absolute;
+  font-family: 'Font Awesome 5 Free';
+  left: 5px;
+  top: 2px;
+  font-size: 22px;
+}
+
+.up-icon--file {
+  @extend %up-icon;
+
+  &:before {
+    @extend %up-icon-before;
+    font-size: 26px;
+    content: "\f1b2";
+  }
+}
+
+.up-icon--loading {
+  @extend %up-icon;
+
+  &:before {
+    @extend %up-icon-before;
+    content: "\f382";
+  }
+}
+
+.up-text {
+  padding: .5rem;
+
+  a {
+    color: white;
+    text-decoration:underline;
+
+    &:active,
+    &:focus {
+      outline: 1px dotted;
+    }
+  }
+}
+
+.up-title {
+  word-break: break-all;
+}
+
+.up-size {
+  color: #dfe0df;
+}
+
+.up-actions {
+  padding: .3rem;
+  z-index: 1;
+}

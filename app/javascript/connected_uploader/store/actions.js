@@ -5,68 +5,93 @@ export const dragOver = ({ commit }) => commit(types.DRAG_OVER);
 
 export const dragLeave = ({ commit }) => commit(types.DRAG_LEAVE);
 
-// export const receiveUsernameError = ({ dispatch }, payload) => {
-//   dispatch('setPendingState', {
-//     pending: false,
-//   });
-//   dispatch('clearFieldValidationState', payload);
-//   dispatch('setMarginBottomUsernameFormGroup', {
-//     margin: '1rem',
-//   });
-//   new Noty({
-//     type: 'error',
-//     layout: 'top',
-//     text: payload.error.response.data.message,
-//   }).show();
-// };
+export const addFile = ({ commit }, fileInfo) => commit(types.ADD_FILE, fileInfo);
 
-// export const receiveUsernameSuccess = ({ dispatch }, payload) => {
-//   dispatch('setAvailableState', payload);
-//   dispatch('setPendingState', {
-//     pending: false,
-//   });
-//   dispatch('renderState', payload);
-// };
+export const removeFile = ({ commit }, uniqueId) => commit(types.REMOVE_FILE, uniqueId);
 
-// export const requestUsername = ({ dispatch, state }, payload) => {
-//   dispatch('setValidState', payload);
-//   dispatch('setEmptyState', payload);
-//   // reset availability state on every request
-//   dispatch('setAvailableState', {
-//     available: false,
-//   });
-//   dispatch('setYoursState', payload);
+export const updateFileList = ({ commit }, fileList) => commit(types.UPDATE_FILE_LIST, fileList);
 
-//   // let client_side_validations gem do his job
-//   // (presence, length and format validations)
-//   if (state.empty || !state.valid) {
-//     dispatch('clearFieldValidationStateMessage', payload);
-//   }
-//   if (state.yours) {
-//     dispatch('renderState', payload);
-//   }
-//   if (state.valid && !state.empty && !state.yours) {
-//     dispatch('setPendingState', {
-//       pending: true,
-//     });
-//     dispatch('renderState', payload);
-//   }
-// };
+export const setFileStatus = ({ commit }, payload) => commit(types.SET_FILE_STATUS, payload);
 
-// export const fetchUsername = ({ dispatch, state }, payload) => {
-//   dispatch('requestUsername', payload);
-//   if (state.pending) {
-//     axios
-//       .get(`/exists/${payload.value}`)
-//       .then(({ data }) =>
-//         dispatch('receiveUsernameSuccess', {
-//           available: !data.exists,
-//           target: payload.target,
-//         }),
-//       )
-//       .catch(error => {
-//         const errorPayload = Object.assign(payload, { 'error': error });
-//         dispatch('receiveUsernameError', errorPayload);
-//       });
-//   }
-// };
+export const receivePresignedPostError = ({ dispatch }, payload) => {
+  // TODO:
+  //
+  //
+};
+
+export const receivePresignedPostSuccess = ({ dispatch }, payload) => {
+  const { data, presignedPost } = payload;
+  presignedPost['Content-Type'] = payload.file.type;
+
+  data.formData = presignedPost;
+
+  data
+    .submit()
+    .then(() => {})
+    .catch(error => {
+      dispatch('setFileStatus', {
+        actionName: 'ERROR_FILE',
+        uniqueId: payload.uniqueId,
+        error: error.responseXML.getElementsByTagName('Message')[0].innerHTML,
+      });
+    });
+};
+
+export const requestPresignedPost = ({ dispatch }, uniqueId) => {
+  dispatch('setFileStatus', {
+    actionName: 'LOADING_FILE',
+    uniqueId,
+  });
+};
+
+export const fetchPresignedPost = ({ dispatch }, payload) => {
+  dispatch('requestPresignedPost', payload.uniqueId);
+  axios
+    .get(payload.uploaderUrl)
+    .then(({ data }) =>
+      dispatch('receivePresignedPostSuccess', {
+        presignedPost: data,
+        data: payload.data,
+        file: payload.file,
+        uniqueId: payload.uniqueId,
+      }),
+    )
+    .catch(error => {
+      // TODO:
+      // const errorPayload = Object.assign(payload, { error: error });
+      // dispatch('receiveFetchError', errorPayload);
+    });
+};
+
+export const receiveCreateFileResourceError = ({ dispatch }, payload) => {
+  dispatch('setFileStatus', {
+    actionName: 'ERROR_FILE',
+    uniqueId: payload.uniqueId,
+    error: payload.error.response.data.join(', '),
+  });
+};
+
+export const receiveCreateFileResource = ({ dispatch }, payload) => {
+  dispatch('setFileStatus', {
+    actionName: 'FILE_DONE',
+    uniqueId: payload.uniqueId,
+    id: payload.id,
+  });
+};
+
+export const createNewFileResource = ({ dispatch }, payload) => {
+  axios
+    .post(payload.createUrl, {
+      [payload.dataType]: { key: payload.key },
+    })
+    .then(response => {
+      dispatch('receiveCreateFileResource', {
+        id: response.data.id,
+        uniqueId: payload.uniqueId,
+      });
+    })
+    .catch(error => {
+      const errorPayload = Object.assign(payload, { error });
+      dispatch('receiveCreateFileResourceError', errorPayload);
+    });
+};

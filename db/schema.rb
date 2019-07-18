@@ -10,10 +10,65 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_08_123932) do
+ActiveRecord::Schema.define(version: 2019_07_09_215416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "blueprints", force: :cascade do |t|
+    t.string "url", null: false
+    t.string "url_path", null: false
+    t.integer "size", null: false
+    t.string "content_type", null: false
+    t.string "image_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name", limit: 50, null: false
+    t.text "description"
+    t.integer "list_order", limit: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "design_blueprints", force: :cascade do |t|
+    t.bigint "design_id", null: false
+    t.bigint "blueprint_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "position"
+    t.index ["blueprint_id"], name: "index_design_blueprints_on_blueprint_id"
+    t.index ["design_id", "blueprint_id"], name: "index_design_blueprints_on_design_id_and_blueprint_id", unique: true
+    t.index ["design_id"], name: "index_design_blueprints_on_design_id"
+  end
+
+  create_table "design_illustrations", force: :cascade do |t|
+    t.bigint "design_id", null: false
+    t.bigint "illustration_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "position"
+    t.index ["design_id", "illustration_id"], name: "index_design_illustrations_on_design_id_and_illustration_id", unique: true
+    t.index ["design_id"], name: "index_design_illustrations_on_design_id"
+    t.index ["illustration_id"], name: "index_design_illustrations_on_illustration_id"
+  end
+
+  create_table "designs", force: :cascade do |t|
+    t.string "name", limit: 120, null: false
+    t.text "description", null: false
+    t.text "printing_settings"
+    t.string "model_file_format"
+    t.string "license_type", null: false
+    t.boolean "allow_comments", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.bigint "category_id", null: false
+    t.index ["category_id"], name: "index_designs_on_category_id"
+    t.index ["user_id"], name: "index_designs_on_user_id"
+  end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
@@ -24,6 +79,36 @@ ActiveRecord::Schema.define(version: 2019_02_08_123932) do
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
+  create_table "gutentag_taggings", force: :cascade do |t|
+    t.bigint "tag_id", null: false
+    t.bigint "taggable_id", null: false
+    t.string "taggable_type", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tag_id"], name: "index_gutentag_taggings_on_tag_id"
+    t.index ["taggable_type", "taggable_id", "tag_id"], name: "unique_taggings", unique: true
+    t.index ["taggable_type", "taggable_id"], name: "index_gutentag_taggings_on_taggable_type_and_taggable_id"
+  end
+
+  create_table "gutentag_tags", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "taggings_count", default: 0, null: false
+    t.index ["name"], name: "index_gutentag_tags_on_name", unique: true
+    t.index ["taggings_count"], name: "index_gutentag_tags_on_taggings_count"
+  end
+
+  create_table "illustrations", force: :cascade do |t|
+    t.string "url", null: false
+    t.string "url_path", null: false
+    t.integer "size", null: false
+    t.string "content_type", null: false
+    t.string "image_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -54,4 +139,10 @@ ActiveRecord::Schema.define(version: 2019_02_08_123932) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "design_blueprints", "blueprints", on_delete: :cascade
+  add_foreign_key "design_blueprints", "designs", on_delete: :cascade
+  add_foreign_key "design_illustrations", "designs", on_delete: :cascade
+  add_foreign_key "design_illustrations", "illustrations", on_delete: :cascade
+  add_foreign_key "designs", "categories", on_delete: :cascade
+  add_foreign_key "designs", "users", on_delete: :cascade
 end
