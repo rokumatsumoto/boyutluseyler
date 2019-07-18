@@ -53,6 +53,12 @@ gem 'aws-sdk-s3', '~> 1.43'
 
 gem 'gutentag', '~> 2.5', '>= 2.5.1'
 
+gem 'mini_mime', '~> 1.0', '>= 1.0.1'
+
+gem 'acts_as_list', '~> 0.9.19'
+
+gem 'sanitize', '~> 5.0'
+
 group :development, :test do
   # n+1 Queries
   gem 'bullet', '~> 5.9'
