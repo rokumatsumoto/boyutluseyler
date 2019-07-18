@@ -45,6 +45,9 @@ gem 'hamlit', '~> 2.9', '>= 2.9.2'
 # Spam and anti-bot protection
 gem 'recaptcha', '~> 4.14'
 
+# Catch unsafe migrations at dev time
+gem 'strong_migrations', '~> 0.3.1'
+
 gem 'local_time', '~> 2.1'
 
 gem 'webpacker', '~> 4.0', '>= 4.0.2'
@@ -108,9 +111,6 @@ group :development do
 
   # Security
   gem 'guard-brakeman', '~> 0.8.3', require: false
-  # Catch unsafe migrations at dev time
-  gem 'strong_migrations', '~> 0.3.1'
-
   # Activate this gem when you need to hamlit:erb2haml rake task.
   # gem 'html2haml', '~> 2.2'
   # Provides hamlit generators for Rails 4. It also enables hamlit as the templating
