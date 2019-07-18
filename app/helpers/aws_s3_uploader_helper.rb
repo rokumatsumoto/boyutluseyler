@@ -11,7 +11,7 @@ module AWSS3UploaderHelper
       acl: object_acl,
       signature_expiration: (Time.now.utc + 15.minutes), # TODO: constants
       cache_control: 'public, max-age=315576000', # TODO: constants
-      content_length_range: 104_857_600 # TODO: constants
+      content_length_range: 1..104_857_600 # TODO: constants
     )
 
     render json: presigned_url.fields, status: :ok
