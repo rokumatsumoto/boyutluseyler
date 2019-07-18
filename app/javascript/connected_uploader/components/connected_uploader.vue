@@ -1,5 +1,7 @@
 <script>
 import { mapActions, mapState } from 'vuex';
+import numberToHumanSize from 'lib/utils/number_utils';
+import { INVALID_CHARACTERS, MIN_FILE_SIZE, MAX_FILE_SIZE } from '../constants';
 import 'blueimp-file-upload/js/jquery.fileupload';
 import DraggableFileList from './draggable_file_list.vue';
 
@@ -37,6 +39,10 @@ export default {
       required: true,
     },
     inputName: {
+      type: String,
+      required: true,
+    },
+    dataType: {
       type: String,
       required: true,
     },
@@ -88,18 +94,17 @@ export default {
         size: file.size,
       });
 
-      const invalidCharactersArr = ['&', '>', '<'];
-      const checker = value => [file.name].some(element => element.includes(value));
-      const invalidCharacters = invalidCharactersArr.filter(checker);
-      if (invalidCharacters.length > 0) {
-        return this.setFileStatus({
-          actionName: 'ERROR_FILE',
-          uniqueId: data.uniqueId,
-          error: `Geçersiz karakter ${invalidCharacters.map(c => `"${c}"`).join(' ')}`,
-        });
+      if (this.fileHasInvalidSize(file, data)) {
+        return true;
+      }
+      if (this.fileTypeInvalidForDragAndDrop(file, data)) {
+        return true;
+      }
+      if (this.fileHasInvalidCharacters(file, data)) {
+        return true;
       }
 
-      this.fetchPresignedPost({
+      return this.fetchPresignedPost({
         uploaderUrl: this.uploaderUrl,
         uniqueId: data.uniqueId,
         data,
@@ -114,10 +119,10 @@ export default {
       });
     },
     handleUploadDone(e, data) {
-      console.log('upload done');
       this.createNewFileResource({
         createUrl: this.createUrl,
         key: data.result.getElementsByTagName('Key')[0].innerHTML,
+        dataType: this.dataType,
         uniqueId: data.uniqueId,
       });
     },
@@ -132,6 +137,66 @@ export default {
     },
     decrementFileCount() {
       this.fileCount -= 1;
+    },
+    getFileExtension(filename){
+      if (this.fileExtension(filename) !== ''){
+        return this.fileExtension(filename);
+      }
+      return filename; // .xyz
+    },
+    fileExtension(filename) {
+      return filename.slice(((filename.lastIndexOf('.') - 1) >>> 0) + 2);
+    },
+    fileTypeInvalidForDragAndDrop(file, data) {
+      const fileExtension = file.type === '' ? this.getFileExtension(file.name) : file.type;
+      const acceptArr = this.accept.split(',').map(a => a.slice(1));
+      const fileTypeChecker = value => [fileExtension].some(element => element.includes(value));
+      const acceptType = acceptArr.filter(fileTypeChecker);
+      if (acceptType.length === 0) {
+        this.setFileStatus({
+          actionName: 'ERROR_FILE',
+          uniqueId: data.uniqueId,
+          error: `Dosya geçersiz, izin verilen dosya türleri ${acceptArr.join(', ')}`,
+        });
+        return true;
+      }
+      return false;
+    },
+    fileHasInvalidCharacters(file, data) {
+      let errorMessage = '';
+      if (file.name.startsWith('.')) {
+        errorMessage = 'Dosya adı boş olamaz';
+      } else {
+        const invalidCharacterChecker = value =>
+          [file.name].some(element => element.includes(value));
+        const invalidCharacters = INVALID_CHARACTERS.filter(invalidCharacterChecker);
+        if (invalidCharacters.length > 0) {
+          errorMessage = `Geçersiz karakter ${invalidCharacters.map(c => `"${c}"`).join(' ')}`;
+        }
+      }
+
+      if (errorMessage !== '') {
+        this.setFileStatus({
+          actionName: 'ERROR_FILE',
+          uniqueId: data.uniqueId,
+          error: errorMessage,
+        });
+        return true;
+      }
+      return false;
+    },
+    fileHasInvalidSize(file, data) {
+      if (file.size && file.size >= MIN_FILE_SIZE && file.size < MAX_FILE_SIZE) {
+        return false;
+      }
+      this.setFileStatus({
+        actionName: 'ERROR_FILE',
+        uniqueId: data.uniqueId,
+        error: `Dosya (${numberToHumanSize(file.size)}) geçersiz, izin verilen
+          dosya boyutu ${numberToHumanSize(MIN_FILE_SIZE)} -
+          ${numberToHumanSize(MAX_FILE_SIZE)}`,
+      });
+      return true;
     },
   },
 };
@@ -158,6 +223,7 @@ export default {
     <draggable-file-list
       :input-name="inputName"
       :remove-button-text="removeButtonText"
+      :origin-files="files"
       @on-remove="decrementFileCount"
     />
   </div>

@@ -24,7 +24,17 @@ export const receivePresignedPostSuccess = ({ dispatch }, payload) => {
   presignedPost['Content-Type'] = payload.file.type;
 
   data.formData = presignedPost;
-  data.submit();
+
+  data
+    .submit()
+    .then(() => {})
+    .catch(error => {
+      dispatch('setFileStatus', {
+        actionName: 'ERROR_FILE',
+        uniqueId: payload.uniqueId,
+        error: error.responseXML.getElementsByTagName('Message')[0].innerHTML,
+      });
+    });
 };
 
 export const requestPresignedPost = ({ dispatch }, uniqueId) => {
@@ -43,6 +53,7 @@ export const fetchPresignedPost = ({ dispatch }, payload) => {
         presignedPost: data,
         data: payload.data,
         file: payload.file,
+        uniqueId: payload.uniqueId,
       }),
     )
     .catch(error => {
@@ -53,9 +64,11 @@ export const fetchPresignedPost = ({ dispatch }, payload) => {
 };
 
 export const receiveCreateFileResourceError = ({ dispatch }, payload) => {
-  //TODO:
-  //
-  //
+  dispatch('setFileStatus', {
+    actionName: 'ERROR_FILE',
+    uniqueId: payload.uniqueId,
+    error: payload.error.response.data.join(', '),
+  });
 };
 
 export const receiveCreateFileResource = ({ dispatch }, payload) => {
@@ -69,7 +82,7 @@ export const receiveCreateFileResource = ({ dispatch }, payload) => {
 export const createNewFileResource = ({ dispatch }, payload) => {
   axios
     .post(payload.createUrl, {
-      illustration: { key: payload.key },
+      [payload.dataType]: { key: payload.key },
     })
     .then(response => {
       dispatch('receiveCreateFileResource', {
@@ -77,7 +90,8 @@ export const createNewFileResource = ({ dispatch }, payload) => {
         uniqueId: payload.uniqueId,
       });
     })
-    .catch(() => {
-      dispatch('receiveCreateFileResourceError');
+    .catch(error => {
+      const errorPayload = Object.assign(payload, { error });
+      dispatch('receiveCreateFileResourceError', errorPayload);
     });
 };
