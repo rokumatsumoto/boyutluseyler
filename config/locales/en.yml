@@ -2,12 +2,41 @@
 ---
 en:
   activerecord:
+    attributes:
+      design:
+        license_types:
+          license_none: "None"
+          cc_by: "CC BY - Attribution"
+          cc_by_sa: "CC BY-SA - Attribution - Share Alike"
+          cc_by_nd: "CC BY-ND - Attribution - No Derivatives"
+          cc_by_nc: "CC BY-NC - Attribution - Non commercial"
+          cc_by_nc_sa: "CC BY-NC-SA - Attribution - Non Commercial - Share Alike"
+          cc_by_nc_nd: "CC BY-NC-ND - Attribution - Non Commercial - No Derivatives"
     errors:
       messages:
         record_invalid: 'Validation failed: %{errors}'
         restrict_dependent_destroy:
           has_one: Cannot delete record because a dependent %{record} exists
           has_many: Cannot delete record because dependent %{record} exist
+      models:
+        design:
+          attributes:
+            design_illustrations:
+              blank: Photos must be added
+            design_blueprints:
+              blank: Files must be added
+        illustration:
+          attributes:
+              url_path:
+                invalid: Invalid file extension
+              filename:
+                empty: Filename cannot be empty
+        blueprint:
+          attributes:
+              url_path:
+                invalid: Invalid file extension
+              filename:
+                empty: Filename cannot be empty
   date:
     abbr_day_names:
     - Sun
