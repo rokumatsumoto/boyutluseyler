@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_29_164450) do
+ActiveRecord::Schema.define(version: 2019_07_09_215416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "blueprints", force: :cascade do |t|
+    t.string "url", null: false
+    t.string "url_path", null: false
+    t.integer "size", null: false
+    t.string "content_type", null: false
+    t.string "image_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string "name", limit: 50, null: false
@@ -21,6 +31,28 @@ ActiveRecord::Schema.define(version: 2019_06_29_164450) do
     t.integer "list_order", limit: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "design_blueprints", force: :cascade do |t|
+    t.bigint "design_id", null: false
+    t.bigint "blueprint_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "position"
+    t.index ["blueprint_id"], name: "index_design_blueprints_on_blueprint_id"
+    t.index ["design_id", "blueprint_id"], name: "index_design_blueprints_on_design_id_and_blueprint_id", unique: true
+    t.index ["design_id"], name: "index_design_blueprints_on_design_id"
+  end
+
+  create_table "design_illustrations", force: :cascade do |t|
+    t.bigint "design_id", null: false
+    t.bigint "illustration_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "position"
+    t.index ["design_id", "illustration_id"], name: "index_design_illustrations_on_design_id_and_illustration_id", unique: true
+    t.index ["design_id"], name: "index_design_illustrations_on_design_id"
+    t.index ["illustration_id"], name: "index_design_illustrations_on_illustration_id"
   end
 
   create_table "designs", force: :cascade do |t|
@@ -107,6 +139,10 @@ ActiveRecord::Schema.define(version: 2019_06_29_164450) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "design_blueprints", "blueprints", on_delete: :cascade
+  add_foreign_key "design_blueprints", "designs", on_delete: :cascade
+  add_foreign_key "design_illustrations", "designs", on_delete: :cascade
+  add_foreign_key "design_illustrations", "illustrations", on_delete: :cascade
   add_foreign_key "designs", "categories", on_delete: :cascade
   add_foreign_key "designs", "users", on_delete: :cascade
 end
