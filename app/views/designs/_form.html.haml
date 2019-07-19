@@ -18,7 +18,9 @@
 
       = f.input :tags_as_string, label: 'Etiketler', hint: 'Örnek: oyuncak, jurassic park, jurassic, dinazor, ceratosaurus, tarih öncesi, dungeons and dragons'
 
-      = f.input :license_type, required: true, label: 'Creative Commons Lisansı', selected: 'license_none', collection: human_enum_collection(Design, :license_types)
+      = f.input :license_type, required: true, label: 'Creative Commons Lisansı',
+        collection: human_enum_collection(Design, :license_types),
+        selected: f.object.license_type || 'license_none'
 
       .form-group
         %span.switch.switch-sm

@@ -1,6 +1,6 @@
 - if object.errors.any?
   .alert
-    %a.close.c-pointer{"data-dismiss" => "alert"} ×
+    %a.close.c-pointer{ 'data-dismiss' => 'alert' } ×
     %ul
       - object.errors.full_messages.each do |msg|
-        = content_tag :li, msg, :id => "error_#{msg}" if msg.is_a?(String)
+        = content_tag :li, msg, id: "error_#{msg}" if msg.is_a?(String)
