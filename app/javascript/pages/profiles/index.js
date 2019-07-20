@@ -1,1 +1,1 @@
-import './show'
+import './edit';

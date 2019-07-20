@@ -1,1 +1,1 @@
-import 'pages/profiles'
+import 'pages/profiles';
