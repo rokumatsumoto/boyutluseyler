@@ -6,7 +6,7 @@ import state from './state';
 
 Vue.use(Vuex);
 
-export default function makeStore() {
+export default function createStore() {
   return new Vuex.Store({
     actions,
     mutations,
