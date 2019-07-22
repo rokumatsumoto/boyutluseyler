@@ -76,5 +76,8 @@ yarn-debug.log*
 # Webpack Bundle Analyzer
 stats.json
 
-# Stl model files for development purpose
-/public/models-dev
+# Model files for development purpose
+/public/models
+
+# Image files for development purpose
+/public/images
