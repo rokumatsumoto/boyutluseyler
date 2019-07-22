@@ -2,6 +2,7 @@
 import { mapActions, mapState } from 'vuex';
 import BaseImg from 'vue_shared/components/base_img.vue';
 import ModelViewer from 'vue_shared/components/viewers/model_viewer.vue';
+import eventHub from 'vue_shared/components/viewers/event_hub';
 
 export default {
   name: 'ContentPreview',
@@ -57,8 +58,17 @@ export default {
   },
   methods: {
     ...mapActions(['registerContent']),
+    triggerViewer() {
+      if (this.activeContent.contentType === 'model') {
+        eventHub.$emit('show');
+      }
+    },
     showContent() {
-      return this.content.dataType === this.activeContent.dataType || this.contents.length === 1;
+      const show = this.content.dataType === this.activeContent.dataType;
+      if (show) {
+        this.triggerViewer();
+      }
+      return show;
     },
   },
 };
@@ -68,7 +78,9 @@ export default {
     <div :ref="content.dataType" class="pic" :class="`pic--${content.dataType}`">
       {{ content.dataType }}
       <div class="pic-main">
-        <component :is="viewer" />
+        <keep-alive>
+          <component :is="viewer" />
+        </keep-alive>
       </div>
     </div>
   </div>
