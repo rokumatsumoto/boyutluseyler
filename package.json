@@ -21,6 +21,7 @@
     "swiper": "^4.5.0",
     "turbolinks": "^5.2.0",
     "vue": "^2.6.10",
+    "vue-3d-model": "^1.1.0-aplha.0",
     "vue-loader": "^15.7.0",
     "vue-template-compiler": "^2.6.10",
     "vue-turbolinks": "^2.0.4",

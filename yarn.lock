@@ -7509,6 +7509,11 @@ three@^0.103.0:
   resolved "https://registry.yarnpkg.com/three/-/three-0.103.0.tgz#63b3dbccc861caad93269618061a73dadebae71b"
   integrity sha512-4WKRHTMt96sp+lX+Hx/eHtN9CWFyejDqr1ikgxZUJIkKEHVglSE7FY8n81NC6yWXqVSjUIQQppaxsoUe26Zi9g==
 
+three@^0.105.2:
+  version "0.105.2"
+  resolved "https://registry.yarnpkg.com/three/-/three-0.105.2.tgz#d135f1549bdcf5a9acd904ba3dbf9198a0268984"
+  integrity sha512-L3Al37k4g3hVbgFFS251UVtIc25chhyN0/RvXzR0C+uIBToV6EKDG+MZzEXm9L2miGUVMK27W46/VkP6WUZXMg==
+
 through2@^2.0.0:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/through2/-/through2-2.0.5.tgz#01c1e39eb31d07cb7d03a96a70823260b23132cd"
@@ -7861,6 +7866,13 @@ vm-browserify@^1.0.1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-1.1.0.tgz#bd76d6a23323e2ca8ffa12028dc04559c75f9019"
   integrity sha512-iq+S7vZJE60yejDYM0ek6zg308+UZsdtPExWP9VZoCFCz1zkJoXFnAX7aZfd/ZwrkidzdUZL0C/ryW+JwAiIGw==
+
+vue-3d-model@^1.1.0-aplha.0:
+  version "1.1.0-aplha.0"
+  resolved "https://registry.yarnpkg.com/vue-3d-model/-/vue-3d-model-1.1.0-aplha.0.tgz#ca46368742e77e78621e9dfce2b04fd9e4064907"
+  integrity sha512-JiaSWeviCzLFJFD8l2L/4wTWb70dWMg6PLn1+fe4MxWQLY2WZh/kwTV80usktkSIIvpzDo5/DeYOZFD2603YXQ==
+  dependencies:
+    three "^0.105.2"
 
 vue-eslint-parser@^5.0.0:
   version "5.0.0"
