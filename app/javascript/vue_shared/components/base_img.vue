@@ -1,12 +1,29 @@
 <script>
 export default {
   name: 'BaseImg',
+  props: {
+    loading: {
+      type: String,
+      default: 'auto',
+      required: false,
+    },
+    alt: {
+      type: String,
+      default: '',
+      required: false,
+    },
+    src: {
+      type: String,
+      required: true,
+    },
+    cssClass: {
+      type: String,
+      default: '',
+      required: false,
+    },
+  },
 };
 </script>
 <template>
-  <div>
-    <img
-      src="images/sarge_bust_bw_1_large.jpg"
-    />
-  </div>
+  <img :loading="loading" :alt="alt" :src="src" :class="cssClass" />
 </template>

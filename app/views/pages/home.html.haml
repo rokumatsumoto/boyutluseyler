@@ -1,14 +1,15 @@
 - content_for :head do
   = javascript_pack_tag 'design'
 
-Homepage
-
-.design.row
-  .design-photos.col-12.col-sm-5.col-md-7.col-xl-5.p-2
+.design
+  .design-photos
     .js-content-preview{ data: { behavior: 'vue' } }
       %content-preview-toggle-button
       %content-preview{ 'data-type': 'illustration', 'content-type': 'image',
-        'toggle-button-text': 'FOTOĞRAFLAR', ':active': true }
+        'toggle-button-text': 'FOTOĞRAFLAR', ':active': true,
+        'img-alt-tag': 'Ücretsiz 3D baskı dosyaları' }
       %content-preview{ 'data-type': 'blueprint', 'content-type': 'model',
-        'toggle-button-text': '3D GÖRÜNÜM' }
-  .design-infos.col-12.col-sm-7.col-md-5.col-xl-7.p-2
+        'toggle-button-text': '3D GÖRÜNÜM', 'img-alt-tag': 'Ücretsiz 3D baskı dosyaları' }
+  .design-infos
+    .d-block sdfsfsfsd sdfsf
+

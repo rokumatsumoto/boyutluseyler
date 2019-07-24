@@ -41,11 +41,14 @@ export default {
       </button>
     </div>
     <div v-else-if="contentCount > 2">
-      <div v-for="(content, index) in contents" :key="index">
-        <button class="btn-sm btn-main float-left" @click="changeContent(content)">
-          {{ toggleButtonText(content.toggleButtonText) }}
-        </button>
-      </div>
+      <button
+        v-for="(content, i) in contents"
+        :key="i"
+        class="btn-sm btn-main float-left"
+        @click="changeContent(content)"
+      >
+        {{ toggleButtonText(content.toggleButtonText) }}
+      </button>
     </div>
   </div>
 </template>

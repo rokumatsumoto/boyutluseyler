@@ -1,33 +1,62 @@
 <script>
-import { ModelStl } from 'vue-3d-model';
+import { ModelStl, ModelObj } from 'vue-3d-model';
+import getFileExtension from 'lib/utils/file_utils';
 import eventHub from './event_hub';
 
 export default {
   name: 'ModelViewer',
-  components: { ModelStl },
-  data() {
-    return {
-      resized: false,
-    }
+  components: { ModelStl, ModelObj },
+  props: {
+    src: {
+      type: String,
+      required: true,
+    },
   },
-  mounted() {
-    eventHub.$on('show', this.resize)
+  computed: {
+    fileExtension() {
+      return getFileExtension(this.src).toLowerCase();
+    },
+    modelProps() {
+      switch (this.fileExtension) {
+        case 'stl':
+          return {
+            src: this.src,
+          };
+        case 'obj':
+          return {
+            src: this.src,
+          };
+        default:
+          return {};
+      };
+    },
+    model() {
+      switch (this.fileExtension) {
+        case 'stl':
+          return ModelStl;
+        case 'obj':
+          return ModelObj;
+        default:
+          return null;
+      }
+    },
+  },
+  created() {
+    eventHub.$on('show', this.resize); // eventHub.$once
   },
   beforeDestroy() {
-    eventHub.$off('show', this.resize)
+    eventHub.$off('show', this.resize);
   },
   methods: {
     resize() {
-      if (this.resized === false){
+      if (this.$refs.model !== undefined) {
         this.$refs.model.onResize();
-        this.resized = true;
       }
     },
+
   },
 };
 </script>
 <template>
-  <model-stl ref="model"
-    src="models/bowser_low_poly_flowalistik.STL"
-  />
+  <component :is="model" ref="model" v-bind="modelProps" />
 </template>
