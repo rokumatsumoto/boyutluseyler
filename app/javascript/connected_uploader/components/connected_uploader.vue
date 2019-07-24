@@ -1,6 +1,7 @@
 <script>
 import { mapActions, mapState } from 'vuex';
 import numberToHumanSize from 'lib/utils/number_utils';
+import getFileExtension from 'lib/utils/file_utils';
 import { INVALID_CHARACTERS, MIN_FILE_SIZE, MAX_FILE_SIZE } from '../constants';
 import 'blueimp-file-upload/js/jquery.fileupload';
 import DraggableFileList from './draggable_file_list.vue';
@@ -138,17 +139,8 @@ export default {
     decrementFileCount() {
       this.fileCount -= 1;
     },
-    getFileExtension(filename){
-      if (this.fileExtension(filename) !== ''){
-        return this.fileExtension(filename);
-      }
-      return filename; // .xyz
-    },
-    fileExtension(filename) {
-      return filename.slice(((filename.lastIndexOf('.') - 1) >>> 0) + 2);
-    },
     fileTypeInvalidForDragAndDrop(file, data) {
-      const fileExtension = file.type === '' ? this.getFileExtension(file.name) : file.type;
+      const fileExtension = file.type === '' ? getFileExtension(file.name) : file.type;
       const acceptArr = this.accept.split(',').map(a => a.slice(1));
       const fileTypeChecker = value => [fileExtension].some(element => element.includes(value));
       const acceptType = acceptArr.filter(fileTypeChecker);
