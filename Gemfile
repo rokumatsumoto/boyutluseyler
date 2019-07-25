@@ -80,12 +80,15 @@ group :development, :test do
   # gem 'rspec-set', '~> 0.1.3'
   gem 'bundler-audit', '~> 0.6.1', require: false
   gem 'parallel_tests', '~> 2.7', '>= 2.7.1'
-  gem 'rspec-parameterized', '~> 0.4.1', require: false
+  # gem 'rspec-parameterized', '~> 0.4.1', require: false
+  gem 'rspec-parameterized', '~> 0.4.2', require: false
   gem 'simplecov', '~> 0.16.1', require: false
 
   # Lints
-  gem 'rubocop', '~> 0.63.1', require: false
-  gem 'rubocop-rspec', '~> 1.32', require: false
+  # gem 'rubocop', '~> 0.63.1', require: false
+  gem 'rubocop', '~> 0.73.0', require: false
+  gem 'rubocop-rspec', '~> 1.34', require: false
+  # gem 'rubocop-rspec', '~> 1.32', require: false
 
   gem 'haml_lint', '~> 0.28.0', require: false
 
