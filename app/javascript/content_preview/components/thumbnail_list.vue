@@ -10,10 +10,7 @@ export default {
     list: {
       type: Array,
       required: true,
-      validator: (prop) => [
-        'url',
-        'imageUrl',
-        ].every( e => Object.keys(prop[0]).includes(e))
+      validator: prop => ['url', 'imageUrl'].every(e => Object.keys(prop[0]).includes(e)),
     },
     imgLoading: {
       type: String,
@@ -41,5 +38,5 @@ export default {
     >
       <base-img :loading="imgLoading" :alt="imgAltTag" :src="item.imageUrl" />
     </a>
-</div>
+  </div>
 </template>

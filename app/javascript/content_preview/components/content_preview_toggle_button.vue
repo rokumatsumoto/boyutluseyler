@@ -1,15 +1,12 @@
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapState, mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'ContentPreviewToggleButton',
   computed: {
     ...mapState(['activeContent', 'contents']),
-    contentCount() {
-      return this.contents.length;
-    },
+    ...mapGetters(['contentCount']),
   },
-  mounted() {},
   methods: {
     ...mapActions(['setActiveContent']),
     toggleButtonText(text) {
@@ -44,7 +41,7 @@ export default {
       <button
         v-for="(content, i) in contents"
         :key="i"
-        class="btn-sm btn-main float-left"
+        class="btn-sm btn-main"
         @click="changeContent(content)"
       >
         {{ toggleButtonText(content.toggleButtonText) }}

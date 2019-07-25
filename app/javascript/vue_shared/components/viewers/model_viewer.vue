@@ -53,7 +53,6 @@ export default {
         this.$refs.model.onResize();
       }
     },
-
   },
 };
 </script>

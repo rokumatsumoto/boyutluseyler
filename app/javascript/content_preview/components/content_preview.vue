@@ -1,5 +1,5 @@
 <script>
-import { mapActions, mapState } from 'vuex';
+import {  mapState, mapGetters, mapActions } from 'vuex';
 import BaseImg from 'vue_shared/components/base_img.vue';
 import ModelViewer from 'vue_shared/components/viewers/model_viewer.vue';
 import eventHub from 'vue_shared/components/viewers/event_hub';
@@ -21,6 +21,16 @@ export default {
       type: String,
       required: true,
     },
+    fileExtensions: {
+      type: Array,
+      default: () => [],
+      required: false,
+    },
+    files: {
+      type: Array,
+      required: true,
+      validator: prop => ['url', 'imageUrl'].every(e => Object.keys(prop[0]).includes(e)),
+    },
     toggleButtonText: {
       type: String,
       default: 'Toggle',
@@ -39,39 +49,15 @@ export default {
   },
   data() {
     return {
-      content: {
-        dataType: this.dataType,
-        contentType: this.contentType,
-        toggleButtonText: this.toggleButtonText,
-        active: this.active,
-      },
-      contentFiles: [
-        {
-          url: 'http://192.168.2.3:3000/images/sarge_bust_bw_1_large.jpg',
-          imageUrl: 'http://192.168.2.3:3000/images/sarge_bust_bw_1_thumb.jpg',
-          contentType: 'image/jpeg',
-        },
-        {
-          url: 'http://192.168.2.3:3000/images/sarge_bust_01_large.jpg',
-          imageUrl: 'http://192.168.2.3:3000/images/sarge_bust_01_thumb.jpg',
-          contentType: 'image/jpeg',
-        },
-        {
-          url: 'http://192.168.2.3:3000/images/sarge_bust_02_large.jpg',
-          imageUrl: 'http://192.168.2.3:3000/images/sarge_bust_02_thumb.jpg',
-          contentType: 'image/jpeg',
-        },
-        {
-          url: 'http://192.168.2.3:3000/images/sarge_bust_03_large.jpg',
-          imageUrl: 'http://192.168.2.3:3000/images/sarge_bust_03_thumb.jpg',
-          contentType: 'image/jpeg',
-        },
-      ],
       contentFile: {},
     };
   },
   computed: {
     ...mapState(['activeContent', 'contents']),
+    ...mapGetters(['getContent']),
+    content() {
+      return this.getContent(this.dataType);
+    },
     viewer() {
       switch (this.content.contentType) {
         case 'image':
@@ -88,20 +74,28 @@ export default {
           return {
             loading: 'lazy',
             alt: this.imgAltTag,
-            src: this.contentFile.url ? this.contentFile.url : this.contentFiles[0].url,
+            src: this.contentFile.url ? this.contentFile.url : this.content.files[0].url,
             cssClass: 'thumb',
           };
         case ModelViewer:
           return {
-            src: this.contentFile.url ? this.contentFile.url : this.contentFiles[0].url,
+            src: this.contentFile.url ? this.contentFile.url : this.content.files[0].url,
           };
         default:
           return {};
       }
     },
   },
-  mounted() {
-    this.registerContent(this.content);
+  created() {
+    this.registerContent({
+      dataType: this.dataType,
+      contentType: this.contentType,
+      fileExtensions: this.fileExtensions,
+      files: this.files,
+      toggleButtonText: this.toggleButtonText,
+      active: this.active,
+      imgAltTag: this.imgAltTag,
+    });
   },
   methods: {
     ...mapActions(['registerContent']),
@@ -111,11 +105,15 @@ export default {
       }
     },
     showContent() {
-      const show = this.content.dataType === this.activeContent.dataType;
-      if (show) {
+      if (this.content === undefined) {
+        return false;
+      }
+
+      const { active } = this.content;
+      if (active) {
         this.triggerViewer();
       }
-      return show;
+      return active;
     },
     showContentFile(file) {
       this.contentFile = file;
@@ -125,15 +123,16 @@ export default {
 </script>
 <template>
   <div v-show="showContent()">
-    <div :ref="content.dataType" class="pic" :class="`pic--${content.dataType}`">
+    <div :ref="dataType" class="pic" :class="`pic--${dataType}`">
       <div class="pic-main">
         <keep-alive>
-          <component :is="viewer" v-bind="viewerProps" />
+          <component :is="viewer" v-if="content" v-bind="viewerProps" />
         </keep-alive>
       </div>
       <div class="pic-minis">
         <thumbnail-list
-          :list="contentFiles"
+          v-if="content"
+          :list="content.files"
           img-loading="lazy"
           :img-alt-tag="imgAltTag"
           @img-update="showContentFile"
