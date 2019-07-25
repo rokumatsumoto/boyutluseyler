@@ -2,7 +2,6 @@ inherit_from: .rubocop_todo.yml
 require: rubocop-rspec
 
 AllCops:
-  TargetRailsVersion: 5.0
   Exclude:
     - 'vendor/**/*'
     - 'node_modules/**/*'
