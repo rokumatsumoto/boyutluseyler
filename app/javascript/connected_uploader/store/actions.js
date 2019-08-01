@@ -5,6 +5,22 @@ export const dragOver = ({ commit }) => commit(types.DRAG_OVER);
 
 export const dragLeave = ({ commit }) => commit(types.DRAG_LEAVE);
 
+export const addOriginFiles = ({ commit, getters }, payload) => {
+  const { originFiles, dataType } = payload;
+  const normalizedOriginFiles = getters.getOriginFiles(originFiles, dataType);
+  Array.from(normalizedOriginFiles).forEach((originFile) => {
+    commit(types.ADD_FILE, {
+        uniqueId: originFile.id,
+        id: originFile.id,
+        filename: originFile.filename,
+        size: originFile.size,
+        url: originFile.url,
+        image: originFile.imageUrl,
+      });
+  });
+
+}
+
 export const addFile = ({ commit }, fileInfo) => commit(types.ADD_FILE, fileInfo);
 
 export const removeFile = ({ commit }, uniqueId) => commit(types.REMOVE_FILE, uniqueId);

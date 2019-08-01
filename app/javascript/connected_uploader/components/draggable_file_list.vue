@@ -19,10 +19,13 @@ export default {
       required: true,
     },
     originFiles: {
-      type: Array,
-      default: () => [],
-      required: false,
+      type: Object,
+      required: true,
     },
+    dataType: {
+      type: String,
+      required: true,
+    }
   },
   computed: {
     ...mapState(['files']),
@@ -39,21 +42,15 @@ export default {
     },
   },
   mounted() {
-    if (this.originFiles.length > 0) {
-      Array.from(this.originFiles).forEach((originFile) => {
-        this.addFile({
-          uniqueId: originFile.id,
-          id: originFile.id,
-          filename: originFile.filename,
-          size: originFile.size,
-          url: originFile.url,
-          image: originFile.image_url,
-        });
+    if (this.originFiles.data && this.originFiles.data.length > 0) {
+      this.addOriginFiles({
+        originFiles: this.originFiles,
+        dataType: this.dataType,
       });
     }
   },
   methods: {
-    ...mapActions(['removeFile', 'updateFileList', 'addFile']),
+    ...mapActions(['removeFile', 'updateFileList', 'addFile', 'addOriginFiles']),
     handleRemove(uniqueId) {
       this.removeFile(uniqueId);
       this.$emit('on-remove');
@@ -73,5 +70,8 @@ export default {
         @on-remove="handleRemove"
       />
     </draggable>
+  </div>
+  <div v-else>
+    <input type="hidden" :name="inputName"/>
   </div>
 </template>
