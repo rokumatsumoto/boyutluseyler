@@ -3,7 +3,6 @@
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.8.1",
-    "@justinribeiro/stl-part-viewer": "^1.0.2",
     "@rails/webpacker": "^4.0.7",
     "activestorage": "^5.2.3",
     "axios": "^0.19.0",
@@ -18,9 +17,9 @@
     "popper.js": "^1.15.0",
     "rails-ujs": "^5.2.3",
     "sanitize-html": "^1.20.1",
-    "swiper": "^4.5.0",
     "turbolinks": "^5.2.0",
     "vue": "^2.6.10",
+    "vue-3d-model": "^1.1.0-aplha.0",
     "vue-loader": "^15.7.0",
     "vue-template-compiler": "^2.6.10",
     "vue-turbolinks": "^2.0.4",

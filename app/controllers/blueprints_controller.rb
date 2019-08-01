@@ -9,12 +9,12 @@ class BlueprintsController < ApplicationController
       if blueprint_obj.exists?
         validate_content_type(:blueprint, blueprint_obj.key, blueprint_obj.content_type)
         # TODO: pundit
-        @blueprint = Blueprint.new do |i|
-          i.url = blueprint_obj.public_url
-          i.url_path = blueprint_obj.key
-          i.size = blueprint_obj.size
-          i.content_type = @content_type
-          i.image_url = blueprint_obj.public_url
+        @blueprint = Blueprint.new do |b|
+          b.url = blueprint_obj.public_url
+          b.url_path = blueprint_obj.key
+          b.size = blueprint_obj.size
+          b.content_type = @content_type
+          b.image_url = ''
         end
 
         if @blueprint.save

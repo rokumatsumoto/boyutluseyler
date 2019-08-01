@@ -14,7 +14,7 @@ class IllustrationsController < ApplicationController
           i.url_path = illustration_obj.key
           i.size = illustration_obj.size
           i.content_type = @content_type
-          i.image_url = illustration_obj.public_url
+          i.image_url = ''
         end
 
         if @illustration.save

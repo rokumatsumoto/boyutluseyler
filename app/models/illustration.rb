@@ -15,6 +15,8 @@
 #
 
 class Illustration < ApplicationRecord
+  include BlocksJsonSerialization
+
   has_one :design_illustration, inverse_of: :illustration
   has_one :design, through: :design_illustration
 
@@ -30,16 +32,6 @@ class Illustration < ApplicationRecord
   def filename_is_empty
     # .png
     errors.add(:filename, :empty) if File.basename(url_path, '.*').split('.')[0] == ''
-  end
-
-  def filename
-    File.basename(url_path)
-  end
-
-  def as_json(options = {})
-    super(options).tap do |json|
-      json[:filename] = filename
-    end
   end
 
   def sanitize_attrs

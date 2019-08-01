@@ -48,3 +48,31 @@ a {
   }
 }
 
+.rich {
+    line-height: 1.4;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+}
+
+.inline-list {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap
+}
+
+.inline-list > li {
+    display: inline-block
+}
+.inline-list li {
+    margin-right: .25rem;
+    margin-bottom: .25rem
+}
+.inline-list li:last-child {
+    margin-right: 0
+}
+.inline-list li a {
+    display: block
+}

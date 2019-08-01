@@ -8,10 +8,6 @@
   background-color: $mercury-2;
 }
 
-.btn-delete {
-
-}
-
 .btn--clear {
   background-color: transparent;
   color: $white;
@@ -30,5 +26,15 @@
 
   &:hover {
     color: $white;
+  }
+}
+
+.no-outline {
+
+  &:focus,
+  &:active,
+  &:focus:active {
+    outline: none;
+    box-shadow: none;
   }
 }

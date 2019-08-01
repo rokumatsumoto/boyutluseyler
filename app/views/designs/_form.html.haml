@@ -1,5 +1,5 @@
 - content_for :head do
-  = javascript_pack_tag 'design'
+  = javascript_pack_tag 'user/designs'
 
 = simple_form_for(@design, validate: true) do |f|
   = f.error_notification
@@ -40,7 +40,7 @@
           'create-url' => '/blueprints',
           'input-name' => 'design[blueprint_ids][]',
           'data-type' => 'blueprint',
-          ':files' => @design.blueprints.to_json }
+          ':files' => @blueprints }
       %br/
       %h6 Fotoğraflar
       .js-connected-uploader{ data: { behavior: 'vue' } }
@@ -52,7 +52,7 @@
           'create-url' => '/illustrations',
           'input-name' => 'design[illustration_ids][]',
           'data-type' => 'illustration',
-          ':files' => @design.illustrations.to_json }
+          ':files' => @illustrations }
       %br/
 
       %span.d-block.text-muted Dosyalar üzerinde sürükle bırak yaparak sıralamayı belirleyebilirsiniz..

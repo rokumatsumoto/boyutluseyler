@@ -1,3 +1,152 @@
+img.thumb, a.thumb img{
+    width: 100%;
+    height: 100%;
+    border: 1px solid #e6e6e6;
+    border-radius: .5rem;
+    background :#b4b4b4;
+    color: #fff;
+}
+
+a.thumb{
+    width: 100%;
+    display: inline-block;
+
+    img {
+      display: inline-block;
+      transition: border-color .25s;
+    }
+    &:hover {
+
+      img {
+        border-color: $dodger-blue-3;
+      }
+    }
+
+    &:hover {
+      outline: 0;
+      box-shadow: none;
+    }
+}
+
+.model canvas {
+  border: 1px solid #e6e6e6;
+  border-radius: .5rem;
+  background :#b4b4b4;
+  color: #fff;
+  overflow: hidden;
+}
+
+.pic-main, .pic-main img {
+
+  @media (min-width: 0) {
+    width: 9rem;
+    height: 9rem;
+  }
+
+  @media (min-width: 15rem) {
+    width: 14rem;
+    height: 14rem;
+  }
+
+  @media (min-width: 17rem) {
+    width: 16rem;
+    height: 16rem;
+  }
+
+  @media (min-width: 24rem) {
+    width: 23rem;
+    height: 23rem;
+  }
+
+  @media (min-width: 29rem) {
+    width: 28rem;
+    height: 28rem;
+  }
+
+  @media (min-width: 33rem) {
+    width: 33rem;
+    height: 33rem;
+  }
+
+  @media (min-width: 37rem) {
+    width: 16rem;
+    height: 16rem;
+  }
+
+  @media (min-width: 47rem) {
+    width: 30rem;
+    height: 30rem;
+  }
+}
+
+@media (min-width: 37rem){
+  .design {
+    display: table;
+  }
+}
+
+.design-photos {
+    margin-top: inherit;
+
+    @media (min-width: 37rem){
+      display: table-cell;
+      vertical-align: top;
+    }
+}
+
+.design-infos{
+  margin-top: inherit;
+
+    @media (min-width: 37rem){
+      display: table-cell;
+      vertical-align: top;
+      width: 100%;
+      padding-left: 1.5rem;
+    }
+}
+
+.pic {
+
+  img {
+    width: 100%;
+    height: auto !important;
+  }
+}
+
+.pic-main {
+  min-width: 14rem;
+  margin: 0 auto;
+}
+
+.pic-minis {
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: 0.75rem;
+
+  a {
+    display: inline-block;
+    margin-top: 0.75rem;
+    margin-right: 0.75rem;
+    width: calc((100% - 3rem) / 5);
+
+    @media (min-width: 37rem) and (max-width: 46rem){
+      margin-right: 0.75rem;
+      width: calc((100% - 2.25rem) / 4);
+    }
+
+    &:nth-child(5n) {
+      margin-right: 0;
+    }
+
+    &:nth-child(4n) {
+      @media (min-width: 37rem) and (max-width: 46rem){
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+
 .btn-grey {
   background-color: #e2e6ea;
   border-color: #dae0e5;
@@ -29,4 +178,15 @@
   &--over, &:focus {
     box-shadow:0 0 1rem $dodger-blue-3;
   }
+}
+
+.license {
+
+  a {
+    color: $gray;
+
+    &:hover {
+      color: $gray;
+    }
+   }
 }

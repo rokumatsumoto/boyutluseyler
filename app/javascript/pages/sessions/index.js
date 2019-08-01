@@ -1,1 +1,1 @@
-import './new'
+import './new';
