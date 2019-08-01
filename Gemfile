@@ -62,6 +62,8 @@ gem 'acts_as_list', '~> 0.9.19'
 
 gem 'sanitize', '~> 5.0'
 
+gem 'fast_jsonapi', '~> 1.5'
+
 group :development, :test do
   # n+1 Queries
   gem 'bullet', '~> 5.9'
