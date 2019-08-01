@@ -3,7 +3,7 @@ import numberToHumanSize from 'lib/utils/number_utils';
 import sanitize from 'sanitize-html';
 
 export default {
-  name: 'DraggableFileListItem',
+  name: 'ConnectedUploaderFileListItem',
   props: {
     file: {
       type: Object,
@@ -65,7 +65,7 @@ export default {
 };
 </script>
 <template>
-  <div class="up-container" :class="{ 'js-draggable-file-list-item': !isLoading }">
+  <div class="up-container" :class="{ 'js-connected-uploader-file-list-item': !isLoading }">
     <div class="up" :class="{ 'up--error': hasError, 'up--draggable': !isLoading }">
       <div v-if="!hasError"
         class="up-progress"

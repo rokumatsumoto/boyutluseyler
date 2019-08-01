@@ -4,11 +4,11 @@ import numberToHumanSize from 'lib/utils/number_utils';
 import getFileExtension from 'lib/utils/file_utils';
 import { INVALID_CHARACTERS, MIN_FILE_SIZE, MAX_FILE_SIZE } from '../constants';
 import 'blueimp-file-upload/js/jquery.fileupload';
-import DraggableFileList from './draggable_file_list.vue';
+import ConnectedUploaderFileList from './connected_uploader_file_list.vue';
 
 export default {
   name: 'ConnectedUploader',
-  components: { DraggableFileList },
+  components: { ConnectedUploaderFileList },
   props: {
     accept: {
       type: String,
@@ -211,7 +211,7 @@ export default {
         tabindex="-1"
       />
     </div>
-    <draggable-file-list
+    <connected-uploader-file-list
       :input-name="inputName"
       :remove-button-text="removeButtonText"
       :origin-files="files"

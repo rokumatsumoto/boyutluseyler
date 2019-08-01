@@ -1,12 +1,12 @@
 <script>
 import { mapActions, mapState } from 'vuex';
 import Draggable from 'vuedraggable';
-import DraggableFileListItem from './draggable_file_list_item.vue';
+import ConnectedUploaderFileListItem from './connected_uploader_file_list_item.vue';
 
 export default {
-  name: 'DraggableFileList',
+  name: 'ConnectedUploaderFileList',
   components: {
-    DraggableFileListItem,
+    ConnectedUploaderFileListItem,
     Draggable,
   },
   props: {
@@ -60,8 +60,8 @@ export default {
 </script>
 <template>
   <div v-if="hasFiles">
-    <draggable v-model="draggableList" draggable=".js-draggable-file-list-item" animation=200>
-      <draggable-file-list-item
+    <draggable v-model="draggableList" draggable=".js-connected-uploader-file-list-item" animation=200>
+      <connected-uploader-file-list-item
         v-for="file in files"
         :key="file.uniqueId"
         :file="file"
