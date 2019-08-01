@@ -3,6 +3,12 @@ import { mapState, mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'ContentPreviewToggleButton',
+  props: {
+    cssClass: {
+      type: String,
+      required: true,
+    }
+  },
   computed: {
     ...mapState(['activeContent', 'contents']),
     ...mapGetters(['contentCount']),
@@ -33,7 +39,7 @@ export default {
 <template>
   <div>
     <div v-if="contentCount === 2">
-      <button class="btn-sm btn-main" @click="changeContent">
+      <button :class="cssClass" @click="changeContent">
         {{ toggleButtonText() }}
       </button>
     </div>
@@ -41,7 +47,8 @@ export default {
       <button
         v-for="(content, i) in contents"
         :key="i"
-        class="btn-sm btn-main"
+        :class="cssClass"
+        style="margin-right:2px;"
         @click="changeContent(content)"
       >
         {{ toggleButtonText(content.toggleButtonText) }}
