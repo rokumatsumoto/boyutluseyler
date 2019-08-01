@@ -21,9 +21,42 @@ export default {
       default: '',
       required: false,
     },
+    backgroundColor: {
+      type: String,
+      default: '#b4b4b4',
+      required: false,
+    },
+    defaultSrc: {
+      type: String,
+      default: '',
+      required: false,
+    },
+  },
+  data() {
+    return {
+      imageError: false,
+    };
+  },
+  computed: {
+    style() {
+      const style = {
+        'background-color': this.backgroundColor,
+      };
+      return style;
+    },
+    source() {
+      return this.imageError ? this.defaultSrc : this.src;
+    },
   },
 };
 </script>
 <template>
-  <img :loading="loading" :alt="alt" :src="src" :class="cssClass" />
+  <img
+    :style="style"
+    :loading="loading"
+    :src="source"
+    :alt="alt"
+    :class="cssClass"
+    @error="imageError = true"
+  />
 </template>

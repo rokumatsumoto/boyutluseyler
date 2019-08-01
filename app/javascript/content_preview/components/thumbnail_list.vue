@@ -22,6 +22,16 @@ export default {
       default: '',
       required: false,
     },
+    defaultImgSrc: {
+      type: String,
+      default: '',
+      required: false,
+    },
+    imgBgColor: {
+      type: String,
+      default: '',
+      required: false,
+    },
   },
 };
 </script>
@@ -36,7 +46,13 @@ export default {
       rel="noopener"
       @click.prevent="$emit('img-update', item)"
     >
-      <base-img :loading="imgLoading" :alt="imgAltTag" :src="item.imageUrl" />
+      <base-img
+        :loading="imgLoading"
+        :alt="imgAltTag"
+        :src="item.imageUrl"
+        :default-src="defaultImgSrc"
+        :background-color="imgBgColor"
+      />
     </a>
   </div>
 </template>

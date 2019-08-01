@@ -11,6 +11,17 @@ export default {
       type: String,
       required: true,
     },
+    cssClass: {
+      type: String,
+      default: '',
+      required: false,
+    },
+  },
+  data() {
+    return {
+      bgAlpha: 1,
+      bgColor: '#e6e6e6',
+    };
   },
   computed: {
     fileExtension() {
@@ -28,7 +39,7 @@ export default {
           };
         default:
           return {};
-      };
+      }
     },
     model() {
       switch (this.fileExtension) {
@@ -57,5 +68,12 @@ export default {
 };
 </script>
 <template>
-  <component :is="model" ref="model" v-bind="modelProps" />
+  <component
+    :is="model"
+    ref="model"
+    v-bind="modelProps"
+    :class="cssClass"
+    :background-alpha="bgAlpha"
+    :background-color="bgColor"
+  />
 </template>
