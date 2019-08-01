@@ -23,9 +23,8 @@ export default {
       required: true,
     },
     files: {
-      type: Array,
-      default: () => [],
-      required: false,
+      type: Object,
+      required: true,
     },
     directUrl: {
       type: String,
@@ -216,6 +215,7 @@ export default {
       :input-name="inputName"
       :remove-button-text="removeButtonText"
       :origin-files="files"
+      :data-type="dataType"
       @on-remove="decrementFileCount"
     />
   </div>
