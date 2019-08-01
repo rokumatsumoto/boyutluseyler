@@ -19,8 +19,6 @@ import * as ActiveStorage from 'activestorage';
 import Turbolinks from 'turbolinks';
 import LocalTime from 'local-time';
 import 'bootstrap/dist/js/bootstrap';
-import 'intersection-observer/intersection-observer';
-import '@justinribeiro/stl-part-viewer';
 
 Rails.start();
 ActiveStorage.start();
@@ -30,5 +28,4 @@ LocalTime.start();
 require('rails.validations');
 require('rails.validations.simple_form.bootstrap4');
 
-// require('../slider');
 require('../user_profile');

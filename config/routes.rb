@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   root 'pages#home'
 
   get 'test_stl_viewer', to: 'pages#test_stl_viewer'
-  get 'test_slider', to: 'pages#test_slider'
   get 'upload', to: 'pages#upload'
 
   resources :file_uploaders
