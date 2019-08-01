@@ -1,5 +1,5 @@
 <script>
-import {  mapState, mapGetters, mapActions } from 'vuex';
+import { mapState, mapGetters, mapActions } from 'vuex';
 import BaseImg from 'vue_shared/components/base_img.vue';
 import ModelViewer from 'vue_shared/components/viewers/model_viewer.vue';
 import eventHub from 'vue_shared/components/viewers/event_hub';
@@ -27,9 +27,10 @@ export default {
       required: false,
     },
     files: {
-      type: Array,
+      type: Object,
       required: true,
-      validator: prop => ['url', 'imageUrl'].every(e => Object.keys(prop[0]).includes(e)),
+      // https://jsonapi.org/format/
+      validator: prop => Object.keys(prop).includes('data'),
     },
     toggleButtonText: {
       type: String,
@@ -42,6 +43,21 @@ export default {
       required: false,
     },
     imgAltTag: {
+      type: String,
+      default: '',
+      required: false,
+    },
+    defaultThumbUrl: {
+      type: String,
+      default: '',
+      required: false,
+    },
+    imgBgColor: {
+      type: String,
+      default: '',
+      required: false,
+    },
+    viewerCssClass: {
       type: String,
       default: '',
       required: false,
@@ -75,11 +91,13 @@ export default {
             loading: 'lazy',
             alt: this.imgAltTag,
             src: this.contentFile.url ? this.contentFile.url : this.content.files[0].url,
-            cssClass: 'thumb',
+            cssClass: this.viewerCssClass,
+            defaultSrc: this.defaultThumbUrl,
           };
         case ModelViewer:
           return {
             src: this.contentFile.url ? this.contentFile.url : this.content.files[0].url,
+            cssClass: this.viewerCssClass,
           };
         default:
           return {};
@@ -87,15 +105,17 @@ export default {
     },
   },
   created() {
-    this.registerContent({
-      dataType: this.dataType,
-      contentType: this.contentType,
-      fileExtensions: this.fileExtensions,
-      files: this.files,
-      toggleButtonText: this.toggleButtonText,
-      active: this.active,
-      imgAltTag: this.imgAltTag,
-    });
+    if (this.files.data && this.files.data.length > 0) {
+      this.registerContent({
+        dataType: this.dataType,
+        contentType: this.contentType,
+        fileExtensions: this.fileExtensions,
+        files: this.files,
+        toggleButtonText: this.toggleButtonText,
+        active: this.active,
+        imgAltTag: this.imgAltTag,
+      });
+    }
   },
   methods: {
     ...mapActions(['registerContent']),
@@ -135,6 +155,8 @@ export default {
           :list="content.files"
           img-loading="lazy"
           :img-alt-tag="imgAltTag"
+          :default-img-src="defaultThumbUrl"
+          :img-bg-color="imgBgColor"
           @img-update="showContentFile"
         />
       </div>

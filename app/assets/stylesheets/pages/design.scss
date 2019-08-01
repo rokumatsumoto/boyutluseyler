@@ -28,6 +28,14 @@ a.thumb{
     }
 }
 
+.model canvas {
+  border: 1px solid #e6e6e6;
+  border-radius: .5rem;
+  background :#b4b4b4;
+  color: #fff;
+  overflow: hidden;
+}
+
 .pic-main, .pic-main img {
 
   @media (min-width: 0) {
@@ -170,4 +178,15 @@ a.thumb{
   &--over, &:focus {
     box-shadow:0 0 1rem $dodger-blue-3;
   }
+}
+
+.license {
+
+  a {
+    color: $gray;
+
+    &:hover {
+      color: $gray;
+    }
+   }
 }

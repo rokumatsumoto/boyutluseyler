@@ -15,6 +15,8 @@
 #
 
 class Blueprint < ApplicationRecord
+  include BlocksJsonSerialization
+
   has_one :design_blueprint, inverse_of: :blueprint
   has_one :design, through: :design_blueprint
 
@@ -30,16 +32,6 @@ class Blueprint < ApplicationRecord
   def filename_is_empty
     # .stl
     errors.add(:filename, :empty) if File.basename(url_path, '.*').split('.')[0] == ''
-  end
-
-  def filename
-    File.basename(url_path)
-  end
-
-  def as_json(options = {})
-    super(options).tap do |json|
-      json[:filename] = filename
-    end
   end
 
   def sanitize_attrs

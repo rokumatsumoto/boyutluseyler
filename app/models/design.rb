@@ -54,4 +54,12 @@ class Design < ApplicationRecord
   def tags_as_string=(string)
     self.tag_names = string.split(/,\s*/)
   end
+
+  def model_blueprints
+    @model_blueprints = Blueprint.joins(:design_blueprint)
+                                 .where('url_path ~* ?', '.(stl|3ds|obj)$')
+                                 .where(design_blueprints: { design_id: id })
+                                 .select(:url, :image_url)
+                                 .order('design_blueprints.position')
+  end
 end
