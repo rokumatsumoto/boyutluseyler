@@ -70,7 +70,7 @@ class DesignsController < ApplicationController
       blueprints = if design_params[:blueprint_ids].all?(&:blank?)
                      @design.blueprints.reload
                    else
-                    # TODO: select
+                     # TODO: select
                      Blueprint.left_outer_joins(:design_blueprint)
                               .where(id: design_params[:blueprint_ids].map(&:to_i))
                    end
