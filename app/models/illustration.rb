@@ -15,8 +15,6 @@
 #
 
 class Illustration < ApplicationRecord
-  include BlocksJsonSerialization
-
   has_one :design_illustration, inverse_of: :illustration
   has_one :design, through: :design_illustration
 

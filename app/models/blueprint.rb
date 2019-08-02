@@ -15,8 +15,6 @@
 #
 
 class Blueprint < ApplicationRecord
-  include BlocksJsonSerialization
-
   has_one :design_blueprint, inverse_of: :blueprint
   has_one :design, through: :design_blueprint
 
