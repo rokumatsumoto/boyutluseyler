@@ -65,56 +65,20 @@ module AWSS3UploaderHelper
     end
   end
 
-  def validate_content_type(type, object_file_name, object_content_type)
-    @content_type = object_content_type
+  def validate_content_type(type, obj_file_name, obj_content_type)
+    invalid = obj_content_type.blank? || allowed_content_types(type).none?(obj_content_type)
 
-    invalid = (@content_type.nil? || @content_type == '') ||
-              allowed_content_types(type).none?(@content_type)
+    return content_type_by_filename(obj_file_name) if invalid
 
-    content_type_by_filename(object_file_name) if invalid
-  end
-
-  def validate_content_type_by_object(type, object, new_options = {})
-    @content_type = object.content_type
-
-    invalid = (@content_type.nil? || @content_type == '') ||
-              allowed_content_types(type).none?(@content_type)
-
-    update_content_type(object, new_options) if invalid
-  end
-
-  def update_content_type(object, new_options)
-    options = {
-      acl: object_acl,
-      metadata_directive: 'REPLACE',
-      content_type: content_type_by_filename(object.key)
-    }
-    options.merge!(new_options)
-
-    copy_object(object, options)
-  end
-
-  def copy_object(object, new_options)
-    # Build a new options object
-    options = {}
-
-    # Merge in the object's existing properties
-    existing_options = object.data.to_h.slice(:metadata, :expires, :cache_control)
-    options.merge!(existing_options)
-
-    # Add our new updates
-    options.merge!(new_options)
-
-    begin
-      object.copy_to({ bucket: S3_BUCKET.name, key: object.key }, options)
-    rescue StandardError => e
-      puts "Exception Raised: #{e}"
-    end
+    obj_content_type
   end
 
   def content_type_by_filename(filename)
-    filename = MiniMime.lookup_by_filename(filename)
-    @content_type = filename.content_type unless filename.nil?
+    mime_info = MiniMime.lookup_by_filename(filename)
+
+    return mime_info.content_type unless mime_info.nil?
+
+    ''
   end
 
   private

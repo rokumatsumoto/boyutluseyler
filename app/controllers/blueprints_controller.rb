@@ -4,16 +4,15 @@ class BlueprintsController < ApplicationController
   include AWSS3UploaderHelper
   def create
     if blueprint_params.key?(:key)
-      blueprint_obj = S3_BUCKET.object(blueprint_params[:key])
+      obj = S3_BUCKET.object(blueprint_params[:key])
 
-      if blueprint_obj.exists?
-        validate_content_type(:blueprint, blueprint_obj.key, blueprint_obj.content_type)
+      if obj.exists?
         # TODO: pundit
         @blueprint = Blueprint.new do |b|
-          b.url = blueprint_obj.public_url
-          b.url_path = blueprint_obj.key
-          b.size = blueprint_obj.size
-          b.content_type = @content_type
+          b.url = obj.public_url
+          b.url_path = obj.key
+          b.size = obj.size
+          b.content_type = validate_content_type(:blueprint, obj.key, obj.content_type)
           b.image_url = ''
         end
 
