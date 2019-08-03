@@ -18,7 +18,7 @@
 #
 
 class Design < ApplicationRecord
-  Gutentag::ActiveRecord.call self
+  include Taggable
 
   has_many :design_illustrations, -> { order(position: :asc) }, inverse_of: 'design'
   has_many :illustrations, through: :design_illustrations
@@ -44,16 +44,6 @@ class Design < ApplicationRecord
     cc_by_nc_sa: 'cc_by_nc_sa',
     cc_by_nc_nd: 'cc_by_nc_nd'
   }
-
-  # Return the tag names separated by a comma and space
-  def tags_as_string
-    tag_names.join(', ')
-  end
-
-  # Split up the provided value by commas and (optional) spaces.
-  def tags_as_string=(string)
-    self.tag_names = string.split(/,\s*/)
-  end
 
   def model_blueprints
     @model_blueprints = Blueprint.joins(:design_blueprint)
