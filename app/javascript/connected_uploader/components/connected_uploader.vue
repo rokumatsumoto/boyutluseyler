@@ -1,6 +1,6 @@
 <script>
 import { mapActions, mapState } from 'vuex';
-import numberToHumanSize from 'lib/utils/number_utils';
+import { numberToHumanSize } from 'lib/utils/number_utils';
 import getFileExtension from 'lib/utils/file_utils';
 import { INVALID_CHARACTERS, MIN_FILE_SIZE, MAX_FILE_SIZE } from '../constants';
 import 'blueimp-file-upload/js/jquery.fileupload';
@@ -97,10 +97,10 @@ export default {
       if (this.fileHasInvalidSize(file, data)) {
         return true;
       }
-      if (this.fileTypeInvalidForDragAndDrop(file, data)) {
+      if (this.fileHasInvalidCharacters(file, data)) {
         return true;
       }
-      if (this.fileHasInvalidCharacters(file, data)) {
+      if (this.fileTypeInvalidForDragAndDrop(file, data)) {
         return true;
       }
 
@@ -135,9 +135,6 @@ export default {
     handleDocumentDropAndDragOver(e) {
       e.target.type !== 'file' && e.preventDefault();
     },
-    decrementFileCount() {
-      this.fileCount -= 1;
-    },
     fileTypeInvalidForDragAndDrop(file, data) {
       const fileExtension = file.type === '' ? getFileExtension(file.name) : file.type;
       const acceptArr = this.accept.split(',').map(a => a.slice(1));
@@ -155,7 +152,7 @@ export default {
     },
     fileHasInvalidCharacters(file, data) {
       let errorMessage = '';
-      if (file.name.startsWith('.')) {
+      if (file.name.trim() === '' || file.name.trim().startsWith('.')) {
         errorMessage = 'Dosya adı boş olamaz';
       } else {
         const invalidCharacterChecker = value =>
@@ -216,7 +213,6 @@ export default {
       :remove-button-text="removeButtonText"
       :origin-files="files"
       :data-type="dataType"
-      @on-remove="decrementFileCount"
     />
   </div>
 </template>
