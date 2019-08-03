@@ -12,7 +12,7 @@ class BlueprintsController < ApplicationController
           b.url = obj.public_url
           b.url_path = obj.key
           b.size = obj.size
-          b.content_type = validate_content_type(:blueprint, obj.key, obj.content_type)
+          b.content_type = obj.content_type
           b.image_url = ''
         end
 
@@ -23,7 +23,7 @@ class BlueprintsController < ApplicationController
         end
 
       else
-        # TODO:
+        # TODO: not exists
         puts 'not exists'
       end
     end

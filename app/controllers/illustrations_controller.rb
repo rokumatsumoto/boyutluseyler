@@ -12,7 +12,7 @@ class IllustrationsController < ApplicationController
           i.url = obj.public_url
           i.url_path = obj.key
           i.size = obj.size
-          i.content_type = validate_content_type(:illustration, obj.key, obj.content_type)
+          i.content_type = obj.content_type
           i.image_url = ''
         end
 
