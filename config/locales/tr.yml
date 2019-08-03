@@ -29,14 +29,16 @@ tr:
           attributes:
               url_path:
                 invalid: Dosya uzantısı geçersiz
-              filename:
-                empty: Dosya adı boş olamaz
+                blank: Dosya adı boş olamaz
+              size:
+                inclusion: Dosya boyutu geçersiz
         blueprint:
           attributes:
               url_path:
                 invalid: Dosya uzantısı geçersiz
-              filename:
-                empty: Dosya adı boş olamaz
+                blank: Dosya adı boş olamaz
+              size:
+                inclusion: Dosya boyutu geçersiz
 
   date:
     abbr_day_names:

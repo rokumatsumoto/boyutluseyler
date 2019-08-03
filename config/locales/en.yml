@@ -29,14 +29,16 @@ en:
           attributes:
               url_path:
                 invalid: Invalid file extension
-              filename:
-                empty: Filename cannot be empty
+                blank: Filename cannot be empty
+              size:
+                inclusion: File size is invalid
         blueprint:
           attributes:
               url_path:
                 invalid: Invalid file extension
-              filename:
-                empty: Filename cannot be empty
+                blank: Filename cannot be empty
+              size:
+                inclusion: File size is invalid
   date:
     abbr_day_names:
     - Sun

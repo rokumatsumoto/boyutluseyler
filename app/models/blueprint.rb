@@ -15,27 +15,15 @@
 #
 
 class Blueprint < ApplicationRecord
+  include FileValidations
+
   has_one :design_blueprint, inverse_of: :blueprint
   has_one :design, through: :design_blueprint
 
   #
   # Validations
+  # FileValidations (concern)
   #
 
   validates_format_of :url_path, with: /\.(stl|3ds|obj|zip)\z/i
-  # TODO: MOVE SHARED
-  validate :filename_is_empty
-  before_validation :sanitize_attrs
-
-  def filename_is_empty
-    # .stl
-    errors.add(:filename, :empty) if File.basename(url_path, '.*').split('.')[0] == ''
-  end
-
-  def sanitize_attrs
-    %i[url url_path].each do |attr|
-      value = self[attr]
-      self[attr] = Sanitize.fragment(value) if value.present?
-    end
-  end
 end
