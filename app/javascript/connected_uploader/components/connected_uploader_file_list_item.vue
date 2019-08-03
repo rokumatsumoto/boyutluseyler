@@ -1,5 +1,5 @@
 <script>
-import numberToHumanSize from 'lib/utils/number_utils';
+import { numberToHumanSize } from 'lib/utils/number_utils';
 import sanitize from 'sanitize-html';
 
 export default {
@@ -80,6 +80,7 @@ export default {
           <div :class="iconClass"></div>
         </div>
         <div class="up-text">
+           <!-- eslint-disable-next-line vue/no-v-html -->
           <div class="up-title" v-html="filename"></div>
           <div class="up-size">{{ size }}</div>
         </div>
