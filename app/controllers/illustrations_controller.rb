@@ -4,16 +4,15 @@ class IllustrationsController < ApplicationController
   include AWSS3UploaderHelper
   def create
     if illustration_params.key?(:key)
-      illustration_obj = S3_BUCKET.object(illustration_params[:key])
+      obj = S3_BUCKET.object(illustration_params[:key])
 
-      if illustration_obj.exists?
-        validate_content_type(:illustration, illustration_obj.key, illustration_obj.content_type)
+      if obj.exists?
         # TODO: pundit
         @illustration = Illustration.new do |i|
-          i.url = illustration_obj.public_url
-          i.url_path = illustration_obj.key
-          i.size = illustration_obj.size
-          i.content_type = @content_type
+          i.url = obj.public_url
+          i.url_path = obj.key
+          i.size = obj.size
+          i.content_type = validate_content_type(:illustration, obj.key, obj.content_type)
           i.image_url = ''
         end
 
@@ -24,7 +23,7 @@ class IllustrationsController < ApplicationController
         end
 
       else
-        # TODO:
+        # TODO: not exists
         puts 'not exists'
       end
     end
