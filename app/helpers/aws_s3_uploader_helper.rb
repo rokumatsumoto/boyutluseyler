@@ -7,8 +7,8 @@ module AWSS3UploaderHelper
       key: generate_key(type),
       key_starts_with: key_starts_with(type),
       content_type_starts_with: content_type_starts_with(type),
-      success_action_status: Rails.application.credentials.aws_s3[:success_action_status],
-      acl: Rails.application.credentials.aws_s3[:acl],
+      success_action_status: Boyutluseyler.credentials[:aws_s3][:success_action_status],
+      acl: Boyutluseyler.credentials[:aws_s3][:acl],
       signature_expiration: (Time.now.utc + 15.minutes), # TODO: constants
       cache_control: 'public, max-age=315576000', # TODO: constants
       content_length_range: 1..104_857_600 # TODO: constants
