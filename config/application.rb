@@ -22,4 +22,8 @@ module Boyutluseyler
     # Disable animations, only for test environments
     config.disable_animations = false
   end
+
+  def self.credentials
+    @credentials ||= Rails.application.credentials[Rails.env.to_sym]
+  end
 end

@@ -95,7 +95,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_mailer.default_url_options = {
-    host: Rails.application.credentials[:send_grid_host]
+    host: Boyutluseyler.credentials[:send_grid_host]
   }
 
   config.action_mailer.perform_deliveries = true
@@ -106,9 +106,9 @@ Rails.application.configure do
     address: 'smtp.sendgrid.net',
     port: 587,
     authentication: :plain,
-    user_name: Rails.application.credentials[:send_grid_user_name],
-    password: Rails.application.credentials[:send_grid_password],
-    domain: Rails.application.credentials[:send_grid_domain],
+    user_name: Boyutluseyler.credentials[:send_grid_user_name],
+    password: Boyutluseyler.credentials[:send_grid_password],
+    domain: Boyutluseyler.credentials[:send_grid_domain],
     enable_starttls_auto: true
   }
   config.action_mailer.raise_delivery_errors = false # true for debug
