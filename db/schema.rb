@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_09_215416) do
+ActiveRecord::Schema.define(version: 2019_08_04_203944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -111,6 +111,35 @@ ActiveRecord::Schema.define(version: 2019_07_09_215416) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "sail_entries", force: :cascade do |t|
+    t.string "value", null: false
+    t.bigint "setting_id"
+    t.bigint "profile_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["profile_id"], name: "index_sail_entries_on_profile_id"
+    t.index ["setting_id"], name: "index_sail_entries_on_setting_id"
+  end
+
+  create_table "sail_profiles", force: :cascade do |t|
+    t.string "name", null: false
+    t.boolean "active", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_sail_profiles_on_name", unique: true
+  end
+
+  create_table "sail_settings", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.string "value", null: false
+    t.string "group"
+    t.integer "cast_type", limit: 2, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_settings_on_name", unique: true
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -145,4 +174,6 @@ ActiveRecord::Schema.define(version: 2019_07_09_215416) do
   add_foreign_key "design_illustrations", "illustrations", on_delete: :cascade
   add_foreign_key "designs", "categories", on_delete: :cascade
   add_foreign_key "designs", "users", on_delete: :cascade
+  add_foreign_key "sail_entries", "sail_profiles", column: "profile_id"
+  add_foreign_key "sail_entries", "sail_settings", column: "setting_id"
 end
