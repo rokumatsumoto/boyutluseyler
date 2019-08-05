@@ -22,4 +22,6 @@ Rails.application.routes.draw do
                           username: /(?:[a-zA-Z0-9_\.][a-zA-Z0-9_\-\.]*[a-zA-Z0-9_\-]|[a-zA-Z0-9_])/
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
+
+  mount Sail::Engine => '/sail'
 end
