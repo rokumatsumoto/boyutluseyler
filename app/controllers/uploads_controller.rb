@@ -1,7 +1,5 @@
-# frozen_string_literal: true
-
-class FileUploadersController < ApplicationController
-  include FileUploadersHelper
+class UploadsController < ApplicationController
+  include UploadsHelper
   include AWSS3UploaderHelper
 
   before_action :authenticate_user!
