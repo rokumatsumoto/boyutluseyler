@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'test_stl_viewer', to: 'pages#test_stl_viewer'
   get 'upload', to: 'pages#upload'
 
-  resources :file_uploaders
+  resources :uploads
 
   resources :illustrations
 
