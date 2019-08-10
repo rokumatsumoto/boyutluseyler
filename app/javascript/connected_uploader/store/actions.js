@@ -73,7 +73,7 @@ export const fetchPresignedPost = ({ dispatch }, payload) => {
       }),
     )
     .catch(error => {
-      // TODO:
+      // TODO: rescue_from UnknownUploadModelError, with: :render_404
       // const errorPayload = Object.assign(payload, { error: error });
       // dispatch('receiveFetchError', errorPayload);
     });

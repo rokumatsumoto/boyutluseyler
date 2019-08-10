@@ -16,6 +16,15 @@ class ApplicationController < ActionController::Base
     stored_location_for(resource_or_scope) || super
   end
 
+  def render_404
+    respond_to do |format|
+      format.html { render file: "#{Rails.root}/public/404", layout: false, status: 404 }
+      # Prevent the Rails CSRF protector from thinking a missing .js file is a JavaScript file
+      format.js { render json: '', status: :not_found, content_type: 'application/json' }
+      format.any { head :not_found }
+    end
+  end
+
   protected
 
   # https://github.com/plataformatec/devise#strong-parameters
