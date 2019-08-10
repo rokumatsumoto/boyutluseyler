@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 class IllustrationsController < ApplicationController
-  include AWSS3UploaderHelper
   def create
     if illustration_params.key?(:key)
-      obj = S3_BUCKET.object(illustration_params[:key])
+      obj = DIRECT_UPLOAD_AWS_S3_BUCKET.object(illustration_params[:key])
 
       if obj.exists?
         # TODO: pundit

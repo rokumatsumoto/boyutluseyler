@@ -16,14 +16,34 @@ module Boyutluseyler
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
+    # There is no need to add `lib` to autoload_paths since autoloading is
+    # configured to check for eager loaded paths:
+    # https://github.com/rails/rails/blob/v4.2.6/railties/lib/rails/engine.rb#L687
+    # http://blog.arkency.com/2014/11/dont-forget-about-eager-load-when-extending-autoload
+    config.eager_load_paths.push("#{config.root}/lib")
+
+    # Rake tasks ignore the eager loading settings, so we need to set the
+    # autoload paths explicitly
+    config.autoload_paths = config.eager_load_paths.dup
+
     config.time_zone = 'Istanbul' # Default time zone
     config.i18n.default_locale = :tr
 
     # Disable animations, only for test environments
     config.disable_animations = false
+
+    # https://guides.rubyonrails.org/configuring.html#initialization-events
+    config.before_initialize do
+      # We need to wait for the Boyutluseyler.credentials method below
+      config.x = config_for(:boyutluseyler).with_indifferent_access
+    end
   end
 
   def self.credentials
     @credentials ||= Rails.application.credentials[Rails.env.to_sym]
+  end
+
+  def self.config
+    @config ||= Rails.configuration.x
   end
 end

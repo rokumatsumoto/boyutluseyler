@@ -1,15 +1,10 @@
-s3_direct_upload_cache_control:
-  description: Specify caching behavior along the request/reply chain.
-  value: public, max-age=315576000
-  cast_type: string
-  group: s3_direct_upload
-s3_direct_upload_content_length_range_min:
+direct_upload_content_length_range_min:
   description: The minimum allowable size for the uploaded content.
   value: 1
   cast_type: integer
-  group: s3_direct_upload
-s3_direct_upload_content_length_range_max:
+  group: direct_upload
+direct_upload_content_length_range_max:
   description: The maximum allowable size for the uploaded content.
   value: 104_857_600
   cast_type: integer
-  group: s3_direct_upload
+  group: direct_upload

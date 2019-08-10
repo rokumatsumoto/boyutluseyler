@@ -1,14 +1,25 @@
+# frozen_string_literal: true
+
 class UploadsController < ApplicationController
-  include UploadsHelper
-  include AWSS3UploaderHelper
+  include UploadsActions
+
+  UnknownUploadModelError = Class.new(StandardError)
+
+  MODEL_CLASSES = {
+    'blueprint' => Blueprint,
+    'illustration' => Illustration
+  }.freeze
+
+  rescue_from UnknownUploadModelError, with: :render_404
 
   before_action :authenticate_user!
+  before_action :find_model
 
-  def new
-    if illustration?
-      render_presigned_post(:illustration)
-    elsif blueprint?
-      render_presigned_post(:blueprint)
-    end
+  def find_model
+    strong_memoize(:find_model) { upload_model_class }
+  end
+
+  def upload_model_class
+    MODEL_CLASSES[upload_params[:model]] || raise(UnknownUploadModelError)
   end
 end

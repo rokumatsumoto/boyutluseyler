@@ -1,0 +1,15 @@
+shared: &shared
+  direct_upload_provider: AWS # Google https://cloud.google.com/storage/docs/migrating
+  direct_upload_access_key_id: <%= Boyutluseyler.credentials[:aws_s3][:access_key_id] %>
+  direct_upload_secret_access_key: <%= Boyutluseyler.credentials[:aws_s3][:secret_access_key] %>
+  direct_upload_bucket_name: <%= Boyutluseyler.credentials[:aws_s3][:bucket_name] %>
+  direct_upload_region: <%= Boyutluseyler.credentials[:aws_s3][:region] %>
+  direct_upload_acl: <%= Boyutluseyler.credentials[:aws_s3][:acl] %>
+  direct_upload_success_action_status: <%= "\'#{Boyutluseyler.credentials[:aws_s3][:success_action_status]}\'" %>
+  direct_upload_cache_control: public, max-age=315576000
+
+development:
+  <<: *shared
+
+production:
+  <<: *shared

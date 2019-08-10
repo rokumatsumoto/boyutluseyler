@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 class BlueprintsController < ApplicationController
-  include AWSS3UploaderHelper
   def create
     if blueprint_params.key?(:key)
-      obj = S3_BUCKET.object(blueprint_params[:key])
+      obj = DIRECT_UPLOAD_AWS_S3_BUCKET.object(blueprint_params[:key])
 
       if obj.exists?
         # TODO: pundit
