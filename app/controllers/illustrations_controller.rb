@@ -2,29 +2,14 @@
 
 class IllustrationsController < ApplicationController
   def create
-    if illustration_params.key?(:key)
-      obj = DIRECT_UPLOAD_AWS_S3_BUCKET.object(illustration_params[:key])
+    return unless illustration_params.key?(:key) # TODO: return 400 bad request
 
-      if obj.exists?
-        # TODO: pundit
-        @illustration = Illustration.new do |i|
-          i.url = obj.public_url
-          i.url_path = obj.key
-          i.size = obj.size
-          i.content_type = obj.content_type
-          i.image_url = ''
-        end
+    @illustration = Illustrations::CreateService.new(illustration_params).execute
 
-        if @illustration.save
-          render json: { id: @illustration.id }, status: :created
-        else
-          render json: @illustration.errors.full_messages, status: :unprocessable_entity
-        end
-
-      else
-        # TODO: not exists
-        puts 'not exists'
-      end
+    if @illustration.persisted?
+      render json: { id: @illustration.id }, status: :created
+    else
+      render json: @illustration.errors.full_messages, status: :unprocessable_entity
     end
   end
 
