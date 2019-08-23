@@ -14,10 +14,7 @@
 #  updated_at   :datetime         not null
 #
 
-class BlueprintSerializer
-  include FastJsonapi::ObjectSerializer
-  set_key_transform :camel_lower
-
+class BlueprintSerializer < BaseSerializer
   attributes :id, :url, :size, :image_url
   attribute :filename do |object|
     File.basename(object.url_path)

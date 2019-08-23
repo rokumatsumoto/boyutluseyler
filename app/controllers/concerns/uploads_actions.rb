@@ -7,14 +7,10 @@ module UploadsActions
     presigned_post = Files::DirectUpload::CreatePresignedPostService
                      .new(model, uploader_context).execute
 
-    render_presigned_post(presigned_post)
+    render json: presigned_post.fields, status: :ok
   end
 
   private
-
-  def render_presigned_post(presigned_post)
-    render json: presigned_post.fields, status: :ok
-  end
 
   def uploader_context
     {
