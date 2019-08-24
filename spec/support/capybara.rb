@@ -2,7 +2,7 @@ require 'capybara/rspec'
 require 'capybara-screenshot'
 require 'capybara-screenshot/rspec'
 require 'capybara/email/rspec'
-require 'selenium-webdriver'
+require 'webdrivers/chromedriver'
 
 ## Configure capybara
 
