@@ -2,6 +2,7 @@
 
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception, prepend: true
+  # protect_from_forgery with: :null_session # for postman
 
   include ApplicationHelper
   include Pundit
@@ -12,11 +13,24 @@ class ApplicationController < ActionController::Base
   # the user as `authenticate_user!` (or whatever your resource is) will halt the filter
   # chain and redirect before the location can be stored.
 
+  protected
+
   def after_sign_in_path_for(resource_or_scope)
     stored_location_for(resource_or_scope) || super
   end
 
-  protected
+  def render_404
+    respond_to do |format|
+      format.html { render file: Rails.root.join('public', '404'), layout: false, status: 404 }
+      # Prevent the Rails CSRF protector from thinking a missing .js file is a JavaScript file
+      format.js { render json: '', status: :not_found, content_type: 'application/json' }
+      format.any { head :not_found }
+    end
+  end
+
+  rescue_from ActionController::ParameterMissing do |e|
+    render json: e.message, status: :unprocessable_entity
+  end
 
   # https://github.com/plataformatec/devise#strong-parameters
   def configure_permitted_parameters

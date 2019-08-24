@@ -1,0 +1,10 @@
+direct_upload_content_length_range_min:
+  description: The minimum allowable size for the uploaded content.
+  value: 1
+  cast_type: integer
+  group: direct_upload
+direct_upload_content_length_range_max:
+  description: The maximum allowable size for the uploaded content.
+  value: 104_857_600
+  cast_type: integer
+  group: direct_upload

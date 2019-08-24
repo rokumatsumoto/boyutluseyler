@@ -1,33 +1,18 @@
 # frozen_string_literal: true
 
 class BlueprintsController < ApplicationController
-  include AWSS3UploaderHelper
   def create
-    if blueprint_params.key?(:key)
-      blueprint_obj = S3_BUCKET.object(blueprint_params[:key])
+    @blueprint = Blueprints::CreateService.new(blueprint_params).execute
 
-      if blueprint_obj.exists?
-        validate_content_type(:blueprint, blueprint_obj.key, blueprint_obj.content_type)
-        # TODO: pundit
-        @blueprint = Blueprint.new do |b|
-          b.url = blueprint_obj.public_url
-          b.url_path = blueprint_obj.key
-          b.size = blueprint_obj.size
-          b.content_type = @content_type
-          b.image_url = ''
-        end
-
-        if @blueprint.save
-          render json: { id: @blueprint.id }, status: :created
-        else
-          render json: @blueprint.errors.full_messages, status: :unprocessable_entity
-        end
-
-      else
-        # TODO:
-        puts 'not exists'
-      end
+    if @blueprint.persisted?
+      render json: { id: @blueprint.id }, status: :created
+    else
+      render json: @blueprint.errors.full_messages, status: :unprocessable_entity
     end
+  rescue ArgumentError => e
+    render json: e.message, status: :bad_request
+  rescue Aws::S3::Errors::ServiceError => e
+    render json: e.message, status: :internal_server_error
   end
 
   private

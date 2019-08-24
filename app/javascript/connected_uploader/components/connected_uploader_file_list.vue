@@ -51,10 +51,6 @@ export default {
   },
   methods: {
     ...mapActions(['removeFile', 'updateFileList', 'addFile', 'addOriginFiles']),
-    handleRemove(uniqueId) {
-      this.removeFile(uniqueId);
-      this.$emit('on-remove');
-    },
   },
 };
 </script>
@@ -67,7 +63,7 @@ export default {
         :file="file"
         :input-name="inputName"
         :remove-button-text="removeButtonText"
-        @on-remove="handleRemove"
+        @on-remove="removeFile"
       />
     </draggable>
   </div>

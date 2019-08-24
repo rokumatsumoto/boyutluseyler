@@ -1,33 +1,18 @@
 # frozen_string_literal: true
 
 class IllustrationsController < ApplicationController
-  include AWSS3UploaderHelper
   def create
-    if illustration_params.key?(:key)
-      illustration_obj = S3_BUCKET.object(illustration_params[:key])
+    @illustration = Illustrations::CreateService.new(illustration_params).execute
 
-      if illustration_obj.exists?
-        validate_content_type(:illustration, illustration_obj.key, illustration_obj.content_type)
-        # TODO: pundit
-        @illustration = Illustration.new do |i|
-          i.url = illustration_obj.public_url
-          i.url_path = illustration_obj.key
-          i.size = illustration_obj.size
-          i.content_type = @content_type
-          i.image_url = ''
-        end
-
-        if @illustration.save
-          render json: { id: @illustration.id }, status: :created
-        else
-          render json: @illustration.errors.full_messages, status: :unprocessable_entity
-        end
-
-      else
-        # TODO:
-        puts 'not exists'
-      end
+    if @illustration.persisted?
+      render json: { id: @illustration.id }, status: :created
+    else
+      render json: @illustration.errors.full_messages, status: :unprocessable_entity
     end
+  rescue ArgumentError => e
+    render json: e.message, status: :bad_request
+  rescue Aws::S3::Errors::ServiceError => e
+    render json: e.message, status: :internal_server_error
   end
 
   private

@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'test_stl_viewer', to: 'pages#test_stl_viewer'
   get 'upload', to: 'pages#upload'
 
-  resources :file_uploaders
+  resources :uploads
 
   resources :illustrations
 
@@ -22,4 +22,6 @@ Rails.application.routes.draw do
                           username: /(?:[a-zA-Z0-9_\.][a-zA-Z0-9_\-\.]*[a-zA-Z0-9_\-]|[a-zA-Z0-9_])/
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
+
+  mount Sail::Engine => '/sail'
 end
