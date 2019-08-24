@@ -134,8 +134,8 @@ group :test do
   gem 'capybara-email', '~> 3.0', '>= 3.0.1'
   gem 'capybara-screenshot', '~> 1.0', '>= 1.0.22'
   gem 'selenium-webdriver'
-  # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'chromedriver-helper'
+  # Easy installation and use of selenium webdriver browsers to run system tests
+  gem 'webdrivers', '~> 4.1', '>= 4.1.2', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

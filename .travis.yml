@@ -48,7 +48,6 @@ env:
     - secure: BR96SqaoI5r/Px8VlkhmTkMHBex9f5+wBhVDP84niUZWmKc6h92n9OJW76iSbQCGZZmW7r5k29MU5WMH1MGvcyj0WMP9TRkf2QzKfChlpRxJpdbe3/0Ko9Y2OUbtCW5nGaKliq3wkY0Nw8MsL21Enobp9iCr8v+3w5/AF0koEyUtLxPozJSusdMdfd+7lWX5k9u2a+OQowQMR1W2Amh3YOM5IeIWOrxe8xtypv0b6RBe4E9hT0QZi2d7YZumf/Ncnf9YvqVQkAQqAT0JlQJX3OfYkMYgCGS3XR5wClPX9H2QiXlAZL1gu55/c221tcNRMxjJRdPYlVQOfVrmeEasTuTo/bEYCqnryT2y5KiV9WzHB1tFdz2lOA3/eHpHK5dSaie6NIofAHwvnzkU7Qy0Te2BvAlEqqTABdOQ4XU0ZbOr9fsj7iF+jbFSDFgvd5FKyP9SH8Y/u+E+QTNfK+c1mADAM547bjoTSopYXsuSZ8u2l2LRMQxHOogt3bEaaZtT/E949w5fUXjk8OUwLwQkWKBmMhBKg42ZgG5ba/vZatuMjN14e4Lh2Q8LvqWpLNNI0mG8iPOm/tuS4UWpivt+pU43Z2tddmu7mCuBYohvWuqd0dMb8TeMELx3EyqvPKKsw/bHw0YqyXxFyL/GE2If9LzZHpCOTHaLBSmw7ZhoWGQ=
 install:
   - "bundle install --path vendor/bundle"
-  - "bundle exec chromedriver-update"
   - "yarn"
   - "curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter"
   - "chmod +x ./cc-test-reporter"
