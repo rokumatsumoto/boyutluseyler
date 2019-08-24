@@ -2,8 +2,6 @@
 
 class IllustrationsController < ApplicationController
   def create
-    return unless illustration_params.key?(:key) # TODO: return 400 bad request
-
     @illustration = Illustrations::CreateService.new(illustration_params).execute
 
     if @illustration.persisted?
@@ -11,6 +9,10 @@ class IllustrationsController < ApplicationController
     else
       render json: @illustration.errors.full_messages, status: :unprocessable_entity
     end
+  rescue ArgumentError => e
+    render json: e.message, status: :bad_request
+  rescue Aws::S3::Errors::ServiceError => e
+    render json: e.message, status: :internal_server_error
   end
 
   private

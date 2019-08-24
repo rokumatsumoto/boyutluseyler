@@ -5,8 +5,6 @@ module ObjectStorage
     include Boyutluseyler::Utils::StrongMemoize
     EXPIRE_OFFSET = 15.minutes
 
-    RemoteStoreError = Class.new(StandardError)
-
     attr_reader :model
 
     def initialize(model)

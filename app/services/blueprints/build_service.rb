@@ -3,7 +3,7 @@
 module Blueprints
   class BuildService < Blueprints::BaseService
     def execute
-      return unless blueprint_exists?
+      raise_no_such_key unless blueprint_exists?
 
       Blueprint.new.tap do |b|
         b.url = blueprint.public_url
@@ -15,6 +15,12 @@ module Blueprints
     end
 
     private
+
+    def raise_no_such_key
+      # TODO: log and i18n exception
+      raise Aws::S3::Errors::NoSuchKey.new 'Error', 'Dosya bulunamadı, site
+        yönetimiyle irtibata geçiniz.'
+    end
 
     def blueprint_exists?
       blueprint.exists?

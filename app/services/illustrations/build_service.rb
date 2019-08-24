@@ -3,7 +3,7 @@
 module Illustrations
   class BuildService < Illustrations::BaseService
     def execute
-      return unless illustration_exists?
+      raise_no_such_key unless illustration_exists?
 
       Illustration.new.tap do |i|
         i.url = illustration.public_url
@@ -15,6 +15,12 @@ module Illustrations
     end
 
     private
+
+    def raise_no_such_key
+      # TODO: log and i18n exception
+      raise Aws::S3::Errors::NoSuchKey.new 'Error', 'Dosya bulunamadı, site
+        yönetimiyle irtibata geçiniz.'
+    end
 
     def illustration_exists?
       illustration.exists?
