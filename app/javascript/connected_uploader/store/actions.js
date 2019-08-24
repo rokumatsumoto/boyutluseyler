@@ -30,9 +30,12 @@ export const updateFileList = ({ commit }, fileList) => commit(types.UPDATE_FILE
 export const setFileStatus = ({ commit }, payload) => commit(types.SET_FILE_STATUS, payload);
 
 export const receivePresignedPostError = ({ dispatch }, payload) => {
-  // TODO:
-  //
-  //
+  const error = payload.error.response.data;
+  dispatch('setFileStatus', {
+    actionName: 'ERROR_FILE',
+    uniqueId: payload.uniqueId,
+    error: Array.isArray(error) ? error.join(', ') : error
+  });
 };
 
 export const receivePresignedPostSuccess = ({ dispatch }, payload) => {
@@ -73,17 +76,17 @@ export const fetchPresignedPost = ({ dispatch }, payload) => {
       }),
     )
     .catch(error => {
-      // TODO: rescue_from UnknownUploadModelError, with: :render_404
-      // const errorPayload = Object.assign(payload, { error: error });
-      // dispatch('receiveFetchError', errorPayload);
+      const errorPayload = Object.assign(payload, { error });
+      dispatch('receivePresignedPostError', errorPayload);
     });
 };
 
 export const receiveCreateFileResourceError = ({ dispatch }, payload) => {
+  const error = payload.error.response.data;
   dispatch('setFileStatus', {
     actionName: 'ERROR_FILE',
     uniqueId: payload.uniqueId,
-    error: payload.error.response.data.join(', '),
+    error: Array.isArray(error) ? error.join(', ') : error
   });
 };
 

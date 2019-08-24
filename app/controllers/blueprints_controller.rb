@@ -2,8 +2,6 @@
 
 class BlueprintsController < ApplicationController
   def create
-    return unless blueprint_params.key?(:key) # TODO: return 400 bad request
-
     @blueprint = Blueprints::CreateService.new(blueprint_params).execute
 
     if @blueprint.persisted?
@@ -11,6 +9,10 @@ class BlueprintsController < ApplicationController
     else
       render json: @blueprint.errors.full_messages, status: :unprocessable_entity
     end
+  rescue ArgumentError => e
+    render json: e.message, status: :bad_request
+  rescue Aws::S3::Errors::ServiceError => e
+    render json: e.message, status: :internal_server_error
   end
 
   private
