@@ -1,5 +1,7 @@
 extends:
   - '@gitlab'
+env:
+  jquery: true
 settings:
   import/resolver:
     webpack:
