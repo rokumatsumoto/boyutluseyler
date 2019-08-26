@@ -27,5 +27,3 @@ LocalTime.start();
 
 require('rails.validations');
 require('rails.validations.simple_form.bootstrap4');
-
-require('../user_profile');
