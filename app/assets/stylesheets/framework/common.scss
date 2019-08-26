@@ -76,3 +76,27 @@ a {
 .inline-list li a {
     display: block
 }
+
+%validation {
+  font-size: 80%;
+}
+
+.validation-success {
+  @extend %validation;
+  color: $eucalyptus-2;
+}
+
+.validation-yours {
+  @extend %validation;
+  color: $eucalyptus-2;
+}
+
+.validation-error {
+  @extend %validation;
+  color: $red-punch;
+}
+
+.validation-pending {
+  @extend %validation;
+  color: $black;
+}

@@ -25,9 +25,11 @@ url: registration_path(resource_name), html: { method: :put }) do |f|
       required: false, input_html: { autocomplete: 'new-password' }
     = f.input :password_confirmation, required: false,
       input_html: { autocomplete: 'new-password' }
-    = f.input :current_password,
-      hint: t('.we_need_your_current_password_to_confirm_your_password_changes'),
-      input_html: { autocomplete: 'current-password' }
+    .current_password
+      = f.input :current_password,
+        hint: t('.we_need_your_current_password_to_confirm_your_password_changes'),
+        input_html: { autocomplete: 'current-password' }
+      %p.validation-error.hide= t('activerecord.errors.models.user.attributes.current_password.blank')
   .form-actions
     = f.button :submit, t('.update'), class: 'btn btn-info', id: 'btn_edit_profile'
 %h4.mt-4= t('.cancel_my_account')
