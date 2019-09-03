@@ -66,6 +66,8 @@ gem 'fast_jsonapi', '~> 1.5'
 
 gem 'sail', '~> 3.2', '>= 3.2.2'
 
+# gem 'rack-cors', '~> 1.0', '>= 1.0.3'
+
 group :development, :test do
   # n+1 Queries
   gem 'bullet', '~> 5.9'

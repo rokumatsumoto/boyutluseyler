@@ -32,6 +32,15 @@ module Boyutluseyler
     # Disable animations, only for test environments
     config.disable_animations = false
 
+    # TODO: Update CORS for production
+    # Enable CORS
+    # config.middleware.insert_before 0, Rack::Cors do
+    #   allow do
+    #     origins '*'
+    #     resource '*', headers: :any, methods: [:get, :post, :options]
+    #   end
+    # end
+
     # https://guides.rubyonrails.org/configuring.html#initialization-events
     config.before_initialize do
       # We need to wait for the Boyutluseyler.credentials method below
