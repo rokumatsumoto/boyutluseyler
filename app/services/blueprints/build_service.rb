@@ -6,7 +6,7 @@ module Blueprints
       raise_no_such_key unless blueprint_exists?
 
       Blueprint.new.tap do |b|
-        b.url = blueprint.public_url
+        b.url = public_url
         b.url_path = blueprint.key
         b.size = blueprint.size
         b.content_type = blueprint.content_type
@@ -32,6 +32,10 @@ module Blueprints
 
     def bucket
       DIRECT_UPLOAD_AWS_S3_BUCKET
+    end
+
+    def public_url
+      "#{Boyutluseyler.config[:direct_upload_website_endpoint]}/#{blueprint.key}"
     end
   end
 end
