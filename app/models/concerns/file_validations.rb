@@ -30,11 +30,11 @@ module FileValidations
 
   def filename_is_blank
     # user input: '.stl', '.png', '  .zip'
-    errors.add(:url_path, :blank) if filename_without_extension.blank?
+    errors.add(:url_path, :blank) if filename.blank?
   end
 
-  def filename_without_extension
-    File.basename(url_path, '.*').split('.')[0]
+  def filename
+    Boyutluseyler::FilenameHelpers.filename(url_path)
   end
 
   def sanitize_attrs
