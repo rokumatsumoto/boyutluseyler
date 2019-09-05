@@ -33,6 +33,6 @@
     "webpack-dev-server": "^3.4.1"
   },
   "resolutions": {
-    "@rails/webpacker/**/set-value": "^2.0.1"
+    "@rails/webpacker/webpack/micromatch/snapdragon/base/cache-base/set-value": "^2.0.1"
   }
 }
