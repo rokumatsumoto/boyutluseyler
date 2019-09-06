@@ -8,11 +8,11 @@
 }
 // scss-lint:enable PlaceholderInExtend
 
-.form-control:focus {
-  border: 1px solid $cornflower-blue-2;
-  box-shadow: none;
-  outline: none;
-}
+// .form-control:focus { TODO: remove unused
+//   border: 1px solid $cornflower-blue-2;
+//   box-shadow: none;
+//   outline: none;
+// }
 
 .captcha {
   margin-bottom: 1rem;
