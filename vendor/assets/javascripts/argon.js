@@ -42,10 +42,11 @@ document.addEventListener('turbolinks:load', () => {
         }, 200);
 
     });
+    var navbarMain = document.querySelector("#navbar-main")
 
     // Headroom - show/hide navbar on scroll
     if ($('.headroom')[0]) {
-        var headroom = new Headroom(document.querySelector("#navbar-main"), {
+        var headroom = new Headroom(navbarMain, {
             offset: 300,
             tolerance: {
                 up: 30,
@@ -53,6 +54,12 @@ document.addEventListener('turbolinks:load', () => {
             },
         });
         headroom.init();
+
+        window.addEventListener('scroll', function () {
+            if (window.pageYOffset === 0) {
+                navbarMain.classList.remove('headroom--pinned');
+            }
+        })
     }
 
     // Datepicker
