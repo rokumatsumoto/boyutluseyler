@@ -1,239 +1,61 @@
+-# header element starts/
 %header.header-global
-  %nav#navbar-main.navbar.navbar-main.navbar-expand-lg.navbar-transparent.navbar-light.headroom
+  -# nav element starts/
+  %nav#navbar-main.navbar.navbar-main.navbar-expand-lg.headroom{class: navbar_class(use_hero?) }
     .container
       = link_to image_tag('white.png'), root_path,
-        class: 'navbar-brand mr-lg-5'
-      %button.navbar-toggler{"aria-controls" => "navbar_global", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbar_global", "data-toggle" => "collapse", :type => "button"}
+      class: 'navbar-brand mr-lg-5'
+      %button.navbar-toggler{"aria-controls" => "navbar-global", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbar-global", "data-toggle" => "collapse", :type => "button"}
         %span.navbar-toggler-icon
-      #navbar_global.navbar-collapse.collapse
+      #navbar-global.navbar-collapse.collapse
         .navbar-collapse-header
           .row
             .col-6.collapse-brand
               %a{:href => "#"}
                 = link_to image_tag('blue.png'), root_path
-                -# %img{:alt => "image", :src => "./assets/img/brand/blue.png"}/
             .col-6.collapse-close
-              %button.navbar-toggler{"aria-controls" => "navbar_global", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbar_global", "data-toggle" => "collapse", :type => "button"}
+              %button.navbar-toggler{"aria-controls" => "navbar-global", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbar-global", "data-toggle" => "collapse", :type => "button"}
                 %span
                 %span
-        %ul.navbar-nav.navbar-nav-hover.align-items-lg-center
-          %li.nav-item.dropdown
-            %a.nav-link{"data-toggle" => "dropdown", :href => "#", :role => "button"}
-              %i.ni.ni-ui-04.d-lg-none
-              %span.nav-link-inner--text Components
-            .dropdown-menu.dropdown-menu-xl
-              .dropdown-menu-inner
-                %a.media.d-flex.align-items-center{:href => "https://demos.creative-tim.com/argon-design-system/docs/getting-started/overview.html"}
-                  .icon.icon-shape.bg-gradient-primary.rounded-circle.text-white
-                    %i.ni.ni-spaceship
-                  .media-body.ml-3
-                    %h6.heading.text-primary.mb-md-1 Getting started
-                    %p.description.d-none.d-md-inline-block.mb-0 Learn how to use Argon compiling Scss, change brand colors and more.
-                %a.media.d-flex.align-items-center{:href => "https://demos.creative-tim.com/argon-design-system/docs/foundation/colors.html"}
-                  .icon.icon-shape.bg-gradient-success.rounded-circle.text-white
-                    %i.ni.ni-palette
-                  .media-body.ml-3
-                    %h6.heading.text-primary.mb-md-1 Foundation
-                    %p.description.d-none.d-md-inline-block.mb-0 Learn more about colors, typography, icons and the grid system we used for Argon.
-                %a.media.d-flex.align-items-center{:href => "https://demos.creative-tim.com/argon-design-system/docs/components/alerts.html"}
-                  .icon.icon-shape.bg-gradient-warning.rounded-circle.text-white
-                    %i.ni.ni-ui-04
-                  .media-body.ml-3
-                    %h5.heading.text-warning.mb-md-1 Components
-                    %p.description.d-none.d-md-inline-block.mb-0 Browse our 50 beautiful handcrafted components offered in the Free version.
-          %li.nav-item.dropdown
-            %a.nav-link{"data-toggle" => "dropdown", :href => "#", :role => "button"}
-              %i.ni.ni-collection.d-lg-none
-              %span.nav-link-inner--text Examples
-            .dropdown-menu
-              %a.dropdown-item{:href => "./examples/landing.html"} Landing
-              %a.dropdown-item{:href => "./examples/profile.html"} Profile
-              %a.dropdown-item{:href => "./examples/login.html"} Login
-              %a.dropdown-item{:href => "./examples/register.html"} Register
         %ul.navbar-nav.align-items-lg-center.ml-lg-auto
-          %li.nav-item
-            %a.nav-link.nav-link-icon{"data-toggle" => "tooltip", :href => "https://www.facebook.com/creativetim", :target => "_blank", :title => "Like us on Facebook"}
-              %i.fa.fa-facebook-square
-              %span.nav-link-inner--text.d-lg-none Facebook
-          %li.nav-item
-            %a.nav-link.nav-link-icon{"data-toggle" => "tooltip", :href => "https://www.instagram.com/creativetimofficial", :target => "_blank", :title => "Follow us on Instagram"}
-              %i.fa.fa-instagram
-              %span.nav-link-inner--text.d-lg-none Instagram
-          %li.nav-item
-            %a.nav-link.nav-link-icon{"data-toggle" => "tooltip", :href => "https://twitter.com/creativetim", :target => "_blank", :title => "Follow us on Twitter"}
-              %i.fa.fa-twitter-square
-              %span.nav-link-inner--text.d-lg-none Twitter
-          %li.nav-item
-            %a.nav-link.nav-link-icon{"data-toggle" => "tooltip", :href => "https://github.com/creativetimofficial/argon-design-system", :target => "_blank", :title => "Star us on Github"}
-              %i.fa.fa-github
-              %span.nav-link-inner--text.d-lg-none Github
-          %li.nav-item.d-none.d-lg-block.ml-lg-4
-            %a.btn.btn-neutral.btn-icon{:href => "https://www.creative-tim.com/product/argon-design-system", :target => "_blank"}
-              %span.btn-inner--icon
-                %i.fa.fa-cloud-download.mr-2
-              %span.nav-link-inner--text Download
-%main
-  .position-relative
-    / Hero for FREE version
-    %section.section.section-lg.section-hero.section-shaped
-      / Background circles
-      .shape.shape-style-1.shape-primary
-        %span.span-150
-        %span.span-50
-        %span.span-50
-        %span.span-75
-        %span.span-100
-        %span.span-75
-        %span.span-50
-        %span.span-100
-        %span.span-50
-        %span.span-100
-      .container.shape-container.d-flex.align-items-center.py-lg
-        .col.px-0
-          .row.align-items-center.justify-content-center
-            .col-lg-6.text-center
-              = link_to image_tag('white.png', width: '200'), root_path,
-              class: 'img-fluid'
-              -# %img.img-fluid{:alt => "image", :src => "./assets/img/brand/white.png", :style => "width: 200px;"}/
-              %p.lead.text-white A beautiful Design System for Bootstrap 4. It's Free and Open Source.
-              .btn-wrapper.mt-5
-                %a.btn.btn-lg.btn-white.btn-icon.mb-3.mb-sm-0{:href => "https://www.creative-tim.com/product/argon-design-system"}
-                  %span.btn-inner--icon
-                    %i.ni.ni-cloud-download-95
-                  %span.btn-inner--text Download HTML
-                %a.btn.btn-lg.btn-github.btn-icon.mb-3.mb-sm-0{:href => "https://github.com/creativetimofficial/argon-design-system", :target => "_blank"}
-                  %span.btn-inner--icon
-                    %i.fa.fa-github
-                  %span.btn-inner--text
-                    %span.text-warning Star us
-                    on Github
-              .mt-5
-                %small.text-white.font-weight-bold.mb-0.mr-2 *proudly coded by
-                = link_to image_tag('white.png', height: '28px'), root_path
-                -# %img{:alt => "image", :src => "./assets/img/brand/creativetim-white-slim.png", :style => "height: 28px;"}/
-      / SVG separator
-      .separator.separator-bottom.separator-skew.zindex-100
-        %svg{:preserveaspectratio => "none", :version => "1.1", :viewbox => "0 0 2560 100", :x => "0", :xmlns => "http://www.w3.org/2000/svg", :y => "0"}
-          %polygon.fill-white{:points => "2560 0 2560 100 0 100"}
+          - if header_link?(:search)
+            %li.nav-item
+              %form.form-inline.my-2.my-lg-0
+                %input.form-control{"aria-label" => "Search", :placeholder => "Ara", :type => "search"}/
+          - if header_link?(:upload)
+            %li.nav-item.d-none.d-lg-block.ml-2
+              %a.btn.btn-neutral.btn-icon{:href => "/upload"}
+                %span.nav-link-inner--text Yükle
+            %li.nav-item.d-md-none
+              %a.nav-link.nav-link-icon{:href => "/upload"}
+                -# %i.fa.fa-cloud-download
+                %span.nav-link-inner--text Yükle
 
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-  %p sdflkdsjfldksfjdsklfjsdlkfjsdlfjsd
-
+          - if header_link?(:user_dropdown)
+            %li.nav-item.ml-1.dropdown
+              %a#user-dropdown.nav-link.nav-link-icon.d-none.d-lg-block{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+                %i.fas.fa-user.fa-1x
+              .dropdown-menu.dropdown-menu-right.d-none.d-lg-block{"aria-labelledby" => "user-dropdown"}
+                %a.dropdown-item{:href => "#"} Action
+                %a.dropdown-item{:href => "#"} Another action
+                %a.dropdown-item{:href => "#"} Something else here
+              -# .dropdown-menu.dropdown-menu-right.d-md-none{"aria-labelledby" => "user-dropdown"}
+              .dropdown-menu.d-md-none
+                %a.nav-link.nav-link-icon{:href => "#"} Action
+                %a.nav-link.nav-link-icon{:href => "#"} Another action
+                %a.nav-link.nav-link-icon{:href => "#"} Something else here
+          - if header_link?(:sign_in)
+            %li.nav-item.d-none.d-lg-block.ml-2
+              %a.btn.btn-neutral.btn-icon{:href => "#"}
+                %span.nav-link-inner--text Giriş Yap
+            %li.nav-item.d-md-none
+              %a.nav-link.nav-link-icon{:href => "#"}
+                %span.nav-link-inner--text Giriş Yap
+            %li.nav-item.d-none.d-lg-block.ml-2
+              %a.btn.btn-neutral.btn-icon{:href => "#"}
+                %span.nav-link-inner--text Kayıt Ol
+            %li.nav-item.d-md-none
+              %a.nav-link.nav-link-icon{:href => "#"}
+                %span.nav-link-inner--text Kayıt Ol
+  -# nav element ends
+-# header element ends

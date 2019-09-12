@@ -8,4 +8,8 @@ module ApplicationHelper
   def human_enum_collection(model, enum_name)
     model.send(enum_name.to_s).keys.collect { |val| [human_enum_name(model, enum_name, val), val] }
   end
+
+  def controller_route
+    "#{controller_path}/#{action_name}"
+  end
 end
