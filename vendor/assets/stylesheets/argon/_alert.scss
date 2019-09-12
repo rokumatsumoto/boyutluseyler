@@ -2,12 +2,14 @@
     padding: $alert-padding-y $alert-padding-x;
     border: 0;
     font-size: $font-size-sm;
-    @include border-radius($alert-border-radius);
+    margin-bottom: 0;
+    border-radius: 0;
+    // @include border-radius($alert-border-radius); // TODO: remove unused
 
     .alert-inner--icon {
         font-size: 1.25rem;
         margin-right: 1.25rem;
-        display: inline-block; 
+        display: inline-block;
         vertical-align: middle;
 
         i.ni {
@@ -27,7 +29,7 @@
 
 [class*="alert-"] {
     .alert-link {
-        color: $white; 
+        color: $white;
         border-bottom: 1px dotted rgba($white, .5);
     }
 }
@@ -35,11 +37,11 @@
 .alert-heading {
     font-weight: $font-weight-bold;
     font-size: $h4-font-size;
-    margin-top: .15rem; 
-} 
+    margin-top: .15rem;
+}
 
 .alert-dismissible {
-    .close { 
+    .close {
         top: 50%;
         right: $alert-padding-x;
         padding: 0;

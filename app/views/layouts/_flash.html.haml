@@ -3,7 +3,6 @@
   - if value
     %div{ class: "alert alert-#{key} alert-dismissible fade show c-pointer",
     role: 'alert', 'data-dismiss': 'alert' }
-      %span= value
+      %span.alert-inner--text= value
       %button.close{ 'aria-label': 'Kapat', 'data-dismiss': 'alert', type: 'button' }
         %span{ 'aria-hidden': 'true' } &times;
-
