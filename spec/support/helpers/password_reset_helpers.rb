@@ -1,7 +1,6 @@
 module PasswordResetHelpers
   def forgot_password(user, user_reload = true)
-    visit new_user_session_path
-    click_link 'link-forgot-your-password'
+    visit new_user_password_path
     fill_in 'user_email', with: user.email
     click_button 'btn_forgot_password'
     user.reload if user_reload

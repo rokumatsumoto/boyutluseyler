@@ -1,7 +1,6 @@
 module UnlockHelpers
   def resend(user)
-    visit new_user_session_path
-    click_link 'link-unlock-instructions'
+    visit new_user_unlock_path
     fill_in 'user_email', with: user.email
     click_button 'btn_resend_unlock'
   end
