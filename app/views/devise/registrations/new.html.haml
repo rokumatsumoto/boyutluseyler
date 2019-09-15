@@ -1,59 +1,77 @@
 - content_for :head do
   %meta{ content: 'no-cache', name: 'turbolinks-cache-control' }/
   = javascript_pack_tag 'session'
-.row.grid-divider
-  .col-md-6.col-lg-6.px-lg-5
-    %h5.card-title.text-center= t('.sign_up_by_email')
-    .row.px-4
-      .col.bg-light.text-sign-up-form.px-5.py-4
-        = simple_form_for(resource, validate: true, as: resource_name,
-        url: registration_path(resource_name)) do |f|
-          .form-inputs
-            .username{ data: { behavior: 'vue' } }
-              = f.input :username, required: true, validate: true,
-              input_html: { autocomplete: 'username' }
-              %p.validation-error.hide= t('activerecord.errors.models.user.attributes.username.taken')
-              %p.validation-success.hide= t('activerecord.errors.models.user.attributes.username.available')
-              %p.validation-pending.hide= t('activerecord.errors.models.user.attributes.username.checking_availability')
-            = f.input :email, required: true, input_html: { autocomplete: 'email' },
-            validate: true
-            = f.input :password, required: true, validate: true,
-            hint: (t('devise.shared.minimum_password_length',
-            count: @minimum_password_length) if @minimum_password_length),
-            input_html: { autocomplete: 'new-password' }
-            = f.input :password_confirmation, required: true,
-            input_html: { autocomplete: 'new-password' }
-          .captcha
-            = recaptcha_tags hl: 'tr'
-          .form-actions
-            = f.button :submit, t('.sign_up'), class: 'btn btn-info', id: 'btn_sign_up'
-  .col-md-6.col-lg-6.px-lg-5.mx-3.my-4.py-3.mx-sm-3.my-md-0.py-md-0.mx-md-0
-    .row.mt-md-5.ml-md-2
-      .col-12
-        .btn-group-vertical.btn-group-sm
-          %button.btn.btn-facebook-auth
-            %i.fab.fa-facebook.fa-lg
-            %span.p-3 Facebook ile Kayıt Ol
-          %button.btn.btn-twitter-auth.mt-2
-            %i.fab.fa-twitter.fa-lg
-            %span.p-3 Twitter ile Kayıt Ol
-          %button.btn.btn-google-auth.mt-2
-            %i.fab.fa-google.fa-lg
-            %span.p-3 Google ile Kayıt Ol
-        .row.mt-4
-          .col-12
-            %span Zaten kayıtlı mısınız?
-          .col-12
-            = link_to 'Buradan giriş yapabilirsiniz', new_user_session_path, class: 'link-light-sign-up-form'
-        .row.mt-5
-          .col-12.text-motto-sign-up-form
-            %p
-              %i.fas.fa-archive.fa-lg
-              %span 3D dosyalarınızı organize edin
-            %p
-              %i.fas.fa-desktop.fa-lg
-              %span 3D tasarımcı olun
-            %p
-              %i.fas.fa-cube.fa-lg
-              %span Çıktı alabileceğiniz onlarca 3D tasarıma erişin
+= render hero('default_dark_blue', 'default_dark_blue') do
+  .container.pt-lg-md
+    .row.justify-content-center
+      .col-lg-5
+        .card.bg-secondary.shadow.border-0
+          .card-header.bg-white.pb-5
+            .text-muted.text-center.mb-3
+              %small Giriş yap
+              -# TODO: Sign up with (translate, i18n)
+            .text-center
+              %a.btn.btn-neutral.btn-icon.mr-4{:href => "#"}
+                %span.btn-inner--icon
+                  %img{:alt => "Google ile bağlan", :src => "data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 512 512' style='enable-background:new 0 0 512 512;' xml:space='preserve'%3E%3Cpath style='fill:%23FBBB00;' d='M113.47,309.408L95.648,375.94l-65.139,1.378C11.042,341.211,0,299.9,0,256 c0-42.451,10.324-82.483,28.624-117.732h0.014l57.992,10.632l25.404,57.644c-5.317,15.501-8.215,32.141-8.215,49.456 C103.821,274.792,107.225,292.797,113.47,309.408z'/%3E%3Cpath style='fill:%23518EF8;' d='M507.527,208.176C510.467,223.662,512,239.655,512,256c0,18.328-1.927,36.206-5.598,53.451 c-12.462,58.683-45.025,109.925-90.134,146.187l-0.014-0.014l-73.044-3.727l-10.338-64.535 c29.932-17.554,53.324-45.025,65.646-77.911h-136.89V208.176h138.887L507.527,208.176L507.527,208.176z'/%3E%3Cpath style='fill:%2328B446;' d='M416.253,455.624l0.014,0.014C372.396,490.901,316.666,512,256,512 c-97.491,0-182.252-54.491-225.491-134.681l82.961-67.91c21.619,57.698,77.278,98.771,142.53,98.771 c28.047,0,54.323-7.582,76.87-20.818L416.253,455.624z'/%3E%3Cpath style='fill:%23F14336;' d='M419.404,58.936l-82.933,67.896c-23.335-14.586-50.919-23.012-80.471-23.012 c-66.729,0-123.429,42.957-143.965,102.724l-83.397-68.276h-0.014C71.23,56.123,157.06,0,256,0 C318.115,0,375.068,22.126,419.404,58.936z'/%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3C/svg%3E"}/
+                %span.btn-inner--text Google
+              %a.btn.btn-neutral.btn-icon{:href => "#"}
+                %span.btn-inner--icon
+                  %img{:alt => "Facebook ile bağlan", :src => "data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 408.788 408.788' style='enable-background:new 0 0 408.788 408.788;' xml:space='preserve'%3E%3Cpath style='fill:%23475993;' d='M353.701,0H55.087C24.665,0,0.002,24.662,0.002,55.085v298.616c0,30.423,24.662,55.085,55.085,55.085 h147.275l0.251-146.078h-37.951c-4.932,0-8.935-3.988-8.954-8.92l-0.182-47.087c-0.019-4.959,3.996-8.989,8.955-8.989h37.882 v-45.498c0-52.8,32.247-81.55,79.348-81.55h38.65c4.945,0,8.955,4.009,8.955,8.955v39.704c0,4.944-4.007,8.952-8.95,8.955 l-23.719,0.011c-25.615,0-30.575,12.172-30.575,30.035v39.389h56.285c5.363,0,9.524,4.683,8.892,10.009l-5.581,47.087 c-0.534,4.506-4.355,7.901-8.892,7.901h-50.453l-0.251,146.078h87.631c30.422,0,55.084-24.662,55.084-55.084V55.085 C408.786,24.662,384.124,0,353.701,0z'/%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3C/svg%3E"}/
+                %span.btn-inner--text Facebook
+          .card-body.px-lg-5.py-lg-5
+            .text-center.text-muted.mb-4
+              %small Veya e-posta adresinle kaydol
+              -# TODO: i18n translate
+            = simple_form_for(resource, validate: true, as: resource_name,
+            url: registration_path(resource_name)) do |f|
+              .username{ data: { behavior: 'vue' } }
+                .form-group
+                  .input-group.input-group-alternative.mb-3
+                    .input-group-prepend
+                      %span.input-group-text
+                        %i.ni.ni-single-02
+                    = f.input_field :username, required: true, validate: true,
+                    class: 'form-control', input_html: { autocomplete: 'username' }
+                    .validation-error.hide= t('activerecord.errors.models.user.attributes.username.taken')
+                    .validation-success.hide= t('activerecord.errors.models.user.attributes.username.available')
+                    .validation-pending.hide= t('activerecord.errors.models.user.attributes.username.checking_availability')
+              .form-group
+                .input-group.input-group-alternative.mb-3
+                  .input-group-prepend
+                    %span.input-group-text
+                      %i.ni.ni-email-83
+                  -# https://github.com/twbs/bootstrap/issues/23454
+                  -# https://github.com/DavyJonesLocker/client_side_validations/issues/762
+                  = f.input_field :email, required: true,
+                  class: "form-control #{resource.errors[:email].present? ? 'is-invalid': ''}", input_html: { autocomplete: 'email' }, validate: true
+                  - if resource.errors[:email].present?
+                    .invalid-feedback= resource.errors[:email].first
 
+              .form-group
+                .input-group.input-group-alternative
+                  .input-group-prepend
+                    %span.input-group-text
+                      %i.ni.ni-lock-circle-open
+                  -# https://github.com/plataformatec/devise/wiki/Disable-password-confirmation-during-registration
+                  -# https://stackoverflow.com/a/6040520/2015025
+                  -# https://github.com/plataformatec/devise/blob/master/lib/devise/models/validatable.rb
+                  = f.input_field :password, required: true, class: 'form-control',
+                  validate: { presence: true, length: true, confirmation: false },
+                  input_html: { autocomplete: 'new-password' },
+                  hint: (t('devise.shared.minimum_password_length',
+                  count: @minimum_password_length) if @minimum_password_length)
+              .form-group
+                .input-group
+                  = recaptcha_tags hl: 'tr'
+              -# .row.my-4
+              -#   .col-12
+              -#     .custom-control.custom-control-alternative.custom-checkbox
+              -#       %input#customCheckRegister.custom-control-input{:type => "checkbox"}/
+              -#       %label.custom-control-label{:for => "customCheckRegister"}
+              -#         %span
+              -#           I agree with the
+              -#           %a{:href => "#"} Privacy Policy
+              -# TODO: terms of use
+              .text-center
+                = f.button :submit, t('devise.registrations.new.sign_up'), class: 'btn btn-primary mt-4', id: 'btn_sign_up'

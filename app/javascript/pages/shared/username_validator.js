@@ -13,7 +13,7 @@ const SUCCESS_INPUT_CLASS = 'is-valid';
 
 const INVALID_FORM_GROUP_CLASS = 'form-group-invalid';
 
-const USERNAME_FORM_GROUP_CLASS = 'form-group user_username';
+// const USERNAME_FORM_GROUP_CLASS = 'form-group user_username'; // TODO: remove unused
 
 export default class UsernameValidator {
   constructor() {
@@ -111,19 +111,20 @@ export default class UsernameValidator {
 
   clearFieldValidationStateMessage() {
     $(this.inputElement.closest('div'))
-      .siblings('p')
+      .children('div[class^="validation-"]')
       .hide();
 
-    this.setMarginBottomUsernameFormGroup('1rem');
+    // this.setMarginBottomUsernameFormGroup('1rem');
   }
 
-  setMarginBottomUsernameFormGroup(margin) {
-    document.getElementsByClassName(USERNAME_FORM_GROUP_CLASS)[0].style['margin-bottom'] = margin;
-  }
+  // TODO: remove unused
+  // setMarginBottomUsernameFormGroup(margin) {
+  //   document.getElementsByClassName(USERNAME_FORM_GROUP_CLASS)[0].style['margin-bottom'] = margin;
+  // }
 
   clearFieldValidationState() {
     $(this.inputElement.closest('div'))
-      .siblings('p')
+      .children('div[class^="validation-"]')
       .hide();
     this.inputElement.classList.remove(INVALID_INPUT_CLASS, SUCCESS_INPUT_CLASS);
   }
@@ -134,7 +135,7 @@ export default class UsernameValidator {
     this.inputElement.classList.remove(INVALID_INPUT_CLASS);
     $usernameYoursMessage.style.display = 'block';
     // fix state message (yours) position
-    this.setMarginBottomUsernameFormGroup(0);
+    // this.setMarginBottomUsernameFormGroup(0);
   }
 
   setSuccessState() {
@@ -149,7 +150,7 @@ export default class UsernameValidator {
     if (this.state.pending) {
       $usernamePendingMessage.style.display = 'block';
       // fix state messages (pending, unavailable, available) positions
-      this.setMarginBottomUsernameFormGroup(0);
+      // this.setMarginBottomUsernameFormGroup(0);
     } else {
       $usernamePendingMessage.style.display = 'none';
     }

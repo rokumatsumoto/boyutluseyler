@@ -79,21 +79,24 @@ a {
 
 %validation {
   font-size: 80%;
+  width: 100%;
+  margin-top: 0.25rem;
+  padding-left: 0.75rem;
 }
 
 .validation-success {
   @extend %validation;
-  color: $eucalyptus-2;
+  color: $success;
 }
 
 .validation-yours {
   @extend %validation;
-  color: $eucalyptus-2;
+  color: $info;
 }
 
 .validation-error {
   @extend %validation;
-  color: $red-punch;
+  color: $danger;
 }
 
 .validation-pending {

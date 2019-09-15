@@ -14,11 +14,11 @@
 //   outline: none;
 // }
 
-.captcha {
-  margin-bottom: 1rem;
-}
+// .captcha { TODO: remove unused
+//   margin-bottom: 1rem;
+// }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 375px) {
   .g-recaptcha {
     transform: scale(.85);
     transform-origin: 0 0;

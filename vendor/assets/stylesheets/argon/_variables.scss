@@ -576,8 +576,8 @@ $custom-toggle-checked-bg:  theme-color("primary") !default;
 
 $form-feedback-valid-bg:         lighten($success, 15%);
 $form-feedback-valid-color:      theme-color("success") !default;
-$form-feedback-invalid-bg:       lighten($warning, 15%);
-$form-feedback-invalid-color:    theme-color("warning") !default;
+$form-feedback-invalid-bg:       lighten($danger, 15%);
+$form-feedback-invalid-color:    theme-color("danger") !default;
 
 
 // Allows for customizing button radius independently from global border radius

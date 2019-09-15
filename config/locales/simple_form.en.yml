@@ -23,6 +23,11 @@ en:
     #   defaults:
     #     username: 'User name to sign in.'
     #     password: 'No special characters, please.'
+    placeholders:
+      user:
+        username: Username
+        email: Email
+        password: Password
     # include_blanks:
     #   defaults:
     #     age: 'Rather not say'

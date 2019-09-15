@@ -21,6 +21,7 @@
     margin-top: $form-feedback-margin-top;
     font-size: $form-feedback-font-size;
     color: $color;
+    padding-left: 0.75rem;
   }
 
   .#{$state}-tooltip {
