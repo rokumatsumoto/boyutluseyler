@@ -27,7 +27,8 @@ tr:
       user:
         username: Kullanıcı adı
         email: E-posta
-        password: Parola
+        login: Kullanıcı adı veya e-posta
+        password: Şifre
 
     # include_blanks:
     #   defaults:

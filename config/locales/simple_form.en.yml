@@ -27,6 +27,7 @@ en:
       user:
         username: Username
         email: Email
+        login: Username or email
         password: Password
     # include_blanks:
     #   defaults:
