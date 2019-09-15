@@ -21,7 +21,6 @@ RSpec.describe 'Signup' do
         fill_in 'user_username',              with: new_user.username
         fill_in 'user_email',                 with: new_user.email
         fill_in 'user_password',              with: new_user.password
-        fill_in 'user_password_confirmation', with: new_user.password
 
         expect { click_button 'btn_sign_up' }.to change(User, :count).by(1)
 
@@ -41,7 +40,6 @@ RSpec.describe 'Signup' do
       fill_in 'user_username', with: new_user.username
       fill_in 'user_email',    with: existing_user.email
       fill_in 'user_password', with: new_user.password
-      fill_in 'user_password_confirmation', with: new_user.password
       click_button 'btn_sign_up'
     end
 

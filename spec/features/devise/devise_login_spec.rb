@@ -67,7 +67,7 @@ RSpec.describe 'Devise login', tag: :devise_default do
 
         visit(root_path)
 
-        expect(page).to have_css('a.dropdown-user-toggle')
+        expect(page).to have_css('a#user-dropdown')
         expect(page).to have_current_path root_path
       end
     end
@@ -80,7 +80,7 @@ RSpec.describe 'Devise login', tag: :devise_default do
 
         visit(root_path)
 
-        expect(page).not_to have_css('a.dropdown-user-toggle')
+        expect(page).not_to have_css('a#user-dropdown')
         expect(page).to have_current_path root_path
       end
     end

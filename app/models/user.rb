@@ -51,7 +51,8 @@ class User < ApplicationRecord
   validates :username, presence: true,
                        uniqueness: { case_sensitive: false },
                        length: { in: 3..30 }
-  validates_confirmation_of :password # override only: create (devise)
+
+  # validates :password_confirmation, presence: false
   # Only allow letter, number, underscore, hyphen and punctuation.
   validates_format_of :username,
                       with: /\A(?:[a-zA-Z0-9_\.][a-zA-Z0-9_\-\.]*[a-zA-Z0-9_\-]|[a-zA-Z0-9_])\z/
