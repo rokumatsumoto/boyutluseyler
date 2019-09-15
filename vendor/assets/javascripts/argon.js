@@ -86,9 +86,9 @@ document.addEventListener('turbolinks:load', () => {
     });
 
     // Additional .focus class on form-groups
-    $('.form-control').on('focus blur', function(e) {
-        $(this).parents('.form-group').toggleClass('focused', (e.type === 'focus' || this.value.length > 0));
-    }).trigger('blur');
+    // $('.form-control').on('focus blur', function(e) {
+    //     $(this).parents('.form-group').toggleClass('focused', (e.type === 'focus' || this.value.length > 0));
+    // }).trigger('blur');
 
     // NoUI Slider
     if ($(".input-slider-container")[0]) {

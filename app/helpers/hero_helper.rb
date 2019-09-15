@@ -9,11 +9,11 @@ module HeroHelper
     true
   end
 
-  def add_hero(anonymous_partial, logged_in_partial)
+  def hero(anonymous_partial, logged_in_partial)
     self.anonymous_partial = anonymous_partial
     self.logged_in_partial = logged_in_partial
 
-    render partial: hero_partial_path
+    hero_partial_path
   end
 
   private

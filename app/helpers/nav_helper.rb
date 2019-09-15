@@ -42,7 +42,7 @@ module NavHelper
   end
 
   def anonymous_links
-    @anonymous_links ||= [:sign_in]
+    @anonymous_links ||= []
   end
 
   def logged_in_links
