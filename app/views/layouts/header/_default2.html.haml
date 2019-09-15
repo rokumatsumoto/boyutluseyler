@@ -36,25 +36,21 @@
               %a#user-dropdown.nav-link.nav-link-icon.d-none.d-lg-block{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
                 %i.fas.fa-user.fa-1x
               .dropdown-menu.dropdown-menu-right.d-none.d-lg-block{"aria-labelledby" => "user-dropdown"}
-                %a.dropdown-item{:href => "#"} Action
-                %a.dropdown-item{:href => "#"} Another action
-                %a.dropdown-item{:href => "#"} Something else here
+                %a.dropdown-item{ href: '#' } Profil
+                = link_to 'Ayarlar', edit_user_registration_path, class: 'dropdown-item'
+                = link_to t('devise.sessions.destroy.log_out'), destroy_user_session_path, method: :delete, class: 'dropdown-item'
               .dropdown-menu.d-md-none
-                %a.nav-link.nav-link-icon{:href => "#"} Action
-                %a.nav-link.nav-link-icon{:href => "#"} Another action
-                %a.nav-link.nav-link-icon{:href => "#"} Something else here
+                %a.nav-link.nav-link-icon{ href: '#' } Profil
+                = link_to 'Ayarlar', edit_user_registration_path, class: 'nav-link nav-link-icon'
+                = link_to t('devise.sessions.destroy.log_out'), destroy_user_session_path, method: :delete, class: 'nav-link nav-link-icon'
           - if header_link?(:sign_in)
             %li.nav-item.d-none.d-lg-block.ml-2
-              %a.btn.btn-neutral.btn-icon{:href => "#"}
-                %span.nav-link-inner--text Giriş Yap
+              = link_to t('devise.sessions.new.sign_in'), new_user_session_path, class: 'btn btn-neutral btn-icon'
             %li.nav-item.d-md-none
-              %a.nav-link.nav-link-icon{:href => "#"}
-                %span.nav-link-inner--text Giriş Yap
+              = link_to t('devise.sessions.new.sign_in'), new_user_session_path, class: 'nav-link nav-link-icon'
             %li.nav-item.d-none.d-lg-block.ml-2
-              %a.btn.btn-neutral.btn-icon{:href => "#"}
-                %span.nav-link-inner--text Kayıt Ol
+              = link_to t('devise.registrations.new.sign_up'), new_user_registration_path, class: 'btn btn-neutral btn-icon', id: 'nav_sign_up'
             %li.nav-item.d-md-none
-              %a.nav-link.nav-link-icon{:href => "#"}
-                %span.nav-link-inner--text Kayıt Ol
+              = link_to t('devise.registrations.new.sign_up'), new_user_registration_path, class: 'nav-link nav-link-icon'
   -# nav element ends
 -# header element ends
