@@ -29,6 +29,7 @@ en:
         email: Email
         login: Username or email
         password: Password
+        password_confirmation: Re-enter password
     # include_blanks:
     #   defaults:
     #     age: 'Rather not say'

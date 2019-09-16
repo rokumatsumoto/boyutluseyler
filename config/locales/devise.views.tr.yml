@@ -103,8 +103,8 @@ tr:
     passwords:
       edit:
         change_my_password: Şifremi değiştir
-        change_your_password: Şifreni değiştir
-        confirm_new_password: Yeni şifreni doğrula
+        change_password: Şifreyi Değiştir
+        re_enter_new_password: Yeni şifreyi tekrar gir
         new_password: Yeni şifre
       new:
         forgot_your_password: Şifreni mi unuttun?

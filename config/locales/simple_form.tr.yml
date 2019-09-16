@@ -29,6 +29,7 @@ tr:
         email: E-posta
         login: Kullanıcı adı veya e-posta
         password: Şifre
+        password_confirmation: Şifreyi tekrar gir
 
     # include_blanks:
     #   defaults:
