@@ -14,7 +14,7 @@
                   .input-group-prepend
                     %span.input-group-text
                       %i.fas.fa-at
-                  = f.input_field :email, required: true, validate: true, class: "form-control #{resource.errors[:email].present? ? 'is-invalid': ''}", input_html: { autocomplete: 'email', value: params[:user_email] }
+                  = f.input_field :email, required: true, validate: true, class: "form-control #{ resource.errors[:email].present? ? 'is-invalid': ''}", value: params[:user_email], autocomplete: 'email'
                   - if resource.errors[:email].present?
                     .invalid-feedback= resource.errors[:email].first
               .text-center

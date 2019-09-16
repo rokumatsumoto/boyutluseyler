@@ -34,7 +34,7 @@
                       %span.input-group-text
                         %i.ni.ni-single-02
                     = f.input_field :username, required: true, validate: true,
-                    class: 'form-control', input_html: { autocomplete: 'username' }
+                    class: 'form-control', autocomplete: 'username'
                     .validation-error.hide= t('activerecord.errors.models.user.attributes.username.taken')
                     .validation-success.hide= t('activerecord.errors.models.user.attributes.username.available')
                     .validation-pending.hide= t('activerecord.errors.models.user.attributes.username.checking_availability')
@@ -45,8 +45,8 @@
                       %i.ni.ni-email-83
                   -# https://github.com/twbs/bootstrap/issues/23454
                   -# https://github.com/DavyJonesLocker/client_side_validations/issues/762
-                  = f.input_field :email, required: true,
-                  class: "form-control #{resource.errors[:email].present? ? 'is-invalid': ''}", input_html: { autocomplete: 'email' }, validate: true
+                  = f.input_field :email, required: true, validate: true,
+                  class: "form-control #{resource.errors[:email].present? ? 'is-invalid': ''}", autocomplete: 'email'
                   - if resource.errors[:email].present?
                     .invalid-feedback= resource.errors[:email].first
 
@@ -60,7 +60,7 @@
                   -# https://github.com/plataformatec/devise/blob/master/lib/devise/models/validatable.rb
                   = f.input_field :password, required: true, class: 'form-control',
                   validate: { presence: true, length: true, confirmation: false },
-                  input_html: { autocomplete: 'new-password' },
+                  autocomplete: 'new-password',
                   hint: (t('devise.shared.minimum_password_length',
                   count: @minimum_password_length) if @minimum_password_length)
               .form-group

@@ -29,14 +29,14 @@
                     %span.input-group-text
                       %i.ni.ni-email-83
                   = f.input_field :login, autofocus: true, class: 'form-control',
-                  input_html: { autocomplete: 'email' }
+                  autocomplete: 'email'
               .form-group
                 .input-group.input-group-alternative
                   .input-group-prepend
                     %span.input-group-text
                       %i.ni.ni-lock-circle-open
                   = f.input_field :password, class: 'form-control',
-                  input_html: { autocomplete: 'current-password' }
+                  autocomplete: 'current-password'
               .custom-control.custom-control-alternative.custom-checkbox
                 = f.input_field :remember_me, id: 'user_remember_me',
                 class: 'custom-control-input',
