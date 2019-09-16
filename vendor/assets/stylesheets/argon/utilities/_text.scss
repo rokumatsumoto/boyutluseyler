@@ -3,7 +3,7 @@
 .font-weight-300 { font-weight: 300 !important; }
 .font-weight-400 { font-weight: 400 !important; }
 .font-weight-500 { font-weight: 500 !important; }
-.font-weight-600 { font-weight: 600 !important; } 
+.font-weight-600 { font-weight: 600 !important; }
 .font-weight-700 { font-weight: 700 !important; }
 .font-weight-800 { font-weight: 800 !important; }
 .font-weight-900 { font-weight: 900 !important; }
@@ -33,3 +33,10 @@
 .ls-1 { letter-spacing: .0625rem; }
 .ls-15 { letter-spacing: .09375rem; }
 .ls-2 { letter-spacing: 0.125rem; }
+
+
+// Text size
+
+.text-sm {
+  font-size: $font-size-sm;
+}
