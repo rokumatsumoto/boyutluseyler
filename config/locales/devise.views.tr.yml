@@ -9,7 +9,7 @@ tr:
         current_password: Şimdiki şifre
         current_sign_in_at:
         current_sign_in_ip:
-        email: E-Posta
+        email: E-posta
         encrypted_password:
         failed_attempts:
         last_sign_in_at:
@@ -42,9 +42,9 @@ tr:
               error: Kullanıcı adı doğrulanırken bir hata oluştu
             email:
               invalid: Lütfen geçerli bir e-posta adresi girin.
-              taken: E-Posta hali hazırda kullanılmakta.
-              not_found: E-Posta bulunamadı.
-              already_confirmed: E-Posta zaten onaylanmış, lütfen giriş yapmayı deneyin.
+              taken: E-posta hali hazırda kullanılmakta.
+              not_found: E-posta bulunamadı.
+              already_confirmed: E-posta zaten onaylanmış, lütfen giriş yapmayı deneyin.
               not_locked: Hesabınız kilitlenmemiş.
             current_password:
               invalid: Şimdiki şifre hatalı.
@@ -68,7 +68,8 @@ tr:
       not_found_in_database: Geçersiz kullanıcı adı veya şifre.
       timeout: Oturumunuz sonlandı. Devam etmek için, lütfen yeniden giriş yapınız.
       unauthenticated: Devam etmeden önce giriş yapmanız veya kayıt olmanız gereklidir.
-      unconfirmed: Devam etmeden önce hesabınızı onaylamalısınız.
+      unconfirmed: 'Devam etmeden önce hesabınızı <a href="/confirmation/new">onaylamalısınız.</a>'
+
     mailer:
       confirmation_instructions:
         action: Hesabımı onayla
@@ -108,6 +109,7 @@ tr:
       new:
         forgot_your_password: Şifreni mi unuttun?
         send_me_reset_password_instructions: Şifre yenileme talimatlarını gönder
+        send_login_link: Giriş Bağlantısı Gönder
       no_token: Bu sayfaya şifre sıfırlama e-postasındaki linke tıklayarak gelmeniz gerekmektedir. Linke tıklamak yerine kopyaladıysanız, hata yapmış olabilirsiniz. Lütfen şifre sıfırlama e-postasındaki linke tıklayın.
       send_instructions: Birkaç dakika içinde şifrenizi nasıl sıfırlayacağınız ile ilgili bir e-posta alacaksınız.
       send_paranoid_instructions: 'Eğer e-posta adresiniz sistemimizde kayıtlı ise, birkaç dakika içinde şifrenizi nasıl sıfırlayacağınız ile ilgili bir e-posta alacaksınız. '
