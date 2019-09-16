@@ -20,6 +20,11 @@
     .alert-inner--text {
         display: inline-block;
         vertical-align: middle;
+
+        a {
+            color: $white;
+            text-decoration: underline;
+        }
     }
 }
 
