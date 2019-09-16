@@ -56,6 +56,8 @@ en:
       confirmed: Your email address has been successfully confirmed.
       new:
         resend_confirmation_instructions: Resend confirmation instructions
+        didn_t_receive_confirmation_email: Didn't receive confirmation email?
+        send_login_link: Send Login Link
         resend: Resend
       send_instructions: You will receive an email with instructions for how to confirm your email address in a few minutes.
       send_paranoid_instructions: If your email address exists in our database, you will receive an email with instructions for how to confirm your email address in a few minutes.

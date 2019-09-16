@@ -56,6 +56,8 @@ tr:
       confirmed: Hesabınız başarıyla onaylandı. Şimdi giriş yapabilirsiniz.
       new:
         resend_confirmation_instructions: Onaylama talimatlarını tekrar gönder
+        didn_t_receive_confirmation_email: Onaylama e-postasını almadın mı?
+        send_login_link: Giriş Bağlantısı Gönder
         resend: Yeniden gönder
       send_instructions: Birkaç dakika içinde hesabınızı nasıl onaylayacağınızı anlatan bir e-posta alacaksınız.
       send_paranoid_instructions: Eğer e-posta adresiniz sistemimizde kayıtlı ise, birkaç dakika içinde hesabınızı nasıl onaylayacağınızı anlatan bir e-posta alacaksınız.
