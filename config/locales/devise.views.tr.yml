@@ -16,16 +16,16 @@ tr:
         last_sign_in_ip:
         locked_at:
         password: Şifre
-        password_confirmation: Şifre Doğrulama
+        password_confirmation: Şifre doğrulama
         remember_created_at:
-        remember_me: Beni Hatırla
+        remember_me: Beni hatırla
         reset_password_sent_at:
         reset_password_token: Şifreyi Yenileme Jetonu
         sign_in_count:
         unconfirmed_email:
-        unlock_token: Hesap Geri Açma Jetonu
+        unlock_token: Hesabı Yeniden Açma Jetonu
         updated_at:
-        username: Kullanıcı Adı
+        username: Kullanıcı adı
         login: Kullanıcı adı veya e-posta
     models:
       user: Kullanıcı
@@ -66,7 +66,7 @@ tr:
       inactive: Hesabınız daha aktifleştirilmemiş.
       invalid: Geçersiz kullanıcı adı veya şifre.
       last_attempt: Hesabınız askıya alınmadan önce son bir deneme hakkınız kaldı.
-      locked: Hesabınız kilitlendi.
+      locked: 'Hesabınız kilitlendi. Yeniden açmak için <a href="/unlock/new">tıklayın.</a>'
       not_found_in_database: Geçersiz kullanıcı adı veya şifre.
       timeout: Oturumunuz sonlandı. Devam etmek için, lütfen yeniden giriş yapınız.
       unauthenticated: Devam etmeden önce giriş yapmanız veya kayıt olmanız gereklidir.
@@ -94,11 +94,11 @@ tr:
         instruction_3: Şifreniz yukarıdaki bağlantıyı kullanıp, yeni bir şifre oluşturmadığınız sürece değişmeyecektir.
         subject: Şifre yenileme talimatları.
       unlock_instructions:
-        action: Hesabımı geri aç
+        action: Hesabımı yeniden aç
         greeting: Merhaba %{recipient}!
-        instruction: 'Hesabınızı geri açmak için aşağıdaki bağlantıyı tıklayınız:'
+        instruction: 'Hesabınızı yeniden açmak için aşağıdaki bağlantıyı tıklayınız:'
         message: Hesabınız çok fazla başarısız giriş denemesinden dolayı kilitlenmiştir.
-        subject: Kilit açma talimatları.
+        subject: Hesabı yeniden açma talimatları.
     omniauth_callbacks:
       failure: Sizi %{kind} aracılığıyla tanıyamadık çünkü "%{reason}".
       success: "%{kind} aracılığıyla onaylandınız."
@@ -153,7 +153,7 @@ tr:
       links:
         back: Geri
         didn_t_receive_confirmation_instructions: Onaylama talimatlarını almadınız mı?
-        didn_t_receive_unlock_instructions: Hesap geri açma talimatlarını almadınız mı?
+        didn_t_receive_unlock_email: Hesap geri açma talimatlarını almadınız mı?
         forgot_your_password: Şifreni mi unuttun?
         sign_in: Giriş yap
         sign_in_with_provider: "%{provider} ile giriş yap"
@@ -164,7 +164,9 @@ tr:
     unlocks:
       new:
         resend_unlock_instructions: Hesap geri açma talimatlarını tekrar gönder
+        didn_t_receive_unlock_email: Hesabı yeniden açma e-postasını almadın mı?
         resend: Yeniden gönder
+        send_login_link: Giriş Bağlantısı Gönder
       send_instructions: Birkaç dakika içerisinde hesap kilidi açma talimatlarını içeren bir e-posta alacaksınız.
       send_paranoid_instructions: Eğer hesabınız varsa, birkaç dakika içerisinde hesap kilidi açma talimatlarını içeren bir e-posta alacaksınız.
       unlocked: Hesabınızın kilidi başarıyla açıldı. Devam etmek için lütfen giriş yapın.
