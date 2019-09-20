@@ -13,12 +13,11 @@ const SUCCESS_INPUT_CLASS = 'is-valid';
 
 const INVALID_FORM_GROUP_CLASS = 'form-group-invalid';
 
-// const USERNAME_FORM_GROUP_CLASS = 'form-group user_username'; // TODO: remove unused
-
 export default class UsernameValidator {
   constructor() {
     this.inputElement = document.getElementById('user_username');
-    if (this.inputElement != null) { // for Turbolinks
+    if (this.inputElement != null) {
+      // for Turbolinks
       this.state = {
         available: false,
         valid: false,
@@ -27,21 +26,23 @@ export default class UsernameValidator {
         yours: false,
       };
       this.inputElement.addEventListener('blur', this.usernameBlur.bind(this), false);
+
+      this.form = this.inputElement.closest('form');
+      this.form.addEventListener('submit', this.formSubmit.bind(this), false);
     }
   }
 
   usernameBlur() {
     const username = this.inputElement.value;
-    // look form group username element (div) for valid state
+    // look parent node (div) for valid state
     // for presence, length and format validations we use client_side_validations gem
-    this.state.valid = !this.inputElement.parentNode.classList.contains(
-      INVALID_FORM_GROUP_CLASS,
-    );
+    this.state.valid = !this.inputElement.parentNode.classList.contains(INVALID_FORM_GROUP_CLASS);
     this.state.empty = !username.length;
     this.state.yours =
       this.inputElement.attributes.data_username !== undefined
         ? this.inputElement.attributes.data_username.value === this.inputElement.value
         : false;
+    this.state.available = true;
 
     if (this.state.empty || !this.state.valid) {
       this.clearFieldValidationStateMessage();
@@ -53,6 +54,13 @@ export default class UsernameValidator {
 
     if (this.state.valid && !this.state.empty && !this.state.yours) {
       return this.validateUsername(username);
+    }
+  }
+
+  formSubmit(event) {
+    if (!this.state.available) {
+      event.preventDefault();
+      event.stopPropagation();
     }
   }
 
@@ -113,35 +121,27 @@ export default class UsernameValidator {
     $(this.inputElement.closest('div'))
       .children('div[class^="validation-"]')
       .hide();
-
-    // this.setMarginBottomUsernameFormGroup('1rem');
   }
 
-  // TODO: remove unused
-  // setMarginBottomUsernameFormGroup(margin) {
-  //   document.getElementsByClassName(USERNAME_FORM_GROUP_CLASS)[0].style['margin-bottom'] = margin;
-  // }
-
   clearFieldValidationState() {
-    $(this.inputElement.closest('div'))
-      .children('div[class^="validation-"]')
-      .hide();
+    this.clearFieldValidationStateMessage();
     this.inputElement.classList.remove(INVALID_INPUT_CLASS, SUCCESS_INPUT_CLASS);
+  }
+
+  addSuccessClass() {
+    this.inputElement.classList.add(SUCCESS_INPUT_CLASS);
+    this.inputElement.classList.remove(INVALID_INPUT_CLASS);
   }
 
   setYoursState() {
     const $usernameYoursMessage = document.querySelector(YOURS_MESSAGE_SELECTOR);
-    this.inputElement.classList.add(SUCCESS_INPUT_CLASS);
-    this.inputElement.classList.remove(INVALID_INPUT_CLASS);
+    this.addSuccessClass();
     $usernameYoursMessage.style.display = 'block';
-    // fix state message (yours) position
-    // this.setMarginBottomUsernameFormGroup(0);
   }
 
   setSuccessState() {
     const $usernameSuccessMessage = document.querySelector(SUCCESS_MESSAGE_SELECTOR);
-    this.inputElement.classList.add(SUCCESS_INPUT_CLASS);
-    this.inputElement.classList.remove(INVALID_INPUT_CLASS);
+    this.addSuccessClass();
     $usernameSuccessMessage.style.display = 'block';
   }
 
@@ -149,8 +149,6 @@ export default class UsernameValidator {
     const $usernamePendingMessage = document.querySelector(PENDING_MESSAGE_SELECTOR);
     if (this.state.pending) {
       $usernamePendingMessage.style.display = 'block';
-      // fix state messages (pending, unavailable, available) positions
-      // this.setMarginBottomUsernameFormGroup(0);
     } else {
       $usernamePendingMessage.style.display = 'none';
     }
