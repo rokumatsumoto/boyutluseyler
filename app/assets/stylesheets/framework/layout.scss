@@ -14,3 +14,21 @@
     }
   }
 }
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.page {
+  flex-grow: 1;
+}
+
+.bg-lavender-violet {
+  background-color: $lavender-violet;
+}
