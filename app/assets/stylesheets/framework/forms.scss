@@ -8,22 +8,52 @@
 }
 // scss-lint:enable PlaceholderInExtend
 
-// .form-control:focus { TODO: remove unused
-//   border: 1px solid $cornflower-blue-2;
-//   box-shadow: none;
-//   outline: none;
-// }
-
-// .captcha { TODO: remove unused
-//   margin-bottom: 1rem;
-// }
-
 @media screen and (max-width: 375px) {
   .g-recaptcha {
     transform: scale(.85);
     transform-origin: 0 0;
   }
 }
+
+.form-group .input-group {
+
+  div[class^="validation-"], div[class$="-feedback"]  {
+    padding-left: 0.75rem;
+  }
+}
+
+.form-group-2 {
+  margin-bottom: 1.5rem;
+
+  .form-control {
+
+    &.is-valid,
+    &.is-invalid {
+      border-color: $input-border-color;
+    }
+
+    &:focus {
+      border-color: $input-focus-border-color;
+    }
+  }
+}
+
+.form-control-label {
+  font-size: .875rem;
+  font-weight: 600;
+  color: #525f7f;
+}
+
+.heading-small {
+  font-size: .75rem;
+  font-weight: 600;
+  padding-top: .25rem;
+  padding-bottom: .25rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+
 
 // This variable does not exist in /node_modules/bootstrap/scss/_variables.scss
 // But it exists in source code

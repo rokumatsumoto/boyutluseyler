@@ -1,0 +1,21 @@
+.card-body .menu-list {
+
+  .menu-item {
+    border: 0;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+
+    a {
+      color: $gray-600;
+    }
+  }
+
+  .active {
+    background-color: $list-group-bg;
+
+    a {
+      @extend .font-weight-600;
+      color: $gray-900;
+    }
+  }
+}

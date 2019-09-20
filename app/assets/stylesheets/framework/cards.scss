@@ -1,0 +1,16 @@
+.card-2 {
+    @extend .card;
+
+    border: 0;
+    box-shadow: 0 0 2rem 0 rgba(136,152,170,.15);
+}
+
+.card-header-2 {
+    @extend .card-header;
+
+    border-bottom: 1px solid rgba(0,0,0,.05);
+
+    &:first-child {
+        @include border-radius(calc(.375rem - 1px) calc(.375rem - 1px) 0 0);
+    }
+}

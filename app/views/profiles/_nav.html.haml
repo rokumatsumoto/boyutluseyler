@@ -1,0 +1,15 @@
+.card-2.mt-4
+  .card-header-2.bg-white
+    %h5.text-10625.font-weight-bold.mb-0 Ayarlar
+    -# TODO: i18n
+  .card-body.pt-2
+    %ul.list-group.menu-list
+      = nav_link(path: 'profiles#show', html_options: {class: 'list-group-item menu-item px-0'}) do
+        = link_to 'Profil', profile_path
+      = nav_link(controller: :accounts, html_options: {class: 'list-group-item menu-item px-0'}) do
+        = link_to 'Hesap', profile_account_path
+      -# %li.list-group-item.menu-item.px-0
+      = nav_link(controller: :passwords, html_options: {class: 'list-group-item menu-item px-0'}) do
+        = link_to 'Şifre', edit_profile_password_path
+
+      -# TODO: i18n

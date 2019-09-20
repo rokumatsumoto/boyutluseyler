@@ -1,20 +1,3 @@
-// .space-body {  // TODO: remove unused
-//   margin-bottom: 3.625rem;
-// }
-
-@media (min-width: 768px) {
-  .two-slices {
-    .slice {
-      padding-right: 5%;
-
-      ~ .slice {
-        padding-right: 15px;
-        padding-left: 5%;
-      }
-    }
-  }
-}
-
 html,
 body {
   height: 100%;
@@ -31,4 +14,17 @@ body {
 
 .bg-lavender-violet {
   background-color: $lavender-violet;
+}
+
+@media (min-width: 768px) {
+  .two-slices {
+    .slice {
+      padding-right: 5%;
+
+      ~ .slice {
+        padding-right: 15px;
+        padding-left: 5%;
+      }
+    }
+  }
 }
