@@ -36,12 +36,14 @@
               %a#user-dropdown.nav-link.nav-link-icon.d-none.d-lg-block{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
                 %i.fas.fa-user.fa-1x
               .dropdown-menu.dropdown-menu-right.d-none.d-lg-block{"aria-labelledby" => "user-dropdown"}
+                -# TODO: i18n
                 %a.dropdown-item{ href: '#' } Profil
-                = link_to 'Ayarlar', edit_user_registration_path, class: 'dropdown-item'
+                = link_to 'Ayarlar', profile_path, class: 'dropdown-item'
                 = link_to t('devise.sessions.destroy.log_out'), destroy_user_session_path, method: :delete, class: 'dropdown-item'
               .dropdown-menu.d-md-none
+                -# TODO: i18n
                 %a.nav-link.nav-link-icon{ href: '#' } Profil
-                = link_to 'Ayarlar', edit_user_registration_path, class: 'nav-link nav-link-icon'
+                = link_to 'Ayarlar', profile_path, class: 'nav-link nav-link-icon'
                 = link_to t('devise.sessions.destroy.log_out'), destroy_user_session_path, method: :delete, class: 'nav-link nav-link-icon'
           - if header_link?(:sign_in)
             %li.nav-item.d-none.d-lg-block.ml-2
