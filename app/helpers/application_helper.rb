@@ -9,7 +9,38 @@ module ApplicationHelper
     model.send(enum_name.to_s).keys.collect { |val| [human_enum_name(model, enum_name, val), val] }
   end
 
-  def controller_route
-    "#{controller_path}/#{action_name}"
+  # Check if a particular controller is the current one
+  #
+  # args - One or more controller names to check (using path notation when inside namespaces)
+  #
+  # Examples
+  #
+  #   # On TreeController
+  #   current_controller?(:tree)           # => true
+  #   current_controller?(:commits)        # => false
+  #   current_controller?(:commits, :tree) # => true
+  #
+  #   # On Admin::ApplicationController
+  #   current_controller?(:application)         # => true
+  #   current_controller?('admin/application')  # => true
+  #   current_controller?('gitlab/application') # => false
+  def current_controller?(*args)
+    args.any? do |v|
+      v.to_s.downcase == controller.controller_name || v.to_s.downcase == controller.controller_path
+    end
+  end
+
+  # Check if a particular action is the current one
+  #
+  # args - One or more action names to check
+  #
+  # Examples
+  #
+  #   # On Projects#new
+  #   current_action?(:new)           # => true
+  #   current_action?(:create)        # => false
+  #   current_action?(:new, :create)  # => true
+  def current_action?(*args)
+    args.any? { |v| v.to_s.downcase == action_name }
   end
 end
