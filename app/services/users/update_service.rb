@@ -8,7 +8,7 @@ module Users
       @params = params.dup
     end
 
-    def execute(validate: true, &block)
+    def execute(validate: true, &block) # rubocop:disable Lint/UnusedMethodArgument
       yield(@user) if block_given?
 
       assign_attributes

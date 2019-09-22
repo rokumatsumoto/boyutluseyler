@@ -43,7 +43,6 @@ class User < ApplicationRecord
   # that is seperate from password, password_confirmation or
   # password_digest...
   attr_accessor :current_password
-
   # Validations
   #
   # Note: devise :validatable above adds validations for :email and :password
@@ -52,7 +51,7 @@ class User < ApplicationRecord
                        uniqueness: { case_sensitive: false },
                        length: { in: 3..30 }
 
-  # validates :password_confirmation, presence: false
+  validates_confirmation_of :password
   # Only allow letter, number, underscore, hyphen and punctuation.
   validates_format_of :username,
                       with: /\A(?:[a-zA-Z0-9_\.][a-zA-Z0-9_\-\.]*[a-zA-Z0-9_\-]|[a-zA-Z0-9_])\z/
