@@ -19,7 +19,7 @@ export default class UsernameValidator {
     if (this.inputElement != null) {
       // for Turbolinks
       this.state = {
-        available: false,
+        available: true,
         valid: false,
         pending: false,
         empty: true,
