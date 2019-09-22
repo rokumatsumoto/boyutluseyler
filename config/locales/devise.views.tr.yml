@@ -6,7 +6,7 @@ tr:
         confirmation_token: Onaylama Jetonu
         confirmed_at:
         created_at:
-        current_password: Şimdiki şifre
+        current_password: Eski şifre
         current_sign_in_at:
         current_sign_in_ip:
         email: E-posta
@@ -16,7 +16,7 @@ tr:
         last_sign_in_ip:
         locked_at:
         password: Şifre
-        password_confirmation: Şifre doğrulama
+        password_confirmation: Şifre tekrarı
         remember_created_at:
         remember_me: Beni hatırla
         reset_password_sent_at:
@@ -47,8 +47,8 @@ tr:
               already_confirmed: E-posta zaten onaylanmış, lütfen giriş yapmayı deneyin.
               not_locked: Hesabınız kilitlenmemiş.
             current_password:
-              invalid: Şimdiki şifre hatalı.
-              blank: Şimdiki şifre doldurulmalı.
+              invalid: Eski şifren yanlış girildi. Lütfen tekrar gir.
+              blank: Eski şifre doldurulmalı.
   devise:
     confirmations:
       # confirmed: Hesabınız başarıyla onaylandı. Şu an giriş yapmış bulunuyorsunuz.
@@ -140,6 +140,8 @@ tr:
       signed_up_but_unconfirmed: E-posta adresinize hesap aktifleştirme linkini içeren bir e-posta gönderdik.
       update_needs_confirmation: Hesabınızı başarıyla güncellediniz, fakat yeni e-posta adresinizin onaylanması gerek. Yeni e-posta hesabınızın onaylanması için lütfen size gönderdiğimiz e-postada bulunan onay linkini açın.
       updated: Hesabınız başarıyla güncellendi.
+      updated_but_not_signed_in: Hesabınız başarıyla güncellendi, ancak şifreniz değiştiğinden, tekrar giriş yapmanız gerekiyor.
+      password_updated_but_not_signed_in: Şifre başarıyla güncellendi. Lütfen yeni şifre ile giriş yapın.
     sessions:
       already_signed_out: Başarıyla çıkış yapıldı.
       new:

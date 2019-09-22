@@ -1,0 +1,36 @@
+- content_for :head do
+  = javascript_pack_tag 'profile/password'
+
+= render 'profiles/layout' do
+  .card-2.mt-4
+    .card-header-2.bg-white
+      .row.align-items-center
+        .col-8
+          %h5.text-10625.font-weight-bold.mb-0 Şifreyi Değiştir
+    .card-body.pt-2
+      = simple_form_for(@user, validate: true, url: profile_password_path,
+      html: { method: :put }) do |f|
+        .row.mt-3
+          .col-lg-6
+            .form-group-2
+              %label.form-control-label= t('simple_form.labels.user.edit.current_password')
+              .current_password
+                = f.input_field :current_password, required: true, validate: false, class: 'form-control', autocomplete: 'current-password'
+                .validation-error.hide= t('errors.messages.blank')
+          .col-lg-6
+        .row
+          .col-lg-6
+            .form-group-2
+              %label.form-control-label= t('simple_form.labels.user.edit.password')
+              = f.input_field :password, class: "form-control #{@user.errors[:email].present? ? 'is-invalid': ''}", required: true, validate: true,autocomplete: 'new-password'
+              .validation-error.hide= t('errors.messages.blank')
+              - if @user.errors[:password].present?
+                .invalid-feedback= @user.errors[:password].first
+          .col-lg-6
+            .form-group-2
+              %label.form-control-label= t('simple_form.labels.user.edit.password_confirmation')
+              = f.input_field :password_confirmation, class: "form-control #{@user.errors[:email].present? ? 'is-invalid': ''}", required: true,validate: true, autocomplete: 'new-password'
+              .validation-error.hide= t('errors.messages.blank')
+              - if @user.errors[:password_confirmation].present?
+                .invalid-feedback= @user.errors[:password_confirmation].first
+        = f.button :submit, t('devise.registrations.edit.update'), class: 'btn btn-primary', id: 'btn_save_password'

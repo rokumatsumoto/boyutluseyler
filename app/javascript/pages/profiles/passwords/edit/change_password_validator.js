@@ -1,54 +1,78 @@
-/* eslint-disable consistent-return */
+/* eslint-disable consistent-return, class-methods-use-this */
 
-const INVALID_MESSAGE_SELECTOR = '.current_password .validation-error';
+const INVALID_MESSAGE_SELECTOR = 'div[class^="validation-"]';
 
 const INVALID_INPUT_CLASS = 'is-invalid';
 const SUCCESS_INPUT_CLASS = 'is-valid';
 
+const FORM_SELECTOR = 'edit_user';
+
 export default class ChangePasswordValidator {
   constructor() {
-    this.form = $('#edit_user');
-    if (this.form != null) { // for Turbolinks
-      this.password = $('#user_password');
-      this.passwordConfirmation = $('#user_password_confirmation');
-      this.currentPassword = $('#user_current_password');
+    const forms = document.getElementsByClassName(FORM_SELECTOR);
+    if (forms.length > 0) {
+      // for Turbolinks
+      // eslint-disable-next-line prefer-destructuring
+      this.form = forms[0];
+      this.form.addEventListener('submit', this.formSubmit.bind(this), false);
 
-      this.form.on('submit', this.formSubmit.bind(this));
-      this.currentPassword.on('blur', this.currentPasswordBlur.bind(this));
+      this.getPasswordFields().forEach(element => {
+        element.addEventListener('blur', this.elementBlur.bind(this), false);
+      });
     }
+  }
+
+  getPasswordFields() {
+    return Array.from($(`.${FORM_SELECTOR} *`).filter(':input[type=password]'));
+
+    // https://caniuse.com/#feat=rest-parameters
+    // TODO: remove jquery
+    // rest-parameters not supported on ios safari <= 10.3.3
+    // return [...this.form.elements].filter(element => {
+    //   return element.type === 'password'
+    // });
   }
 
   formSubmit(event) {
-    if (this.passwordChange() && this.currentPasswordIsBlank()) {
-      this.setInvalidState();
-      event.stopImmediatePropagation();
-      return false;
+    this.getPasswordFields().forEach(element => {
+      if (this.elementIsBlank(element)) {
+        this.setInvalidState(element);
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    });
+  }
+
+  elementBlur(event) {
+    if (!this.elementIsBlank(event.target)) {
+      this.clearFieldValidationState(event.target);
+    } else {
+      this.setInvalidState(event.target);
     }
   }
 
-  currentPasswordBlur() {
-    if (!this.currentPasswordIsBlank()) {
-      this.clearFieldValidationState();
-    }
+  elementIsBlank(element) {
+    return element.value.trim() === '';
   }
 
-  passwordChange() {
-    return this.password.val().trim().length > 0 &&
-           this.passwordConfirmation.val().trim().length > 0
+  getInputErrorMessage(element) {
+    return element.closest('div').querySelector(INVALID_MESSAGE_SELECTOR);
   }
 
-  currentPasswordIsBlank() {
-    return this.currentPassword.val().trim() === ''
+  setInvalidState(element) {
+    const $inputErrorMessage = this.getInputErrorMessage(element);
+
+    element.classList.add(INVALID_INPUT_CLASS);
+    element.classList.remove(SUCCESS_INPUT_CLASS);
+
+    $inputErrorMessage.style.display = 'block';
   }
 
-  setInvalidState() {
-    const $inputErrorMessage = $(INVALID_MESSAGE_SELECTOR);
-    this.currentPassword.addClass(INVALID_INPUT_CLASS).removeClass(SUCCESS_INPUT_CLASS);
-    $inputErrorMessage.show();
-  }
+  clearFieldValidationState(element) {
+    const $inputErrorMessage = this.getInputErrorMessage(element);
 
-  clearFieldValidationState() {
-    this.currentPassword.closest('div').siblings('p').hide();
-    this.currentPassword.removeClass(INVALID_INPUT_CLASS).removeClass(SUCCESS_INPUT_CLASS);
+    element.classList.remove(INVALID_INPUT_CLASS, SUCCESS_INPUT_CLASS);
+
+    $inputErrorMessage.style.display = 'none';
   }
 }
