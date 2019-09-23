@@ -219,6 +219,11 @@ Devise.setup do |config|
   # reset. Defaults to true, so a user is signed in automatically after a reset.
   config.sign_in_after_reset_password = false # default is true
 
+  # When set to false, does not sign a user in automatically after their password is
+  # changed. Defaults to true, so a user is signed in automatically after a password
+  # is changed.
+  config.sign_in_after_change_password = false
+
   # ==> Configuration for :encryptable
   # Allow you to use another hashing or encryption algorithm besides bcrypt (default).
   # You can use :sha1, :sha512 or algorithms from others authentication tools as
