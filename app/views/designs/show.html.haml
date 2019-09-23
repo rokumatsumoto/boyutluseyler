@@ -1,36 +1,36 @@
 - content_for :head do
   = javascript_pack_tag 'design'
 
-%h3= @design.name
-.design
-  .design-photos
-    .js-content-preview{ data: { behavior: 'vue' } }
-      %content-preview-toggle-button.mb-2{ 'css-class': 'btn-sm btn-main no-outline' }
-      %content-preview{ 'data-type': 'illustration', 'content-type': 'image',
-        ':files': @illustrations, 'toggle-button-text': 'Fotoğraflar',
-        'default-thumb-url': image_path('B4B4B4-1.png'), ':active': true,
-        'viewer-css-class': 'thumb', 'img-alt-tag': 'Ücretsiz 3D baskı dosyaları' }
-      %content-preview{ 'data-type': 'blueprint', 'content-type': 'model',
-        ':file-extensions': %w[stl obj], ':files': @model_blueprints,
-        'toggle-button-text': '3D Görünüm', 'default-thumb-url': image_path('3d.svg'),
-        'img-bg-color': '#fff', 'viewer-css-class': 'model',
-        'img-alt-tag': 'Ücretsiz 3D baskı dosyaları' }
-  .design-infos
-    %h6.mt-3 3D MODEL AÇIKLAMA
-    .rich= @design.description
-    %h6.mt-3 3D BASKI AYARLARI
-    .rich= @design.printing_settings
-    .text-muted.mt-3 3d model format: #{@design.model_file_format}
-    %h6.mt-3 ETİKETLER
-    %ul.inline-list
-      - @design.tag_names.each do |t|
-        %li
-          %a{ class: 'btn-sm btn-secondary', href: "/tags/#{t}" }= t
+.container
+  %h3= @design.name
+  .design
+    .design-photos
+      .js-content-preview{ data: { behavior: 'vue' } }
+        %content-preview-toggle-button.mb-2{ 'css-class': 'btn-sm btn-main no-outline' }
+        %content-preview{ 'data-type': 'illustration', 'content-type': 'image',
+          ':files': @illustrations, 'toggle-button-text': 'Fotoğraflar',
+          'default-thumb-url': image_path('B4B4B4-1.png'), ':active': true,
+          'viewer-css-class': 'thumb', 'img-alt-tag': 'Ücretsiz 3D baskı dosyaları' }
+        %content-preview{ 'data-type': 'blueprint', 'content-type': 'model',
+          ':file-extensions': %w[stl obj], ':files': @model_blueprints,
+          'toggle-button-text': '3D Görünüm', 'default-thumb-url': image_path('3d.svg'),
+          'img-bg-color': '#fff', 'viewer-css-class': 'model',
+          'img-alt-tag': 'Ücretsiz 3D baskı dosyaları' }
+    .design-infos
+      %h6.mt-3 3D MODEL AÇIKLAMA
+      .rich= @design.description
+      %h6.mt-3 3D BASKI AYARLARI
+      .rich= @design.printing_settings
+      .text-muted.mt-3 3d model format: #{@design.model_file_format}
+      %h6.mt-3 ETİKETLER
+      %ul.inline-list
+        - @design.tag_names.each do |t|
+          %li
+            %a{ class: 'btn-sm btn-secondary', href: "/tags/#{t}" }= t
 
-    - if @design.license_type != 'license_none'
-      .license.float-right.mt-3
-        %h6.d-table-row TELİF HAKKI
-        = render partial: 'designs/shared/license', locals: { license_type: @design.license_type }
-
+      - if @design.license_type != 'license_none'
+        .license.float-right.mt-3
+          %h6.d-table-row TELİF HAKKI
+          = render partial: 'designs/shared/license', locals: { license_type: @design.license_type }
 
 

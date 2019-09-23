@@ -1,34 +1,39 @@
 - content_for :head do
   = javascript_pack_tag 'profile/show'
 
+-# .pl-lg-4 use padding left
+
 = render 'layout' do
   .card-2.mt-4
     .card-header-2.bg-white
       .row.align-items-center
         .col-8
+          -# TODO: i18n
           %h5.text-10625.font-weight-bold.mb-0 Profili Düzenle
     .card-body.pt-2
       = simple_form_for(@user, validate: true, url: profile_path,
       html: { method: :put }) do |f|
         = f.error_notification
+        -# TODO: i18n
         %h6.heading-small.text-muted.mb-4 Kullanıcı Bilgisi
-        .pl-lg-4
-          .row
-            .col-lg-6
-              .form-group-2
-                %label.form-control-label Kullanıcı adı
-                .username{ data: { behavior: 'vue' } }
-                  = f.input_field :username, required: true, validate: true,
-                  class: 'form-control', data_username: current_user.username
-                  .validation-error.hide= t('activerecord.errors.models.user.attributes.username.taken')
-                  .validation-success.hide= t('activerecord.errors.models.user.attributes.username.available')
-                  .validation-pending.hide= t('activerecord.errors.models.user.attributes.username.checking_availability')
-                  .validation-yours.hide= t('activerecord.errors.models.user.attributes.username.yours')
-            .col-lg-6
-              .form-group-2
-                %label.form-control-label E-posta
-                = f.input_field :email, required: true, validate: true,
-                class: 'form-control'
-                - if devise_mapping.confirmable? && @user.pending_reconfirmation?
-                  %small= t('devise.registrations.edit.currently_waiting_confirmation_for_email',email: @user.unconfirmed_email)
+        .row
+          .col-lg-6
+            .form-group-2
+              -# TODO: i18n
+              %label.form-control-label Kullanıcı adı
+              .username{ data: { behavior: 'vue' } }
+                = f.input_field :username, required: true, validate: true,
+                class: 'form-control', data_username: current_user.username
+                .validation-error.hide= t('activerecord.errors.models.user.attributes.username.taken')
+                .validation-success.hide= t('activerecord.errors.models.user.attributes.username.available')
+                .validation-pending.hide= t('activerecord.errors.models.user.attributes.username.checking_availability')
+                .validation-yours.hide= t('activerecord.errors.models.user.attributes.username.yours')
+          .col-lg-6
+            .form-group-2
+              -# TODO: i18n
+              %label.form-control-label E-posta
+              = f.input_field :email, required: true, validate: true,
+              class: 'form-control'
+              - if devise_mapping.confirmable? && @user.pending_reconfirmation?
+                %small= t('devise.registrations.edit.currently_waiting_confirmation_for_email',email: @user.unconfirmed_email)
         = f.button :submit, t('devise.registrations.edit.update'), class: 'btn btn-primary', id: 'btn_edit_profile'
