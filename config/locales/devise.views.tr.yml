@@ -117,6 +117,8 @@ tr:
       send_paranoid_instructions: 'Eğer e-posta adresiniz sistemimizde kayıtlı ise, birkaç dakika içinde şifrenizi nasıl sıfırlayacağınız ile ilgili bir e-posta alacaksınız. '
       updated: Şifreniz başarıyla güncellendi. Şu an giriş yapmış bulunuyorsunuz.
       updated_not_active: Şifreniz başarıyla güncellendi.
+      forgot_my_password: Şifremi unuttum
+      sent_reset_password_instructions: E-posta adresinize şifre sıfırlama linkini içeren bir e-posta gönderdik.
     registrations:
       destroyed: Hesabınız başarıyla kapatıldı. En kısa sürede görüşmek üzere!
       edit:

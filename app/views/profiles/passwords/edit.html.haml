@@ -34,3 +34,4 @@
               - if @user.errors[:password_confirmation].present?
                 .invalid-feedback= @user.errors[:password_confirmation].first
         = f.button :submit, t('devise.registrations.edit.update'), class: 'btn btn-primary', id: 'btn_save_password'
+        = link_to t('devise.passwords.forgot_my_password'), reset_profile_password_path, method: :put, class: 'text-sm'

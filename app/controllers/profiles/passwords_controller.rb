@@ -27,6 +27,12 @@ class Profiles::PasswordsController < ApplicationController
     end
   end
 
+  def reset
+    current_user.send_reset_password_instructions
+    redirect_to edit_profile_password_path,
+                notice: t('devise.passwords.sent_reset_password_instructions')
+  end
+
   private
 
   def set_user

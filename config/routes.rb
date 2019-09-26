@@ -25,7 +25,11 @@ Rails.application.routes.draw do
 
     scope module: :profiles do
       resource :account, only: [:show, :update]
-      resource :password, only: [:edit, :update]
+      resource :password, only: [:edit, :update] do
+        member do
+          put :reset
+        end
+      end
     end
   end
 
