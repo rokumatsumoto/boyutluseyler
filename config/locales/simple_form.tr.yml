@@ -19,10 +19,20 @@ tr:
           current_password: Eski şifre
           password: Yeni şifre
           password_confirmation: Yeni şifreyi tekrar gir
-    # hints:
-    #   defaults:
-    #     username: 'User name to sign in.'
-    #     password: 'No special characters, please.'
+      design:
+        name: İsim
+        description: 3D model açıklama
+        printing_settings: 3D baskı ayarları
+        category: Kategori
+        tags_as_string: Etiketler
+        license_type: Creative Commons Lisansı
+        allow_comments: Yorumlara izin ver
+    hints:
+    #  defaults:
+    #  username: 'User name to sign in.'
+    #  password: 'No special characters, please.'
+      design:
+        tags_as_string: 'Örnek: oyuncak, jurassic park, jurassic, dinazor, ceratosaurus, tarih öncesi, dungeons and dragons'
     placeholders:
       user:
         new:

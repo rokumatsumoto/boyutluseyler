@@ -15,17 +15,7 @@
   &:hover,
   &:focus {
     background-color: #e2e6ea;
-    color: $dodger-blue-3;
-  }
-}
-
-.btn-main {
-  color: $white;
-  background-color: $dodger-blue-3;
-  border-color: $dodger-blue-3;
-
-  &:hover {
-    color: $white;
+    color: $primary;
   }
 }
 
@@ -38,9 +28,3 @@
     box-shadow: none;
   }
 }
-
-// @include media-breakpoint-between(xs,sm){
-//   .btn {
-//       @include button-size($input-btn-padding-y-sm, $input-btn-padding-x-sm, $font-size-sm, $line-height-sm, $btn-border-radius-sm);
-//   }
-// }

@@ -18,7 +18,7 @@ a.thumb{
     &:hover {
 
       img {
-        border-color: $dodger-blue-3;
+        border-color: $primary;
       }
     }
 
@@ -148,9 +148,8 @@ a.thumb{
 
 
 .btn-grey {
-  background-color: #e2e6ea;
-  border-color: #dae0e5;
-  color: #212529;
+  background-color: $gray-200;
+  color: $gray-900;
 }
 
 .btn-drop {
@@ -162,6 +161,7 @@ a.thumb{
 
   p {
     margin: .5rem 0;
+    font-weight: normal;
   }
 
   &--input {
@@ -176,7 +176,7 @@ a.thumb{
   }
 
   &--over, &:focus {
-    box-shadow:0 0 1rem $dodger-blue-3;
+    box-shadow:0 0 1rem $primary;
   }
 }
 

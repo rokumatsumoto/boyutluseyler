@@ -1,4 +1,12 @@
 // scss-lint:disable PlaceholderInExtend
+.alert-danger-border {
+  @extend .alert-danger;
+  @include border-radius($alert-border-radius);
+
+  background-color: $danger;
+  border-color: $danger;
+}
+
 .alert-notice {
   @extend .alert-info;
 }
@@ -54,7 +62,7 @@
 }
 
 
-
+// TODO: remove unused
 // This variable does not exist in /node_modules/bootstrap/scss/_variables.scss
 // But it exists in source code
 // https://github.com/twbs/bootstrap/blob/2317b7fc9636f6a17465d366ce6d73a0c93fee79/scss/_variables.scss#L448

@@ -28,6 +28,10 @@
 
 // Sizes
 
+.btn-xs {
+  @include button-size($btn-padding-y-sm, $btn-padding-x-sm, $input-btn-font-size-xs, $btn-line-height-sm, $btn-border-radius-sm);
+}
+
 .btn-sm {
     font-size: $input-btn-font-size-sm;
 }

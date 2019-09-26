@@ -19,10 +19,20 @@ en:
           current_password: Old password
           password: New password
           password_confirmation: Confirm new password
-    # hints:
+      design:
+        name: Name
+        description: 3D model description
+        printing_settings: 3D printing settings
+        category: Category
+        tags_as_string: Tags
+        license_type: Creative Commons license
+        allow_comments: Allow comments
+    hints:
     #   defaults:
     #     username: 'User name to sign in.'
     #     password: 'No special characters, please.'
+      design:
+        tags_as_string: 'Example: toy, jurassic park, jurassic, dinosaur, ceratosaurus, prehistoric, dungeons and dragons'
     placeholders:
       user:
         username: Username

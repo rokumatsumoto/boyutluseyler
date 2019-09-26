@@ -17,11 +17,11 @@ body {
 }
 
 @media (min-width: 768px) {
-  .two-slices {
-    .slice {
+  .twins {
+    .twin {
       padding-right: 5%;
 
-      ~ .slice {
+      ~ .twin {
         padding-right: 15px;
         padding-left: 5%;
       }
