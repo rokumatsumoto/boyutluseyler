@@ -6,12 +6,12 @@ tr:
       design:
         license_types:
           license_none: "Yok"
-          cc_by: "CC BY - Attribution"
-          cc_by_sa: "CC BY-SA - Attribution - Share Alike"
-          cc_by_nd: "CC BY-ND - Attribution - No Derivatives"
-          cc_by_nc: "CC BY-NC - Attribution - Non commercial"
-          cc_by_nc_sa: "CC BY-NC-SA - Attribution - Non Commercial - Share Alike"
-          cc_by_nc_nd: "CC BY-NC-ND - Attribution - Non Commercial - No Derivatives"
+          cc_by: "CC BY - Atıf"
+          cc_by_sa: "CC BY-SA - Atıf - Aynı Lisansla Paylaş"
+          cc_by_nd: "CC BY-ND - Atıf - Türetilemez"
+          cc_by_nc: "CC BY-NC - Atıf - Gayri Ticari"
+          cc_by_nc_sa: "CC BY-NC-SA - Atıf - Gayri Ticari - Aynı Lisansla Paylaş"
+          cc_by_nc_nd: "CC BY-NC-ND - Atıf - Gayri Ticari - Türetilemez"
     errors:
       messages:
         record_invalid: 'Doğrulama başarısız oldu: %{errors}'
@@ -184,6 +184,9 @@ tr:
       create: "%{model} Ekle"
       submit: "%{model} Kaydet"
       update: "%{model} Güncelle"
+    button:
+      edit: Düzenle
+      delete: Sil
   number:
     currency:
       format:

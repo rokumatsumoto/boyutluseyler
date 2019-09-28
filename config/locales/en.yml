@@ -183,6 +183,9 @@ en:
       create: Create %{model}
       submit: Save %{model}
       update: Update %{model}
+    button:
+      edit: Edit
+      delete: Delete
   number:
     currency:
       format:

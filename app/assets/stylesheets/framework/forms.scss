@@ -61,6 +61,14 @@
   text-transform: uppercase;
 }
 
+.content {
+
+  p {
+    font-weight: normal;
+    opacity: .8;
+  }
+}
+
 
 // TODO: remove unused
 // This variable does not exist in /node_modules/bootstrap/scss/_variables.scss
