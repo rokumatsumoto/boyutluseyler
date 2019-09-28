@@ -50,6 +50,13 @@ class DesignsController < ApplicationController
     end
   end
 
+  # TODO: soft deletion
+  def destroy
+    design.destroy
+
+    redirect_to root_path
+  end
+
   private
 
   def design_files_for(action)
