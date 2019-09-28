@@ -1,11 +1,14 @@
 !!! 5
 %html{ lang: 'tr' }
   = render 'layouts/head'
-  %body.top-bar
-    = render partial: 'layouts/header/default'
-    .container
-      = render 'layouts/flash'
-      .space-body
+  %body
+    = render 'layouts/flash'
+    = render partial: 'layouts/header/default2'
+    -# = render 'layouts/flash'
+    -# = render partial: 'layouts/hero/default'
+    -# .container
+      -# = render 'layouts/flash'
+      -# .space-body
       / %p.notice= notice
       / %p.alert= alert
-      = yield
+    = yield

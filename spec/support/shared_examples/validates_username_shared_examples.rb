@@ -6,7 +6,7 @@ RSpec.shared_examples 'validates username' do
       page.find('body').click # simulate blur event
       wait_for_requests
 
-      expect(find('.user_username')).not_to have_css '.is-invalid'
+      expect(find('#user_username')[:class]).not_to include 'is-invalid'
     end
 
     it 'does not show an error border if the username contains dots (.)' do
@@ -14,7 +14,7 @@ RSpec.shared_examples 'validates username' do
       page.find('body').click
       wait_for_requests
 
-      expect(find('.user_username')).not_to have_css '.is-invalid'
+      expect(find('#user_username')[:class]).not_to include 'is-invalid'
     end
 
     it 'shows an error border if the username already exists' do
@@ -24,7 +24,7 @@ RSpec.shared_examples 'validates username' do
       page.find('body').click
       wait_for_requests
 
-      expect(find('.user_username')).to have_css '.is-invalid'
+      expect(find('#user_username')[:class]).to include 'is-invalid'
     end
 
     it 'shows an error border if the username contains special characters' do
@@ -32,7 +32,7 @@ RSpec.shared_examples 'validates username' do
       page.find('body').click
       wait_for_requests
 
-      expect(find('.user_username')).to have_css '.is-invalid'
+      expect(find('#user_username')[:class]).to include 'is-invalid'
     end
   end
 

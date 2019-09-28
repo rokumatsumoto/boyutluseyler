@@ -45,6 +45,7 @@ class Design < ApplicationRecord
     cc_by_nc_nd: 'cc_by_nc_nd'
   }
 
+  # TODO: remove 3ds format, add ply format
   def model_blueprints
     Blueprint.joins(:design_blueprint)
              .where(design_blueprints: { design_id: id })

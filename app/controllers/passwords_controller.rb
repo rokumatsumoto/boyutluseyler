@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class PasswordsController < Devise::PasswordsController
+  skip_before_action :require_no_authentication, only: [:edit, :update]
   before_action :resource_from_email, only: [:create]
   before_action :throttle_reset, only: [:create]
   # GET /resource/password/new

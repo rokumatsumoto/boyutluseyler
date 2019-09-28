@@ -12,6 +12,11 @@ environment.plugins.append('Provide', new webpack.ProvidePlugin({
   Popper: ['popper.js', 'default']
 }))
 
+// resolve-url-loader must be used before sass-loader
+environment.loaders.get('sass').use.splice(-1, 0, {
+  loader: 'resolve-url-loader'
+});
+
 // environment.loaders.prepend('file', file)
 
 environment.plugins.prepend('VueLoaderPlugin', new VueLoaderPlugin())

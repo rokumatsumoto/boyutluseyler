@@ -6,27 +6,27 @@ tr:
         confirmation_token: Onaylama Jetonu
         confirmed_at:
         created_at:
-        current_password: Geçerli Parola
+        current_password: Eski şifre
         current_sign_in_at:
         current_sign_in_ip:
-        email: E-Posta
+        email: E-posta
         encrypted_password:
         failed_attempts:
         last_sign_in_at:
         last_sign_in_ip:
         locked_at:
-        password: Parola
-        password_confirmation: Parola Doğrulama
+        password: Şifre
+        password_confirmation: Şifre tekrarı
         remember_created_at:
-        remember_me: Beni Hatırla
+        remember_me: Beni hatırla
         reset_password_sent_at:
         reset_password_token: Şifreyi Yenileme Jetonu
         sign_in_count:
         unconfirmed_email:
-        unlock_token: Hesap Geri Açma Jetonu
+        unlock_token: Hesabı Yeniden Açma Jetonu
         updated_at:
-        username: Kullanıcı Adı
-        login: Kullanıcı adı veya E-posta
+        username: Kullanıcı adı
+        login: Kullanıcı adı veya e-posta
     models:
       user: Kullanıcı
     errors:
@@ -42,13 +42,13 @@ tr:
               error: Kullanıcı adı doğrulanırken bir hata oluştu
             email:
               invalid: Lütfen geçerli bir e-posta adresi girin.
-              taken: E-Posta hali hazırda kullanılmakta.
-              not_found: E-Posta bulunamadı.
-              already_confirmed: E-Posta zaten onaylanmış, lütfen giriş yapmayı deneyin.
+              taken: E-posta hali hazırda kullanılmakta.
+              not_found: E-posta bulunamadı.
+              already_confirmed: E-posta zaten onaylanmış, lütfen giriş yapmayı deneyin.
               not_locked: Hesabınız kilitlenmemiş.
             current_password:
-              invalid: Geçerli Parola hatalı.
-              blank: Geçerli Parola doldurulmalı.
+              invalid: Eski şifren yanlış girildi. Lütfen tekrar gir.
+              blank: Eski şifre doldurulmalı.
   devise:
     confirmations:
       # confirmed: Hesabınız başarıyla onaylandı. Şu an giriş yapmış bulunuyorsunuz.
@@ -56,19 +56,22 @@ tr:
       confirmed: Hesabınız başarıyla onaylandı. Şimdi giriş yapabilirsiniz.
       new:
         resend_confirmation_instructions: Onaylama talimatlarını tekrar gönder
+        didn_t_receive_confirmation_email: Onaylama e-postasını almadın mı?
+        send_login_link: Giriş Bağlantısı Gönder
         resend: Yeniden gönder
       send_instructions: Birkaç dakika içinde hesabınızı nasıl onaylayacağınızı anlatan bir e-posta alacaksınız.
       send_paranoid_instructions: Eğer e-posta adresiniz sistemimizde kayıtlı ise, birkaç dakika içinde hesabınızı nasıl onaylayacağınızı anlatan bir e-posta alacaksınız.
     failure:
       already_authenticated: Zaten giriş yaptınız.
       inactive: Hesabınız daha aktifleştirilmemiş.
-      invalid: Geçersiz kullanıcı adı veya parola.
+      invalid: Geçersiz kullanıcı adı veya şifre.
       last_attempt: Hesabınız askıya alınmadan önce son bir deneme hakkınız kaldı.
-      locked: Hesabınız kilitlendi.
-      not_found_in_database: Geçersiz kullanıcı adı veya parola.
+      locked: 'Hesabınız kilitlendi. Yeniden açmak için <a href="/unlock/new">tıklayın.</a>'
+      not_found_in_database: Geçersiz kullanıcı adı veya şifre.
       timeout: Oturumunuz sonlandı. Devam etmek için, lütfen yeniden giriş yapınız.
       unauthenticated: Devam etmeden önce giriş yapmanız veya kayıt olmanız gereklidir.
-      unconfirmed: Devam etmeden önce hesabınızı onaylamalısınız.
+      unconfirmed: 'Devam etmeden önce hesabınızı <a href="/confirmation/new">onaylamalısınız.</a>'
+
     mailer:
       confirmation_instructions:
         action: Hesabımı onayla
@@ -84,35 +87,38 @@ tr:
         message: Şifreniz az önce değiştirildi.
         subject: Şifreniz Değişti
       reset_password_instructions:
-        action: Parolamı değiştir
+        action: Şifremi değiştir
         greeting: Merhaba %{recipient}!
-        instruction: Birisi parolanızı değiştirmek için bir istek gönderdi, aşağıdaki bağlantıyı kullanarak bunu yapabilirsiniz.
+        instruction: Birisi şifrenizi değiştirmek için bir istek gönderdi, aşağıdaki bağlantıyı kullanarak bunu yapabilirsiniz.
         instruction_2: Eğer bu isteği siz yapmadıysanız, bu e-postayı görmezden gelebilirsiniz.
-        instruction_3: Parolanız yukarıdaki bağlantıyı kullanıp, yeni bir parola oluşturmadığınız sürece değişmeyecektir.
-        subject: Şifre sıfırlama talimatları.
+        instruction_3: Şifreniz yukarıdaki bağlantıyı kullanıp, yeni bir şifre oluşturmadığınız sürece değişmeyecektir.
+        subject: Şifre yenileme talimatları.
       unlock_instructions:
-        action: Hesabımı geri aç
+        action: Hesabımı yeniden aç
         greeting: Merhaba %{recipient}!
-        instruction: 'Hesabınızı geri açmak için aşağıdaki bağlantıyı tıklayınız:'
+        instruction: 'Hesabınızı yeniden açmak için aşağıdaki bağlantıyı tıklayınız:'
         message: Hesabınız çok fazla başarısız giriş denemesinden dolayı kilitlenmiştir.
-        subject: Kilit açma talimatları.
+        subject: Hesabı yeniden açma talimatları.
     omniauth_callbacks:
       failure: Sizi %{kind} aracılığıyla tanıyamadık çünkü "%{reason}".
       success: "%{kind} aracılığıyla onaylandınız."
     passwords:
       edit:
-        change_my_password: Parolamı değiştir
-        change_your_password: Şifreni değiştir
-        confirm_new_password: Yeni parolanı doğrula
-        new_password: Yeni Parola
+        change_my_password: Şifremi değiştir
+        change_password: Şifreyi Değiştir
+        re_enter_new_password: Yeni şifreyi tekrar gir
+        new_password: Yeni şifre
       new:
-        forgot_your_password: Parolanızı mı unuttunuz?
-        send_me_reset_password_instructions: Parola yenileme talimatlarını gönder
+        forgot_your_password: Şifreni mi unuttun?
+        send_me_reset_password_instructions: Şifre yenileme talimatlarını gönder
+        send_login_link: Giriş Bağlantısı Gönder
       no_token: Bu sayfaya şifre sıfırlama e-postasındaki linke tıklayarak gelmeniz gerekmektedir. Linke tıklamak yerine kopyaladıysanız, hata yapmış olabilirsiniz. Lütfen şifre sıfırlama e-postasındaki linke tıklayın.
       send_instructions: Birkaç dakika içinde şifrenizi nasıl sıfırlayacağınız ile ilgili bir e-posta alacaksınız.
       send_paranoid_instructions: 'Eğer e-posta adresiniz sistemimizde kayıtlı ise, birkaç dakika içinde şifrenizi nasıl sıfırlayacağınız ile ilgili bir e-posta alacaksınız. '
       updated: Şifreniz başarıyla güncellendi. Şu an giriş yapmış bulunuyorsunuz.
       updated_not_active: Şifreniz başarıyla güncellendi.
+      forgot_my_password: Şifremi unuttum
+      sent_reset_password_instructions: E-posta adresinize şifre sıfırlama linkini içeren bir e-posta gönderdik.
     registrations:
       destroyed: Hesabınız başarıyla kapatıldı. En kısa sürede görüşmek üzere!
       edit:
@@ -121,12 +127,12 @@ tr:
         currently_waiting_confirmation_for_email: 'Doğrulama için bekleniyor : %{email}'
         leave_blank_if_you_don_t_want_to_change_it: değiştirmek istemiyorsanız boş bırakın
         title: "%{resource} düzenle"
-        edit_your_profile: Profilinizi düzenleyin
-        password_change: Parola değişimi
+        edit_your_profile: Profili Düzenle
+        password_change: Şifreyi Değiştir
         unhappy: Mutsuz
         update: Güncelle
-        we_need_your_current_password_to_confirm_your_changes: değişikleri onaylamak için şu anki parolanız
-        we_need_your_current_password_to_confirm_your_password_changes: Parola değişikliklerinizi onaylamak için şu anki parolanız gerekli.
+        we_need_your_current_password_to_confirm_your_changes: değişikleri onaylamak için şu anki şifreniz
+        we_need_your_current_password_to_confirm_your_password_changes: Şifre değişikliklerinizi onaylamak için şu anki şifreniz gerekli.
       new:
         sign_up: Kaydol
         sign_up_by_email: E-posta ile kayıt ol
@@ -136,10 +142,13 @@ tr:
       signed_up_but_unconfirmed: E-posta adresinize hesap aktifleştirme linkini içeren bir e-posta gönderdik.
       update_needs_confirmation: Hesabınızı başarıyla güncellediniz, fakat yeni e-posta adresinizin onaylanması gerek. Yeni e-posta hesabınızın onaylanması için lütfen size gönderdiğimiz e-postada bulunan onay linkini açın.
       updated: Hesabınız başarıyla güncellendi.
+      updated_but_not_signed_in: Hesabınız başarıyla güncellendi, ancak şifreniz değiştiğinden, tekrar giriş yapmanız gerekiyor.
+      password_updated_but_not_signed_in: Şifre başarıyla güncellendi. Lütfen yeni şifre ile giriş yapın.
     sessions:
       already_signed_out: Başarıyla çıkış yapıldı.
       new:
         sign_in: Giriş Yap
+        sign_in_link: Giriş yap
       destroy:
         log_out: Çıkış Yap
       signed_in: Başarıyla giriş yapıldı.
@@ -148,8 +157,8 @@ tr:
       links:
         back: Geri
         didn_t_receive_confirmation_instructions: Onaylama talimatlarını almadınız mı?
-        didn_t_receive_unlock_instructions: Hesap geri açma talimatlarını almadınız mı?
-        forgot_your_password: Parolanızı mı unuttunuz?
+        didn_t_receive_unlock_email: Hesap geri açma talimatlarını almadınız mı?
+        forgot_your_password: Şifreni mi unuttun?
         sign_in: Giriş yap
         sign_in_with_provider: "%{provider} ile giriş yap"
         sign_up: Kaydol
@@ -159,7 +168,9 @@ tr:
     unlocks:
       new:
         resend_unlock_instructions: Hesap geri açma talimatlarını tekrar gönder
+        didn_t_receive_unlock_email: Hesabı yeniden açma e-postasını almadın mı?
         resend: Yeniden gönder
+        send_login_link: Giriş Bağlantısı Gönder
       send_instructions: Birkaç dakika içerisinde hesap kilidi açma talimatlarını içeren bir e-posta alacaksınız.
       send_paranoid_instructions: Eğer hesabınız varsa, birkaç dakika içerisinde hesap kilidi açma talimatlarını içeren bir e-posta alacaksınız.
       unlocked: Hesabınızın kilidi başarıyla açıldı. Devam etmek için lütfen giriş yapın.

@@ -14,11 +14,16 @@
 # Note: client_side_validation requires the error to be encapsulated within
 # <label for="#{instance.send(:tag_id)}" class="message"></label>
 #
+# ActionView::Base.field_error_proc = proc do |html_tag, instance|
+#   if /^<label/.match?(html_tag)
+#     %(<div class="field_with_errors">#{html_tag}</div>).html_safe
+#   else
+#     %(<div class="field_with_errors">#{html_tag}<label for="#{instance.send(:tag_id)}"
+#     class="message">#{instance.error_message.first}</label></div>).html_safe
+#   end
+# end
+
+# https://github.com/DavyJonesLocker/client_side_validations/issues/762
 ActionView::Base.field_error_proc = proc do |html_tag, instance|
-  if /^<label/.match?(html_tag)
-    %(<div class="field_with_errors">#{html_tag}</div>).html_safe
-  else
-    %(<div class="field_with_errors">#{html_tag}<label for="#{instance.send(:tag_id)}"
-    class="message">#{instance.error_message.first}</label></div>).html_safe
-  end
+  html_tag.html_safe
 end

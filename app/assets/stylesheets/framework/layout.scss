@@ -1,13 +1,27 @@
-.space-body {
-  margin-bottom: 3.625rem;
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.page {
+  flex-grow: 1;
+}
+
+.bg-lavender-violet {
+  background-color: $lavender-violet;
 }
 
 @media (min-width: 768px) {
-  .two-slices {
-    .slice {
+  .twins {
+    .twin {
       padding-right: 5%;
 
-      ~ .slice {
+      ~ .twin {
         padding-right: 15px;
         padding-left: 5%;
       }

@@ -11,20 +11,20 @@
   border-radius: 3px;
   position: relative;
   overflow: hidden;
-  background: #828282;
+  background: $gray-600;
   color: $white;
   line-height: normal;
 }
 
 .up--error{
-    background-color: #DE636F;
+    background-color: $danger;
 }
 
 .up-progress {
   position: absolute;
   width: 0;
   height: 100%;
-  background: $dodger-blue-3;
+  background: $primary;
   transition: width 1s ease-out;
 }
 
