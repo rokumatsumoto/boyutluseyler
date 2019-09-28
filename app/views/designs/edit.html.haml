@@ -1,1 +1,11 @@
+.container-fluid.bg-secondary
+  .container
+    .d-flex.mt-4
+      %div
+        -# TODO: i18n
+        %span.badge.badge-primary.badge-pill Tasarımı Düzenle
+        -# TODO: i18n
+      .ml-auto
+        %a.btn-xs.btn-primary.no-outline{ href: design_path(@design) } Görüntüle
+    %h5.display-4.card-title.mt-3 #{@design.name}
 = render 'form'

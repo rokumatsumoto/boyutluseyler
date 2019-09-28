@@ -25,5 +25,6 @@ class Blueprint < ApplicationRecord
   # FileValidations (concern)
   #
 
+  # TODO: remove 3ds format, add ply format
   validates_format_of :url_path, with: /\.(stl|3ds|obj|zip)\z/i
 end

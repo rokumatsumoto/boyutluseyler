@@ -19,6 +19,10 @@ class ApplicationController < ActionController::Base
     stored_location_for(resource_or_scope) || super
   end
 
+  def redirect_back_or_default(default: root_path, options: {})
+    redirect_back(fallback_location: default, **options)
+  end
+
   def render_404
     respond_to do |format|
       format.html { render file: Rails.root.join('public', '404'), layout: false, status: 404 }

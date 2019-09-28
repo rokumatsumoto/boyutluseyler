@@ -1,30 +1,33 @@
+- link_title = human_enum_name(Design, :license_types, license_type)
+- locale = I18n.locale
+
 - if license_type == 'cc_by'
-  %a{ target: '_blank', rel: 'noopener', href: 'https://creativecommons.org/licenses/by/4.0/deed.tr', title: human_enum_name(Design, :license_types, license_type) }
+  %a{ target: '_blank', rel: 'noopener', href: "https://creativecommons.org/licenses/by/4.0/deed.#{locale}", title: link_title }
     %i.fab.fa-creative-commons.fa-lg
     %i.fab.fa-creative-commons-by.fa-lg
 - elsif license_type == 'cc_by_sa'
-  %a{ target: '_blank', rel: 'noopener', href: 'https://creativecommons.org/licenses/by-sa/4.0/deed.tr', title: human_enum_name(Design, :license_types, license_type) }
+  %a{ target: '_blank', rel: 'noopener', href: "https://creativecommons.org/licenses/by-sa/4.0/deed.#{locale}", title: link_title }
     %i.fab.fa-creative-commons.fa-lg
     %i.fab.fa-creative-commons-by.fa-lg
     %i.fab.fa-creative-commons-sa.fa-lg
 - elsif license_type == 'cc_by_nd'
-  %a{ target: '_blank', rel: 'noopener', href: 'https://creativecommons.org/licenses/by-nd/4.0/deed.tr', title: human_enum_name(Design, :license_types, license_type) }
+  %a{ target: '_blank', rel: 'noopener', href: "https://creativecommons.org/licenses/by-nd/4.0/deed.#{locale}", title: link_title }
     %i.fab.fa-creative-commons.fa-lg
     %i.fab.fa-creative-commons-by.fa-lg
     %i.fab.fa-creative-commons-nd.fa-lg
 - elsif license_type == 'cc_by_nc'
-  %a{ target: '_blank', rel: 'noopener', href: 'https://creativecommons.org/licenses/by-nc/4.0/deed.tr', title: human_enum_name(Design, :license_types, license_type) }
+  %a{ target: '_blank', rel: 'noopener', href: "https://creativecommons.org/licenses/by-nc/4.0/deed.#{locale}", title: link_title }
     %i.fab.fa-creative-commons.fa-lg
     %i.fab.fa-creative-commons-by.fa-lg
     %i.fab.fa-creative-commons-nc.fa-lg
 - elsif license_type == 'cc_by_nc_sa'
-  %a{ target: '_blank', rel: 'noopener', href: 'https://creativecommons.org/licenses/by-nc-sa/4.0/deed.tr', title: human_enum_name(Design, :license_types, license_type) }
+  %a{ target: '_blank', rel: 'noopener', href: "https://creativecommons.org/licenses/by-nc-sa/4.0/deed.#{locale}", title: link_title }
     %i.fab.fa-creative-commons.fa-lg
     %i.fab.fa-creative-commons-by.fa-lg
     %i.fab.fa-creative-commons-nc.fa-lg
     %i.fab.fa-creative-commons-sa.fa-lg
 - elsif license_type == 'cc_by_nc_nd'
-  %a{ target: '_blank', rel: 'noopener', href: 'https://creativecommons.org/licenses/by-nc-nd/4.0/deed.tr', title: human_enum_name(Design, :license_types, license_type) }
+  %a{ target: '_blank', rel: 'noopener', href: "https://creativecommons.org/licenses/by-nc-nd/4.0/deed.#{locale}", title: link_title }
     %i.fab.fa-creative-commons.fa-lg
     %i.fab.fa-creative-commons-by.fa-lg
     %i.fab.fa-creative-commons-nc.fa-lg

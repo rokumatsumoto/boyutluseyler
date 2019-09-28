@@ -21,6 +21,18 @@ Rails.application.routes.draw do
   get 'exists/:username', to: 'users#exists',
                           username: /(?:[a-zA-Z0-9_\.][a-zA-Z0-9_\-\.]*[a-zA-Z0-9_\-]|[a-zA-Z0-9_])/
 
+  resource :profile, only: [:show, :update] do
+
+    scope module: :profiles do
+      resource :account, only: [:show, :update]
+      resource :password, only: [:edit, :update] do
+        member do
+          put :reset
+        end
+      end
+    end
+  end
+
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 
   mount Sail::Engine => '/sail'

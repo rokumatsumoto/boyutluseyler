@@ -1,36 +1,46 @@
 - content_for :head do
   = javascript_pack_tag 'design'
+-# TODO: i18n all page
+.container
+  .d-flex.mt-4
+    %div
+      %h3.text-primary.font-weight-600= @design.name
+    .ml-auto.mt-2
+      -# TODO: pundit
+      - if user_signed_in? && @design.user == current_user
+        .d-flex
+          = link_to t('helpers.button.edit'), edit_design_path, class: 'btn-xs btn-primary no-outline'
+          -# TODO: soft delete by request via form + slack integration
+          = link_to t('helpers.button.delete'), design_path(@design), method: :delete, data: { confirm: 'Emin misin?' }, class: 'btn-xs btn-primary no-outline ml-1'
 
-%h3= @design.name
-.design
-  .design-photos
-    .js-content-preview{ data: { behavior: 'vue' } }
-      %content-preview-toggle-button.mb-2{ 'css-class': 'btn-sm btn-main no-outline' }
-      %content-preview{ 'data-type': 'illustration', 'content-type': 'image',
-        ':files': @illustrations, 'toggle-button-text': 'Fotoğraflar',
-        'default-thumb-url': image_path('B4B4B4-1.png'), ':active': true,
-        'viewer-css-class': 'thumb', 'img-alt-tag': 'Ücretsiz 3D baskı dosyaları' }
-      %content-preview{ 'data-type': 'blueprint', 'content-type': 'model',
-        ':file-extensions': %w[stl obj], ':files': @model_blueprints,
-        'toggle-button-text': '3D Görünüm', 'default-thumb-url': image_path('3d.svg'),
-        'img-bg-color': '#fff', 'viewer-css-class': 'model',
-        'img-alt-tag': 'Ücretsiz 3D baskı dosyaları' }
-  .design-infos
-    %h6.mt-3 3D MODEL AÇIKLAMA
-    .rich= @design.description
-    %h6.mt-3 3D BASKI AYARLARI
-    .rich= @design.printing_settings
-    .text-muted.mt-3 3d model format: #{@design.model_file_format}
-    %h6.mt-3 ETİKETLER
-    %ul.inline-list
-      - @design.tag_names.each do |t|
-        %li
-          %a{ class: 'btn-sm btn-secondary', href: "/tags/#{t}" }= t
+  .design
+    .design-photos
+      .js-content-preview{ data: { behavior: 'vue' } }
+        %content-preview-toggle-button.mb-2{ 'css-class': 'btn-xs btn-outline-primary no-outline' }
+        %content-preview{ 'data-type': 'illustration', 'content-type': 'image',
+          ':files': @illustrations, 'toggle-button-text': 'Fotoğraflar',
+          'default-thumb-url': image_path('B4B4B4-1.png'), ':active': true,
+          'viewer-css-class': 'thumb', 'img-alt-tag': 'Ücretsiz 3D baskı dosyaları' }
+        %content-preview{ 'data-type': 'blueprint', 'content-type': 'model',
+          ':file-extensions': %w[stl obj], ':files': @model_blueprints,
+          'toggle-button-text': '3D Görünüm', 'default-thumb-url': image_path('3d.svg'),
+          'img-bg-color': '#fff', 'viewer-css-class': 'model',
+          'img-alt-tag': 'Ücretsiz 3D baskı dosyaları' }
+    .design-infos
+      %h6.text-primary.mt-3 3D Model Açıklama
+      .rich.content= simple_format(@design.description)
+      %h6.text-primary.mt-3 3D Baskı Ayarları
+      .rich.content= simple_format(@design.printing_settings)
+      %h6.mt-3 3D model formatı: #{@design.model_file_format}
+      %h6.text-primary.mt-3 Etiketler
+      %ul.inline-list
+        - @design.tag_names.each do |t|
+          %li
+            %a{ class: 'badge badge-pill badge-primary', href: "/tags/#{t}" }= t
 
-    - if @design.license_type != 'license_none'
-      .license.float-right.mt-3
-        %h6.d-table-row TELİF HAKKI
-        = render partial: 'designs/shared/license', locals: { license_type: @design.license_type }
-
+      - if @design.license_type != 'license_none'
+        .license.float-right.mt-3
+          %h6.text-primary Telif Hakkı
+          = render partial: 'designs/shared/license', locals: { license_type: @design.license_type }
 
 

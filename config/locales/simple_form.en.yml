@@ -11,18 +11,35 @@ en:
     error_notification:
       default_message: "Please review the problems below:"
     # Examples
-    # labels:
-    #   defaults:
-    #     password: 'Password'
-    #   user:
-    #     new:
-    #       email: 'E-mail to sign in.'
-    #     edit:
-    #       email: 'E-mail.'
-    # hints:
+    labels:
+      # defaults:
+      #   password: 'Şifre'
+      user:
+        edit:
+          current_password: Old password
+          password: New password
+          password_confirmation: Confirm new password
+      design:
+        name: Name
+        description: 3D model description
+        printing_settings: 3D printing settings
+        category: Category
+        tags_as_string: Tags
+        license_type: Creative Commons license
+        allow_comments: Allow comments
+    hints:
     #   defaults:
     #     username: 'User name to sign in.'
     #     password: 'No special characters, please.'
+      design:
+        tags_as_string: 'Example: toy, jurassic park, jurassic, dinosaur, ceratosaurus, prehistoric, dungeons and dragons'
+    placeholders:
+      user:
+        username: Username
+        email: Email
+        login: Username or email
+        password: Password
+        password_confirmation: Confirm password
     # include_blanks:
     #   defaults:
     #     age: 'Rather not say'

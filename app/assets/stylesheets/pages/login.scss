@@ -21,31 +21,33 @@
   }
 }
 
+// TODO: remove unused
 // Sign up form
-.text-sign-up-form {
-  @extend %text-auth-form;
-}
+// .text-sign-up-form {
+//   @extend %text-auth-form;
+// }
 
-.link-light-sign-up-form {
-  @extend %link-light-auth-form;
-}
+// .link-light-sign-up-form {
+//   @extend %link-light-auth-form;
+// }
 
-.text-motto-sign-up-form p span {
-  color: $delta-2;
-}
+// .text-motto-sign-up-form p span {
+//   color: $delta-2;
+// }
 
+// TODO: remove unused
 // Sign in form
-.text-sign-in-form {
-  @extend %text-auth-form;
-}
+// .text-sign-in-form {
+//   @extend %text-auth-form;
+// }
 
-.link-light-sign-in-form {
-  @extend %link-light-auth-form;
-}
+// .link-light-sign-in-form {
+//   @extend %link-light-auth-form;
+// }
 
-.link-sign-in-form {
-  @extend %link-auth-form;
-}
+// .link-sign-in-form {
+//   @extend %link-auth-form;
+// }
 
 // Reset password form
 .text-reset-pass-form {
@@ -74,19 +76,21 @@
   @extend %link-light-auth-form;
 }
 
-@include media-breakpoint-between(xs, sm) {
-  // change .btn-password-reset to .btn-sm size on xs
-  .btn-forgot-pass {
-    @include button-size($input-btn-padding-y-sm, $input-btn-padding-x-sm, $font-size-sm, $line-height-sm, $btn-border-radius-sm);
-  }
-}
+// TODO: remove unused
+// @include media-breakpoint-between(xs, sm) {
+//   // change .btn-password-reset to .btn-sm size on xs
+//   .btn-forgot-pass {
+//     @include button-size($input-btn-padding-y-sm, $input-btn-padding-x-sm, $font-size-sm, $line-height-sm, $btn-border-radius-sm);
+//   }
+// }
 
-@include media-breakpoint-between(sm, md) {
-  // change .btn-password-reset to .btn-sm size on sm
-  .btn-forgot-pass {
-    @include button-size($input-btn-padding-y-sm, $input-btn-padding-x-sm, $font-size-sm, $line-height-sm, $btn-border-radius-sm);
-  }
-}
+// TODO: remove unused
+// @include media-breakpoint-between(sm, md) {
+//   // change .btn-password-reset to .btn-sm size on sm
+//   .btn-forgot-pass {
+//     @include button-size($input-btn-padding-y-sm, $input-btn-padding-x-sm, $font-size-sm, $line-height-sm, $btn-border-radius-sm);
+//   }
+// }
 
 // Resend confirmation instructions form
 .text-resend-conf-form {
@@ -114,33 +118,36 @@
   @extend %link-light-auth-form;
 }
 
+// TODO: remove unused
 // Sign up, sign in forms
-.btn-twitter-auth {
-  background-color: $dodger-blue-2;
-  border-color: $dodger-blue-2;
-  color: $white;
+// .btn-twitter-auth {
+//   background-color: $dodger-blue-2;
+//   border-color: $dodger-blue-2;
+//   color: $white;
 
-  &:hover {
-    color: $white;
-  }
-}
+//   &:hover {
+//     color: $white;
+//   }
+// }
 
-.btn-facebook-auth {
-  background-color: $san-marino-2;
-  border-color: $san-marino-2;
-  color: $white;
+// TODO: remove unused
+// .btn-facebook-auth {
+//   background-color: $san-marino-2;
+//   border-color: $san-marino-2;
+//   color: $white;
 
-  &:hover {
-    color: $white;
-  }
-}
+//   &:hover {
+//     color: $white;
+//   }
+// }
 
-.btn-google-auth {
-  background-color: $mojo-2;
-  border-color: $mojo-2;
-  color: $white;
+// TODO: remove unused
+// .btn-google-auth {
+//   background-color: $mojo-2;
+//   border-color: $mojo-2;
+//   color: $white;
 
-  &:hover {
-    color: $white;
-  }
-}
+//   &:hover {
+//     color: $white;
+//   }
+// }

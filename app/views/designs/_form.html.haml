@@ -1,62 +1,57 @@
 - content_for :head do
   = javascript_pack_tag 'user/designs'
+.container.mt-4.mb-4
+  = simple_form_for(@design, validate: true) do |f|
+    = render 'layouts/errors_inline', object: @design
+    .twins.row.grid-divider
+      .twin.col-md-6
+        = f.input :name, required: true, validate: true
 
-= simple_form_for(@design, validate: true) do |f|
-  = f.error_notification
-  = render 'layouts/errors', object: @design
-  .two-slices.row.grid-divider
-    .slice.col-md-6
-      %h5.card-title Yeni Tasarım
-      %br/
-      = f.input :name, required: true, validate: true, label: 'İsim'
+        = f.input :description, required: true, input_html: { rows: 8 }
 
-      = f.input :description, required: true, label: '3D model açıklama', input_html: { rows: 8 }
+        = f.input :printing_settings, input_html: { rows: 5 }
 
-      = f.input :printing_settings, label: '3D baskı ayarları', input_html: { rows: 5 }
+        = f.association :category, collection: Category.order(:list_order), required: true
 
-      = f.association :category, collection: Category.order(:list_order), required: true, label: 'Kategori'
+        = f.input :tags_as_string
 
-      = f.input :tags_as_string, label: 'Etiketler', hint: 'Örnek: oyuncak, jurassic park, jurassic, dinazor, ceratosaurus, tarih öncesi, dungeons and dragons'
+        = f.input :license_type, required: true,
+          collection: human_enum_collection(Design, :license_types),
+          selected: f.object.license_type || 'license_none'
 
-      = f.input :license_type, required: true, label: 'Creative Commons Lisansı',
-        collection: human_enum_collection(Design, :license_types),
-        selected: f.object.license_type || 'license_none'
+        .form-group.d-flex
+          %label.custom-toggle
+            = f.input_field :allow_comments, as: :boolean, id: 'cb_allow_comments', boolean_style: :inline, required: true
+            %span.custom-toggle-slider.rounded-circle
+          %label.ml-2{ for: 'cb_allow_comments' }= t('simple_form.labels.design.allow_comments')
 
-      .form-group
-        %span.switch.switch-sm
-          = f.input_field :allow_comments, as: :boolean, id: 'cb_allow_comments', class: 'switch', boolean_style: :inline, required: true
-          %label{ for: 'cb_allow_comments' } Yorumlara izin ver
+      .twin.col-md-6
+        %label.form-control-label Dosyalar
+        .js-connected-uploader{ data: { behavior: 'vue' } }
+          %connected-uploader{ accept: '.stl,.obj,.ply,.zip,.STL,.OBJ,.ZIP',
+            'add-button-text' => 'STL, OBJ, PLY, ZIP dosyaları ekleyin veya sürükleyin…',
+            'remove-button-text' => 'Kaldır',
+            'direct-url' => 'https://boyutluseyler-staging.s3.eu-central-1.amazonaws.com',
+            'uploader-url' => '/uploads/new?model=blueprint',
+            'create-url' => '/blueprints',
+            'input-name' => 'design[blueprint_ids][]',
+            'data-type' => 'blueprint',
+            ':files' => @blueprints }
 
-    .slice.col-md-6
-      %br/
-      %br/
-      %h6 Dosyalar
-      .js-connected-uploader{ data: { behavior: 'vue' } }
-        %connected-uploader{ accept: '.stl,.3ds,.obj,.zip,.STL,.3DS,.OBJ,.ZIP',
-          'add-button-text' => 'STL, 3DS, OBJ veya ZIP dosyalarını ekleyin veya sürükleyin…',
-          'remove-button-text' => 'Kaldır',
-          'direct-url' => 'https://boyutluseyler-staging.s3.eu-central-1.amazonaws.com',
-          'uploader-url' => '/uploads/new?model=blueprint',
-          'create-url' => '/blueprints',
-          'input-name' => 'design[blueprint_ids][]',
-          'data-type' => 'blueprint',
-          ':files' => @blueprints }
-      %br/
-      %h6 Fotoğraflar
-      .js-connected-uploader{ data: { behavior: 'vue' } }
-        %connected-uploader{ accept: '.jpg,.jpeg,.gif,.png,.JPG,.JPEG,.GIF,.PNG',
-          'add-button-text' => 'JPG, GIF veya PNG dosyaları ekleyin veya sürükleyin…',
-          'remove-button-text' => 'Kaldır',
-          'direct-url' => 'https://boyutluseyler-staging.s3.eu-central-1.amazonaws.com',
-          'uploader-url' => '/uploads/new?model=illustration',
-          'create-url' => '/illustrations',
-          'input-name' => 'design[illustration_ids][]',
-          'data-type' => 'illustration',
-          ':files' => @illustrations }
-      %br/
+        %label.form-control-label.mt-3 Fotoğraflar
+        .js-connected-uploader{ data: { behavior: 'vue' } }
+          %connected-uploader{ accept: '.jpg,.jpeg,.gif,.png,.JPG,.JPEG,.GIF,.PNG',
+            'add-button-text' => 'JPG, GIF veya PNG dosyaları ekleyin veya sürükleyin…',
+            'remove-button-text' => 'Kaldır',
+            'direct-url' => 'https://boyutluseyler-staging.s3.eu-central-1.amazonaws.com',
+            'uploader-url' => '/uploads/new?model=illustration',
+            'create-url' => '/illustrations',
+            'input-name' => 'design[illustration_ids][]',
+            'data-type' => 'illustration',
+            ':files' => @illustrations }
 
-      %span.d-block.text-muted Dosyalar üzerinde sürükle bırak yaparak sıralamayı belirleyebilirsiniz..
-      %p.text-muted Fotoğraflar için ilk sıradaki resim tasarımınızı temsil eder.
-      %p.text-muted Dikkat çekici resimlerinizi üst sıralara koyarak görüntülenme şansını arttırabilirsiniz.
+        %p.description.font-weight-400.mt-3 Dosyalar üzerinde sürükle bırak yaparak sıralamayı belirleyebilirsiniz..
+        %p.description.opacity-8.font-weight-400 Fotoğraflar için ilk sıradaki resim tasarımınızı temsil eder.
+        %p.description.opacity-8.font-weight-400 Dikkat çekici resimlerinizi üst sıralara koyarak görüntülenme şansını arttırabilirsiniz.
 
-      = f.button :submit, 'Gönder', class: 'btn btn-main'
+        = f.button :submit, 'Gönder', class: 'btn btn-primary'

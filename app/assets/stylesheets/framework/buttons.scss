@@ -15,17 +15,7 @@
   &:hover,
   &:focus {
     background-color: #e2e6ea;
-    color: $dodger-blue-3;
-  }
-}
-
-.btn-main {
-  color: $white;
-  background-color: $dodger-blue-3;
-  border-color: $dodger-blue-3;
-
-  &:hover {
-    color: $white;
+    color: $primary;
   }
 }
 

@@ -1,7 +1,8 @@
 @import 'framework/variables';
 @import 'framework/mixins';
 
-@import 'bootstrap/scss/bootstrap';
+// Argon design system
+@import 'argon';
 
 @import 'framework/colors';
 
@@ -9,7 +10,8 @@
 @import 'framework/common';
 @import 'framework/files';
 @import 'framework/forms';
-@import 'framework/header';
+@import 'framework/cards';
+@import 'framework/lists';
+@import 'framework/section';
+// @import 'framework/header';
 @import 'framework/layout';
-
-

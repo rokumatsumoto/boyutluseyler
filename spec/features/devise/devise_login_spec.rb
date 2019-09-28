@@ -7,20 +7,24 @@ RSpec.describe 'Devise login', tag: :devise_default do
   describe 'with unconfirmed account' do
     let(:user) { create(:user, :unconfirmed) }
 
-    it 'blocks unconfirmed account login' do
+    it 'blocks unconfirmed account login and shows confirmation page link' do
       boyutluseyler_sign_in(user)
 
-      expect(page).to have_content(t('devise.failure.unconfirmed'))
+      page.within '.alert' do
+        expect(page).to have_link(nil, href: new_user_confirmation_path)
+      end
     end
   end
 
   describe 'with locked account' do
     let(:user) { create(:user, :locked) }
 
-    it 'blocks locked account login' do
+    it 'blocks locked account login and shows unlock account page link' do
       boyutluseyler_sign_in(user)
 
-      expect(page).to have_content(t('devise.failure.locked'))
+      page.within '.alert' do
+        expect(page).to have_link(nil, href: new_user_unlock_path)
+      end
     end
   end
 
@@ -44,8 +48,10 @@ RSpec.describe 'Devise login', tag: :devise_default do
         end
       end
 
-      it 'blocks invalid login and locks the account' do
-        expect(page).to have_content(t('devise.failure.locked'))
+      it 'blocks invalid login, locks the account and shows unlock account page link' do
+        page.within '.alert' do
+          expect(page).to have_link(nil, href: new_user_unlock_path)
+        end
       end
 
       it 'sends unlock instructions' do
@@ -67,7 +73,7 @@ RSpec.describe 'Devise login', tag: :devise_default do
 
         visit(root_path)
 
-        expect(page).to have_css('a.dropdown-user-toggle')
+        expect(page).to have_css('a#user-dropdown')
         expect(page).to have_current_path root_path
       end
     end
@@ -80,7 +86,7 @@ RSpec.describe 'Devise login', tag: :devise_default do
 
         visit(root_path)
 
-        expect(page).not_to have_css('a.dropdown-user-toggle')
+        expect(page).not_to have_css('a#user-dropdown')
         expect(page).to have_current_path root_path
       end
     end

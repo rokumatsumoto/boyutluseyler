@@ -25,5 +25,6 @@ ActiveStorage.start();
 Turbolinks.start();
 LocalTime.start();
 
+require('argon');
 require('rails.validations');
 require('rails.validations.simple_form.bootstrap4');

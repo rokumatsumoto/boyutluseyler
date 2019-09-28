@@ -1,7 +1,6 @@
 module ConfirmationHelpers
   def resend(user)
-    visit new_user_session_path
-    click_link 'link-confirmaton-instructions'
+    visit new_user_confirmation_path
     fill_in 'user_email', with: user.email
     click_button 'btn_resend_confirmation'
   end
