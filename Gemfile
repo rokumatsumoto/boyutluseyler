@@ -39,7 +39,7 @@ gem 'client_side_validations-simple_form', '~> 7.0'
 gem 'simple_form', '~> 4.1'
 
 # Clean URL (https://en.wikipedia.org/wiki/Clean_URL)
-gem 'friendly_id', '~> 5.2', '>= 5.2.5'
+gem 'friendly_id', '~> 5.3'
 # HAML
 gem 'hamlit', '~> 2.9', '>= 2.9.2'
 # Spam and anti-bot protection
