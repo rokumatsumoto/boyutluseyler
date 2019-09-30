@@ -1,7 +1,10 @@
-// Body
-// $body-bg: #fff;
-// TODO: remove or change
 
+// Bootstrap variables
+$enable-responsive-font-sizes: true;
+// TODO: remove unused
+// $enable-validation-icons: false;
+
+// TODO: remove unused
 // Header - Navbar
 $navbar-bg: #fff;
 $navbar-link: #777;
@@ -13,9 +16,6 @@ $navbar-link-active-bg: #32c8fa;
 $navbar-toggler-bg: #fff;
 $navbar-brand: #32c8fa;
 $navbar-brand-link: #32c8fa;
-
-// Validation
-$enable-validation-icons: false;
 
 // Header - Navbar @media (max-width: 992px)
 
