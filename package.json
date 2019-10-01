@@ -2,6 +2,8 @@
   "name": "boyutluseyler",
   "private": true,
   "dependencies": {
+    "@client-side-validations/client-side-validations": "^0.0.5",
+    "@client-side-validations/simple-form": "^0.0.1",
     "@fortawesome/fontawesome-free": "^5.8.1",
     "@rails/webpacker": "^4.0.7",
     "activestorage": "^5.2.3",
