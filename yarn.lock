@@ -662,6 +662,23 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
+"@client-side-validations/client-side-validations@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@client-side-validations/client-side-validations/-/client-side-validations-0.0.4.tgz#65ddc44a74b78ea60507de3438d4d757b79dc42d"
+  integrity sha512-A+1UQHBKS/WsLqxRd1ZagfIfmwpTAR9EWcI9f8nv7/2gP8kUEu8Erfx2GfL3/aPlbW2VljE7jivJlxYR06fsfw==
+
+"@client-side-validations/client-side-validations@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@client-side-validations/client-side-validations/-/client-side-validations-0.0.5.tgz#b6d60af9a5a79f3829f4c050a7406a52764c1af8"
+  integrity sha512-Pfs/Hj7fYXkLHLGrk9rJBsNSocyugY1o6uadl8m4Ft3Dd+vv8IKYVqQUdMyGXjiw04EVQSyL22E0+/W2Um/kKA==
+
+"@client-side-validations/simple-form@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@client-side-validations/simple-form/-/simple-form-0.0.1.tgz#723acb3ffdc3f87a96131bcf7c6ad79438903eec"
+  integrity sha512-7PodNbSsCZS5wTTYcerKzyXrBO5YvnB3yrdEhSmqfwPoaqCGB7J0SsY49MZ+kLTe+7eiTQVJpM9GkdWkhPuNhA==
+  dependencies:
+    "@client-side-validations/client-side-validations" "^0.0.4"
+
 "@csstools/convert-colors@^1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
