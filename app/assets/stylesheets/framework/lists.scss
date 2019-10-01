@@ -19,3 +19,28 @@
     }
   }
 }
+
+.header-tags {
+  position: absolute;
+  bottom: 20px;
+  width: 90%;
+
+  li {
+    display: inline-block;
+    opacity: .9;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 3px 0 rgba(51,51,51,.1);
+    box-shadow: 0 1px 3px 0 rgba(51,51,51,.1);
+    background-color: #fff;
+    margin: 0 5px 10px 5px;
+
+    a {
+      display: block;
+      color: #1a1e21;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 5px 10px;
+      opacity: .9;
+    }
+  }
+}

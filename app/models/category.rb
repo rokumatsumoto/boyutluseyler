@@ -13,5 +13,7 @@
 #
 
 class Category < ApplicationRecord
+  include Randomable
+
   has_many :designs
 end
