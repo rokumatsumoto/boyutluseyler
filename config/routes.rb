@@ -10,7 +10,8 @@ Rails.application.routes.draw do
 
   resources :blueprints
 
-  resources :designs, constraints: { id: /.*\D+.*/ }
+  resources :designs, except: :show
+  get '/3d-model/:category/:id', to: 'designs#show', as: :design_show, constraints: { id: /.*\D+.*/ }
 
   devise_for :users, path: '', controllers: { registrations: :registrations,
                                               passwords: :passwords,
@@ -21,11 +22,10 @@ Rails.application.routes.draw do
   get 'exists/:username', to: 'users#exists',
                           username: /(?:[a-zA-Z0-9_\.][a-zA-Z0-9_\-\.]*[a-zA-Z0-9_\-]|[a-zA-Z0-9_])/
 
-  resource :profile, only: [:show, :update] do
-
+  resource :profile, only: %i[show update] do
     scope module: :profiles do
-      resource :account, only: [:show, :update]
-      resource :password, only: [:edit, :update] do
+      resource :account, only: %i[show update]
+      resource :password, only: %i[edit update] do
         member do
           put :reset
         end
