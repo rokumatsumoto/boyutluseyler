@@ -33,11 +33,11 @@ gem 'devise', '~> 4.7', '>= 4.7.1'
 gem 'devise-i18n', '~> 1.7', '>= 1.7.1'
 # Authorization
 gem 'pundit', '~> 2.0', '>= 2.0.1'
-# Forms
-gem 'client_side_validations', '~> 15.0'
-gem 'client_side_validations-simple_form', '~> 7.0'
-gem 'simple_form', '~> 4.1'
 
+# Forms
+gem 'simple_form', '~> 5.0'
+gem 'client_side_validations', '~> 16.0', '>= 16.0.2'
+gem 'client_side_validations-simple_form', '~> 9.0'
 # Clean URL (https://en.wikipedia.org/wiki/Clean_URL)
 gem 'friendly_id', '~> 5.2', '>= 5.2.5'
 # HAML
@@ -137,7 +137,7 @@ group :test do
   gem 'capybara', '~> 3.13', '>= 3.13.2'
   gem 'capybara-email', '~> 3.0', '>= 3.0.1'
   gem 'capybara-screenshot', '~> 1.0', '>= 1.0.22'
-  gem 'selenium-webdriver'
+  gem 'selenium-webdriver', '~> 3.142', '>= 3.142.5'
   # Easy installation and use of selenium webdriver browsers to run system tests
   gem 'webdrivers', '~> 4.1', '>= 4.1.2', require: false
 end
