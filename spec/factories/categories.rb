@@ -8,6 +8,7 @@
 #  list_order  :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  slug        :string
 #
 
 FactoryBot.define do
