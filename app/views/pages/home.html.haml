@@ -1,4 +1,7 @@
-= render hero('anonymous', 'logged_in')
-- add_header_links([:sign_in], %i[upload])
+- content_for :head do
+  = javascript_pack_tag 'home'
 
-Homepage
+- add_header_links([:sign_in], %i[upload])
+= render hero('anonymous', 'logged_in')
+
+#most-downloaded En çok indirilenler
