@@ -137,7 +137,7 @@ group :test do
   gem 'capybara', '~> 3.13', '>= 3.13.2'
   gem 'capybara-email', '~> 3.0', '>= 3.0.1'
   gem 'capybara-screenshot', '~> 1.0', '>= 1.0.22'
-  gem 'selenium-webdriver'
+  gem 'selenium-webdriver', '~> 3.142', '>= 3.142.5'
   # Easy installation and use of selenium webdriver browsers to run system tests
   gem 'webdrivers', '~> 4.1', '>= 4.1.2', require: false
 end
