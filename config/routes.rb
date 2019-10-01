@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :blueprints
 
-  resources :designs
+  resources :designs, constraints: { id: /.*\D+.*/ }
 
   devise_for :users, path: '', controllers: { registrations: :registrations,
                                               passwords: :passwords,
@@ -32,6 +32,10 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  # this should be last route
+  # TODO: redirect 404 page (customize 404 page)
+  get '*path' => redirect('/')
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 

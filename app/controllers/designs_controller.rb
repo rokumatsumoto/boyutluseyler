@@ -90,7 +90,7 @@ class DesignsController < ApplicationController
   end
 
   def design
-    strong_memoize(:design) { Design.find(params[:id]) }
+    strong_memoize(:design) { Design.friendly.find(params[:id]) }
   end
 
   def design_params
