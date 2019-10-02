@@ -131,6 +131,8 @@ SimpleForm.setup do |config|
   # change this configuration to true.
   config.browser_validations = false
 
+  # The config SimpleForm.file_methods is DEPRECATED!!! and it has no effect
+  # https://github.com/plataformatec/simple_form/blob/master/CHANGELOG.md#500
   # Collection of methods to detect if a file type was given.
   # config.file_methods = [ :mounted_as, :file?, :public_filename, :attached? ]
 

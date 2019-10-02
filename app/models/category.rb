@@ -14,6 +14,7 @@
 
 class Category < ApplicationRecord
   extend FriendlyId
+  include Randomable
 
   has_many :designs
 

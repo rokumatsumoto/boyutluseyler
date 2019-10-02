@@ -34,7 +34,7 @@
     .stars-and-coded{
         margin-top: 8rem;
     }
-    
+
     .shape {
         position: absolute;
         top: 0;
@@ -479,6 +479,17 @@
             height: 553px;
         }
     }
+}
+
+.section-anonymous-cover {
+    height: 580px;
+    background-size: cover;
+    background-position: center center;
+    background-color: rgba(0,0,0,.3);
+}
+
+.section-anonymous-cover-img {
+    background: url(image-path("hero-image-anonymous.jpeg")) center center / cover rgb(221, 221, 221);
 }
 
 // Profile cover
