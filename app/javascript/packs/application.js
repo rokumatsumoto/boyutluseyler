@@ -15,16 +15,20 @@
 import '../styles';
 
 import Rails from 'rails-ujs';
-import * as ActiveStorage from 'activestorage';
-import Turbolinks from 'turbolinks';
-import LocalTime from 'local-time';
-import 'bootstrap/dist/js/bootstrap';
-
 Rails.start();
+
+import * as ActiveStorage from 'activestorage';
 ActiveStorage.start();
+
+import Turbolinks from 'turbolinks';
 Turbolinks.start();
+
+import LocalTime from 'local-time';
 LocalTime.start();
 
+import 'bootstrap/dist/js/bootstrap';
+
+// https://github.com/DavyJonesLocker/client_side_validations/issues/767
+require('@client-side-validations/client-side-validations')
+require('@client-side-validations/simple-form/dist/simple-form.bootstrap4')
 require('argon');
-require('rails.validations');
-require('rails.validations.simple_form.bootstrap4');
