@@ -26,7 +26,7 @@ class DesignsController < ApplicationController
     @design = Designs::CreateService.new(nil, current_user, design_params).execute
 
     if @design.persisted?
-      redirect_to @design
+      redirect_to design_show_path(@design.category.slug, @design)
     else
       design_files_for(:create_error)
 
@@ -90,7 +90,7 @@ class DesignsController < ApplicationController
   end
 
   def design
-    strong_memoize(:design) { Design.find(params[:id]) }
+    strong_memoize(:design) { Design.friendly.find(params[:id]) }
   end
 
   def design_params

@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: designs
@@ -15,9 +14,12 @@
 #  updated_at        :datetime         not null
 #  user_id           :bigint(8)        not null
 #  category_id       :bigint(8)        not null
+#  slug              :string
 #
 
 class Design < ApplicationRecord
+  extend FriendlyId
+
   include Taggable
 
   has_many :design_illustrations, -> { order(position: :asc) }, inverse_of: 'design'
@@ -35,6 +37,8 @@ class Design < ApplicationRecord
   validates :design_illustrations, presence: true
   validates :design_blueprints, presence: true
 
+  friendly_id :name, use: %i[slugged history]
+
   enum license_type: {
     license_none: 'license_none',
     cc_by: 'cc_by',
@@ -44,6 +48,10 @@ class Design < ApplicationRecord
     cc_by_nc_sa: 'cc_by_nc_sa',
     cc_by_nc_nd: 'cc_by_nc_nd'
   }
+
+  def should_generate_new_friendly_id?
+    name_changed?
+  end
 
   # TODO: remove 3ds format, add ply format
   def model_blueprints
