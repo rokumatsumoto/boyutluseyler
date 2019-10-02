@@ -17,8 +17,8 @@ before_install:
 before_script:
   - "bundle exec rake db:create"
 branches:
-  only:
-    - staging
+  except:
+    - master
 cache:
   yarn: true
   directories:
