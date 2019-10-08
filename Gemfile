@@ -52,7 +52,8 @@ gem 'local_time', '~> 2.1'
 
 gem 'webpacker', '~> 4.0', '>= 4.0.2'
 
-gem 'aws-sdk-s3', '~> 1.43'
+gem 'aws-sdk-s3', '~> 1.48'
+gem 'aws-sdk-lambda', '~> 1.30'
 
 gem 'gutentag', '~> 2.5', '>= 2.5.1'
 
