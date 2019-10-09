@@ -187,6 +187,7 @@ tr:
     button:
       edit: Düzenle
       delete: Sil
+      download: İNDİR
   number:
     currency:
       format:

@@ -4,7 +4,7 @@ class DesignsController < ApplicationController
   include Boyutluseyler::Utils::StrongMemoize
 
   before_action :authenticate_user!, except: %i[show index]
-  before_action :design, only: %i[show edit update destroy]
+  before_action :design, only: %i[show edit update destroy download]
 
   def new
     @design = Design.new
@@ -55,6 +55,10 @@ class DesignsController < ApplicationController
     design.destroy
 
     redirect_to root_path
+  end
+
+  def download
+    Designs::Files::DownloadService.new(design, current_user).execute
   end
 
   private

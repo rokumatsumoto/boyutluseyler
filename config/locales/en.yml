@@ -186,6 +186,7 @@ en:
     button:
       edit: Edit
       delete: Delete
+      download: DOWNLOAD
   number:
     currency:
       format:
