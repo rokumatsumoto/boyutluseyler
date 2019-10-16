@@ -30,7 +30,7 @@ module Designs
 
       def archive_folder_path
         [
-          current_user.username,
+          design.user.username,
           design.slug
         ].join('/')
       end
@@ -40,7 +40,7 @@ module Designs
           'uploads',
           'design_zip',
           'file',
-          current_user.id,
+          design.user.id,
           archive_file_name
         ].join('/')
       end

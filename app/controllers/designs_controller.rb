@@ -58,7 +58,9 @@ class DesignsController < ApplicationController
   end
 
   def download
-    Designs::Files::DownloadService.new(design, current_user).execute
+    AvailableDownloadBroadcastWorker.perform_async(params[:id])
+    redirect_to design_show_path(design.category.slug, design)
+    # render json: { result: :ok }
   end
 
   private

@@ -8,7 +8,7 @@ module Designs
 
     attr_accessor :design, :current_user, :params
 
-    def initialize(design, user, params = {})
+    def initialize(design, user = nil, params = {})
       @design = design
       @current_user = user
       @params = params.dup
