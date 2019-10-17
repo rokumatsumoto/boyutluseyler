@@ -979,6 +979,18 @@ acorn@^6.0.2, acorn@^6.0.5, acorn@^6.0.7:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.1.1.tgz#7d25ae05bb8ad1f9b699108e1094ecd7884adc1f"
   integrity sha512-jPTiwtOxaHNaAPg/dmrJ/beuzLRnXtB0kQPQ8JpotKJgTB6rX6c8mlf315941pyjBSaPg8NHXS9fhP4u17DpGA==
 
+actioncable-vue@1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/actioncable-vue/-/actioncable-vue-1.3.0.tgz#927296b8a9c733e4bb746f59480e61387aa00cd6"
+  integrity sha512-0UnGNZXKiYFwtaflYAyBZqXRS9S1lEthCoHYHjoei7FDw5NaxGXwt2r07/SW3UFsAfFX8mpUREe8zrRr3mjpBg==
+  dependencies:
+    actioncable "^5.2.2"
+
+actioncable@^5.2.2:
+  version "5.2.3"
+  resolved "https://registry.yarnpkg.com/actioncable/-/actioncable-5.2.3.tgz#639d98855b854b7bfe2059ab97d6e0ae8fd60a1d"
+  integrity sha512-KNdZHRDu92VDSO7SOEJS8Bf5G//LZZLz5e6m7mv8Wjafe9Svdp/DPJ/DpO7rJmPAlKcLAYwi/R7pNJ/VCHV1FQ==
+
 activestorage@^5.2.3:
   version "5.2.3"
   resolved "https://registry.yarnpkg.com/activestorage/-/activestorage-5.2.3.tgz#04df0a194d15f7a04abbba313f584fbea2c5a66f"
