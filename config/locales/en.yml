@@ -187,6 +187,7 @@ en:
       edit: Edit
       delete: Delete
       download: DOWNLOAD
+      downloading: DOWNLOADING...
   number:
     currency:
       format:
