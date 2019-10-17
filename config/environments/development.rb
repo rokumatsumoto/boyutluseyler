@@ -65,4 +65,11 @@ Rails.application.configure do
 
   # If you want to whitelist the whole private network
   config.web_console.whitelisted_ips = '192.168.0.0/16'
+
+  config.action_cable.url = 'http://localhost:3000/cable'
+  config.websocket_server_url = 'ws://localhost:3000/cable'
+  config.action_cable.allowed_request_origins = [
+   # Local address of our RoR server
+  'http://localhost:3000'
+  ]
 end
