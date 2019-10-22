@@ -21,7 +21,6 @@ export const receiveDownloadUrlSuccess = ({ dispatch }, payload) => {
 export const requestDownloadUrl = ({ dispatch }, payload) => {
   const { recordId, vm } = payload;
   // `this._vm` not working here
-  vm.addDownloadChannel();
   vm.$cable.subscribe({ channel: 'DownloadChannel', id: recordId });
 
   dispatch('setDownloading', true);

@@ -57,21 +57,7 @@ export default {
       'fetchDownloadUrl',
       'setDownloading',
     ]),
-    // Temporary fix for now (Code smell)
-    addDownloadChannel() {
-      const downloadChannel = Object.entries(this.$options.channels)[0];
-      this.$cable._addChannel(downloadChannel[0], downloadChannel[1], this);
-    },
     download() {
-      // TESTING PURPOSE
-      // https://github.com/mclintprojects/actioncable-vue/issues/4
-      // this.addDownloadChannel();
-      // this.$cable.subscribe({ channel: 'DownloadChannel', id: this.recordId });
-
-      // const vm = this;
-      // setTimeout(function(){
-      //   vm.$cable.unsubscribe('DownloadChannel');
-      //  }, 1000);
       this.fetchDownloadUrl({
         vm: this,
         endpoint: this.endpoint,
@@ -79,9 +65,6 @@ export default {
       });
     }
   }
-  // mounted() {
-  //   this.$cable.subscribe({ channel: 'DownloadChannel', id: this.recordId });
-  // }
 }
 </script>
 
