@@ -74,6 +74,8 @@ gem 'gon', '~> 6.2', '>= 6.2.1'
 
 gem 'oj', '~> 3.9', '>= 3.9.2' # Speed up Gon
 
+gem 'finite_machine', '~> 0.12.1'
+
 # gem 'rack-cors', '~> 1.0', '>= 1.0.3'
 
 group :development, :test do
