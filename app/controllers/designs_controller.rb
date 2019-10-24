@@ -58,16 +58,8 @@ class DesignsController < ApplicationController
   end
 
   def download
-    # url hazir mi kontrol
-    # url hazirsa kullaniciya ulastir.
-    # background job stats update
-    url = 'https://boyutluseyler-staging.s3.eu-central-1.amazonaws.com/uploads/design_zip/file/1/battle-cat-keychain-dual-extrusion20190927-cew1xdfv.zip'
-
-    url = ''
-    # url hazir degilse indirme linki hazirlanir bu arada return olarak
-    # ok dondurulur. (websocket sadece url hazir degilse kullanilacak.)
-    # background job stats update
-    AvailableDownloadBroadcastWorker.perform_async(params[:id])
+    url = Designs::Downloads::StateMachineService.new(design).execute
+    # background job download stats update
     render json: { url: url }, status: :ok
   end
 

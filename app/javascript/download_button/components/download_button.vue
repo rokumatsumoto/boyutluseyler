@@ -1,4 +1,5 @@
 <script>
+import Noty from 'noty';
 import { mapActions, mapState } from 'vuex';
 export default {
   name: 'DownloadButton',
@@ -41,11 +42,17 @@ export default {
 			rejected() {},
 			received(data) {
         if (data.url) {
-          this.$cable.unsubscribe('DownloadChannel');
           window.location = data.url;
-
-          this.setDownloading(false);
+        } else {
+          new Noty({
+            type: 'error',
+            layout: 'top',
+            timeout: 4000,
+            text: data.message,
+          }).show();
         }
+        this.$cable.unsubscribe('DownloadChannel');
+        this.setDownloading(false);
       },
 			disconnected() {
         console.log('I am disconnected.');
@@ -70,7 +77,7 @@ export default {
 
 <template>
   <div>
-    <button ref="downloadButton" :class="cssClass" @click="download" :disabled="isDownloading">
+    <button :class="cssClass" @click="download" :disabled="isDownloading">
       <span><i class="fas fa-lg" :class="iconCssClass"></i></span>
       <span class="btn-inner--text">{{ buttonText }}</span>
     </button>
