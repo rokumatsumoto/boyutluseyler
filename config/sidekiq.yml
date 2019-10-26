@@ -1,2 +1,6 @@
+# https://github.com/mperham/sidekiq/blob/master/examples/config.yml
+
 ---
 :concurrency: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+:queues:
+  - default

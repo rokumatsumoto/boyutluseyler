@@ -1,0 +1,4 @@
+cleanup_tmp_cache_worker:
+  cron: "0 4 * * 1" # every monday at 4 am
+  class: "CleanupTmpCacheWorker"
+  queue: default
