@@ -31,7 +31,7 @@ module Designs
     end
 
     def blueprints_changed?
-      @blueprints_changed ||= !blueprint_ids_identical?(design)
+      @blueprints_changed ||= blueprint_ids_different?(design)
     end
 
     def design_download
