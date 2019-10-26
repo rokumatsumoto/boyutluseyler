@@ -69,6 +69,7 @@ gem 'sail', '~> 3.2', '>= 3.2.2'
 
 # Background jobs
 gem 'sidekiq', '~> 6.0', '>= 6.0.1'
+gem 'sidekiq-cron', '~> 1.1'
 
 gem 'gon', '~> 6.2', '>= 6.2.1'
 

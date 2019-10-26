@@ -418,6 +418,9 @@ GEM
       rack (>= 2.0.0)
       rack-protection (>= 2.0.0)
       redis (>= 4.1.0)
+    sidekiq-cron (1.1.0)
+      fugit (~> 1.1)
+      sidekiq (>= 4.2.1)
     simple_form (5.0.0)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
@@ -545,6 +548,7 @@ DEPENDENCIES
   selenium-webdriver (~> 3.142, >= 3.142.5)
   shoulda-matchers (= 4.0.0.rc1)
   sidekiq (~> 6.0, >= 6.0.1)
+  sidekiq-cron (~> 1.1)
   simple_form (~> 5.0)
   simplecov (~> 0.16.1)
   spring
