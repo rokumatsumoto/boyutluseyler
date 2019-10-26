@@ -4,7 +4,7 @@ module Designs
   module Downloads
     class StateMachineService < Designs::BaseService
       def execute
-        return url if ready?
+        return presigned_url if ready?
 
         return '' if requested?
 
@@ -21,8 +21,8 @@ module Designs
         step == 'requested'
       end
 
-      def url
-        design_download.url
+      def presigned_url
+        Designs::Downloads::PresignedUrlService.new(nil, key: design_download.url).execute
       end
 
       def step

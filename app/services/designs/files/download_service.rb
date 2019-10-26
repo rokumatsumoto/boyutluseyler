@@ -4,8 +4,7 @@ module Designs
   module Files
     class DownloadService < Designs::BaseService
       def execute
-        url_path = Boyutluseyler::FunctionCaller.new(function_name, payload).call
-        archive_url(url_path)
+        Boyutluseyler::FunctionCaller.new(function_name, payload).call
       end
 
       private
@@ -59,11 +58,6 @@ module Designs
 
       def archive_format
         'zip'
-      end
-
-      def archive_url(url_path)
-        # TODO: Add new config name
-        "#{Boyutluseyler.config[:direct_upload_website_endpoint]}/#{url_path}"
       end
     end
   end

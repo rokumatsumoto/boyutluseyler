@@ -11,8 +11,8 @@ class AvailableDownloadBroadcastWorker
 
     before_download_service(design)
 
-    # url = Designs::Files::DownloadService.new(design).execute
-    url = 'https://boyutluseyler-staging.s3.eu-central-1.amazonaws.com/uploads/design_zip/file/1/battle-cat-keychain-dual-extrusion20190927-cew1xdfv.zip'
+    url = Designs::Files::DownloadService.new(design).execute
+    # url = 'uploads/design_zip/file/1/battle-cat-keychain-dual-extrusion20191026-hlozcrkj.zip'
 
     after_download_service(url)
   end
@@ -60,7 +60,7 @@ class AvailableDownloadBroadcastWorker
 
   def broadcast(url, message)
     ActionCable.server.broadcast("download_channel_#{design_id}",
-                                 url: url,
+                                 url: presigned_url(url),
                                  message: message)
   end
 
@@ -80,6 +80,10 @@ class AvailableDownloadBroadcastWorker
 
   def file_updated?
     design_download.step == 'file_updated'
+  end
+
+  def presigned_url(url)
+    Designs::Downloads::PresignedUrlService.new(nil, key: url).execute
   end
 
   def design_download
