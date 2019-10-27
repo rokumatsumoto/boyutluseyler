@@ -8,6 +8,6 @@ class CreateDesignDownloads < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    add_foreign_key :design_downloads, :designs, on_delete: :cascade
+    add_foreign_key :design_downloads, :designs, on_delete: :cascade, validate: false
   end
 end

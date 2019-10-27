@@ -14,7 +14,7 @@ class CreateSailProfiles < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    add_foreign_key(:sail_entries, :sail_settings, column: :setting_id)
-    add_foreign_key(:sail_entries, :sail_profiles, column: :profile_id)
+    add_foreign_key(:sail_entries, :sail_settings, column: :setting_id, validate: false)
+    add_foreign_key(:sail_entries, :sail_profiles, column: :profile_id, validate: false)
   end
 end
