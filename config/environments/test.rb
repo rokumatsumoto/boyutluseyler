@@ -51,4 +51,11 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   config.disable_animations = true
+
+  config.action_cable.url = 'http://localhost:3000/cable'
+  config.websocket_server_url = 'ws://localhost:3000/cable'
+  config.action_cable.allowed_request_origins = [
+   # Local address of our RoR server
+  'http://localhost:3000'
+  ]
 end

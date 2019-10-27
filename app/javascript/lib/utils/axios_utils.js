@@ -36,7 +36,7 @@ axios.interceptors.response.use(
               id: 'noty_notification',
               timeout: 4000,
               progressBar: true,
-              text: "Oturumunuzun süresi doldu, giriş sayfasına yönlendiriliyorsunuz.",
+              text: "Oturumunuzun süresi doldu veya giriş yapmadınız, giriş sayfasına yönlendiriliyorsunuz.",
               callbacks: {
                 afterClose() {
                   window.location.href = '/sign_in';

@@ -9,9 +9,9 @@
       -# TODO: pundit
       - if user_signed_in? && @design.user == current_user
         .d-flex
-          = link_to t('helpers.button.edit'), edit_design_path, class: 'btn-xs btn-primary no-outline'
+          = link_to t('helpers.button.edit'), edit_design_path, class: 'btn-xs btn-outline-default border-solid no-outline'
           -# TODO: soft delete by request via form + slack integration
-          = link_to t('helpers.button.delete'), design_path(@design), method: :delete, data: { confirm: 'Emin misin?' }, class: 'btn-xs btn-primary no-outline ml-1'
+          = link_to t('helpers.button.delete'), design_path(@design), method: :delete, data: { confirm: 'Emin misin?' }, class: 'btn-xs btn-outline-default border-solid no-outline ml-1'
 
   .design
     .design-photos
@@ -27,6 +27,16 @@
           'img-bg-color': '#fff', 'viewer-css-class': 'model',
           'img-alt-tag': 'Ücretsiz 3D baskı dosyaları' }
     .design-infos
+      .d-flex.mb-2
+        .ml-auto
+          .js-download-button{ data: { behavior: 'vue' } }
+            %download-button{ 'css-class': 'btn-xs btn-primary border-solid border-width-15x btn-icon', 'text': t('helpers.button.download'),
+            'downloading-text': t('helpers.button.downloading'),
+            'record-id': @design.id, 'endpoint': design_download_path(@design) }
+          -# = link_to design_download_path(@design), class: 'btn-xs btn-primary border-solid border-width-15x btn-icon' do
+          -#   %span
+          -#     %i.fas.fa-cloud-download-alt.fa-lg
+          -#   %span.btn-inner--text= t('helpers.button.download')
       %h6.text-primary.mt-3 3D Model Açıklama
       .rich.content= simple_format(@design.description)
       %h6.text-primary.mt-3 3D Baskı Ayarları

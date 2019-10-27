@@ -6,6 +6,6 @@
         %span.badge.badge-primary.badge-pill Tasarımı Düzenle
         -# TODO: i18n
       .ml-auto
-        %a.btn-xs.btn-primary.no-outline{ href: design_show_path(@design.category.slug, @design) } Görüntüle
+        %a.btn-xs.btn-outline-default.border-solid.no-outline{ href: design_show_path(@design.category.slug, @design) } Görüntüle
     %h5.display-4.card-title.mt-3 #{@design.name}
 = render 'form'

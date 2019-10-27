@@ -187,6 +187,8 @@ tr:
     button:
       edit: Düzenle
       delete: Sil
+      download: İNDİR
+      downloading: İNDİRİLİYOR...
   number:
     currency:
       format:
