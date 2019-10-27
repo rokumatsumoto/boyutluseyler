@@ -5,11 +5,9 @@
 superclass = ActiveRecord::VERSION::MAJOR < 5 ?
   ActiveRecord::Migration : ActiveRecord::Migration[4.2]
 class GutentagCacheCounter < superclass
-  disable_ddl_transaction!
-
   def up
-    add_column :gutentag_tags, :taggings_count, :bigint, default: 0
-    add_index  :gutentag_tags, :taggings_count, algorithm: :concurrently
+    add_column :gutentag_tags, :taggings_count, :bigint
+    change_column_default :gutentag_tags, :taggings_count, 0
 
     Gutentag::Tag.reset_column_information
     Gutentag::Tag.pluck(:id).each do |tag_id|
