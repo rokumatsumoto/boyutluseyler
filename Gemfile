@@ -46,7 +46,7 @@ gem 'hamlit', '~> 2.9', '>= 2.9.2'
 gem 'recaptcha', '~> 4.14'
 
 # Catch unsafe migrations at dev time
-gem 'strong_migrations', '~> 0.3.1'
+gem 'strong_migrations', '~> 0.4.1'
 
 gem 'local_time', '~> 2.1'
 
