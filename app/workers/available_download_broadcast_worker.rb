@@ -12,7 +12,7 @@ class AvailableDownloadBroadcastWorker
     before_download_service(design)
 
     url = Designs::Files::DownloadService.new(design).execute
-    # url = 'uploads/design_zip/file/1/battle-cat-keychain-dual-extrusion20191026-hlozcrkj.zip'
+    # url = 'uploads/design_zip/file/1/battle-cat-keychain-dual-extrusion20191026-a985tfq3.zip'
 
     after_download_service(url)
   end
