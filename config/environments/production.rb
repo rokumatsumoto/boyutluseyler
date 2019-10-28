@@ -44,7 +44,7 @@ Rails.application.configure do
 
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
-  # config.action_cable.url = 'wss://example.com/cable'
+  config.action_cable.url = "ws://#{Boyutluseyler.credentials[:website]}/cable"
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
 
   # Note: I'm assuming that you're using ssl certificates in production, but if you're not, then just change https to http and wss to ws
