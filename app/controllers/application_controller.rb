@@ -1,12 +1,15 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  include Boyutluseyler::GonHelper
+
   protect_from_forgery with: :exception, prepend: true
   # protect_from_forgery with: :null_session # for postman
 
   include ApplicationHelper
   include Pundit
 
+  before_action :add_gon_variables, unless: [:json_request?]
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :store_user_location!, if: :storable_location?
   # The callback which stores the current location must be added before you authenticate
@@ -14,6 +17,10 @@ class ApplicationController < ActionController::Base
   # chain and redirect before the location can be stored.
 
   protected
+
+  def json_request?
+    request.format.json?
+  end
 
   def after_sign_in_path_for(resource_or_scope)
     stored_location_for(resource_or_scope) || super

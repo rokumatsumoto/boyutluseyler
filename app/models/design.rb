@@ -26,6 +26,7 @@ class Design < ApplicationRecord
   has_many :illustrations, through: :design_illustrations
   has_many :design_blueprints, -> { order(position: :asc) }, inverse_of: 'design'
   has_many :blueprints, through: :design_blueprints
+  has_one :design_downloads
 
   belongs_to :user
   belongs_to :category
@@ -49,6 +50,7 @@ class Design < ApplicationRecord
     cc_by_nc_nd: 'cc_by_nc_nd'
   }
 
+  # TODO: add concern for friendlyid
   def should_generate_new_friendly_id?
     name_changed?
   end

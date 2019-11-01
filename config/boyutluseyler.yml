@@ -9,6 +9,8 @@ shared: &shared
   direct_upload_success_action_status: <%= "\'#{Boyutluseyler.credentials[:aws_s3][:success_action_status]}\'" %>
   direct_upload_cache_control: public, max-age=315576000
 
+  presigned_url_expires_in: 3600 # 1 hour
+
 development:
   <<: *shared
 

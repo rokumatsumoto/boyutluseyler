@@ -4,7 +4,7 @@ class DesignsController < ApplicationController
   include Boyutluseyler::Utils::StrongMemoize
 
   before_action :authenticate_user!, except: %i[show index]
-  before_action :design, only: %i[show edit update destroy]
+  before_action :design, only: %i[show edit update destroy download]
 
   def new
     @design = Design.new
@@ -55,6 +55,12 @@ class DesignsController < ApplicationController
     design.destroy
 
     redirect_to root_path
+  end
+
+  def download
+    url = Designs::Downloads::StateMachineService.new(design).execute
+    # background job download stats update
+    render json: { url: url }, status: :ok
   end
 
   private

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_01_110550) do
+ActiveRecord::Schema.define(version: 2019_10_27_132819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,15 @@ ActiveRecord::Schema.define(version: 2019_10_01_110550) do
     t.index ["blueprint_id"], name: "index_design_blueprints_on_blueprint_id"
     t.index ["design_id", "blueprint_id"], name: "index_design_blueprints_on_design_id_and_blueprint_id", unique: true
     t.index ["design_id"], name: "index_design_blueprints_on_design_id"
+  end
+
+  create_table "design_downloads", force: :cascade do |t|
+    t.string "step", limit: 50
+    t.string "url"
+    t.bigint "design_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["design_id"], name: "index_design_downloads_on_design_id"
   end
 
   create_table "design_illustrations", force: :cascade do |t|
@@ -174,6 +183,7 @@ ActiveRecord::Schema.define(version: 2019_10_01_110550) do
 
   add_foreign_key "design_blueprints", "blueprints", on_delete: :cascade
   add_foreign_key "design_blueprints", "designs", on_delete: :cascade
+  add_foreign_key "design_downloads", "designs", on_delete: :cascade
   add_foreign_key "design_illustrations", "designs", on_delete: :cascade
   add_foreign_key "design_illustrations", "illustrations", on_delete: :cascade
   add_foreign_key "designs", "categories", on_delete: :cascade

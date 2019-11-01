@@ -1,3 +1,6 @@
+require 'sidekiq/web'
+require 'sidekiq/cron/web'
+
 Rails.application.routes.draw do
   root 'pages#home'
 
@@ -12,6 +15,7 @@ Rails.application.routes.draw do
 
   resources :designs, except: :show
   get '/3d-model/:category/:id', to: 'designs#show', as: :design_show, constraints: { id: /.*\D+.*/ }
+  get '/design/download/:id', to: 'designs#download', as: :design_download,constraints: { id: /.*\D+.*/ }
 
   devise_for :users, path: '', controllers: { registrations: :registrations,
                                               passwords: :passwords,
@@ -33,11 +37,13 @@ Rails.application.routes.draw do
     end
   end
 
-  # this should be last route
-  # TODO: redirect 404 page (customize 404 page)
-  get '*path' => redirect('/')
-
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 
   mount Sail::Engine => '/sail'
+
+  mount Sidekiq::Web => '/sidekiq'
+
+  # this should be last route
+  # TODO: redirect 404 page (customize 404 page)
+  get '*path' => redirect('/')
 end

@@ -27,7 +27,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.1.0', require: false
+gem 'bootsnap', '~> 1.4', '>= 1.4.5', require: false
 # Authentication
 gem 'devise', '~> 4.7', '>= 4.7.1'
 gem 'devise-i18n', '~> 1.7', '>= 1.7.1'
@@ -46,13 +46,14 @@ gem 'hamlit', '~> 2.9', '>= 2.9.2'
 gem 'recaptcha', '~> 4.14'
 
 # Catch unsafe migrations at dev time
-gem 'strong_migrations', '~> 0.3.1'
+gem 'strong_migrations', '~> 0.4.1'
 
 gem 'local_time', '~> 2.1'
 
 gem 'webpacker', '~> 4.0', '>= 4.0.2'
 
-gem 'aws-sdk-s3', '~> 1.43'
+gem 'aws-sdk-s3', '~> 1.48'
+gem 'aws-sdk-lambda', '~> 1.30'
 
 gem 'gutentag', '~> 2.5', '>= 2.5.1'
 
@@ -65,6 +66,17 @@ gem 'sanitize', '~> 5.0'
 gem 'fast_jsonapi', '~> 1.5'
 
 gem 'sail', '~> 3.2', '>= 3.2.2'
+
+# Background jobs
+# gem 'sidekiq', '~> 6.0', '>= 6.0.1'
+gem 'sidekiq', '~> 5.2', '>= 5.2.7'
+gem 'sidekiq-cron', '~> 1.1'
+
+gem 'gon', '~> 6.2', '>= 6.2.1'
+
+gem 'oj', '~> 3.9', '>= 3.9.2' # Speed up Gon
+
+gem 'finite_machine', '~> 0.12.1'
 
 # gem 'rack-cors', '~> 1.0', '>= 1.0.3'
 

@@ -8,7 +8,7 @@ module Designs
 
     attr_accessor :design, :current_user, :params
 
-    def initialize(design, user, params = {})
+    def initialize(design, user = nil, params = {})
       @design = design
       @current_user = user
       @params = params.dup
@@ -38,6 +38,15 @@ module Designs
 
       return true if !design.new_record? &&
                      design.illustration_ids.map(&:to_s) == illustration_ids
+    end
+
+    # TODO: with ruby 2.6 use difference method
+    # https://ruby-doc.org/core-2.6/Array.html#method-i-difference
+    # design.blueprint_ids.difference(blueprint_ids).any?
+    # add or remove
+    def blueprint_ids_different?(design)
+      return true if !design.new_record? &&
+                     design.blueprint_ids.sort.map(&:to_s) != blueprint_ids.sort
     end
 
     def blueprint_ids
