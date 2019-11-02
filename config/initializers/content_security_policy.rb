@@ -21,7 +21,7 @@ Rails.application.config.content_security_policy do |policy|
   if Rails.env.development?
     policy.script_src :self, :https, :unsafe_eval, :unsafe_inline
     policy.connect_src :self, :https, 'http://localhost:3035', 'ws://localhost:3035',
-                       Boyutluseyler.config[:direct_upload_website_endpoint]
+                       Boyutluseyler.config[:direct_upload_website_endpoint], 'ws://localhost:3000/cable'
   end
 end
 
