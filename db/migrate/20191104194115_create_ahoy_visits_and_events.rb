@@ -22,13 +22,6 @@ class CreateAhoyVisitsAndEvents < ActiveRecord::Migration[5.2]
       t.string :os
       t.string :device_type
 
-      # location
-      t.string :country
-      t.string :region
-      t.string :city
-      t.float :latitude
-      t.float :longitude
-
       # utm parameters
       t.string :utm_source
       t.string :utm_medium
