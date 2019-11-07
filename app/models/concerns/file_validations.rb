@@ -23,7 +23,7 @@ module FileValidations
     validate :filename_is_blank
     validates :url, presence: true
     validates :url_path, presence: true
-    validates_inclusion_of :size, in: content_length_range
+    validates :size, inclusion: { in: content_length_range }
     before_validation :sanitize_attrs
     before_validation :ensure_content_type_correct
   end
