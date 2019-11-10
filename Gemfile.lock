@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/rokumatsumoto/activerecord-jsonb-associations
+  revision: 9abe0dd9724a442f45f525377594faead6ac0439
+  specs:
+    activerecord-jsonb-associations (0.2.0)
+      activerecord (<= 6.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -50,6 +57,9 @@ GEM
       memoizable (~> 0.4.0)
     addressable (2.6.0)
       public_suffix (>= 2.0.2, < 4.0)
+    after_commit_action (1.1.0)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
     ahoy_matey (3.0.1)
       activesupport (>= 5)
       device_detector
@@ -130,6 +140,10 @@ GEM
       equalizer (~> 0.0.9)
     concurrent-ruby (1.1.5)
     connection_pool (2.2.2)
+    counter_culture (2.2.4)
+      activerecord (>= 4.2)
+      activesupport (>= 4.2)
+      after_commit_action (~> 1.0)
     crass (1.0.5)
     database_cleaner (1.7.0)
     debug_inspector (0.0.3)
@@ -500,6 +514,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-jsonb-associations!
   acts_as_list (~> 0.9.19)
   ahoy_matey (~> 3.0, >= 3.0.1)
   aws-sdk-lambda (~> 1.30)
@@ -514,6 +529,7 @@ DEPENDENCIES
   capybara-screenshot (~> 1.0, >= 1.0.22)
   client_side_validations (~> 16.0, >= 16.0.2)
   client_side_validations-simple_form (~> 9.0)
+  counter_culture (~> 2.2, >= 2.2.4)
   database_cleaner (~> 1.7)
   devise (~> 4.7, >= 4.7.1)
   devise-i18n (~> 1.7, >= 1.7.1)
