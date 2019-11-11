@@ -15,6 +15,7 @@
 #  user_id           :bigint(8)        not null
 #  category_id       :bigint(8)        not null
 #  slug              :string
+#  downloads_count   :integer          default(0), not null
 #
 
 class Design < ApplicationRecord
@@ -26,6 +27,11 @@ class Design < ApplicationRecord
   has_many :illustrations, through: :design_illustrations
   has_many :design_blueprints, -> { order(position: :asc) }, inverse_of: 'design'
   has_many :blueprints, through: :design_blueprints
+
+  # OPTIONAL
+  # has_many :view_events, -> { where(name: 'Viewed design') }, class_name: "Ahoy::Event", foreign_store: :properties
+  # has_many :download_events, -> { where(name: 'Downloaded design') }, class_name: "Ahoy::Event", foreign_store: :properties
+
   has_one :design_downloads
 
   belongs_to :user
