@@ -55,7 +55,9 @@
 
 %up-icon-before {
   position: absolute;
+  // https://fontawesome.com/how-to-use/on-the-web/advanced/css-pseudo-elements#define
   font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
   left: 5px;
   top: 2px;
   font-size: 22px;
