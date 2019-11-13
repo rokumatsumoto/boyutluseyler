@@ -13,12 +13,12 @@ export default {
   props: {
     views: {
       type: Object,
-      default: () => {},
+      default: () => ({}),
       required: false,
     },
     downloads: {
       type: Object,
-      default: () => {},
+      default: () => ({}),
       required: false,
     },
     locale: {
@@ -38,10 +38,12 @@ export default {
       return numberToLocale(this.downloadsCount, this.locale);
     },
     hasPageView() {
-      return this.showCounter(this.viewsCount, this.views);
+      return this.objectNotEmpty(this.views) &&
+             this.showCounter(this.viewsCount, this.views);
     },
     hasDownload() {
-      return this.showCounter(this.downloadsCount, this.downloads);
+      return this.objectNotEmpty(this.downloads) &&
+             this.showCounter(this.downloadsCount, this.downloads);
     },
   },
   created() {
@@ -49,11 +51,15 @@ export default {
   },
   methods: {
     ...mapActions(['setDownloadsCount']),
+    objectNotEmpty(obj) {
+      return Object.keys(obj).length !== 0
+    },
     showCounter(count, counter) {
       if (count >= counter.min) return true;
 
       return false;
     },
+
   },
 };
 </script>
