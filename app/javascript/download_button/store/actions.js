@@ -1,10 +1,15 @@
 import axios from 'lib/utils/axios_utils';
+import eventHub from 'page_counters/components/event_hub';
 import * as types from './mutation_types';
 
 export const setDownloading = ({ commit }, isDownloading) => commit(types.SET_DOWNLOADING, isDownloading);
 
 export const receiveDownloadUrlError = ({ dispatch }, payload) => {
   // TODO: fetch error
+  const { vm } = payload;
+
+  vm.$cable.unsubscribe('DownloadChannel');
+  dispatch('setDownloading', false);
 };
 
 export const receiveDownloadUrlSuccess = ({ dispatch }, payload) => {
@@ -15,6 +20,7 @@ export const receiveDownloadUrlSuccess = ({ dispatch }, payload) => {
     window.location = url;
 
     dispatch('setDownloading', false);
+    eventHub.$emit('download');
   }
 };
 

@@ -1,6 +1,8 @@
 <script>
 import Noty from 'noty';
 import { mapActions, mapState } from 'vuex';
+import eventHub from 'page_counters/components/event_hub';
+
 export default {
   name: 'DownloadButton',
   props: {
@@ -43,6 +45,7 @@ export default {
 			received(data) {
         if (data.url) {
           window.location = data.url;
+          eventHub.$emit('download');
         } else {
           new Noty({
             type: 'error',

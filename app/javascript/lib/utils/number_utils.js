@@ -16,3 +16,5 @@ export const uuidV4 = () =>
     // eslint-disable-next-line no-bitwise
     (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
   )
+
+export const numberToLocale = (number, locale) => Number(number).toLocaleString(locale)

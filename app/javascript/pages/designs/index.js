@@ -3,11 +3,12 @@ import Vue from 'vue/dist/vue.esm';
 import ContentPreview from 'content_preview/components/content_preview.vue';
 import ContentPreviewToggleButton from 'content_preview/components/content_preview_toggle_button.vue';
 import DownloadButton from 'download_button/components/download_button.vue';
+import PageCounters from 'page_counters/components/page_counters.vue';
 import createContentPreviewStore from 'content_preview/store';
 import createDownloadButtonStore from 'download_button/store';
+import createPageCountersStore from 'page_counters/store';
 import ActionCableVue from 'actioncable-vue';
 
-console.log(gon.websocketServerUrl);
 Vue.use(TurbolinksAdapter);
 Vue.use(ActionCableVue, {
   debug: true,
@@ -35,6 +36,17 @@ document.addEventListener('turbolinks:load', () => {
         el: $downloadButton,
         store: createDownloadButtonStore(),
         components: { DownloadButton },
+      });
+    });
+  }
+
+  const $pageCounters = document.getElementsByClassName('js-page-counters');
+  if ($pageCounters.length > 0) {
+    Array.from($pageCounters).forEach($pageCounter => {
+      const app = new Vue({
+        el: $pageCounter,
+        store: createPageCountersStore(),
+        components: { PageCounters },
       });
     });
   }
