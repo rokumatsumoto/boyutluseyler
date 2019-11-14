@@ -120,9 +120,7 @@ export default {
   methods: {
     ...mapActions(['registerContent']),
     triggerViewer() {
-      if (this.activeContent.contentType === 'model') {
-        eventHub.$emit('show');
-      }
+      if (this.activeContent.contentType === 'model') eventHub.$emit('show');
     },
     showContent() {
       if (this.content === undefined) {

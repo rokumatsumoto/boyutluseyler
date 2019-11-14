@@ -27,16 +27,16 @@
           'img-bg-color': '#fff', 'viewer-css-class': 'model',
           'img-alt-tag': 'Ücretsiz 3D baskı dosyaları' }
     .design-infos
-      .d-flex.mb-2
+      .d-flex.mb-3
         .ml-auto
           .js-download-button{ data: { behavior: 'vue' } }
             %download-button{ 'css-class': 'btn-xs btn-primary border-solid border-width-15x btn-icon', 'text': t('helpers.button.download'),
             'downloading-text': t('helpers.button.downloading'),
             'record-id': @design.id, 'endpoint': design_download_path(@design) }
-          -# = link_to design_download_path(@design), class: 'btn-xs btn-primary border-solid border-width-15x btn-icon' do
-          -#   %span
-          -#     %i.fas.fa-cloud-download-alt.fa-lg
-          -#   %span.btn-inner--text= t('helpers.button.download')
+      .d-flex.mb-2
+        .ml-auto
+          .js-page-counters{ data: { behavior: 'vue' } }
+            %page-counters.page-counters{ ':views': { count: @page_views_count,  min: 0, textPlural: 'Toplam Görüntülenme', textSingular: 'Toplam Görüntülenme' }.to_json, ':downloads': { count: @design.downloads_count, min: 1, textPlural: 'İndirme', textSingular: 'İndirme' }.to_json, locale: I18n.locale }
       %h6.text-primary.mt-3 3D Model Açıklama
       .rich.content= simple_format(@design.description)
       %h6.text-primary.mt-3 3D Baskı Ayarları

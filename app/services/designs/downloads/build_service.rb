@@ -8,6 +8,6 @@ module Designs
           dd.design = design
         end
       end
-  end
+    end
   end
 end

@@ -103,6 +103,17 @@ a.thumb{
       width: 100%;
       padding-left: 1.5rem;
     }
+
+  .page-counters {
+    font-size: 14px;
+    opacity: .8;
+    line-height: 1.7;
+  }
+}
+
+.counter-tooltip {
+  font-size: 12px;
+  font-weight: 600;
 }
 
 .pic {

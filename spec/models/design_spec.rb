@@ -14,6 +14,7 @@
 #  user_id           :bigint(8)        not null
 #  category_id       :bigint(8)        not null
 #  slug              :string
+#  downloads_count   :integer          default(0), not null
 #
 
 require 'rails_helper'
