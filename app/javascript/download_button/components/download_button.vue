@@ -44,8 +44,8 @@ export default {
 			rejected() {},
 			received(data) {
         if (data.url) {
-          window.location = data.url;
           eventHub.$emit('download');
+          window.location = data.url;
         } else {
           new Noty({
             type: 'error',

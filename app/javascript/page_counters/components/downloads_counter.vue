@@ -6,11 +6,22 @@ import eventHub from './event_hub';
 export default {
   name: 'DownloadsCounter',
   mixins: [counterMixin],
+  props: {
+    min: {
+      type: Number,
+      required: true,
+    },
+  },
   created() {
     eventHub.$on('download', this.incrementCounter);
   },
   beforeDestroy() {
     eventHub.$off('download', this.incrementCounter);
+  },
+  computed: {
+    showCounter() {
+      return this.count >= this.min;
+    },
   },
   methods: {
     ...mapActions(['setDownloadsCount']),
@@ -22,7 +33,7 @@ export default {
 }
 </script>
 <template>
-  <span data-toggle="tooltip" data-placement="bottom" :title="counterTooltip">
+  <span v-if="showCounter" data-toggle="tooltip" data-placement="bottom" :title="counterTooltip">
     <i class="fas fa-cloud-download-alt mr-1"></i>
     {{ localeCount }}
   </span>

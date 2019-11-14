@@ -39,11 +39,10 @@ export default {
     },
     hasPageView() {
       return this.objectNotEmpty(this.views) &&
-             this.showCounter(this.viewsCount, this.views);
+             this.viewsCount >= this.views.min
     },
     hasDownload() {
-      return this.objectNotEmpty(this.downloads) &&
-             this.showCounter(this.downloadsCount, this.downloads);
+      return this.objectNotEmpty(this.downloads)
     },
   },
   created() {
@@ -54,12 +53,6 @@ export default {
     objectNotEmpty(obj) {
       return Object.keys(obj).length !== 0
     },
-    showCounter(count, counter) {
-      if (count >= counter.min) return true;
-
-      return false;
-    },
-
   },
 };
 </script>
@@ -78,6 +71,7 @@ export default {
       <downloads-counter
         :count="downloadsCount"
         :locale-count="downloadsLocaleCount"
+        :min="downloads.min"
         :text-plural="downloads.textPlural"
         :text-singular="downloads.textSingular"
       />

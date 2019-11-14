@@ -17,10 +17,10 @@ export const receiveDownloadUrlSuccess = ({ dispatch }, payload) => {
 
   if (url && url !== '') {
     vm.$cable.unsubscribe('DownloadChannel');
-    window.location = url;
-
     dispatch('setDownloading', false);
     eventHub.$emit('download');
+
+    window.location = url;
   }
 };
 
