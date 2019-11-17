@@ -84,6 +84,8 @@ gem 'activerecord-jsonb-associations', git: 'https://github.com/rokumatsumoto/ac
 
 gem 'counter_culture', '~> 2.2', '>= 2.2.4'
 
+gem 'pagy', '~> 3.7'
+
 # gem 'rack-cors', '~> 1.0', '>= 1.0.3'
 
 group :development, :test do
