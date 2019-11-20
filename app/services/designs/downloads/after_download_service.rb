@@ -2,8 +2,9 @@
 
 module Designs
   module Downloads
-    class AfterDownloadService < Designs::BaseService
-      attr_reader :design, :current_user, :controller, :params
+    class AfterDownloadService
+      attr_reader :current_user, :controller, :params
+      attr_accessor :design
 
       def initialize(design, user = nil, params = {})
         @design = design
@@ -25,6 +26,10 @@ module Designs
                                event_name: 'Downloaded design',
                                properties: event_properties,
                                visit_token: params[:visit_token]).track
+
+        reload_design
+
+        HourlyDownloadsCountService.new.execute_for_design(design)
       end
 
       private
@@ -39,6 +44,10 @@ module Designs
 
       def service_ahoy
         ::Ahoy::Tracker.new(controller: nil, user: current_user)
+      end
+
+      def reload_design
+        self.design = design.reload
       end
     end
   end
