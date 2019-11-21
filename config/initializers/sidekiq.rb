@@ -1,11 +1,11 @@
-schedule_file = "config/schedule.yml"
+schedule_file = 'config/schedule.yml'
 
 Sidekiq.configure_server do |config|
- config.redis = { url: "redis://#{Boyutluseyler.credentials[:redis][:host]}:#{Boyutluseyler.credentials[:redis][:port]}/12" }
+  config.redis = { url: "redis://#{Boyutluseyler.credentials[:redis][:host]}:#{Boyutluseyler.credentials[:redis][:port]}/12" }
 end
 
 Sidekiq.configure_client do |config|
- config.redis = { url: "redis://#{Boyutluseyler.credentials[:redis][:host]}:#{Boyutluseyler.credentials[:redis][:port]}/12" }
+  config.redis = { url: "redis://#{Boyutluseyler.credentials[:redis][:host]}:#{Boyutluseyler.credentials[:redis][:port]}/12" }
 end
 
 if File.exist?(schedule_file) && Sidekiq.server?

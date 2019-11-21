@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   resources :designs, except: :show
   get '/3d-model/:category/:id', to: 'designs#show', as: :design_show, constraints: { id: /.*\D+.*/ }
-  get '/design/download/:id', to: 'designs#download', as: :design_download,constraints: { id: /.*\D+.*/ }
+  get '/design/download/:id', to: 'designs#download', as: :design_download, constraints: { id: /.*\D+.*/ }
 
   devise_for :users, path: '', controllers: { registrations: :registrations,
                                               passwords: :passwords,

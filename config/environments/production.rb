@@ -51,8 +51,8 @@ Rails.application.configure do
   # TODO: SSL certificate
   config.websocket_server_url = "ws://#{Boyutluseyler.credentials[:website]}/cable"
   config.action_cable.allowed_request_origins = [
-   # Address of our Ruby on Rails App
-  "http://#{Boyutluseyler.credentials[:website]}"
+    # Address of our Ruby on Rails App
+    "http://#{Boyutluseyler.credentials[:website]}"
   ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.

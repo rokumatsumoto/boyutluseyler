@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: design_downloads
@@ -41,6 +43,7 @@ class DesignDownload < ApplicationRecord
 
   def step_defined_in_state_machines
     return true if defined_steps.include? step.to_s
+
     errors.add(:step, "#{step} is not defined in #{state_machine_class}")
   end
 end

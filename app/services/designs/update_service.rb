@@ -19,9 +19,7 @@ module Designs
     def before_update
       design.model_file_format = model_file_format_for(design)
 
-      if blueprints_changed?
-        design_download.set_step_as(:file_updated)
-      end
+      design_download.set_step_as(:file_updated) if blueprints_changed?
     end
 
     def after_update

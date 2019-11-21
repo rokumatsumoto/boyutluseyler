@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #  StepMachine makes it easier to integrate the state machine into the app.
 #  Methods are added here which cannot be easily added directly to the state
 #  machine.
@@ -10,8 +12,8 @@
 class StepMachine
   attr_reader :target, :state_machine_class, :initiating_step
   def initialize(target:,
-                  state_machine_class:,
-                  step: nil)
+                 state_machine_class:,
+                 step: nil)
     @target = target
     @state_machine_class = state_machine_class
     @initiating_step = step

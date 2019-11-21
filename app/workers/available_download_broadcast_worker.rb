@@ -24,7 +24,7 @@ class AvailableDownloadBroadcastWorker
 
       update_design_download
     when 'ready', 'requested'
-      return
+      nil
     else
       Designs::Downloads::CreateService.new(design).execute
     end
@@ -50,7 +50,8 @@ class AvailableDownloadBroadcastWorker
       # TODO: i18n
       broadcast(
         '',
-        'Sunucu kaynaklı bir problem oluştu, bir süre sonra tekrar deneyebilirsiniz.')
+        'Sunucu kaynaklı bir problem oluştu, bir süre sonra tekrar deneyebilirsiniz.'
+      )
     end
   end
 

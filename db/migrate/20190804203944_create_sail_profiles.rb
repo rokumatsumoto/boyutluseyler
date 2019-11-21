@@ -10,7 +10,7 @@ class CreateSailProfiles < ActiveRecord::Migration[5.2]
     create_table :sail_profiles do |t|
       t.string :name, null: false
       t.boolean :active, default: false
-      t.index ["name"], name: "index_sail_profiles_on_name", unique: true
+      t.index ['name'], name: 'index_sail_profiles_on_name', unique: true
       t.timestamps
     end
 

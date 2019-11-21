@@ -22,7 +22,7 @@ module Designs
       end
 
       def presigned_url
-        Designs::Downloads::PresignedUrlService.new(nil, key: design_download.url).execute
+        PresignedUrlService.new(nil, key: design_download.url).execute
       end
 
       def step

@@ -1,5 +1,5 @@
-class Profiles::AccountsController < ApplicationController
-  def show
+# frozen_string_literal: true
 
-  end
+class Profiles::AccountsController < ApplicationController
+  def show; end
 end
