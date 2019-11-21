@@ -35,9 +35,9 @@ gem 'devise-i18n', '~> 1.7', '>= 1.7.1'
 gem 'pundit', '~> 2.0', '>= 2.0.1'
 
 # Forms
-gem 'simple_form', '~> 5.0'
 gem 'client_side_validations', '~> 16.0', '>= 16.0.2'
 gem 'client_side_validations-simple_form', '~> 9.0'
+gem 'simple_form', '~> 5.0'
 # Clean URL (https://en.wikipedia.org/wiki/Clean_URL)
 gem 'friendly_id', '~> 5.3'
 # HAML
@@ -52,8 +52,8 @@ gem 'local_time', '~> 2.1'
 
 gem 'webpacker', '~> 4.0', '>= 4.0.2'
 
-gem 'aws-sdk-s3', '~> 1.48'
 gem 'aws-sdk-lambda', '~> 1.30'
+gem 'aws-sdk-s3', '~> 1.48'
 
 gem 'gutentag', '~> 2.5', '>= 2.5.1'
 
@@ -111,10 +111,8 @@ group :development, :test do
   gem 'simplecov', '~> 0.16.1', require: false
 
   # Lints
-  # gem 'rubocop', '~> 0.63.1', require: false
-  gem 'rubocop', '~> 0.73.0', require: false
+  gem 'rubocop', '~> 0.76.0', require: false
   gem 'rubocop-rspec', '~> 1.34', require: false
-  # gem 'rubocop-rspec', '~> 1.32', require: false
 
   gem 'haml_lint', '~> 0.28.0', require: false
 
