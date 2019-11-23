@@ -4,7 +4,6 @@ require 'sidekiq/cron/web'
 Rails.application.routes.draw do
   root 'pages#home'
 
-  get 'test_stl_viewer', to: 'pages#test_stl_viewer'
   get 'upload', to: 'pages#upload'
 
   resources :uploads

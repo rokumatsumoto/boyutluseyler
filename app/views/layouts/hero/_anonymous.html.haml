@@ -23,5 +23,5 @@
                 %ul
                   - @random_categories.each do |c|
                     %li
-                      %a{ href: "/categories/#{c.name}" }= c.name
+                      %a{ href: "/categories/#{c['slug']}" }= c['name'].downcase
   -# main element ends
