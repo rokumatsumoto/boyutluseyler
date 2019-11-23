@@ -6,7 +6,11 @@ module Designs
       attr_reader :design
 
       def execute
+        design_list = Design.most_downloaded
 
+        design_list.each do |design|
+          execute_for_design(design)
+        end
       end
 
       def execute_for_design(design)
@@ -38,7 +42,7 @@ module Designs
       end
 
       def hourly
-        1.hours
+        Design::HOURLY_DOWNLOAD_CALCULATE_INTERVAL
       end
     end
   end

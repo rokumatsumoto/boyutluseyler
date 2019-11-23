@@ -5,3 +5,5 @@
 = render hero('anonymous', 'logged_in')
 
 #most-downloaded En çok indirilenler
+- @most_downloaded.each do |d|
+  %span= d['name']

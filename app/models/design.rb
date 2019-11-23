@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: designs
@@ -23,6 +24,9 @@ class Design < ApplicationRecord
   extend FriendlyId
 
   include Taggable
+
+  HOURLY_DOWNLOAD_CALCULATE_INTERVAL = 1.hour
+  MOST_DOWNLOADED_LIMIT = 8
 
   has_many :design_illustrations, -> { order(position: :asc) }, inverse_of: 'design'
   has_many :illustrations, through: :design_illustrations
@@ -63,11 +67,24 @@ class Design < ApplicationRecord
   end
 
   # TODO: remove 3ds format, add ply format
+  # TODO: create method for model extensions (stl|3ds|obj)
   def model_blueprints
     Blueprint.joins(:design_blueprint)
              .where(design_blueprints: { design_id: id })
              .where('url_path ~* ?', '.(stl|3ds|obj)$')
              .select(:url, :image_url)
              .order('design_blueprints.position')
+  end
+
+  # Class methods
+  #
+  class << self
+    def most_downloaded
+      select('id', 'name', 'slug', 'created_at', 'downloads_count')
+        .where('downloads_count > 0',
+               'created_at < ?', Time.now - HOURLY_DOWNLOAD_CALCULATE_INTERVAL)
+        .order(hourly_downloads_count: :desc, created_at: :desc)
+        .limit(MOST_DOWNLOADED_LIMIT)
+    end
   end
 end
