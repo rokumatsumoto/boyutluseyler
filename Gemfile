@@ -31,7 +31,7 @@ gem 'puma', '~> 3.11'
 gem 'pundit', '~> 2.0', '>= 2.0.1' # Authorization
 gem 'rails', '5.2.3'
 gem 'recaptcha', '~> 4.14' # Spam and anti-bot protection
-gem 'redis', '~> 4.1', '>= 4.1.3', :require => ["redis", "redis/connection/hiredis"]
+gem 'redis', '~> 4.1', '>= 4.1.3', require: ['redis', 'redis/connection/hiredis']
 gem 'sail', '~> 3.2', '>= 3.2.2'
 gem 'sanitize', '~> 5.0'
 gem 'sass-rails', '~> 5.0'
@@ -75,6 +75,7 @@ group :development do
   gem 'letter_opener_web', '~> 1.3', '>= 1.3.4'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'meta_request', '~> 0.6.0'
+  gem 'rack-mini-profiler', '~> 1.1', '>= 1.1.3'
   gem 'spring' # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0' # Access an interactive console on exception pages or by calling 'console' anywhere in the code.

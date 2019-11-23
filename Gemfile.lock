@@ -323,6 +323,8 @@ GEM
     rack (2.0.7)
     rack-contrib (2.1.0)
       rack (~> 2.0)
+    rack-mini-profiler (1.1.3)
+      rack (>= 1.2.0)
     rack-protection (2.0.7)
       rack
     rack-proxy (0.6.5)
@@ -566,6 +568,7 @@ DEPENDENCIES
   puma (~> 3.11)
   pundit (~> 2.0, >= 2.0.1)
   pundit-matchers (~> 1.6)
+  rack-mini-profiler (~> 1.1, >= 1.1.3)
   rails (= 5.2.3)
   rails-controller-testing
   recaptcha (~> 4.14)
