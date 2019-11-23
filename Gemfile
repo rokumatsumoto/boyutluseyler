@@ -24,7 +24,7 @@ gem 'hiredis', '~> 0.6.3'
 gem 'jbuilder', '~> 2.5'
 gem 'local_time', '~> 2.1'
 gem 'mini_mime', '~> 1.0', '>= 1.0.1'
-gem 'oj', '~> 3.9', '>= 3.9.2' # Speed up Gon
+gem 'oj', '~> 3.9', '>= 3.9.2' # Speed up JSON processes
 gem 'pagy', '~> 3.7'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
