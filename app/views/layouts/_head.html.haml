@@ -9,5 +9,6 @@
   = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
   = Gon::Base.render_data(:camel_case => true)
   = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+  = favicon_link_tag asset_path('favicon-16x16.png')
   = render 'layouts/disable_animations'
   = yield :head
