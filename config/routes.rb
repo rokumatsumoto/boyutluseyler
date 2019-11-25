@@ -23,7 +23,7 @@ Rails.application.routes.draw do
                                               unlocks: :unlocks }
 
   get 'exists/:username', to: 'users#exists',
-                          username: /(?:[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\.\%][a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\-\.\%]*[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\-]|[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_])/
+                          username: /(?:[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\.\%][a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\-\.\%]*[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\-\%]|[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_])/
 
   resource :profile, only: %i[show update] do
     scope module: :profiles do
