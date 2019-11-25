@@ -38,7 +38,7 @@ module Designs
       end
 
       def time
-        Time.now
+        Time.current
       end
 
       def hourly

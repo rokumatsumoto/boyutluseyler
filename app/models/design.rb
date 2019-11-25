@@ -82,7 +82,7 @@ class Design < ApplicationRecord
     def most_downloaded
       select('id', 'name', 'slug', 'created_at', 'downloads_count')
         .where('downloads_count > 0',
-               'created_at < ?', Time.now - HOURLY_DOWNLOAD_CALCULATE_INTERVAL)
+               'created_at < ?', Time.current - HOURLY_DOWNLOAD_CALCULATE_INTERVAL)
         .order(hourly_downloads_count: :desc, created_at: :desc)
         .limit(MOST_DOWNLOADED_LIMIT)
     end
