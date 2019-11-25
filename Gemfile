@@ -42,12 +42,14 @@ gem 'strong_migrations', '~> 0.4.1' # Catch unsafe migrations at dev time
 gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 4.0', '>= 4.0.2'
 # gem 'rack-cors', '~> 1.0', '>= 1.0.3'
+# gem 'turkish_support', '~> 1.1', '>= 1.1.3'
 
 group :development, :test do
   gem 'bullet', '~> 5.9' # n+1 Queries
   gem 'bundler-audit', '~> 0.6.1', require: false
   gem 'database_cleaner', '~> 1.7', require: false
   gem 'factory_bot_rails', '~> 5.0'
+  gem 'faker', '~> 2.7'
   gem 'fivemat', '~> 1.3', '>= 1.3.7' # RSpec Formatter
   gem 'guard', '~> 2.15' # Handle events on file system modifications.
   gem 'guard-rspec', '~> 4.7', '>= 4.7.3', require: false
