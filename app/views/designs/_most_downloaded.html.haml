@@ -1,0 +1,15 @@
+%section#most-downloaded.group.mt-3
+  .group-title.group-title-linked
+    %a.mb-3{href: "#", title: "En Çok İndirilenler"}
+      %i.fas.fa-cloud-download-alt
+      %span.ml-2 En Çok İndirilenler
+    %p.group-title-link
+      %a.btn.btn-icon.btn-outline-primary.btn-sm{ title: 'En Çok İndirilenler', href: "#" }
+        %span.btn-inner--icon
+          %span Tümü
+          %i.ni.ni-bold-right
+  .designs-group
+    - @most_downloaded.each do |d|
+      %article.designs.box
+        %a.box-thumb{ title: d['name'], href: design_show_path(d['category_slug'], d['slug']) }
+          %img{ src: d['url'], width: 234, height: 234 }

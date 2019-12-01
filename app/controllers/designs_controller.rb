@@ -7,6 +7,8 @@ class DesignsController < ApplicationController
   before_action :authenticate_user!, except: %i[show index]
   before_action :design, only: %i[show edit update destroy download]
 
+  def index; end
+
   def new
     @design = Design.new
     @illustrations = {}
