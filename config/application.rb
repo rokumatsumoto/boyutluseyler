@@ -29,6 +29,9 @@ module Boyutluseyler
     config.time_zone = 'Istanbul' # Default time zone
     config.i18n.default_locale = :tr
 
+    # auto-load nested translation folders ie: locales/models/foo.yml
+    I18n.load_path += Dir[Rails.root.join('config/locales/**/*.yml').to_s]
+
     # Disable animations, only for test environments
     config.disable_animations = false
 
