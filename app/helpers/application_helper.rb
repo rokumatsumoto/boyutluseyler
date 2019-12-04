@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+  include Pagy::Frontend
+
   def human_enum_name(model, enum_name, enum_value)
     I18n.t("activerecord.attributes.#{model.model_name.i18n_key}.#{enum_name}.#{enum_value}")
   end

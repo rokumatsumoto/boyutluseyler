@@ -15,18 +15,24 @@
 import '../styles';
 
 import Rails from 'rails-ujs';
+
 Rails.start();
 
 import * as ActiveStorage from 'activestorage';
+
 ActiveStorage.start();
 
 import Turbolinks from 'turbolinks';
+
 Turbolinks.start();
 
 import LocalTime from 'local-time';
+
 LocalTime.start();
 
 import 'bootstrap/dist/js/bootstrap';
+
+import 'lib/pagy.js.erb';
 
 // https://github.com/DavyJonesLocker/client_side_validations/issues/767
 require('@client-side-validations/client-side-validations')
