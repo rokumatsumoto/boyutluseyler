@@ -6,7 +6,7 @@ module DesignsHelper
                                     expires_in: Design::HOURLY_DOWNLOAD_CALCULATE_INTERVAL) do
       Designs::Downloads::HourlyDownloadsCountService.new.execute
 
-      Design.most_downloaded.to_json
+      Design.most_downloaded_by_hourly.to_json
     end
 
     JSON.parse(design_list)

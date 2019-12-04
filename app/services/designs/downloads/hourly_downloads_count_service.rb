@@ -6,7 +6,7 @@ module Designs
       attr_reader :design
 
       def execute
-        design_list = Design.most_downloaded
+        design_list = Design.most_downloaded_by_hourly
 
         design_list.each do |design|
           execute_for_design(design)

@@ -4,10 +4,8 @@ class DesignsController < ApplicationController
   include Boyutluseyler::Utils::StrongMemoize
   include AhoyActions
 
-  before_action :authenticate_user!, except: %i[show index]
+  before_action :authenticate_user!, except: %i[show latest]
   before_action :design, only: %i[show edit update destroy download]
-
-  def index; end
 
   def new
     @design = Design.new
@@ -74,6 +72,10 @@ class DesignsController < ApplicationController
     render json: { url: url }, status: :ok
   end
 
+  def latest
+    @pagy, @designs = pagy(DesignsFinder.new(design_list_params).execute)
+  end
+
   private
 
   def design_files_for(action)
@@ -126,6 +128,11 @@ class DesignsController < ApplicationController
       illustration_ids: [],
       blueprint_ids: []
     ]
+  end
+
+  def design_list_params
+    params[:with_illustrations] = true
+    params.permit(%i[sort page with_illustrations])
   end
 
   def file_preview_fields

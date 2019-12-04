@@ -12,7 +12,12 @@ Rails.application.routes.draw do
 
   resources :blueprints
 
-  resources :designs, except: :show
+  resources :designs, except: :show do
+    collection do
+      get 'latest'
+    end
+  end
+
   get '/3d-model/:category/:id', to: 'designs#show', as: :design_show, constraints: { id: /.*\D+.*/ }
   get '/design/download/:id', to: 'designs#download', as: :design_download, constraints: { id: /.*\D+.*/ }
 

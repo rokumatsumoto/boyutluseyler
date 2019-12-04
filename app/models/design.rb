@@ -24,9 +24,10 @@ class Design < ApplicationRecord
   extend FriendlyId
 
   include Taggable
+  # include Sortable
 
   HOURLY_DOWNLOAD_CALCULATE_INTERVAL = 1.hour
-  MOST_DOWNLOADED_LIMIT = 8
+  MOST_DOWNLOADED_LIMIT_BY_HOURLY = 8
 
   has_many :design_illustrations, -> { order(position: :asc) }, inverse_of: 'design'
   has_many :illustrations, through: :design_illustrations
@@ -50,6 +51,12 @@ class Design < ApplicationRecord
   validates :design_blueprints, presence: true
 
   friendly_id :name, use: %i[slugged history]
+
+  scope :with_tags, -> { includes(:taggings, :tags) }
+  scope :with_first_illustration, lambda {
+                                    joins(:illustrations)
+                                      .where('design_illustrations.position = ?', 1)
+                                  }
 
   enum license_type: {
     license_none: 'license_none',
@@ -79,15 +86,31 @@ class Design < ApplicationRecord
   # Class methods
   #
   class << self
-    def most_downloaded
-      includes(:taggings, :tags)
-        .joins(:illustrations)
+    def sort_by_attribute(method)
+      case method.to_s
+      when 'downloads_count_desc'
+        reorder(downloads_count: :desc)
+      when 'downloads_count_asc'
+        reorder(downloads_count: :asc)
+      else
+        order_by(method)
+      end
+    end
+
+    def with_illustrations
+      with_tags
+        .with_first_illustration
         .joins(:category)
-        .where('downloads_count > ? AND designs.created_at < ? AND position = ?',
-               0, Time.current - HOURLY_DOWNLOAD_CALCULATE_INTERVAL, 1)
-        .select('designs.*, url, categories.slug as category_slug')
+        .select('designs.name, designs.slug, illustrations.url, categories.slug as category_slug')
+    end
+
+    def most_downloaded_by_hourly
+      with_illustrations
+        .where('downloads_count > ? AND designs.created_at < ?',
+               0, Time.current - HOURLY_DOWNLOAD_CALCULATE_INTERVAL)
+        .select('designs.*')
         .order(hourly_downloads_count: :desc, created_at: :desc)
-        .limit(MOST_DOWNLOADED_LIMIT)
+        .limit(MOST_DOWNLOADED_LIMIT_BY_HOURLY)
     end
   end
 end

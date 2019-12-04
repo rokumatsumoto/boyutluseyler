@@ -1,0 +1,12 @@
+.container
+  .mt-3
+    .group-title.group-title-linked
+      .mb-3
+        %h6.text-primary.mt-3 En Yeni 3D Modeller
+    .designs-group
+      - @designs.each do |d|
+        = render partial: 'designs/box', locals: { design: d }
+    %nav{ 'aria-label' => 'pagination' }
+      %ul.pagination.justify-content-center
+        = pagy_bootstrap_nav_js(@pagy).html_safe
+

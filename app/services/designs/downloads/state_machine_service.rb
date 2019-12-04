@@ -8,7 +8,6 @@ module Designs
 
         return '' if requested?
 
-        # test AvailableDownloadBroadcast.new(design.id).perform
         AvailableDownloadBroadcastWorker.perform_async(design.id)
         ''
       end
