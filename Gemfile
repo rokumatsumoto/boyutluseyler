@@ -1,9 +1,15 @@
 source 'https://rubygems.org'
-git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+
+# Enforce git to transmitted via https.
+# workaround until we upgrade bundler to 2.0
+git_source(:github) do |repo_name|
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  "https://github.com/#{repo_name}.git"
+end
 
 ruby '2.5.5'
 
-gem 'activerecord-jsonb-associations', git: 'https://github.com/rokumatsumoto/activerecord-jsonb-associations'
+gem 'activerecord-jsonb-associations', github: 'rokumatsumoto/activerecord-jsonb-associations', branch: "master"
 gem 'acts_as_list', '~> 0.9.19'
 gem 'ahoy_matey', '~> 3.0', '>= 3.0.1'
 gem 'aws-sdk-lambda', '~> 1.30'
@@ -78,7 +84,7 @@ group :development do
   gem 'letter_opener_web', '~> 1.3', '>= 1.3.4'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'meta_request', '~> 0.6.0'
-  gem 'rack-mini-profiler', '~> 1.1', '>= 1.1.3'
+  gem 'rack-mini-profiler', github: 'MiniProfiler/rack-mini-profiler', branch: "master"
   gem 'spring' # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0' # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
