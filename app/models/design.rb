@@ -24,7 +24,7 @@ class Design < ApplicationRecord
   extend FriendlyId
 
   include Taggable
-  # include Sortable
+  include Sortable
 
   HOURLY_DOWNLOAD_CALCULATE_INTERVAL = 1.hour
   MOST_DOWNLOADED_LIMIT_BY_HOURLY = 8

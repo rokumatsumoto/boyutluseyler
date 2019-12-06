@@ -1,12 +1,34 @@
+- url_path = '/designs/latest'
+- d_desc = ApplicationHelper::D_DESC
+- date = 'created'
+- sort_by_date = "#{url_path}?#{d_desc}&sort=#{date}"
+- downloads = 'downloads_count'
+- sort_by_download = "#{url_path}?#{d_desc}&sort=#{downloads}"
+- likes = 'likes_count'
+- sort_by_like = "#{url_path}?#{d_desc}&sort=#{likes}"
+
 .container
-  .mt-3
-    .group-title.group-title-linked
-      .mb-3
-        %h6.text-primary.mt-3 En Yeni 3D Modeller
-    .designs-group
-      - @designs.each do |d|
-        = render partial: 'designs/box', locals: { design: d }
-    %nav{ 'aria-label' => 'pagination' }
-      %ul.pagination.justify-content-center
-        = pagy_bootstrap_nav_js(@pagy).html_safe
+  .grid
+    .grid-cell
+      %h6.mt-4.text-primary En Yeni 3D Modeller
+    .grid-cell.grid-cell--fit
+      %nav.sort
+        .sort-text Sırala:
+        - active = active_class_for(date)
+        - link = toggle_sort_link(sort_by_date, active)
+        = render partial: 'designs/nav_sort_link', locals: { active: active, text: 'Tarih', link: link }
+
+        - active = active_class_for(downloads)
+        - link = toggle_sort_link(sort_by_download, active)
+        = render partial: 'designs/nav_sort_link', locals: { active: active, text: 'İndirme', link: link }
+
+        - active = active_class_for(likes)
+        - link = toggle_sort_link(sort_by_like, active)
+        = render partial: 'designs/nav_sort_link', locals: { active: active, text: 'Beğeni', link: link }
+  .designs-group
+    - @designs.each do |d|
+      = render partial: 'designs/box', locals: { design: d }
+  %nav{ 'aria-label' => 'pagination' }
+    %ul.pagination.justify-content-center
+      = pagy_bootstrap_nav_js(@pagy).html_safe
 

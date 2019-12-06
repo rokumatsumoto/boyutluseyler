@@ -132,7 +132,7 @@ class DesignsController < ApplicationController
 
   def design_list_params
     params[:with_illustrations] = true
-    params.permit(%i[sort page with_illustrations])
+    params.permit(%i[direction sort page with_illustrations])
   end
 
   def file_preview_fields

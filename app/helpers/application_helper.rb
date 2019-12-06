@@ -3,6 +3,9 @@
 module ApplicationHelper
   include Pagy::Frontend
 
+  D_DESC = 'direction=desc'
+  D_ASC = 'direction=asc'
+
   def human_enum_name(model, enum_name, enum_value)
     I18n.t("activerecord.attributes.#{model.model_name.i18n_key}.#{enum_name}.#{enum_value}")
   end
@@ -44,5 +47,17 @@ module ApplicationHelper
   #   current_action?(:new, :create)  # => true
   def current_action?(*args)
     args.any? { |v| v.to_s.downcase == action_name }
+  end
+
+  def active_class_for(query)
+    request.fullpath.include?(query) ? true : false
+  end
+
+  def toggle_sort_link(link_path, active)
+    return link_path unless active
+
+    return link_path.gsub(D_DESC, D_ASC) if request.fullpath.include?(D_DESC)
+
+    link_path.gsub(D_ASC, D_DESC)
   end
 end

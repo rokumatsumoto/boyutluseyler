@@ -1,0 +1,25 @@
+nav.sort {
+  margin: 1rem 0;
+  display: flex;
+  flex-wrap: wrap;
+
+  .sort-text {
+    padding: .5rem 1rem .5rem 0;
+    font-size: 14px;
+  }
+
+  .sort-item {
+    padding: .5rem 1rem;
+    border-radius: .5rem;
+    font-size: 14px;
+  }
+
+  .sort-active {
+    background: #e6e6e6;
+  }
+
+  .sort-icon {
+    font-weight: bold;
+    color: #b4b4b4;
+  }
+}

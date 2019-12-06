@@ -16,6 +16,19 @@ body {
   background-color: $lavender-violet;
 }
 
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+
+  .grid-cell {
+    flex: 1;
+  }
+
+  .grid-cell--fit {
+    flex: inherit;
+  }
+}
+
 .group-title {
   display: flex;
 

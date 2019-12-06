@@ -30,10 +30,18 @@ class DesignsFinder
   def sort(items)
     return items unless sort?
 
-    items.sort_by_attribute(params[:sort])
+    items.sort_by_attribute(direction? ? sort_with_direction : params[:sort])
   end
 
   def sort?
     params[:sort].present?
+  end
+
+  def direction?
+    params[:direction].present?
+  end
+
+  def sort_with_direction
+    "#{params[:sort]}_#{params[:direction]}"
   end
 end
