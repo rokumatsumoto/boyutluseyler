@@ -93,9 +93,9 @@ group :development do
 end
 
 group :test do
-  gem 'capybara', '~> 3.13', '>= 3.13.2' # Adds support for Capybara system testing and selenium driver
+  gem 'capybara', '~> 3.29' # Adds support for Capybara system testing and selenium driver
   gem 'capybara-email', '~> 3.0', '>= 3.0.1'
-  gem 'capybara-screenshot', '~> 1.0', '>= 1.0.22'
+  gem 'capybara-screenshot', '~> 1.0', '>= 1.0.24'
   gem 'pundit-matchers', '~> 1.6'
   gem 'rails-controller-testing'
   gem 'selenium-webdriver', '~> 3.142', '>= 3.142.5'
