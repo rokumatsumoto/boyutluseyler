@@ -1,17 +1,15 @@
 nav.sort {
-  margin: 1rem 0;
+  margin: .75rem 0;
   display: flex;
   flex-wrap: wrap;
 
   .sort-text {
-    padding: .5rem 1rem .5rem 0;
-    font-size: 14px;
+    padding: .375rem .75rem .375rem 0;
   }
 
   .sort-item {
-    padding: .5rem 1rem;
-    border-radius: .5rem;
-    font-size: 14px;
+    padding: .375rem .75rem;
+    border-radius: .375rem;
   }
 
   .sort-active {
