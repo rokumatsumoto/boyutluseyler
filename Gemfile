@@ -38,7 +38,7 @@ gem 'pundit', '~> 2.0', '>= 2.0.1' # Authorization
 gem 'rails', '5.2.3'
 gem 'recaptcha', '~> 4.14' # Spam and anti-bot protection
 gem 'redis', '~> 4.1', '>= 4.1.3', require: ['redis', 'redis/connection/hiredis']
-gem 'sail', '~> 3.2', '>= 3.2.2'
+gem 'sail', '~> 3.3'
 gem 'sanitize', '~> 5.0'
 gem 'sassc-rails', '~> 2.1', '>= 2.1.2' # TODO: Rails 6.0 upgrade https://github.com/rails/sass-rails/pull/424
 gem 'sidekiq', '~> 5.2', '>= 5.2.7' # Background jobs
