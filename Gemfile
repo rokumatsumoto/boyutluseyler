@@ -40,7 +40,10 @@ gem 'recaptcha', '~> 4.14' # Spam and anti-bot protection
 gem 'redis', '~> 4.1', '>= 4.1.3', require: ['redis', 'redis/connection/hiredis']
 gem 'sail', '~> 3.3'
 gem 'sanitize', '~> 5.0'
-gem 'sassc-rails', '~> 2.1', '>= 2.1.2' # TODO: Rails 6.0 upgrade https://github.com/rails/sass-rails/pull/424
+# A portability issue in the sassc gem exists on several platforms.
+  # https://github.com/sass/sassc-ruby/issues/146
+gem 'sassc', '2.1.0'  # TODO: Remove when we upgrade Rails to 6.0
+gem 'sassc-rails', '~> 2.1', '>= 2.1.2' # TODO: Remove when we upgrade Rails to 6.0 https://github.com/rails/sass-rails/pull/424
 gem 'sidekiq', '~> 5.2', '>= 5.2.7' # Background jobs
 gem 'sidekiq-cron', '~> 1.1' # Cron jobs
 gem 'simple_form', '~> 5.0' # Forms
