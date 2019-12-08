@@ -1,5 +1,4 @@
 const { environment } = require('@rails/webpacker')
-const erb = require('./loaders/erb')
 const webpack = require('webpack')
 const { VueLoaderPlugin } = require('vue-loader')
 const customConfig = require('./custom')
@@ -25,5 +24,4 @@ environment.loaders.prepend('vue', vue)
 
 environment.config.merge(customConfig)
 
-environment.loaders.prepend('erb', erb)
 module.exports = environment

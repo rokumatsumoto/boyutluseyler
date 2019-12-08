@@ -36,8 +36,6 @@ LocalTime.start();
 
 import 'bootstrap/dist/js/bootstrap';
 
-import 'lib/pagy.js.erb';
-
 // https://github.com/DavyJonesLocker/client_side_validations/issues/767
 require('@client-side-validations/client-side-validations')
 require('@client-side-validations/simple-form/dist/simple-form.bootstrap4')
