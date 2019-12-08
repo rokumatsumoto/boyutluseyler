@@ -69,8 +69,7 @@ notifications:
 rvm:
   - "2.5.5"
 script:
-  # https://github.com/usabilityhub/rails-erb-loader/issues/63#issuecomment-374791504
-  - "DISABLE_SPRING=1 bundle exec rails webpacker:compile"
+  - "DISABLE_SPRING=1 bundle exec rails webpacker:compile" # https://github.com/usabilityhub/rails-erb-loader/issues/63#issuecomment-374791504
   - "bundle exec rake db:schema:load"
   - "./cc-test-reporter before-build"
   - "bundle exec rspec spec"
