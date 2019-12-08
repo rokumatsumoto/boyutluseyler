@@ -10,6 +10,11 @@ nav.sort {
   .sort-item {
     padding: .375rem .75rem;
     border-radius: .375rem;
+
+    @media (max-width: 22.5rem){
+      display: block;
+      width: 100%;
+    }
   }
 
   .sort-active {

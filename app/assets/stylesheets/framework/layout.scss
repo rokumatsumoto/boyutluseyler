@@ -29,6 +29,12 @@ body {
   }
 }
 
+@media (max-width: 36rem){
+  .grid--full--large > .grid-cell {
+    flex: 0 0 100%;
+  }
+}
+
 .group-title {
   display: flex;
 
