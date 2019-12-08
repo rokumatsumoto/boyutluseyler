@@ -40,13 +40,13 @@ gem 'recaptcha', '~> 4.14' # Spam and anti-bot protection
 gem 'redis', '~> 4.1', '>= 4.1.3', require: ['redis', 'redis/connection/hiredis']
 gem 'sail', '~> 3.2', '>= 3.2.2'
 gem 'sanitize', '~> 5.0'
-gem 'sass-rails', '~> 5.0'
+gem 'sassc-rails', '~> 2.1', '>= 2.1.2' # TODO: Rails 6.0 upgrade https://github.com/rails/sass-rails/pull/424
 gem 'sidekiq', '~> 5.2', '>= 5.2.7' # Background jobs
 gem 'sidekiq-cron', '~> 1.1' # Cron jobs
 gem 'simple_form', '~> 5.0' # Forms
 gem 'strong_migrations', '~> 0.4.1' # Catch unsafe migrations at dev time
 gem 'turbolinks', '~> 5'
-gem 'webpacker', '~> 4.0', '>= 4.0.2'
+gem 'webpacker', '~> 4.2'
 # gem 'rack-cors', '~> 1.0', '>= 1.0.3'
 # gem 'turkish_support', '~> 1.1', '>= 1.1.3'
 
