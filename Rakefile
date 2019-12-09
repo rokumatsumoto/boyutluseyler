@@ -4,3 +4,7 @@
 require_relative 'config/application'
 
 Rails.application.load_tasks
+Rake::Task['default'].clear
+
+task default: 'bundler:audit'
+# TODO: add brakeman, rails-best-practices, Rubocop, reek v.s to default task

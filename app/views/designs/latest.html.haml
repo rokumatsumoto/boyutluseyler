@@ -1,0 +1,37 @@
+- content_for :head do
+  = javascript_pack_tag 'designs/latest'
+
+- url_path = '/designs/latest'
+- d_desc = ApplicationHelper::D_DESC
+- date = 'created'
+- sort_by_date = "#{url_path}?#{d_desc}&sort=#{date}"
+- downloads = 'downloads_count'
+- sort_by_download = "#{url_path}?#{d_desc}&sort=#{downloads}"
+- likes = 'likes_count'
+- sort_by_like = "#{url_path}?#{d_desc}&sort=#{likes}"
+
+.container
+  .grid.grid--full--large
+    .grid-cell
+      %h6.mt-3.text-primary En Yeni 3D Modeller
+    .grid-cell.grid-cell--fit
+      %nav.sort
+        .sort-text Sırala:
+        - active = active_class_for(date)
+        - link = toggle_sort_link(sort_by_date, active)
+        = render partial: 'designs/nav_sort_link', locals: { active: active, text: 'Tarih', link: link }
+
+        - active = active_class_for(downloads)
+        - link = toggle_sort_link(sort_by_download, active)
+        = render partial: 'designs/nav_sort_link', locals: { active: active, text: 'İndirme', link: link }
+
+        - active = active_class_for(likes)
+        - link = toggle_sort_link(sort_by_like, active)
+        = render partial: 'designs/nav_sort_link', locals: { active: active, text: 'Beğeni', link: link }
+  .designs-group
+    - @designs.each do |d|
+      = render partial: 'designs/box', locals: { design: d }
+  %nav{ 'aria-label' => 'pagination' }
+    %ul.pagination.justify-content-center
+      = pagy_bootstrap_nav_js(@pagy).html_safe
+

@@ -12,16 +12,16 @@ export default {
       required: true,
     },
   },
+  computed: {
+    showCounter() {
+      return this.count >= this.min;
+    },
+  },
   created() {
     eventHub.$on('download', this.incrementCounter);
   },
   beforeDestroy() {
     eventHub.$off('download', this.incrementCounter);
-  },
-  computed: {
-    showCounter() {
-      return this.count >= this.min;
-    },
   },
   methods: {
     ...mapActions(['setDownloadsCount']),

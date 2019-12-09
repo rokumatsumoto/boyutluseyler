@@ -4,7 +4,6 @@ require 'sidekiq/cron/web'
 Rails.application.routes.draw do
   root 'pages#home'
 
-  get 'test_stl_viewer', to: 'pages#test_stl_viewer'
   get 'upload', to: 'pages#upload'
 
   resources :uploads
@@ -13,9 +12,14 @@ Rails.application.routes.draw do
 
   resources :blueprints
 
-  resources :designs, except: :show
+  resources :designs, except: :show do
+    collection do
+      get 'latest'
+    end
+  end
+
   get '/3d-model/:category/:id', to: 'designs#show', as: :design_show, constraints: { id: /.*\D+.*/ }
-  get '/design/download/:id', to: 'designs#download', as: :design_download,constraints: { id: /.*\D+.*/ }
+  get '/design/download/:id', to: 'designs#download', as: :design_download, constraints: { id: /.*\D+.*/ }
 
   devise_for :users, path: '', controllers: { registrations: :registrations,
                                               passwords: :passwords,
@@ -24,7 +28,7 @@ Rails.application.routes.draw do
                                               unlocks: :unlocks }
 
   get 'exists/:username', to: 'users#exists',
-                          username: /(?:[a-zA-Z0-9_\.][a-zA-Z0-9_\-\.]*[a-zA-Z0-9_\-]|[a-zA-Z0-9_])/
+                          username: /(?:[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\.\%][a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\-\.\%]*[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\-\%]|[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_])/
 
   resource :profile, only: %i[show update] do
     scope module: :profiles do

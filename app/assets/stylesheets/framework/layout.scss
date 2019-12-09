@@ -16,6 +16,99 @@ body {
   background-color: $lavender-violet;
 }
 
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+
+  .grid-cell {
+    flex: 1;
+  }
+
+  .grid-cell--fit {
+    flex: inherit;
+  }
+}
+
+@media (max-width: 36rem){
+  .grid--full--large > .grid-cell {
+    flex: 0 0 100%;
+  }
+}
+
+.group-title {
+  display: flex;
+
+  .group-title-link {
+    text-align: right;
+  }
+}
+
+.group-title-linked {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.designs {
+  position: relative;
+}
+
+.designs-group {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+
+  .designs {
+    margin-top: 1rem;
+
+    @media (min-width: 22.5rem){
+      width: 23.4%;
+      margin-right: 2%;
+
+      &:nth-of-type(4n) {
+        margin-right: 0;
+      }
+    }
+
+    @media (max-width: 22.5rem){
+      width: 48.5%;
+      margin-right: 3%;
+
+      &:nth-of-type(2n) {
+        margin-right: 0;
+      }
+    }
+
+    img {
+
+      @media (min-width: 75rem){
+        height: 234px;
+        width: 234px;
+      }
+    }
+  }
+}
+
+.box {
+  overflow: hidden;
+  position: relative;
+  border: 1px solid #e6e6e6;
+  border-radius: .5rem
+}
+
+.box-thumb{
+  display: block;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background:#b4b4b4;
+    color:#fff;
+    font-size:2rem;
+  }
+}
+
 @media (min-width: 768px) {
   .twins {
     .twin {

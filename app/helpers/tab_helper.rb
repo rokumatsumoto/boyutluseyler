@@ -74,17 +74,13 @@ module TabHelper
 
   def active_nav_link?(options)
     if path = options.delete(:path)
-      unless path.respond_to?(:each)
-        path = [path]
-      end
+      path = [path] unless path.respond_to?(:each)
 
       path.any? do |single_path|
         current_path?(single_path)
       end
     elsif page = options.delete(:page)
-      unless page.respond_to?(:each)
-        page = [page]
-      end
+      page = [page] unless page.respond_to?(:each)
 
       page.any? do |single_page|
         current_page?(single_page)
@@ -104,7 +100,7 @@ module TabHelper
   end
 
   def current_path?(path)
-    c, a, _ = path.split('#')
+    c, a, = path.split('#')
     current_controller?(c) && current_action?(a)
   end
 end

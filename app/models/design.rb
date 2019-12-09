@@ -1,27 +1,33 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: designs
 #
-#  id                :bigint(8)        not null, primary key
-#  name              :string(120)      not null
-#  description       :text             not null
-#  printing_settings :text
-#  model_file_format :string
-#  license_type      :string           not null
-#  allow_comments    :boolean          default(TRUE), not null
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  user_id           :bigint(8)        not null
-#  category_id       :bigint(8)        not null
-#  slug              :string
-#  downloads_count   :integer          default(0), not null
+#  id                     :bigint(8)        not null, primary key
+#  name                   :string(120)      not null
+#  description            :text             not null
+#  printing_settings      :text
+#  model_file_format      :string
+#  license_type           :string           not null
+#  allow_comments         :boolean          default(TRUE), not null
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  user_id                :bigint(8)        not null
+#  category_id            :bigint(8)        not null
+#  slug                   :string
+#  downloads_count        :integer          default(0), not null
+#  hourly_downloads_count :float            default(0.0), not null
 #
 
 class Design < ApplicationRecord
   extend FriendlyId
 
   include Taggable
+  include Sortable
+
+  HOURLY_DOWNLOAD_CALCULATE_INTERVAL = 1.hour
+  MOST_DOWNLOADED_LIMIT_BY_HOURLY = 8
 
   has_many :design_illustrations, -> { order(position: :asc) }, inverse_of: 'design'
   has_many :illustrations, through: :design_illustrations
@@ -46,6 +52,12 @@ class Design < ApplicationRecord
 
   friendly_id :name, use: %i[slugged history]
 
+  scope :with_tags, -> { includes(:taggings, :tags) }
+  scope :with_first_illustration, lambda {
+                                    joins(:illustrations)
+                                      .where('design_illustrations.position = ?', 1)
+                                  }
+
   enum license_type: {
     license_none: 'license_none',
     cc_by: 'cc_by',
@@ -62,11 +74,43 @@ class Design < ApplicationRecord
   end
 
   # TODO: remove 3ds format, add ply format
+  # TODO: create method for model extensions (stl|3ds|obj)
   def model_blueprints
     Blueprint.joins(:design_blueprint)
              .where(design_blueprints: { design_id: id })
              .where('url_path ~* ?', '.(stl|3ds|obj)$')
              .select(:url, :image_url)
              .order('design_blueprints.position')
+  end
+
+  # Class methods
+  #
+  class << self
+    def sort_by_attribute(method)
+      case method.to_s
+      when 'downloads_count_desc'
+        reorder(downloads_count: :desc)
+      when 'downloads_count_asc'
+        reorder(downloads_count: :asc)
+      else
+        order_by(method)
+      end
+    end
+
+    def with_illustrations
+      with_tags
+        .with_first_illustration
+        .joins(:category)
+        .select('designs.name, designs.slug, illustrations.url, categories.slug as category_slug')
+    end
+
+    def most_downloaded_by_hourly
+      with_illustrations
+        .where('downloads_count > ? AND designs.created_at < ?',
+               0, Time.current - HOURLY_DOWNLOAD_CALCULATE_INTERVAL)
+        .select('designs.*')
+        .order(hourly_downloads_count: :desc, created_at: :desc)
+        .limit(MOST_DOWNLOADED_LIMIT_BY_HOURLY)
+    end
   end
 end

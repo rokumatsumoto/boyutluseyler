@@ -57,7 +57,7 @@ module ObjectStorage
     end
 
     def expire_at
-      Time.now.utc + EXPIRE_OFFSET
+      Time.current.utc + EXPIRE_OFFSET
     end
   end
 end

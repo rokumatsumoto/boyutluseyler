@@ -88,7 +88,6 @@ RSpec.describe 'User edit profile' do
   end
 
   # TODO: cancel account
-  # rubocop:disable RSpec/PredicateMatcher
   # describe 'when I cancel my account', :js do
   #   it 'deletes user' do
   #     accept_alert do

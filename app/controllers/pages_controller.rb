@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 class PagesController < ApplicationController
-  def home
-    @random_categories = Category.random(4) unless user_signed_in?
-  end
+  include CategoriesHelper
+  include DesignsHelper
 
-  # TODO: remove
-  def test_stl_viewer; end
+  def home
+    @random_categories = fetch_random_categories
+
+    @most_downloaded = fetch_most_downloaded
+  end
 end

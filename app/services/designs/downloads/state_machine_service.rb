@@ -8,7 +8,6 @@ module Designs
 
         return '' if requested?
 
-        # test AvailableDownloadBroadcast.new(design.id).perform
         AvailableDownloadBroadcastWorker.perform_async(design.id)
         ''
       end
@@ -22,7 +21,7 @@ module Designs
       end
 
       def presigned_url
-        Designs::Downloads::PresignedUrlService.new(nil, key: design_download.url).execute
+        PresignedUrlService.new(nil, key: design_download.url).execute
       end
 
       def step

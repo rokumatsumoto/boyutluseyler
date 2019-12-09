@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: categories
@@ -14,7 +15,6 @@
 
 class Category < ApplicationRecord
   extend FriendlyId
-  include Randomable
 
   has_many :designs
 

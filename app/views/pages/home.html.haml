@@ -4,4 +4,5 @@
 - add_header_links([:sign_in], %i[upload])
 = render hero('anonymous', 'logged_in')
 
-#most-downloaded En çok indirilenler
+.container
+  = render partial: 'designs/most_downloaded', locals: { most_downloaded: @most_downloaded }

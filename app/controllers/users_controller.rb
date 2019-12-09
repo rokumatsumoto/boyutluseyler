@@ -2,7 +2,7 @@
 
 class UsersController < ApplicationController
   def exists
-    if User.exists?(['lower(username) = :username', username: params[:username].downcase])
+    if User.exists?(['lower(username) = :username', username: params[:username].downcase(:turkic)])
       render json: { exists: true }
     else
       render json: { exists: false }

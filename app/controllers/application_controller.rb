@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   # protect_from_forgery with: :null_session # for postman
 
   include ApplicationHelper
+  include Pagy::Backend
   include Pundit
 
   before_action :add_gon_variables, unless: [:json_request?]
@@ -17,6 +18,12 @@ class ApplicationController < ActionController::Base
   # chain and redirect before the location can be stored.
 
   protected
+
+  rescue_from ActionController::ParameterMissing do |e|
+    render json: e.message, status: :unprocessable_entity
+  end
+
+  rescue_from Pagy::OverflowError, with: :redirect_to_last_page
 
   def json_request?
     request.format.json?
@@ -32,15 +39,11 @@ class ApplicationController < ActionController::Base
 
   def render_404
     respond_to do |format|
-      format.html { render file: Rails.root.join('public', '404'), layout: false, status: 404 }
+      format.html { render file: Rails.root.join('public/404'), layout: false, status: 404 }
       # Prevent the Rails CSRF protector from thinking a missing .js file is a JavaScript file
       format.js { render json: '', status: :not_found, content_type: 'application/json' }
       format.any { head :not_found }
     end
-  end
-
-  rescue_from ActionController::ParameterMissing do |e|
-    render json: e.message, status: :unprocessable_entity
   end
 
   # https://github.com/plataformatec/devise#strong-parameters
@@ -67,5 +70,10 @@ class ApplicationController < ActionController::Base
   def store_user_location!
     # :user is the scope we are authenticating
     store_location_for(:user, request.fullpath)
+  end
+
+  def redirect_to_last_page(exception)
+    redirect_to url_for(page: exception.pagy.last), notice:
+    helpers.pagy_t('pagy.error.overflow', page: params[:page], last_page: exception.pagy.last)
   end
 end

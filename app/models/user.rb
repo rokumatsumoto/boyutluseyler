@@ -54,7 +54,7 @@ class User < ApplicationRecord
   validates_confirmation_of :password
   # Only allow letter, number, underscore, hyphen and punctuation.
   validates_format_of :username,
-                      with: /\A(?:[a-zA-Z0-9_\.][a-zA-Z0-9_\-\.]*[a-zA-Z0-9_\-]|[a-zA-Z0-9_])\z/
+                      with: /\A(?:[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\.][a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\-\.]*[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\-]|[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_])\z/
 
   class << self
     # Devise method overridden to allow sign in with email or username
@@ -62,7 +62,7 @@ class User < ApplicationRecord
       conditions = warden_conditions.dup
       login = conditions.delete(:login)
       where(conditions).find_by('lower(username) = :value OR lower(email) =
-                                 :value', value: login.downcase.strip)
+                                 :value', value: login.downcase(:turkic).strip)
     end
   end
 

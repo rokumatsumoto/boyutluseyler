@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DownloadChannel < ApplicationCable::Channel
   def subscribed
     stream_from "download_channel_#{params[:id]}"

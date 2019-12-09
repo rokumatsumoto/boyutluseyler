@@ -1,0 +1,13 @@
+%a.sort-item{ class: active ? 'sort-active' : '', href: link }
+  - if active
+    - if link.include?(ApplicationHelper::D_ASC)
+      %span.btn-inner--icon
+        %span= "#{text} "
+        %span.sort-icon ∨
+    - else
+      %span.btn-inner--icon
+        %span= "#{text} "
+        %span.sort-icon ∧
+  - else
+    %span= text
+

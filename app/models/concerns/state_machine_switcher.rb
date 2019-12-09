@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # A set of class methods that allow a default state machine
 # class to be set, but also alternatives to be selected
 # at run time.

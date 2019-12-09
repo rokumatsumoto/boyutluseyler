@@ -1,10 +1,10 @@
+# frozen_string_literal: true
+
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
   before_action :user
 
-  def show
-
-  end
+  def show; end
 
   def update
     respond_to do |format|

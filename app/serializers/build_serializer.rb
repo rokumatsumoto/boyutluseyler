@@ -49,9 +49,7 @@ class BuildSerializer < BaseSerializer
     }
 
     includes = options[:include]
-    if includes.present?
-      json_options[:include] = includes_array(includes)
-    end
+    json_options[:include] = includes_array(includes) if includes.present?
 
     json_options
   end

@@ -14,16 +14,24 @@
 // https://github.com/rails/webpacker/blob/master/docs/assets.md
 import '../styles';
 
+import "core-js/stable";
+
+import "regenerator-runtime/runtime";
+
 import Rails from 'rails-ujs';
+
 Rails.start();
 
 import * as ActiveStorage from 'activestorage';
+
 ActiveStorage.start();
 
 import Turbolinks from 'turbolinks';
+
 Turbolinks.start();
 
 import LocalTime from 'local-time';
+
 LocalTime.start();
 
 import 'bootstrap/dist/js/bootstrap';

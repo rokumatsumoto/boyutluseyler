@@ -51,8 +51,8 @@ Rails.application.configure do
   # TODO: SSL certificate
   config.websocket_server_url = "ws://#{Boyutluseyler.credentials[:website]}/cable"
   config.action_cable.allowed_request_origins = [
-   # Address of our Ruby on Rails App
-  "http://#{Boyutluseyler.credentials[:website]}"
+    # Address of our Ruby on Rails App
+    "http://#{Boyutluseyler.credentials[:website]}"
   ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
@@ -65,8 +65,8 @@ Rails.application.configure do
   # Prepend all log lines with the following tags.
   config.log_tags = [:request_id]
 
-  # Use a different cache store in production.
-  # config.cache_store = :mem_cache_store
+  # Redis caching
+  config.cache_store = :redis_cache_store, { url: ENV['REDIS_URL'] }
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque

@@ -5,9 +5,10 @@ addons:
 after_deploy:
   - "echo \"done deploying\""
 before_install:
-  - "nvm install 11.14.0"
+  - "nvm install 12.13.1"
   - "node --version"
-  - "curl --compressed -o- -L https://yarnpkg.com/install.sh | bash"
+  - "curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.19.2"
+  - "export PATH=$HOME/.yarn/bin:$PATH"
   - "yarn --version"
   - "sudo locale-gen tr_TR.UTF-8"
   - "sudo /etc/init.d/postgresql stop"

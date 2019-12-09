@@ -7,7 +7,7 @@ class CreateSailSettings < ActiveRecord::Migration[5.2]
       t.string :group
       t.integer :cast_type, null: false, limit: 1
       t.timestamps
-      t.index ["name"], name: "index_settings_on_name", unique: true
+      t.index ['name'], name: 'index_settings_on_name', unique: true
     end
   end
 end

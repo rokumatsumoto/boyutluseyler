@@ -5,18 +5,20 @@
     "@client-side-validations/client-side-validations": "^0.0.5",
     "@client-side-validations/simple-form": "^0.0.1",
     "@fortawesome/fontawesome-free": "^5.11.2",
-    "@rails/webpacker": "^4.0.7",
+    "@rails/webpacker": "4.2.0",
     "actioncable-vue": "^1.4.2",
     "activestorage": "^5.2.3",
     "axios": "^0.19.0",
     "blueimp-file-upload": "^9.31.0",
     "bootstrap": "^4.3.1",
+    "core-js": "^3.4.7",
     "jquery": "^3.4.0",
     "local-time": "^2.1.0",
     "lodash-es": "^4.17.14",
     "noty": "^3.2.0-beta",
     "popper.js": "^1.15.0",
     "rails-ujs": "^5.2.3",
+    "regenerator-runtime": "^0.13.3",
     "resolve-url-loader": "^3.1.0",
     "sanitize-html": "^1.20.1",
     "turbolinks": "^5.2.0",
@@ -34,9 +36,10 @@
     "eslint-import-resolver-webpack": "^0.11.1",
     "prettier": "^1.18.2",
     "webpack-bundle-analyzer": "^3.3.2",
-    "webpack-dev-server": "^3.4.1"
+    "webpack-dev-server": "^3.9.0"
   },
   "resolutions": {
-    "@rails/webpacker/webpack/micromatch/snapdragon/base/cache-base/set-value": "^2.0.1"
+    "lodash": "^4.17.15",
+    "@rails/webpacker/webpack/micromatch/snapdragon/base/cache-base/union-value": "^1.0.1"
   }
 }

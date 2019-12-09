@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_14_114318) do
+ActiveRecord::Schema.define(version: 2019_11_18_143649) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(version: 2019_11_14_114318) do
     t.bigint "category_id", null: false
     t.string "slug"
     t.integer "downloads_count", default: 0, null: false
+    t.float "hourly_downloads_count", default: 0.0, null: false
     t.index ["category_id"], name: "index_designs_on_category_id"
     t.index ["slug"], name: "index_designs_on_slug", unique: true
     t.index ["user_id"], name: "index_designs_on_user_id"

@@ -1,5 +1,7 @@
 inherit_from: .rubocop_todo.yml
-require: rubocop-rspec
+require:
+  - rubocop-rails
+  - rubocop-rspec
 
 AllCops:
   Exclude:
@@ -40,7 +42,7 @@ Layout/EmptyLineAfterGuardClause:
   Enabled: true
   Exclude:
     - 'app/views/**/*'
-Style/UnneededInterpolation:
+Style/RedundantInterpolation:
   Enabled: true
   Exclude:
     - 'app/views/**/*'
