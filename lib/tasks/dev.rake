@@ -1,10 +1,10 @@
 if Rails.env.development? || Rails.env.test?
-  require 'faker/default/internet_tr'
 
   namespace :dev do
     desc 'Sample data for local development environment'
     task :prime do
       Faker::UniqueGenerator.clear
+      Faker::Config.locale = :en
 
       image_source = 'https://picsum.photos'
       design_illustrations = {}
@@ -12,7 +12,6 @@ if Rails.env.development? || Rails.env.test?
 
       p '1/7 Creating Users'
 
-      Faker::Config.locale = :tr
 
       User.delete_all
 
@@ -20,7 +19,7 @@ if Rails.env.development? || Rails.env.test?
         name = Faker::Name.unique.name
         user = User.create!(
           email: Faker::Internet.email(name: name, separators: '+'),
-          username: Faker::Default::InternetTr.unique.username(specifier: name),
+          username: Faker::Internet.unique.username(specifier: name),
           password: 'password',
           confirmed_at: Time.current
         )
@@ -83,7 +82,6 @@ if Rails.env.development? || Rails.env.test?
       Gutentag::Tagging.where(taggable_type: 'Design').delete_all
       Gutentag::Tag.delete_all
 
-      Faker::Config.locale = :en
       blueprint_extensions = %i[STL OBJ PLY ZIP]
       user_ids = User.pluck(:id)
       category_ids = Category.pluck(:id)
