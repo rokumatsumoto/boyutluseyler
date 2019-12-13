@@ -42,7 +42,7 @@ gem 'sail', '~> 3.3'
 gem 'sanitize', '~> 5.0'
 # A portability issue in the sassc gem exists on several platforms.
   # https://github.com/sass/sassc-ruby/issues/146
-gem 'sassc', '2.1.0'  # TODO: Remove when we upgrade Rails to 6.0
+gem 'sassc', '2.1.0', require: false  # TODO: Remove when we upgrade Rails to 6.0
 gem 'sassc-rails', '~> 2.1', '>= 2.1.2' # TODO: Remove when we upgrade Rails to 6.0 https://github.com/rails/sass-rails/pull/424
 gem 'sidekiq', '~> 5.2', '>= 5.2.7' # Background jobs
 gem 'sidekiq-cron', '~> 1.1' # Cron jobs
