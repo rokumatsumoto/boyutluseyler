@@ -9,9 +9,9 @@
 #  url_path     :string           not null
 #  size         :integer          not null
 #  content_type :string           not null
-#  image_url    :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  thumb_url    :string           default(""), not null
 #
 
 class Blueprint < ApplicationRecord
@@ -26,7 +26,7 @@ class Blueprint < ApplicationRecord
   #
 
   # TODO: remove 3ds format, add ply format
-  validates_format_of :url_path, with: /\.(stl|3ds|obj|zip)\z/i
+  validates :url_path, format: { with: /\.(stl|3ds|obj|zip)\z/i }
 
   # << REMOVE ON NEXT RELEASE (0.8.0)
   def thumb_url

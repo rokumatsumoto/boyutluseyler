@@ -7,9 +7,9 @@
 #  url_path     :string           not null
 #  size         :integer          not null
 #  content_type :string           not null
-#  image_url    :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  thumb_url    :string           default(""), not null
 #
 
 require 'rails_helper'
