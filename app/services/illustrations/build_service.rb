@@ -3,14 +3,16 @@
 module Illustrations
   class BuildService < Illustrations::BaseService
     def execute
-      raise_no_such_key unless illustration_exists?
+      raise_no_such_key unless illustration.exists?
 
       Illustration.new.tap do |i|
-        i.url = url_with_size(:large)
+        i.url = public_url
         i.url_path = illustration.key
         i.size = illustration.size
         i.content_type = illustration.content_type
-        i.image_url = url_with_size(:thumb)
+        i.large_url = url_for_size(:large)
+        i.medium_url = url_for_size(:medium)
+        i.thumb_url = url_for_size(:thumb)
       end
     end
 
@@ -22,10 +24,6 @@ module Illustrations
         yönetimiyle irtibata geçiniz.'
     end
 
-    def illustration_exists?
-      illustration.exists?
-    end
-
     def illustration
       strong_memoize(:illustration) { bucket.object(params[:key]) }
     end
@@ -34,19 +32,18 @@ module Illustrations
       DIRECT_UPLOAD_AWS_S3_BUCKET
     end
 
-    def url_with_size(size)
-      case size
-      when :large, :thumb
-        params = {
-          url: public_url,
-          suffix: "_#{size}"
-        }
-        Boyutluseyler::UrlBuilder.build(Illustration.new, params)
-      end
+    def url_for_size(size)
+      Boyutluseyler::UrlBuilder.build(Illustration.new,
+                                      url: processed_public_url,
+                                      suffix: "_#{size}")
+    end
+
+    def processed_public_url
+      "#{Boyutluseyler.config[:direct_upload_processed_endpoint]}/#{illustration.key}"
     end
 
     def public_url
-      "#{Boyutluseyler.config[:direct_upload_website_endpoint]}/#{illustration.key}"
+      "#{Boyutluseyler.config[:direct_upload_endpoint]}/#{illustration.key}"
     end
   end
 end

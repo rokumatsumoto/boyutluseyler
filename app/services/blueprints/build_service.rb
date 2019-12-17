@@ -3,14 +3,14 @@
 module Blueprints
   class BuildService < Blueprints::BaseService
     def execute
-      raise_no_such_key unless blueprint_exists?
+      raise_no_such_key unless blueprint.exists?
 
       Blueprint.new.tap do |b|
         b.url = public_url
         b.url_path = blueprint.key
         b.size = blueprint.size
         b.content_type = blueprint.content_type
-        b.image_url = ''
+        b.thumb_url = ''
       end
     end
 
@@ -22,10 +22,6 @@ module Blueprints
         yönetimiyle irtibata geçiniz.'
     end
 
-    def blueprint_exists?
-      blueprint.exists?
-    end
-
     def blueprint
       strong_memoize(:blueprint) { bucket.object(params[:key]) }
     end
@@ -35,7 +31,7 @@ module Blueprints
     end
 
     def public_url
-      "#{Boyutluseyler.config[:direct_upload_website_endpoint]}/#{blueprint.key}"
+      "#{Boyutluseyler.config[:direct_upload_endpoint]}/#{blueprint.key}"
     end
   end
 end

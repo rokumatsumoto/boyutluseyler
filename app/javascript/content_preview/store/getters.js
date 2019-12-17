@@ -16,8 +16,8 @@ export const getValidFiles = (state, getters) => content =>
     const validUrl =
       content.fileExtensions.length === 0 ||
       content.fileExtensions.includes(getFileExtension(f.url).toLowerCase());
-    const validImageUrl =
-      f.imageUrl === '' ||
-      VALID_IMAGE_EXTENSIONS.includes(getFileExtension(f.imageUrl).toLowerCase());
-    return validUrl && validImageUrl;
+    const validThumbUrl =
+      f.thumbUrl === '' ||
+      VALID_IMAGE_EXTENSIONS.includes(getFileExtension(f.thumbUrl).toLowerCase());
+    return validUrl && validThumbUrl;
   }) || [];

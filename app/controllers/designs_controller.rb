@@ -14,11 +14,11 @@ class DesignsController < ApplicationController
   end
 
   def show
-    @illustrations = BuildSerializer.new(design.illustrations,
+    @illustrations = BuildSerializer.new(design.preview_illustrations,
                                          fields: { illustration: file_preview_fields })
                                     .serialize
 
-    @model_blueprints = BuildSerializer.new(design.model_blueprints,
+    @blueprints = BuildSerializer.new(design.preview_blueprints,
                                             fields: { blueprint: file_preview_fields })
                                        .serialize
 
@@ -136,10 +136,10 @@ class DesignsController < ApplicationController
   end
 
   def file_preview_fields
-    %i[id url imageUrl]
+    %i[id url thumbUrl]
   end
 
   def file_detail_fields
-    %i[id url size imageUrl filename]
+    %i[id url thumbUrl filename size]
   end
 end

@@ -22,7 +22,7 @@ module Designs
       private
 
       def calculate_and_save
-        design.update_attribute(:hourly_downloads_count, calculate)
+        design.update(hourly_downloads_count: calculate)
       end
 
       def calculate

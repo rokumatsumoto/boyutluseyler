@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_18_143649) do
+ActiveRecord::Schema.define(version: 2019_12_16_124217) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,9 +57,9 @@ ActiveRecord::Schema.define(version: 2019_11_18_143649) do
     t.string "url_path", null: false
     t.integer "size", null: false
     t.string "content_type", null: false
-    t.string "image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "thumb_url", default: "", null: false
   end
 
   create_table "categories", force: :cascade do |t|
@@ -158,9 +158,11 @@ ActiveRecord::Schema.define(version: 2019_11_18_143649) do
     t.string "url_path", null: false
     t.integer "size", null: false
     t.string "content_type", null: false
-    t.string "image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "large_url", default: "", null: false
+    t.string "medium_url", default: "", null: false
+    t.string "thumb_url", default: "", null: false
   end
 
   create_table "sail_entries", force: :cascade do |t|
