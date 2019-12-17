@@ -17,7 +17,7 @@
 #
 
 class IllustrationSerializer < BaseSerializer
-  attributes :id, :url, :size, :image_url
+  attributes :id, :url, :large_url, :thumb_url, :size
   attribute :filename do |object|
     File.basename(object.url_path)
   end

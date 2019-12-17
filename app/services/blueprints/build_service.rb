@@ -10,7 +10,7 @@ module Blueprints
         b.url_path = blueprint.key
         b.size = blueprint.size
         b.content_type = blueprint.content_type
-        b.image_url = ''
+        b.thumb_url = ''
       end
     end
 

@@ -18,6 +18,6 @@ FactoryBot.define do
     url_path { 'MyString' }
     size { 1 }
     content_type { 'MyString' }
-    image_url { 'MyString' }
+    thumb_url { 'MyString' }
   end
 end

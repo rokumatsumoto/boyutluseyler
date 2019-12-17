@@ -10,13 +10,13 @@ export const addOriginFiles = ({ commit, getters }, payload) => {
   const normalizedOriginFiles = getters.getOriginFiles(originFiles, dataType);
   Array.from(normalizedOriginFiles).forEach((originFile) => {
     commit(types.ADD_FILE, {
-        uniqueId: originFile.id,
-        id: originFile.id,
-        filename: originFile.filename,
-        size: originFile.size,
-        url: originFile.url,
-        image: originFile.imageUrl,
-      });
+      uniqueId: originFile.id,
+      id: originFile.id,
+      filename: originFile.filename,
+      size: originFile.size,
+      url: originFile.url,
+      thumbUrl: originFile.thumbUrl,
+    });
   });
 
 }
@@ -46,7 +46,7 @@ export const receivePresignedPostSuccess = ({ dispatch }, payload) => {
 
   data
     .submit()
-    .then(() => {})
+    .then(() => { })
     .catch(error => {
       dispatch('setFileStatus', {
         actionName: 'ERROR_FILE',

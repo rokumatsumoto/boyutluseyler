@@ -15,7 +15,7 @@
 #
 
 class BlueprintSerializer < BaseSerializer
-  attributes :id, :url, :size, :image_url
+  attributes :id, :url, :thumb_url, :size
   attribute :filename do |object|
     File.basename(object.url_path)
   end

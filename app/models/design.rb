@@ -33,12 +33,13 @@ class Design < ApplicationRecord
   has_many :illustrations, through: :design_illustrations
   has_many :design_blueprints, -> { order(position: :asc) }, inverse_of: 'design'
   has_many :blueprints, through: :design_blueprints
+  has_one :design_downloads, dependent: :destroy
 
   # OPTIONAL
-  # has_many :view_events, -> { where(name: 'Viewed design') }, class_name: "Ahoy::Event", foreign_store: :properties
-  # has_many :download_events, -> { where(name: 'Downloaded design') }, class_name: "Ahoy::Event", foreign_store: :properties
-
-  has_one :design_downloads
+  # has_many :view_events, -> { where(name: 'Viewed design') },
+  #          class_name: 'Ahoy::Event', foreign_store: :properties
+  # has_many :download_events, -> { where(name: 'Downloaded design') },
+  #          class_name: 'Ahoy::Event', foreign_store: :properties
 
   belongs_to :user
   belongs_to :category
@@ -53,10 +54,6 @@ class Design < ApplicationRecord
   friendly_id :name, use: %i[slugged history]
 
   scope :with_tags, -> { includes(:taggings, :tags) }
-  scope :with_first_illustration, lambda {
-                                    joins(:illustrations)
-                                      .where('design_illustrations.position = ?', 1)
-                                  }
 
   enum license_type: {
     license_none: 'license_none',
@@ -75,12 +72,16 @@ class Design < ApplicationRecord
 
   # TODO: remove 3ds format, add ply format
   # TODO: create method for model extensions (stl|3ds|obj)
-  def model_blueprints
+  def preview_blueprints
     Blueprint.joins(:design_blueprint)
              .where(design_blueprints: { design_id: id })
              .where('url_path ~* ?', '.(stl|3ds|obj)$')
-             .select(:url, :image_url)
+             .select(:url, :thumb_url)
              .order('design_blueprints.position')
+  end
+
+  def preview_illustrations
+    illustrations.select(:id, :thumb_url, 'large_url as url')
   end
 
   # Class methods
@@ -97,17 +98,22 @@ class Design < ApplicationRecord
       end
     end
 
+    def with_first_illustration
+      joins(:illustrations).where('design_illustrations.position = ?', 1)
+    end
+
     def with_illustrations
       with_tags
         .with_first_illustration
         .joins(:category)
-        .select('designs.name, designs.slug, illustrations.url, categories.slug as category_slug')
+        .select('designs.name, designs.slug, illustrations.medium_url, categories.slug
+                 as category_slug')
     end
 
     def most_downloaded_by_hourly
       with_illustrations
-        .where('downloads_count > ? AND designs.created_at < ?',
-               0, Time.current - HOURLY_DOWNLOAD_CALCULATE_INTERVAL)
+        .where('downloads_count > :min_count AND  designs.created_at < :date',
+               min_count: 0, date: Time.current - HOURLY_DOWNLOAD_CALCULATE_INTERVAL)
         .select('designs.*')
         .order(hourly_downloads_count: :desc, created_at: :desc)
         .limit(MOST_DOWNLOADED_LIMIT_BY_HOURLY)

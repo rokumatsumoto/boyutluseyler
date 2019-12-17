@@ -6,11 +6,13 @@ module Illustrations
       raise_no_such_key unless illustration.exists?
 
       Illustration.new.tap do |i|
-        i.url = url_for_size(:large)
+        i.url = public_url
         i.url_path = illustration.key
         i.size = illustration.size
         i.content_type = illustration.content_type
-        i.image_url = url_for_size(:thumb)
+        i.large_url = url_for_size(:large)
+        i.medium_url = url_for_size(:medium)
+        i.thumb_url = url_for_size(:thumb)
       end
     end
 

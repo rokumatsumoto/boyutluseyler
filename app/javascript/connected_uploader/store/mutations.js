@@ -20,7 +20,7 @@ export default {
         loaded: 0,
         loading: false,
         url: fileInfo.url,
-        image: fileInfo.image,
+        thumbUrl: fileInfo.thumbUrl,
       },
     ]);
   },

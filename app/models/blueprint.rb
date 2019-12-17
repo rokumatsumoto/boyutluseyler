@@ -45,4 +45,6 @@ class Blueprint < ApplicationRecord
     super
   end
   # >> REMOVE ON NEXT RELEASE (0.8.0)
+
+
 end
