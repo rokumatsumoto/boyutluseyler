@@ -13,6 +13,7 @@ export const INVALID_CHARACTERS = [
   '~',
   '#',
   '|',
+  '+'
 ];
 
 export const MIN_FILE_SIZE = 1;
