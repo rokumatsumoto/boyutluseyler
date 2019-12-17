@@ -12,10 +12,9 @@ if Rails.env.development? || Rails.env.test?
 
       p '1/7 Creating Users'
 
-
       User.delete_all
 
-      10.times do |_i|
+      10.times do
         name = Faker::Name.unique.name
         user = User.create!(
           email: Faker::Internet.email(name: name, separators: '+'),
@@ -34,7 +33,7 @@ if Rails.env.development? || Rails.env.test?
 
         illustration_ids = []
 
-        illustrations_count.times do |_ic|
+        illustrations_count.times do
           illustration_id = rand(1..1000)
 
           illustration = Illustration.create!(
@@ -42,7 +41,9 @@ if Rails.env.development? || Rails.env.test?
             url_path: "#{image_source}/id/#{illustration_id}/480/480.jpg",
             size: 35_029,
             content_type: 'image/jpeg',
-            image_url: "#{image_source}/id/#{illustration_id}/113/113.jpg"
+            large_url: "#{image_source}/id/#{illustration_id}/480/480.jpg",
+            medium_url: "#{image_source}/id/#{illustration_id}/234/234.jpg",
+            thumb_url: "#{image_source}/id/#{illustration_id}/113/113.jpg"
           )
 
           illustration_ids << illustration.id
@@ -59,15 +60,15 @@ if Rails.env.development? || Rails.env.test?
 
         blueprint_ids = []
 
-        blueprints_count.times do |_bc|
+        blueprints_count.times do
           blueprint_id = rand(1..1000)
 
           blueprint = Blueprint.create!(
-            url: 'http://boyutluseyler-staging.s3-website.eu-central-1.amazonaws.com/uploaders/3/blueprint-file/ece88c67-b624-4855-9714-a53eeff9f4da/bowser_low_poly_flowalistik2 (4) (1).STL',
-            url_path: 'uploaders/3/blueprint-file/ece88c67-b624-4855-9714-a53eeff9f4da/bowser_low_poly_flowalistik2 (4) (1).STL',
+            url: "#{Boyutluseyler.config[:direct_upload_endpoint]}/bowser_low_poly_flowalistik223.STL",
+            url_path: 'bowser_low_poly_flowalistik223.STL',
             size: 32_484,
             content_type: 'application/vnd.ms-pki.stl',
-            image_url: "#{image_source}/id/#{blueprint_id}/113/113.jpg"
+            thumb_url: "#{image_source}/id/#{blueprint_id}/113/113.jpg"
           )
 
           blueprint_ids << blueprint.id
@@ -83,8 +84,8 @@ if Rails.env.development? || Rails.env.test?
       Gutentag::Tag.delete_all
 
       blueprint_extensions = %i[STL OBJ PLY ZIP]
-      user_ids = User.pluck(:id)
-      category_ids = Category.pluck(:id)
+      user_ids = User.ids
+      category_ids = Category.ids
 
       design_downloads_count_list = {}
 
@@ -110,10 +111,8 @@ if Rails.env.development? || Rails.env.test?
           blueprint_ids: design_blueprints[i]
         )
 
-        design_downloads_count_list[design.id] = rand(0..10_000)
+        design_downloads_count_list[design.id] = rand(0..300)
       end
-
-      p design_downloads_count_list
 
       p '5/7 Creating Design Downloads'
       DesignDownload.delete_all
@@ -121,7 +120,7 @@ if Rails.env.development? || Rails.env.test?
       Design.all.each do |design|
         DesignDownload.create!(
           step: 'ready',
-          url: 'uploads/design_zip/file/2/esttstest20191027-garo4psc.zip',
+          url: 'uploads/design_zip/file/1/esttstest20191027-2jfu7iv8.zip',
           design: design
         )
       end
@@ -134,7 +133,7 @@ if Rails.env.development? || Rails.env.test?
       Ahoy::Visit.delete(visit_ids)
 
       Design.all.each do |design|
-        design_downloads_count_list[design.id].times do |_dc|
+        design_downloads_count_list[design.id].times do
           ahoy = Ahoy::Tracker.new(user: User.order('RANDOM()').first)
           ahoy.track(event_name, design_id: design.id)
         end
@@ -152,7 +151,7 @@ if Rails.env.development? || Rails.env.test?
       Ahoy::Visit.delete(visit_ids)
 
       Design.all.each do |design|
-        rand(1..100).times do |_dc|
+        rand(1..100).times do
           ahoy = Ahoy::Tracker.new(user: User.order('RANDOM()').first)
           ahoy.track(event_name, design_id: design.id)
         end
