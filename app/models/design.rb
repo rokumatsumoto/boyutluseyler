@@ -28,6 +28,7 @@ class Design < ApplicationRecord
 
   HOURLY_DOWNLOAD_CALCULATE_INTERVAL = 1.hour
   MOST_DOWNLOADED_LIMIT_BY_HOURLY = 8
+  POPULARITY_EFFECT = 0.02
 
   has_many :design_illustrations, -> { order(position: :asc) }, inverse_of: 'design'
   has_many :illustrations, through: :design_illustrations
