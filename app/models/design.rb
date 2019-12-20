@@ -29,6 +29,7 @@ class Design < ApplicationRecord
 
   HOURLY_DOWNLOAD_CALCULATE_INTERVAL = 1.hour
   MOST_DOWNLOADED_LIMIT_BY_HOURLY = 8
+  POPULAR_LIMIT = 12
   POPULARITY_EFFECT = 0.02
 
   has_many :design_illustrations, -> { order(position: :asc) }, inverse_of: 'design'
@@ -91,12 +92,9 @@ class Design < ApplicationRecord
   class << self
     def sort_by_attribute(method)
       case method.to_s
-      when 'downloads_count_desc'
-        reorder(downloads_count: :desc)
-      when 'downloads_count_asc'
-        reorder(downloads_count: :asc)
-      else
-        order_by(method)
+      when 'downloads_count_desc' then reorder(downloads_count: :desc)
+      when 'downloads_count_asc'  then reorder(downloads_count: :asc)
+      else order_by(method)
       end
     end
 
@@ -108,7 +106,7 @@ class Design < ApplicationRecord
       with_tags
         .with_first_illustration
         .joins(:category)
-        .select('designs.name, designs.slug, illustrations.medium_url, categories.slug
+        .select('designs.id, designs.name, designs.slug, illustrations.medium_url, categories.slug
                  as category_slug')
     end
 
@@ -119,6 +117,12 @@ class Design < ApplicationRecord
         .select('designs.*')
         .order(hourly_downloads_count: :desc, created_at: :desc)
         .limit(MOST_DOWNLOADED_LIMIT_BY_HOURLY)
+    end
+
+    def home_popular
+      with_illustrations
+        .order(popularity_score: :desc)
+        .limit(POPULAR_LIMIT)
     end
   end
 end

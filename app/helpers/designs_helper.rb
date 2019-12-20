@@ -11,4 +11,12 @@ module DesignsHelper
 
     JSON.parse(design_list)
   end
+
+  def fetch_popular_designs
+    design_list = Rails.cache.fetch('popular_designs', expires_in: 1.hour) do
+      Design.home_popular.to_json
+    end
+
+    JSON.parse(design_list)
+  end
 end

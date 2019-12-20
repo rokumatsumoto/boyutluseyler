@@ -4,7 +4,7 @@ class DesignsController < ApplicationController
   include Boyutluseyler::Utils::StrongMemoize
   include AhoyActions
 
-  before_action :authenticate_user!, except: %i[show latest]
+  before_action :authenticate_user!, except: %i[show latest popular]
   before_action :design, only: %i[show edit update destroy download]
 
   def new
@@ -19,12 +19,12 @@ class DesignsController < ApplicationController
                                     .serialize
 
     @blueprints = BuildSerializer.new(design.preview_blueprints,
-                                            fields: { blueprint: file_preview_fields })
-                                       .serialize
+                                      fields: { blueprint: file_preview_fields })
+                                 .serialize
 
     @page_views_count = Ahoy::Event.where_event('Viewed design', design_id: design.id).count
 
-    ahoy.track 'Viewed design', design_id: design.id
+    Designs::PageViews::AfterPageViewService.new(design, current_user, controller: self).execute
   end
 
   def create
@@ -73,6 +73,11 @@ class DesignsController < ApplicationController
   end
 
   def latest
+    @pagy, @designs = pagy(DesignsFinder.new(design_list_params).execute)
+  end
+
+  def popular
+    params[:popularity] = true
     @pagy, @designs = pagy(DesignsFinder.new(design_list_params).execute)
   end
 
@@ -132,7 +137,7 @@ class DesignsController < ApplicationController
 
   def design_list_params
     params[:with_illustrations] = true
-    params.permit(%i[direction sort page with_illustrations])
+    params.permit(%i[direction sort page with_illustrations popularity])
   end
 
   def file_preview_fields
