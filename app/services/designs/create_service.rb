@@ -19,6 +19,8 @@ module Designs
     end
 
     def after_create(design)
+      Designs::PageViews::PopularityScoreService.new(design).execute
+
       Designs::Files::MoveService.new(design, current_user, params).execute
     end
   end

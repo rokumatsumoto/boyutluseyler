@@ -1,15 +1,15 @@
 - content_for :head do
-  = javascript_pack_tag 'designs/latest'
+  = javascript_pack_tag 'designs/popular'
 
-- url_path = '/designs/latest'
-- date = 'created'
+- url_path = '/designs/popular'
+- date = 'home_popular_at'
 - downloads = 'downloads_count'
 - likes = 'likes_count'
 
 .container
   .grid.grid--full--large
     .grid-cell
-      %h6.mt-3.text-primary En Yeni 3D Modeller
+      %h6.mt-3.text-primary En Çok Sevilen 3D Modeller
     .grid-cell.grid-cell--fit
       = render partial: 'designs/nav_sort', locals: { url_path: url_path, date: date, downloads: downloads, likes: likes }
   .designs-group

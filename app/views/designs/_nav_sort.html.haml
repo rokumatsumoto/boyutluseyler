@@ -1,0 +1,18 @@
+- d_desc = ApplicationHelper::D_DESC
+- sort_by_date = "#{url_path}?#{d_desc}&sort=#{date}"
+- sort_by_download = "#{url_path}?#{d_desc}&sort=#{downloads}"
+- sort_by_like = "#{url_path}?#{d_desc}&sort=#{likes}"
+
+%nav.sort
+  .sort-text Sırala:
+  - active = active_class_for(date)
+  - link = toggle_sort_link(sort_by_date, active)
+  = render partial: 'designs/nav_sort_link', locals: { active: active, text: 'Tarih', link: link }
+
+  - active = active_class_for(downloads)
+  - link = toggle_sort_link(sort_by_download, active)
+  = render partial: 'designs/nav_sort_link', locals: { active: active, text: 'İndirme', link: link }
+
+  - active = active_class_for(likes)
+  - link = toggle_sort_link(sort_by_like, active)
+  = render partial: 'designs/nav_sort_link', locals: { active: active, text: 'Beğeni', link: link }
