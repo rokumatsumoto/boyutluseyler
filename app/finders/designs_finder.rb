@@ -19,12 +19,17 @@ class DesignsFinder
 
   def filter_designs(collection)
     collection = with_illustrations(collection)
+    collection = by_popularity(collection)
 
     collection
   end
 
   def with_illustrations(items)
     params[:with_illustrations].present? ? items.with_illustrations : items
+  end
+
+  def by_popularity(items)
+    params[:popularity].present? ? items.popular : items
   end
 
   def sort(items)

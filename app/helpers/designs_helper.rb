@@ -6,7 +6,7 @@ module DesignsHelper
                                     expires_in: Design::HOURLY_DOWNLOAD_CALCULATE_INTERVAL) do
       Designs::Downloads::HourlyDownloadsCountService.new.execute
 
-      Design.most_downloaded_by_hourly.to_json
+      Design.most_downloaded_with_illustrations.to_json
     end
 
     JSON.parse(design_list)
@@ -14,7 +14,9 @@ module DesignsHelper
 
   def fetch_popular_designs
     design_list = Rails.cache.fetch('popular_designs', expires_in: 1.hour) do
-      Design.home_popular.to_json
+      Designs::BecomePopularService.new.execute
+
+      Design.home_popular_with_illustrations.to_json
     end
 
     JSON.parse(design_list)

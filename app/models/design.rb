@@ -28,7 +28,7 @@ class Design < ApplicationRecord
   include Sortable
 
   HOURLY_DOWNLOAD_CALCULATE_INTERVAL = 1.hour
-  MOST_DOWNLOADED_LIMIT_BY_HOURLY = 8
+  MOST_DOWNLOADED_LIMIT = 8
   POPULAR_LIMIT = 12
   POPULARITY_EFFECT = 0.02
 
@@ -57,6 +57,7 @@ class Design < ApplicationRecord
   friendly_id :name, use: %i[slugged history]
 
   scope :with_tags, -> { includes(:taggings, :tags) }
+  scope :home_popular, -> { order(popularity_score: :desc).limit(POPULAR_LIMIT) }
 
   enum license_type: {
     license_none: 'license_none',
@@ -94,6 +95,8 @@ class Design < ApplicationRecord
       case method.to_s
       when 'downloads_count_desc' then reorder(downloads_count: :desc)
       when 'downloads_count_asc'  then reorder(downloads_count: :asc)
+      when 'home_popular_at_desc' then reorder(home_popular_at: :desc)
+      when 'home_popular_at_asc'  then reorder(home_popular_at: :asc)
       else order_by(method)
       end
     end
@@ -110,19 +113,25 @@ class Design < ApplicationRecord
                  as category_slug')
     end
 
-    def most_downloaded_by_hourly
-      with_illustrations
-        .where('downloads_count > :min_count AND  designs.created_at < :date',
-               min_count: 0, date: Time.current - HOURLY_DOWNLOAD_CALCULATE_INTERVAL)
-        .select('designs.*')
+    def most_downloaded
+      where('downloads_count > :min_count AND  designs.created_at < :date',
+            min_count: 0, date: Time.current - HOURLY_DOWNLOAD_CALCULATE_INTERVAL)
         .order(hourly_downloads_count: :desc, created_at: :desc)
-        .limit(MOST_DOWNLOADED_LIMIT_BY_HOURLY)
+        .limit(MOST_DOWNLOADED_LIMIT)
     end
 
-    def home_popular
+    def most_downloaded_with_illustrations
+      with_illustrations.most_downloaded
+    end
+
+    def home_popular_with_illustrations
       with_illustrations
         .order(popularity_score: :desc)
         .limit(POPULAR_LIMIT)
+    end
+
+    def popular
+      where.not(home_popular_at: nil)
     end
   end
 end

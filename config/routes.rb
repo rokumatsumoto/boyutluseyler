@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :designs, except: :show do
     collection do
       get 'latest'
+      get 'popular'
     end
   end
 
