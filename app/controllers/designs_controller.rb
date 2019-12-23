@@ -5,7 +5,7 @@ class DesignsController < ApplicationController
   include AhoyActions
 
   before_action :authenticate_user!, except: %i[show latest popular]
-  before_action :design, only: %i[show edit update destroy download]
+  before_action :design, only: %i[show edit update destroy download like]
 
   def new
     @design = Design.new
@@ -70,6 +70,10 @@ class DesignsController < ApplicationController
                                                  controller: self).execute
 
     render json: { url: url }, status: :ok
+  end
+
+  def like
+    Designs::Likes::AfterLikeService.new(design, current_user, controller: self).execute
   end
 
   def latest
