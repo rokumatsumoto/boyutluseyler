@@ -92,6 +92,20 @@ a.thumb{
       display: table-cell;
       vertical-align: top;
     }
+
+    .actionbar {
+      display: flex;
+      align-items: flex-end;
+      margin-bottom: .5rem;
+    }
+
+    .actionbar-left {
+      float: left;
+      flex: 1;
+    }
+    .actionbar-right{
+      float: right;
+    }
 }
 
 .design-infos{
