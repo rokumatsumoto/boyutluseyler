@@ -1,7 +1,7 @@
 class BackfillDesignsPopularityScore < ActiveRecord::Migration[5.2]
   disable_ddl_transaction!
 
-  def change
+  def up
     safety_assured do
       now = Time.current.to_i
 
@@ -11,4 +11,6 @@ class BackfillDesignsPopularityScore < ActiveRecord::Migration[5.2]
       SQL
     end
   end
+
+  def down; end
 end
