@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Designs
-  module Downloads
-    class AfterDownloadService
+  module Likes
+    class AfterLikeService
       attr_reader :current_user, :controller, :params
       attr_accessor :design
 
@@ -16,26 +16,34 @@ module Designs
       def execute
         controller.ensure_new_visit_created_before_ahoy_async_jobs if controller.present?
 
-        DesignAfterDownloadWorker.perform_async(design.id,
-                                                current_user.id,
-                                                ahoy.visit_token)
+        DesignAfterLikeWorker.perform_async(design.id, current_user.id, ahoy.visit_token)
       end
 
       def perform
-        ::AhoyEventService.new(current_user: current_user,
-                               event_name: event_name,
-                               properties: event_properties,
-                               visit_token: params[:visit_token]).track
+        return delete_like if liked?
 
-        reload_design
-
-        HourlyDownloadsCountService.new.execute_for_design(design)
+        create_new_like
       end
 
       private
 
+      def liked?
+        Ahoy::Event.cached_any_events_for?(event_name, current_user, event_properties)
+      end
+
+      def delete_like
+        Ahoy::Event.where(name: event_name, properties: event_properties, user_id: current_user.id).destroy_all
+      end
+
+      def create_new_like
+        ::AhoyEventService.new(current_user: current_user,
+                               event_name: event_name,
+                               properties: event_properties,
+                               visit_token: params[:visit_token]).track
+      end
+
       def event_name
-        Ahoy::Event::DOWNLOADED_DESIGN
+        Ahoy::Event::LIKED_DESIGN
       end
 
       def event_properties
@@ -48,10 +56,6 @@ module Designs
 
       def service_ahoy
         ::Ahoy::Tracker.new(controller: nil, user: current_user)
-      end
-
-      def reload_design
-        self.design = design.reload
       end
     end
   end

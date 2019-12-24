@@ -1,1 +1,3 @@
 export const SET_DOWNLOADS_COUNT = 'SET_DOWNLOADS_COUNT';
+
+export const SET_LIKES_COUNT = 'SET_LIKES_COUNT';

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_20_200156) do
+ActiveRecord::Schema.define(version: 2019_12_24_000412) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,6 +119,7 @@ ActiveRecord::Schema.define(version: 2019_12_20_200156) do
     t.float "hourly_downloads_count", default: 0.0, null: false
     t.float "popularity_score", default: 0.0, null: false
     t.datetime "home_popular_at"
+    t.integer "likes_count", default: 0, null: false
     t.index ["category_id"], name: "index_designs_on_category_id"
     t.index ["slug"], name: "index_designs_on_slug", unique: true
     t.index ["user_id"], name: "index_designs_on_user_id"
@@ -217,6 +218,7 @@ ActiveRecord::Schema.define(version: 2019_12_20_200156) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "username"
+    t.integer "events_count", default: 0, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

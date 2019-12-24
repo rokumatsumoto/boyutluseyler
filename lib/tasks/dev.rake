@@ -127,7 +127,7 @@ if Rails.env.development? || Rails.env.test?
 
       p '6/7 Creating Download Events'
 
-      event_name = 'Downloaded design'
+      event_name = Ahoy::Event::DOWNLOADED_DESIGN
       visit_ids = Ahoy::Event.where_event(event_name).pluck(:visit_id)
       Ahoy::Event.where_event(event_name).delete_all
       Ahoy::Visit.delete(visit_ids)
@@ -145,7 +145,7 @@ if Rails.env.development? || Rails.env.test?
 
       p '7/7 Creating Visit Events'
 
-      event_name = 'Viewed design'
+      event_name = Ahoy::Event::VIEWED_DESIGN
       visit_ids = Ahoy::Event.where_event(event_name).pluck(:visit_id)
       Ahoy::Event.where_event(event_name).delete_all
       Ahoy::Visit.delete(visit_ids)

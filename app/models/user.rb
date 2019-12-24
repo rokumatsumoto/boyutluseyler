@@ -36,6 +36,7 @@ class User < ApplicationRecord
          email_regexp: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
 
   has_many :designs
+  has_many :events, class_name: 'Ahoy::Event', dependent: :destroy
 
   # Virtual attribute for authenticating by either username or email
   attr_accessor :login
@@ -51,10 +52,10 @@ class User < ApplicationRecord
                        uniqueness: { case_sensitive: false },
                        length: { in: 3..30 }
 
-  validates_confirmation_of :password
+  validates :password, confirmation: true
   # Only allow letter, number, underscore, hyphen and punctuation.
-  validates_format_of :username,
-                      with: /\A(?:[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\.][a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\-\.]*[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\-]|[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_])\z/
+  validates :username,
+            format: { with: /\A(?:[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\.][a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\-\.]*[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\-]|[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_])\z/ }
 
   class << self
     # Devise method overridden to allow sign in with email or username

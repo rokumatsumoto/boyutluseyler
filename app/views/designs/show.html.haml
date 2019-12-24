@@ -15,8 +15,12 @@
 
   .design
     .design-photos
+      .actionbar
+        .js-content-preview-toggle-button.actionbar-left{ data: { behavior: 'vue' } }
+          %content-preview-toggle-button{ 'css-class': 'btn-xs btn-outline-primary no-outline' }
+        .js-like-button.actionbar-right{ data: { behavior: 'vue' } }
+          %like-button{ 'like-css-class': 'btn-xs btn-primary no-outline border-solid btn-icon', 'unlike-css-class': 'btn-xs btn-grayish-navy no-outline border-solid btn-icon', 'like-text': 'BEĞEN', 'unlike-text': 'BEĞENDİN', ':liked-status': liked_design?(@design.id), 'endpoint': design_like_path(@design) }
       .js-content-preview{ data: { behavior: 'vue' } }
-        %content-preview-toggle-button.mb-2{ 'css-class': 'btn-xs btn-outline-primary no-outline' }
         %content-preview{ 'data-type': 'illustration', 'content-type': 'image',
           ':files': @illustrations, 'toggle-button-text': 'Fotoğraflar',
           'default-thumb-url': image_path('B4B4B4-1.png'), ':active': true,
@@ -30,13 +34,13 @@
       .d-flex.mb-3
         .ml-auto
           .js-download-button{ data: { behavior: 'vue' } }
-            %download-button{ 'css-class': 'btn-xs btn-primary border-solid border-width-15x btn-icon', 'text': t('helpers.button.download'),
+            %download-button{ 'css-class': 'btn-xs btn-primary no-outline border-solid border-width-15x btn-icon', 'text': t('helpers.button.download'),
             'downloading-text': t('helpers.button.downloading'),
             'record-id': @design.id, 'endpoint': design_download_path(@design) }
       .d-flex.mb-2
         .ml-auto
           .js-page-counters{ data: { behavior: 'vue' } }
-            %page-counters.page-counters{ ':views': { count: @page_views_count,  min: 0, textPlural: 'Toplam Görüntülenme', textSingular: 'Toplam Görüntülenme' }.to_json, ':downloads': { count: @design.downloads_count, min: 1, textPlural: 'İndirme', textSingular: 'İndirme' }.to_json, locale: I18n.locale }
+            %page-counters.page-counters{ ':views': { count: @page_views_count,  min: 0, textPlural: 'Toplam Görüntülenme', textSingular: 'Toplam Görüntülenme' }.to_json, ':downloads': { count: @design.downloads_count, min: 1, textPlural: 'İndirme', textSingular: 'İndirme' }.to_json, ':likes': { count: @design.likes_count, min: 1, textPlural: 'Beğeni', textSingular: 'Beğeni' }.to_json, locale: I18n.locale }
       %h6.text-primary.mt-3 3D Model Açıklama
       .rich.content= simple_format(@design.description)
       %h6.text-primary.mt-3 3D Baskı Ayarları
