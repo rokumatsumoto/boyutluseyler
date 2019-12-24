@@ -10,6 +10,10 @@ export default {
       type: String,
       required: true,
     },
+    min: {
+      type: Number,
+      required: true,
+    },
     textPlural: {
       type: String,
       required: true,
@@ -27,11 +31,17 @@ export default {
       template: '<div class="tooltip counter-tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
     });
   },
+  beforeDestroy() {
+    $('[data-toggle="tooltip"]').tooltip('destroy');
+  },
   computed: {
     counterTooltip() {
       if (this.count !== 1) return this.textPlural;
 
       return this.textSingular;
+    },
+    showCounter() {
+      return this.count >= this.min;
     },
   },
 }
