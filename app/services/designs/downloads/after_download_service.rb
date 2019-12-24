@@ -23,7 +23,7 @@ module Designs
 
       def perform
         ::AhoyEventService.new(current_user: current_user,
-                               event_name: 'Downloaded design',
+                               event_name: event_name,
                                properties: event_properties,
                                visit_token: params[:visit_token]).track
 
@@ -33,6 +33,10 @@ module Designs
       end
 
       private
+
+      def event_name
+        Ahoy::Event::DOWNLOADED_DESIGN
+      end
 
       def event_properties
         { design_id: design.id }

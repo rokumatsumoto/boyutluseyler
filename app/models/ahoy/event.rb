@@ -18,6 +18,7 @@ module Ahoy
 
     self.table_name = 'ahoy_events'
 
+    VIEWED_DESIGN = 'Viewed design'
     LIKED_DESIGN = 'Liked design'
     DOWNLOADED_DESIGN = 'Downloaded design'
 
@@ -31,10 +32,10 @@ module Ahoy
 
     belongs_to :design, class_name: 'Design', store: :properties, optional: true
     counter_culture :design, column_name: proc { |model|
-      model.name == 'Downloaded design' ? 'downloads_count' : nil
+      model.name == DOWNLOADED_DESIGN ? 'downloads_count' : nil
     }
     counter_culture :design, column_name: proc { |model|
-      model.name == 'Liked design' ? 'likes_count' : nil
+      model.name == LIKED_DESIGN ? 'likes_count' : nil
     }
 
     class << self

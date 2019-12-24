@@ -14,7 +14,7 @@ module Designs
       end
 
       def execute
-        ahoy.track 'Viewed design', design_id: design.id
+        ahoy.track Ahoy::Event::VIEWED_DESIGN, design_id: design.id
 
         PopularityScoreService.new(design).execute
       end

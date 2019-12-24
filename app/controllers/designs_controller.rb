@@ -22,7 +22,8 @@ class DesignsController < ApplicationController
                                       fields: { blueprint: file_preview_fields })
                                  .serialize
 
-    @page_views_count = Ahoy::Event.where_event('Viewed design', design_id: design.id).count
+    @page_views_count = Ahoy::Event.where_event(Ahoy::Event::VIEWED_DESIGN,
+                                                design_id: design.id).count
 
     Designs::PageViews::AfterPageViewService.new(design, current_user, controller: self).execute
   end
