@@ -33,6 +33,9 @@ module Ahoy
     counter_culture :design, column_name: proc { |model|
       model.name == 'Downloaded design' ? 'downloads_count' : nil
     }
+    counter_culture :design, column_name: proc { |model|
+      model.name == 'Liked design' ? 'likes_count' : nil
+    }
 
     class << self
       def cached_any_events_for?(event_name, user, event_properties)
