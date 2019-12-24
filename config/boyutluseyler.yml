@@ -11,6 +11,7 @@ shared: &shared
   direct_upload_cache_control: public, max-age=315576000
 
   presigned_url_expires_in: 3600 # 1 hour
+  cookie_domain: <%= Boyutluseyler.credentials[:cookie_domain] %>
 
 development:
   <<: *shared
