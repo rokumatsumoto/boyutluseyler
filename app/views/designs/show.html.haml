@@ -40,7 +40,7 @@
       .d-flex.mb-2
         .ml-auto
           .js-page-counters{ data: { behavior: 'vue' } }
-            %page-counters.page-counters{ ':views': { count: @page_views_count,  min: 0, textPlural: 'Toplam Görüntülenme', textSingular: 'Toplam Görüntülenme' }.to_json, ':downloads': { count: @design.downloads_count, min: 1, textPlural: 'İndirme', textSingular: 'İndirme' }.to_json, locale: I18n.locale }
+            %page-counters.page-counters{ ':views': { count: @page_views_count,  min: 0, textPlural: 'Toplam Görüntülenme', textSingular: 'Toplam Görüntülenme' }.to_json, ':downloads': { count: @design.downloads_count, min: 1, textPlural: 'İndirme', textSingular: 'İndirme' }.to_json, ':likes': { count: @design.likes_count, min: 1, textPlural: 'Beğeni', textSingular: 'Beğeni' }.to_json, locale: I18n.locale }
       %h6.text-primary.mt-3 3D Model Açıklama
       .rich.content= simple_format(@design.description)
       %h6.text-primary.mt-3 3D Baskı Ayarları
