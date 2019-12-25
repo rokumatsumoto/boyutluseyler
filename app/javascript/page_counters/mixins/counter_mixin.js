@@ -32,7 +32,7 @@ export default {
     });
   },
   beforeDestroy() {
-    $('[data-toggle="tooltip"]').tooltip('destroy');
+    $('[data-toggle="tooltip"]').tooltip('dispose');
   },
   computed: {
     counterTooltip() {
