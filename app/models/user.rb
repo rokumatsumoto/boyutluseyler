@@ -65,6 +65,10 @@ class User < ApplicationRecord
       where(conditions).find_by('lower(username) = :value OR lower(email) =
                                  :value', value: login.downcase(:turkic).strip)
     end
+
+    def avatar_content_length_range
+      Range.new(1, 409600)
+    end
   end
 
   def recently_sent_password_reset?
