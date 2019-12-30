@@ -13,6 +13,8 @@ module Users
 
       assign_attributes
 
+      before_update
+
       if @user.save(validate: validate)
         success
       else
@@ -25,6 +27,14 @@ module Users
 
     def assign_attributes
       @user.assign_attributes(params) unless params.empty?
+    end
+
+    def before_update
+      update_avatar if @user.avatar_url_changed?
+    end
+
+    def update_avatar
+      @user = UpdateAvatarService.new(@user).execute
     end
   end
 end
