@@ -23,6 +23,9 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  username               :string
+#  events_count           :integer          default(0), not null
+#  avatar_thumb_url       :string           default(""), not null
+#  avatar_url             :string           default(""), not null
 #
 
 require 'spec_helper'
