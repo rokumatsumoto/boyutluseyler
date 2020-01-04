@@ -23,8 +23,7 @@ module Users
     end
 
     def processed_public_url
-      "#{Boyutluseyler.config[:direct_upload_processed_endpoint]}/#{user.avatar_url}"
+      "#{Boyutluseyler.config[:processed_endpoint]}/#{user.avatar_url}"
     end
-
   end
 end

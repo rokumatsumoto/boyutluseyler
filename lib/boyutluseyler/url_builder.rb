@@ -10,7 +10,7 @@ module Boyutluseyler
 
     def url
       case object
-      when Illustration, User
+      when Illustration, User, UserAvatar
         add_suffix_to_url_before_extension
       end
     end

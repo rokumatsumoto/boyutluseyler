@@ -2,6 +2,8 @@
 
 class RegistrationsController < Devise::RegistrationsController
   prepend_before_action :check_captcha, only: [:create]
+  after_action :after_create, only: :create
+
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
@@ -85,6 +87,10 @@ class RegistrationsController < Devise::RegistrationsController
     flash.delete :recaptcha_error
     set_minimum_password_length
     respond_with_navigational(resource) { render :new }
+  end
+
+  def after_create
+    Users::AfterCreateService.new(resource).execute
   end
 
   def sign_up_params
