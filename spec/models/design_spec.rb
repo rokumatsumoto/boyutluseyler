@@ -18,6 +18,7 @@
 #  hourly_downloads_count :float            default(0.0), not null
 #  popularity_score       :float            default(0.0), not null
 #  home_popular_at        :datetime
+#  likes_count            :integer          default(0), not null
 #
 
 require 'rails_helper'
