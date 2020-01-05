@@ -3,12 +3,5 @@
   = render 'layouts/head'
   %body
     = render 'layouts/flash'
-    = render partial: 'layouts/header/default2'
-    -# = render 'layouts/flash'
-    -# = render partial: 'layouts/hero/default'
-    -# .container
-      -# = render 'layouts/flash'
-      -# .space-body
-      / %p.notice= notice
-      / %p.alert= alert
+    = render partial: 'layouts/header/default'
     = yield
