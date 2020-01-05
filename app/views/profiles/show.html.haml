@@ -13,7 +13,6 @@
     .card-body.pt-2
       = simple_form_for(@user, validate: true, url: profile_path,
       html: { method: :put }) do |f|
-        = f.error_notification
         -# TODO: i18n
         %h6.heading-small.text-muted.mb-4 Profil Resmi
         .js-avatar-uploader{ data: { behavior: 'vue' } }

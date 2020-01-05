@@ -4,10 +4,8 @@ import Cropper from 'cropperjs';
 import 'blueimp-file-upload/js/jquery.fileupload';
 import 'blueimp-canvas-to-blob/js/canvas-to-blob.min';
 import { mapActions, mapState } from 'vuex';
-import { uuidV4 } from 'lib/utils/number_utils';
-import getFileExtension from 'lib/utils/file_utils';
+import { uuidV4, numberToHumanSize } from 'lib/utils/number_utils';
 import { MIN_FILE_SIZE, MAX_FILE_SIZE } from '../constants';
-import { INVALID_CHARACTERS } from '../../connected_uploader/constants';
 
 const mime = require('mime/lite');
 
@@ -87,7 +85,6 @@ export default {
         dataType: 'XML',
         paramName: 'file',
         add: this.handleUploadAdd,
-        dropZone: this,
         replaceFileInput: false,
       });
       $fileInput.on('fileuploaddone', this.handleUploadDone);
@@ -105,7 +102,6 @@ export default {
       this.$refs.input.value = '';
       this.dataURI = undefined;
       this.filename = undefined;
-      this.mimeType = undefined;
     },
     cancelUpload() {
       this.destroyCropper();
@@ -129,15 +125,20 @@ export default {
     handleUploadAdd(e, data) {
       const fileInput = this.$refs.input;
       this.data = data;
+
       if (fileInput.files != null && fileInput.files[0] != null) {
+        const file = fileInput.files[0];
+
+        if (this.fileHasInvalidSize(file)) return;
+
         const reader = new FileReader();
         reader.onload = event => {
           this.dataURI = event.target.result;
         };
-        reader.readAsDataURL(fileInput.files[0]);
-        this.filename = fileInput.files[0].name || 'unknown';
-        this.mimeType = fileInput.files[0].type;
-        this.$emit('changed', fileInput.files[0], reader);
+        reader.readAsDataURL(file);
+        this.filename = file.name || 'unknown';
+        this.mimeType = file.type;
+        this.$emit('changed', file, reader);
       }
     },
     handleUploadDone(e, data) {
@@ -166,6 +167,14 @@ export default {
         this.outputQuality,
       );
     },
+    fileHasInvalidSize(file) {
+      if (file.size && file.size >= MIN_FILE_SIZE && file.size <= MAX_FILE_SIZE) return false;
+      this.setFileStatus(`Dosya (${numberToHumanSize(file.size)})
+        geçersiz, izin verilen maksimum dosya boyutu
+        ${numberToHumanSize(MAX_FILE_SIZE)}`);
+
+      return true;
+    },
   },
 };
 </script>
@@ -189,11 +198,11 @@ export default {
       </div>
       <input ref="input" :accept="mimes" class="avatar-cropper-img-input" type="file" />
     </div>
-    <div class="d-flex flex-column form-group-2">
+    <div class="d-flex flex-column mt-2 mt-md-0 form-group-2">
       <label class="form-control-label">Yeni profil resmi yükle</label>
-      <div class="d-inline-flex align-items-center">
-        <button ref="button" class="btn btn-primary btn-sm">Dosya seçin...</button>
-        <span class="ml-2 text-sm">{{ fileStatus }}</span>
+      <div class="d-sm-block d-md-inline">
+        <button ref="button" class="float-left mr-3 btn btn-primary btn-sm">Dosya seçin...</button>
+        <span class="float-sm-left float-lg-none mt-2 text-sm">{{ fileStatus }}</span>
       </div>
     </div>
     <input type="hidden" :name="inputName" :value="hiddenImageSrc" />

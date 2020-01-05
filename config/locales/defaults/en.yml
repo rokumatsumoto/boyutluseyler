@@ -39,6 +39,11 @@ en:
                 blank: Filename cannot be empty
               size:
                 inclusion: File size is invalid
+        user:
+          attributes:
+              avatar_url:
+                invalid: Invalid file extension
+                blank: Filename cannot be empty
   date:
     abbr_day_names:
     - Sun
