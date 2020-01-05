@@ -6,25 +6,46 @@ if Rails.env.development? || Rails.env.test?
       Faker::UniqueGenerator.clear
       Faker::Config.locale = :en
 
-      image_source = 'https://picsum.photos'
+      steps = 9
+
+      illustration_source = 'https://picsum.photos'
+      illustration_large_size = 480
+      illustration_medium_size = 234
+      illustration_thumb_size = 113
+      illustration_content_type = 'image/jpeg'
+      illustration_format = 'jpg'
+
+      blueprint_image_source = 'https://picsum.photos'
+      blueprint_image_thumb_size = 113
+      blueprint_content_type = 'application/vnd.ms-pki.stl'
+      blueprint_image_format = 'jpg'
+
+      avatar_source = 'https://api.adorable.io/avatars'
+      avatar_medium_size = 160
+      avatar_thumb_size = 36
+      avatar_format = 'jpeg'
+
       design_illustrations = {}
       design_blueprints = {}
 
-      p '1/7 Creating Users'
+      p "1/#{steps} Creating Users"
 
       User.delete_all
 
       10.times do
         name = Faker::Name.unique.name
-        user = User.create!(
+        username = Faker::Internet.unique.username(specifier: name)
+        User.create!(
           email: Faker::Internet.email(name: name, separators: '+'),
-          username: Faker::Internet.unique.username(specifier: name),
+          username: username,
           password: 'password',
-          confirmed_at: Time.current
+          confirmed_at: Time.current,
+          avatar_url: "#{avatar_source}/#{avatar_medium_size}/#{username}.#{avatar_format}",
+          avatar_thumb_url: "#{avatar_source}/#{avatar_thumb_size}/#{username}.#{avatar_format}"
         )
       end
 
-      p '2/7 Creating Illustrations'
+      p "2/#{steps} Creating Illustrations"
 
       Illustration.delete_all
 
@@ -37,13 +58,13 @@ if Rails.env.development? || Rails.env.test?
           illustration_id = rand(1..1000)
 
           illustration = Illustration.create!(
-            url: "#{image_source}/id/#{illustration_id}/480/480.jpg",
-            url_path: "#{image_source}/id/#{illustration_id}/480/480.jpg",
+            url: "#{illustration_source}/id/#{illustration_id}/#{illustration_large_size}/#{illustration_large_size}.#{illustration_format}",
+            url_path: "#{illustration_source}/id/#{illustration_id}/#{illustration_large_size}/#{illustration_large_size}.#{illustration_format}",
             size: 35_029,
-            content_type: 'image/jpeg',
-            large_url: "#{image_source}/id/#{illustration_id}/480/480.jpg",
-            medium_url: "#{image_source}/id/#{illustration_id}/234/234.jpg",
-            thumb_url: "#{image_source}/id/#{illustration_id}/113/113.jpg"
+            content_type: illustration_content_type,
+            large_url: "#{illustration_source}/id/#{illustration_id}/#{illustration_large_size}/#{illustration_large_size}.#{illustration_format}",
+            medium_url: "#{illustration_source}/id/#{illustration_id}/#{illustration_medium_size}/#{illustration_medium_size}.#{illustration_format}",
+            thumb_url: "#{illustration_source}/id/#{illustration_id}/#{illustration_thumb_size}/#{illustration_thumb_size}.#{illustration_format}"
           )
 
           illustration_ids << illustration.id
@@ -51,7 +72,7 @@ if Rails.env.development? || Rails.env.test?
         end
       end
 
-      p '3/7 Creating Blueprints'
+      p "3/#{steps} Creating Blueprints"
 
       Blueprint.delete_all
 
@@ -67,8 +88,8 @@ if Rails.env.development? || Rails.env.test?
             url: "#{Boyutluseyler.config[:direct_upload_endpoint]}/bowser_low_poly_flowalistik223.STL",
             url_path: 'bowser_low_poly_flowalistik223.STL',
             size: 32_484,
-            content_type: 'application/vnd.ms-pki.stl',
-            thumb_url: "#{image_source}/id/#{blueprint_id}/113/113.jpg"
+            content_type: blueprint_content_type,
+            thumb_url: "#{blueprint_image_source}/id/#{blueprint_id}/#{blueprint_image_thumb_size}/#{blueprint_image_thumb_size}.#{blueprint_image_format}"
           )
 
           blueprint_ids << blueprint.id
@@ -76,7 +97,7 @@ if Rails.env.development? || Rails.env.test?
         end
       end
 
-      p '4/7 Creating Designs'
+      p "4/#{steps} Creating Designs"
 
       Design.delete_all
       FriendlyId::Slug.where(sluggable_type: 'Design').delete_all
@@ -86,8 +107,6 @@ if Rails.env.development? || Rails.env.test?
       blueprint_extensions = %i[STL OBJ PLY ZIP]
       user_ids = User.ids
       category_ids = Category.ids
-
-      design_downloads_count_list = {}
 
       100.times do |i|
         design = Design.create!(
@@ -110,11 +129,10 @@ if Rails.env.development? || Rails.env.test?
           illustration_ids: design_illustrations[i],
           blueprint_ids: design_blueprints[i]
         )
-
-        design_downloads_count_list[design.id] = rand(0..300)
       end
 
-      p '5/7 Creating Design Downloads'
+      p "5/#{steps} Creating Design Downloads"
+
       DesignDownload.delete_all
 
       Design.all.each do |design|
@@ -125,7 +143,7 @@ if Rails.env.development? || Rails.env.test?
         )
       end
 
-      p '6/7 Creating Download Events'
+      p "6/#{steps} Creating Download Events"
 
       event_name = Ahoy::Event::DOWNLOADED_DESIGN
       visit_ids = Ahoy::Event.where_event(event_name).pluck(:visit_id)
@@ -133,7 +151,7 @@ if Rails.env.development? || Rails.env.test?
       Ahoy::Visit.delete(visit_ids)
 
       Design.all.each do |design|
-        design_downloads_count_list[design.id].times do
+        rand(1..100).times do
           ahoy = Ahoy::Tracker.new(user: User.order('RANDOM()').first)
           ahoy.track(event_name, design_id: design.id)
         end
@@ -143,7 +161,7 @@ if Rails.env.development? || Rails.env.test?
         Designs::Downloads::HourlyDownloadsCountService.new.execute_for_design(design)
       end
 
-      p '7/7 Creating Visit Events'
+      p "7/#{steps} Creating Visit Events"
 
       event_name = Ahoy::Event::VIEWED_DESIGN
       visit_ids = Ahoy::Event.where_event(event_name).pluck(:visit_id)
@@ -155,6 +173,32 @@ if Rails.env.development? || Rails.env.test?
           ahoy = Ahoy::Tracker.new(user: User.order('RANDOM()').first)
           ahoy.track(event_name, design_id: design.id)
         end
+      end
+
+      p "8/#{steps} Creating Like Events"
+
+      event_name = Ahoy::Event::LIKED_DESIGN
+      visit_ids = Ahoy::Event.where_event(event_name).pluck(:visit_id)
+      Ahoy::Event.where_event(event_name).delete_all
+      Ahoy::Visit.delete(visit_ids)
+
+      Design.all.each do |design|
+        rand(1..30).times do
+          ahoy = Ahoy::Tracker.new(user: User.order('RANDOM()').first)
+          ahoy.track(event_name, design_id: design.id)
+        end
+      end
+
+      p "9/#{steps} Creating User Avatars"
+
+      UserAvatar.delete_all
+
+      User.all.each do |user|
+        UserAvatar.create!(
+          letter_avatar_url: user.avatar_url,
+          letter_avatar_thumb_url: user.avatar_thumb_url,
+          user: user
+        )
       end
     end
   end
