@@ -2,6 +2,7 @@
   float: left;
   margin-right: 15px;
   border-radius: $avatar-radius;
+  &.s36 { @include avatar-size(36px, 16px); }
   &.s160 { @include avatar-size(160px, 16px); }
 }
 

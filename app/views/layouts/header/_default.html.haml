@@ -34,7 +34,8 @@
           - if header_link?(:user_dropdown)
             %li.nav-item.ml-1.dropdown
               %a#user-dropdown.nav-link.nav-link-icon.d-none.d-lg-block{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
-                %i.fas.fa-user.fa-1x
+                %span.avatar.avatar-sm.rounded-circle
+                  %img{ alt: current_user.username, src: current_user.avatar_thumb_url }
               .dropdown-menu.dropdown-menu-right.d-none.d-lg-block{"aria-labelledby" => "user-dropdown"}
                 -# TODO: i18n
                 %a.dropdown-item{ href: '#' } Profil
