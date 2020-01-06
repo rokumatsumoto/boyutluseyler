@@ -18,6 +18,7 @@ if Boyutluseyler.config[:direct_upload_provider] == 'AWS'
 end
 
 AWS_LAMBDA = Aws::Lambda::Client.new(
+  stub_responses: Rails.env.test?,
   region: Boyutluseyler.credentials[:aws][:region],
   access_key_id: Boyutluseyler.credentials[:aws][:access_key_id],
   secret_access_key: Boyutluseyler.credentials[:aws][:secret_access_key]
