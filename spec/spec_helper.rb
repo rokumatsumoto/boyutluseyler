@@ -26,7 +26,7 @@ require 'sidekiq/testing'
 ActiveRecord::Migration.maintain_test_schema!
 
 # https://github.com/mperham/sidekiq/wiki/Testing
-Sidekiq::Testing.inline!
+Sidekiq::Testing.fake!
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -50,9 +50,16 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::IntegrationHelpers, type: :feature
   config.include AbstractController::Translation
+  config.include BackgroundJobs, type: :feature
 
   config.before(:suite) do
     Timecop.safe_mode = true
+  end
+
+  config.around(:each, type: :feature) do |example|
+    run_background_jobs_immediately do
+      example.run
+    end
   end
 
   # This can be useful to make sure jobs don't linger between tests:
