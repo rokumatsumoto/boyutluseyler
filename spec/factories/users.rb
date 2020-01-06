@@ -35,6 +35,8 @@ FactoryBot.define do
     password { '123456' }
     confirmed_at { Time.current }
     confirmation_token { nil }
+    avatar_url { 'https://example.com/avatar_medium.png' }
+    avatar_thumb_url { 'https://example.com/avatar_thumb.png' }
 
     trait :unconfirmed do
       confirmed_at { nil }
