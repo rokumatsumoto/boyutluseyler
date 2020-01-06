@@ -59,9 +59,9 @@ class User < ApplicationRecord
   # Only allow letter, number, underscore, hyphen and punctuation.
   validates :username,
             format: { with: /\A(?:[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\.][a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\-\.]*[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\-]|[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_])\z/ }
-  validates :avatar_url, presence: true
-  validates :avatar_url, format: { with: /\.(png|jpg|jpeg|gif)\z/i }
-  validate :avatar_filename_is_blank
+  validates :avatar_url, presence: true, on: :update
+  validates :avatar_url, format: { with: /\.(png|jpg|jpeg|gif)\z/i }, on: :update
+  validate :avatar_filename_is_blank, on: :update
 
   def avatar_filename_is_blank
     # user input: '.png'
