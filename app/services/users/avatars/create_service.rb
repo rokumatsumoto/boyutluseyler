@@ -26,10 +26,7 @@ module Users
       end
 
       def create_initials_avatar
-        url = InitialsAvatarService.new(user).execute
-
-        params[:avatar_url] = url
-        user.avatar_url = url
+        params[:avatar_url] = user.avatar_url = InitialsAvatarService.new(user).execute
       end
     end
   end
