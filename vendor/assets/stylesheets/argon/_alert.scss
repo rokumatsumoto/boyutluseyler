@@ -4,7 +4,7 @@
     font-size: $font-size-sm;
     margin-bottom: 0;
     border-radius: 0;
-    // @include border-radius($alert-border-radius); // TODO: remove unused
+    // @include border-radius($alert-border-radius);
 
     .alert-inner--icon {
         font-size: 1.25rem;

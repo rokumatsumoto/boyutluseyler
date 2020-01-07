@@ -94,15 +94,9 @@ export default {
         size: file.size,
       });
 
-      if (this.fileHasInvalidSize(file, data)) {
-        return true;
-      }
-      if (this.fileHasInvalidCharacters(file, data)) {
-        return true;
-      }
-      if (this.fileTypeInvalidForDragAndDrop(file, data)) {
-        return true;
-      }
+      if (this.fileHasInvalidSize(file, data)) return true;
+      if (this.fileHasInvalidCharacters(file, data)) return true;
+      if (this.fileTypeInvalid(file, data)) return true;
 
       return this.fetchPresignedPost({
         uploaderUrl: this.uploaderUrl,
@@ -135,7 +129,7 @@ export default {
     handleDocumentDropAndDragOver(e) {
       e.target.type !== 'file' && e.preventDefault();
     },
-    fileTypeInvalidForDragAndDrop(file, data) {
+    fileTypeInvalid(file, data) {
       const fileExtension = file.type === '' ? getFileExtension(file.name) : file.type;
       const acceptArr = this.accept.split(',').map(a => a.slice(1));
       const fileTypeChecker = value => [fileExtension].some(element => element.includes(value));

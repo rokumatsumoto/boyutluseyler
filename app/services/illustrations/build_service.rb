@@ -39,7 +39,7 @@ module Illustrations
     end
 
     def processed_public_url
-      "#{Boyutluseyler.config[:direct_upload_processed_endpoint]}/#{illustration.key}"
+      "#{Boyutluseyler.config[:processed_endpoint]}/#{illustration.key}"
     end
 
     def public_url

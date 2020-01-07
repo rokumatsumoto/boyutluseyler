@@ -1,0 +1,5 @@
+export const SET_FILE_STATUS = 'SET_FILE_STATUS';
+
+export const SET_IMAGE_SRC = 'SET_IMAGE_SRC';
+
+export const SET_HIDDEN_IMAGE_SRC = 'SET_HIDDEN_IMAGE_SRC';

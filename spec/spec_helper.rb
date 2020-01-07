@@ -17,12 +17,16 @@ abort('The Rails environment is running in production mode!') if Rails.env.produ
 require 'rspec/rails'
 require 'shoulda/matchers'
 require 'zonebie/rspec'
+require 'sidekiq/testing'
 # TODO: Activate when they are needed
 # require 'pundit/matchers'
 # require 'pundit/rspec'
 
 # Check for pending migrations before tests are run
 ActiveRecord::Migration.maintain_test_schema!
+
+# https://github.com/mperham/sidekiq/wiki/Testing
+Sidekiq::Testing.fake!
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -46,9 +50,21 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::IntegrationHelpers, type: :feature
   config.include AbstractController::Translation
+  config.include BackgroundJobs, type: :feature
 
   config.before(:suite) do
     Timecop.safe_mode = true
+  end
+
+  config.around(:each, type: :feature) do |example|
+    run_background_jobs_immediately do
+      example.run
+    end
+  end
+
+  # This can be useful to make sure jobs don't linger between tests:
+  config.before do
+    Sidekiq::Worker.clear_all
   end
 
   config.expect_with :rspec do |expectations|

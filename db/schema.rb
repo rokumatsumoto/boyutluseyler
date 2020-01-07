@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_24_000412) do
+ActiveRecord::Schema.define(version: 2019_12_30_023155) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -197,6 +197,15 @@ ActiveRecord::Schema.define(version: 2019_12_24_000412) do
     t.index ["name"], name: "index_settings_on_name", unique: true
   end
 
+  create_table "user_avatars", force: :cascade do |t|
+    t.string "letter_avatar_url", null: false
+    t.string "letter_avatar_thumb_url", null: false
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_avatars_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -219,6 +228,8 @@ ActiveRecord::Schema.define(version: 2019_12_24_000412) do
     t.datetime "updated_at", null: false
     t.string "username"
     t.integer "events_count", default: 0, null: false
+    t.string "avatar_thumb_url", default: "", null: false
+    t.string "avatar_url", default: "", null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -235,4 +246,5 @@ ActiveRecord::Schema.define(version: 2019_12_24_000412) do
   add_foreign_key "designs", "users", on_delete: :cascade
   add_foreign_key "sail_entries", "sail_profiles", column: "profile_id"
   add_foreign_key "sail_entries", "sail_settings", column: "setting_id"
+  add_foreign_key "user_avatars", "users", on_delete: :cascade
 end

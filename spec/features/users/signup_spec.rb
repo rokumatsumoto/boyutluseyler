@@ -14,6 +14,15 @@ RSpec.describe 'Signup' do
   end
 
   context 'with no errors' do
+    lambda_functions = {
+      'serverless-initials-avatar-dev-initials': {
+        payload: '{"statusCode": 200,"body":"{\"message\":\"avatar.png\"}"}'
+      }
+    }
+    AWS_LAMBDA.stub_responses(:invoke, lambda { |context|
+      lambda_functions[context.params[:function_name].to_sym]
+    })
+
     context 'when sending confirmation email' do
       # rubocop:disable RSpec/ExampleLength
       # rubocop:disable RSpec/MultipleExpectations

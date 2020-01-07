@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
 module UploadsActions
-  include Boyutluseyler::Utils::StrongMemoize
-
   def new
     presigned_post = Files::DirectUpload::CreatePresignedPostService
-                     .new(model, uploader_context).execute
+                     .new(policy, direct_upload_context).execute
 
     render json: presigned_post.fields, status: :ok
   rescue Aws::S3::Errors::ServiceError => e
@@ -14,21 +12,21 @@ module UploadsActions
 
   private
 
-  def uploader_context
+  def direct_upload_context
     {
       current_user_id: current_user.id
     }
   end
 
-  def find_model
+  def find_policy
     nil
   end
 
-  def model
-    find_model
+  def policy
+    find_policy
   end
 
   def upload_params
-    params.permit(:model)
+    params.permit(:policy_name)
   end
 end

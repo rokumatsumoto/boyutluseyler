@@ -25,6 +25,9 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  username               :string
+#  events_count           :integer          default(0), not null
+#  avatar_thumb_url       :string           default(""), not null
+#  avatar_url             :string           default(""), not null
 #
 
 class User < ApplicationRecord
@@ -56,6 +59,15 @@ class User < ApplicationRecord
   # Only allow letter, number, underscore, hyphen and punctuation.
   validates :username,
             format: { with: /\A(?:[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\.][a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\-\.]*[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\-]|[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_])\z/ }
+  validates :avatar_url, presence: true, on: :update
+  validates :avatar_url, format: { with: /\.(png|jpg|jpeg|gif)\z/i }, on: :update
+  validate :avatar_filename_is_blank, on: :update
+
+  def avatar_filename_is_blank
+    # user input: '.png'
+    filename = Boyutluseyler::FilenameHelpers.filename(avatar_url)
+    errors.add(:avatar_url, :blank) if filename.blank?
+  end
 
   class << self
     # Devise method overridden to allow sign in with email or username
@@ -64,6 +76,10 @@ class User < ApplicationRecord
       login = conditions.delete(:login)
       where(conditions).find_by('lower(username) = :value OR lower(email) =
                                  :value', value: login.downcase(:turkic).strip)
+    end
+
+    def avatar_content_length_range
+      Range.new(1, 2_097_152)
     end
   end
 

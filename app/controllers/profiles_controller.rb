@@ -31,7 +31,8 @@ class ProfilesController < ApplicationController
   def user_params
     @user_params ||= params.require(:user).permit(
       :email,
-      :username
+      :username,
+      :avatar_url
     )
   end
 end

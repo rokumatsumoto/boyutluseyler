@@ -39,6 +39,11 @@ tr:
                 blank: Dosya adı boş olamaz
               size:
                 inclusion: Dosya boyutu geçersiz
+        user:
+          attributes:
+              avatar_url:
+                invalid: Dosya uzantısı geçersiz
+                blank: Dosya adı boş olamaz
 
   date:
     abbr_day_names:
