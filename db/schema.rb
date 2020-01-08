@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_30_023155) do
+ActiveRecord::Schema.define(version: 2020_01_08_162455) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -156,6 +156,16 @@ ActiveRecord::Schema.define(version: 2019_12_30_023155) do
     t.index ["taggings_count"], name: "index_gutentag_tags_on_taggings_count"
   end
 
+  create_table "identities", force: :cascade do |t|
+    t.string "uid"
+    t.string "provider"
+    t.text "auth_data_dump"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_identities_on_user_id"
+  end
+
   create_table "illustrations", force: :cascade do |t|
     t.string "url", null: false
     t.string "url_path", null: false
@@ -244,6 +254,7 @@ ActiveRecord::Schema.define(version: 2019_12_30_023155) do
   add_foreign_key "design_illustrations", "illustrations", on_delete: :cascade
   add_foreign_key "designs", "categories", on_delete: :cascade
   add_foreign_key "designs", "users", on_delete: :cascade
+  add_foreign_key "identities", "users"
   add_foreign_key "sail_entries", "sail_profiles", column: "profile_id"
   add_foreign_key "sail_entries", "sail_settings", column: "setting_id"
   add_foreign_key "user_avatars", "users", on_delete: :cascade
