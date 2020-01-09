@@ -36,10 +36,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable, :trackable,
+         :omniauthable, omniauth_providers: %i[google_oauth2 facebook],
          email_regexp: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
 
   has_many :designs
   has_many :events, class_name: 'Ahoy::Event', dependent: :destroy
+  has_many :identities, dependent: :destroy
 
   # Virtual attribute for authenticating by either username or email
   attr_accessor :login

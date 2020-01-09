@@ -276,6 +276,14 @@ Devise.setup do |config|
   #   manager.default_strategies(scope: :user).unshift :some_external_strategy
   # end
 
+  config.omniauth :google_oauth2, Boyutluseyler.credentials[:google_key],
+                  Boyutluseyler.credentials[:google_secret],
+                  scope: 'userinfo.email, userinfo.profile, http://gdata.youtube.com',
+                  prompt: 'select_account', image_aspect_ratio: 'square', image_size: 50
+
+  config.omniauth :facebook, Boyutluseyler.credentials[:facebook_key],
+                  Boyutluseyler.credentials[:facebook_secret], scope: 'public_profile,email', secure_image_url: true, image_size: 'large', client_options: { site: 'https://graph.facebook.com/v3.0', authorize_url: 'https://www.facebook.com/v3.0/dialog/oauth' }
+
   # ==> Mountable engine configurations
   # When using Devise inside an engine, let's call it `MyEngine`, and this engine
   # is mountable, there are some extra configurations to be taken into account.
