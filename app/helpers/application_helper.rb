@@ -28,7 +28,7 @@ module ApplicationHelper
   #   # On Admin::ApplicationController
   #   current_controller?(:application)         # => true
   #   current_controller?('admin/application')  # => true
-  #   current_controller?('gitlab/application') # => false
+  #   current_controller?('boyutluseyler/application') # => false
   def current_controller?(*args)
     args.any? do |v|
       v.to_s.downcase == controller.controller_name || v.to_s.downcase == controller.controller_path

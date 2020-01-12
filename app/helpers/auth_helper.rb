@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module AuthHelper
+  extend self
   PROVIDERS_WITH_ICONS = %w[twitter google_oauth2 facebook].freeze
 
   def auth_providers
