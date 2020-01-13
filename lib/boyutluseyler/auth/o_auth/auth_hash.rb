@@ -30,6 +30,10 @@ module Boyutluseyler
           @password ||= Boyutluseyler::Utils.force_utf8(Devise.friendly_token[0, 8].downcase)
         end
 
+        def image
+          @image ||= get_info(:image)
+        end
+
         private
 
         def info
@@ -52,7 +56,7 @@ module Boyutluseyler
 
             {
               username: username,
-              email:    email
+              email: email
             }
           end
         end

@@ -37,11 +37,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable, :trackable,
          :omniauthable, omniauth_providers: %i[google_oauth2 facebook],
-         email_regexp: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+                        email_regexp: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
 
   has_many :designs
   has_many :events, class_name: 'Ahoy::Event', dependent: :destroy
-  has_many :identities, dependent: :destroy
+  has_many :identities, dependent: :destroy, autosave: true
 
   # Virtual attribute for authenticating by either username or email
   attr_accessor :login
@@ -87,5 +87,9 @@ class User < ApplicationRecord
 
   def recently_sent_password_reset?
     reset_password_sent_at.present? && reset_password_sent_at >= 1.minute.ago
+  end
+
+  def skip_confirmation=(bool)
+    skip_confirmation! if bool
   end
 end

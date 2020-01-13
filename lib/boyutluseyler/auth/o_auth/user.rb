@@ -13,6 +13,27 @@ module Boyutluseyler
           add_or_update_user_identities
         end
 
+        def persisted?
+          bs_user.try(:persisted?)
+        end
+
+        def valid?
+          bs_user.try(:valid?)
+        end
+
+        def valid_sign_in?
+          valid? && persisted?
+        end
+
+        def save(provider = 'OAuth')
+          Users::UpdateService.new(bs_user, user: bs_user).execute!
+
+          bs_user
+        rescue ActiveRecord::RecordInvalid => e
+          # TODO: log
+          puts "(#{provider}) Error saving user #{auth_hash.uid} (#{auth_hash.email}): #{bs_user.errors.full_messages}"
+        end
+
         def bs_user
           return @bs_user if defined?(@bs_user)
 
@@ -25,6 +46,12 @@ module Boyutluseyler
           user ||= build_new_user
 
           user
+        end
+
+        def find_and_update!
+          save
+
+          bs_user
         end
 
         protected
@@ -60,8 +87,22 @@ module Boyutluseyler
             username: username,
             email: email,
             password: auth_hash.password,
-            password_confirmation: auth_hash.password
+            password_confirmation: auth_hash.password,
+            avatar_url: medium_image_url_for_provider(auth_hash.provider, auth_hash.image),
+            avatar_thumb_url: thumb_image_url_for_provider(auth_hash.provider, auth_hash.image)
           }
+        end
+
+        def provider_module
+          Boyutluseyler::Auth::OAuth::Provider
+        end
+
+        def medium_image_url_for_provider(name, url)
+          provider_module.medium_image_url_for(name, url)
+        end
+
+        def thumb_image_url_for_provider(name, url)
+          provider_module.thumb_image_url_for(name, url)
         end
       end
     end

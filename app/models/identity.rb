@@ -13,7 +13,11 @@
 #  updated_at     :datetime         not null
 #
 
-
 class Identity < ApplicationRecord
   belongs_to :user
+
+  scope :with_provider, ->(provider) { where(provider: provider) }
+  scope :with_uid, lambda { |provider, uid|
+    where(uid: uid).with_provider(provider)
+  }
 end
