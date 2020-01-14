@@ -45,6 +45,8 @@ module Boyutluseyler
 
           user ||= build_new_user
 
+          user.external = true if user&.new_record?
+
           user
         end
 
@@ -88,8 +90,8 @@ module Boyutluseyler
             email: email,
             password: auth_hash.password,
             password_confirmation: auth_hash.password,
-            avatar_url: medium_image_url_for_provider(auth_hash.provider, auth_hash.image),
-            avatar_thumb_url: thumb_image_url_for_provider(auth_hash.provider, auth_hash.image)
+            avatar_url: medium_image_url,
+            avatar_thumb_url: thumb_image_url
           }
         end
 
@@ -97,12 +99,12 @@ module Boyutluseyler
           Boyutluseyler::Auth::OAuth::Provider
         end
 
-        def medium_image_url_for_provider(name, url)
-          provider_module.medium_image_url_for(name, url)
+        def medium_image_url
+          provider_module.medium_image_url_for(auth_hash.provider, auth_hash.image)
         end
 
-        def thumb_image_url_for_provider(name, url)
-          provider_module.thumb_image_url_for(name, url)
+        def thumb_image_url
+          provider_module.thumb_image_url_for(auth_hash.provider, auth_hash.image)
         end
       end
     end

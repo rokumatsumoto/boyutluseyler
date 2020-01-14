@@ -9,8 +9,10 @@ shared: &shared
   direct_upload_success_action_status: <%= "\'#{Boyutluseyler.credentials[:aws_s3][:success_action_status]}\'" %>
   direct_upload_cache_control: public, max-age=315576000
 
+  bucket_acl: <%= Boyutluseyler.credentials[:aws_s3][:acl] %>
   presigned_url_expires_in: 3600 # 1 hour
   cookie_domain: <%= Boyutluseyler.credentials[:cookie_domain] %>
+  processed_bucket_name: <%= Boyutluseyler.credentials[:aws_s3][:processed_bucket_name] %>
   processed_endpoint: <%= Boyutluseyler.credentials[:aws_s3][:processed_endpoint] %>
 
 development:

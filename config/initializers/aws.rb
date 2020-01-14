@@ -17,6 +17,16 @@ if Boyutluseyler.config[:direct_upload_provider] == 'AWS'
   )
 end
 
+s3_credentials = Aws::Credentials.new(
+  Boyutluseyler.credentials[:aws_s3][:access_key_id],
+  Boyutluseyler.credentials[:aws_s3][:secret_access_key]
+)
+
+AWS_S3_CLIENT = Aws::S3::Client.new(
+  region: Boyutluseyler.credentials[:aws_s3][:region],
+  credentials: s3_credentials
+)
+
 AWS_LAMBDA = Aws::Lambda::Client.new(
   stub_responses: Rails.env.test?,
   region: Boyutluseyler.credentials[:aws][:region],
