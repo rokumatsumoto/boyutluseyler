@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: users
@@ -28,6 +27,7 @@
 #  events_count           :integer          default(0), not null
 #  avatar_thumb_url       :string           default(""), not null
 #  avatar_url             :string           default(""), not null
+#  external               :boolean          default(FALSE)
 #
 
 class User < ApplicationRecord
