@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_08_162455) do
+ActiveRecord::Schema.define(version: 2020_01_14_101331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -240,6 +240,7 @@ ActiveRecord::Schema.define(version: 2020_01_08_162455) do
     t.integer "events_count", default: 0, null: false
     t.string "avatar_thumb_url", default: "", null: false
     t.string "avatar_url", default: "", null: false
+    t.boolean "external", default: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
