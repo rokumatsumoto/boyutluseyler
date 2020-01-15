@@ -16,6 +16,8 @@
 class Identity < ApplicationRecord
   belongs_to :user
 
+  serialize :auth_data_dump
+
   scope :with_provider, ->(provider) { where(provider: provider) }
   scope :with_uid, lambda { |provider, uid|
     where(uid: uid).with_provider(provider)

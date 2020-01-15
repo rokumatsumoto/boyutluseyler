@@ -66,6 +66,7 @@ module Boyutluseyler
 
           identity ||= bs_user.identities.build(provider: auth_hash.provider)
           identity.uid = auth_hash.uid
+          identity.auth_data_dump = auth_hash.auth_hash
         end
 
         def auth_hash=(auth_hash)
