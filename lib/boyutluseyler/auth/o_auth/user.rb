@@ -86,8 +86,11 @@ module Boyutluseyler
         def user_attributes
           username ||= auth_hash.username
           email ||= auth_hash.email
+
+          valid_username = ::User.clean_username(username)
+
           {
-            username: username,
+            username: valid_username,
             email: email,
             password: auth_hash.password,
             password_confirmation: auth_hash.password,

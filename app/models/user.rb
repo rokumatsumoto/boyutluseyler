@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -82,6 +83,29 @@ class User < ApplicationRecord
 
     def avatar_content_length_range
       Range.new(1, 2_097_152)
+    end
+
+    def find_by_username(username)
+      find_by('lower(username) = :username', username: username.downcase(:turkic))
+    end
+
+    def clean_username(username)
+      username = username.dup
+      # Get the email username by removing everything after an `@` sign.
+      username.gsub!(/@.*\z/, '')
+      # Remove everything that's not in the list of allowed characters.
+      username.gsub!(/[^a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\-\.]/, '')
+      # Remove trailing violations ('.')
+      username.gsub!(/(\.)*\z/, '')
+      # Remove leading violations ('-')
+      username.gsub!(/\A\-+/, '')
+
+      # Users with the great usernames of "." or ".." would end up with a blank username.
+      # Work around that by setting their username to "blank", followed by a counter.
+      username = 'blank' if username.blank?
+
+      uniquify = Uniquify.new
+      uniquify.string(username) { |s| find_by_username(s) } # rubocop:disable Rails/DynamicFindBy
     end
   end
 
