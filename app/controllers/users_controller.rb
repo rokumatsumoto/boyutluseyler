@@ -2,7 +2,7 @@
 
 class UsersController < ApplicationController
   def exists
-    if User.exists?(['lower(username) = :username', username: params[:username].downcase(:turkic)])
+    if User.find_by_username(params[:username]) # rubocop:disable Rails/DynamicFindBy
       render json: { exists: true }
     else
       render json: { exists: false }
