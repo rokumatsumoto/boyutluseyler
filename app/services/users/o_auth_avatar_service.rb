@@ -9,15 +9,15 @@ module Users
     end
 
     def execute
-      user.avatar_url = handle_avatar_for_url(user.avatar_url)
-      user.avatar_thumb_url = handle_avatar_for_url(user.avatar_thumb_url)
+      user.avatar_url = handle_oauth_avatar_for_url(user.avatar_url)
+      user.avatar_thumb_url = handle_oauth_avatar_for_url(user.avatar_thumb_url)
 
       user
     end
 
     private
 
-    def handle_avatar_for_url(url)
+    def handle_oauth_avatar_for_url(url)
       file = download(url)
 
       file_path = rename(file)
@@ -50,7 +50,8 @@ module Users
         acl: acl,
         body: File.read(file_path),
         bucket: bucket,
-        key: key
+        key: key,
+        content_type: MiniMime.lookup_by_filename(file_path).content_type
       )
 
       key
