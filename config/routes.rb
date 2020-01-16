@@ -30,8 +30,13 @@ Rails.application.routes.draw do
                                               passwords: :passwords,
                                               unlocks: :unlocks }
 
+  devise_scope :user do
+    get '/auth/:provider/omniauth_error' => 'omniauth_callbacks#omniauth_error', as: :omniauth_error
+  end
+
   get 'exists/:username', to: 'users#exists',
                           username: /(?:[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\.\%][a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\-\.\%]*[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\-\%]|[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_])/
+  # TODO: Boyutluseyler::PathRegex
 
   resource :profile, only: %i[show update] do
     scope module: :profiles do

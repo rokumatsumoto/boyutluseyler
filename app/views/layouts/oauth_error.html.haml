@@ -1,0 +1,77 @@
+!!! 5
+%html{ lang: "en" }
+  %head
+    %meta{ :content => "width=device-width, initial-scale=1, maximum-scale=1", :name => "viewport" }
+    %title= yield(:title)
+    :css
+      body {
+        color: #666;
+        text-align: center;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        margin: auto;
+        font-size: 16px;
+      }
+
+      .container {
+        margin: auto 20px;
+      }
+
+      h3 {
+        color: #456;
+        font-size: 22px;
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+
+      p {
+        max-width: 470px;
+        margin: 16px auto;
+      }
+
+      .subtitle {
+        margin: 0 auto 20px;
+      }
+
+      .light {
+        color: #8D8D8D;
+      }
+
+      hr {
+        max-width: 600px;
+        margin: 18px auto;
+        border: 0;
+        border-top: 1px solid #EEE;
+      }
+
+      .btn {
+        padding: 8px 14px;
+        border-radius: 3px;
+        border: 1px solid;
+        display: inline-block;
+        text-decoration: none;
+        margin: 4px 8px;
+        font-size: 14px;
+      }
+
+      .primary {
+        color: #fff;
+        background-color: #5e72e4;
+        border-color: #766ec8;
+      }
+
+      .primary:hover {
+        background-color: #766ec8;
+      }
+
+      .secondary {
+        color: #8898aa;
+        background-color: #fff;
+        border-color: #8898aa;
+      }
+
+      .secondary:hover {
+        background-color: #e7e6fb;
+      }
+
+%body
+  = yield
