@@ -1,3 +1,5 @@
+- content_for :head do
+  = javascript_pack_tag 'session/new'
 = render hero('default_dark_blue', 'default_dark_blue') do
   .container.pt-lg-md
     .row.justify-content-center
@@ -6,9 +8,8 @@
           .card-header.bg-white.pb-5
             .text-muted.text-center.mb-3
               %small Giriş yap
-            .text-center
-              - if devise_mapping.omniauthable?
-                = render 'devise/shared/omniauth_box'
+            - if devise_mapping.omniauthable?
+              = render 'devise/shared/omniauth_box'
           .card-body.px-lg-5.py-lg-5
             .text-center.text-muted.mb-4
               %small Veya e-posta adresinle giriş yap

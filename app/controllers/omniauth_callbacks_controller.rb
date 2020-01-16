@@ -63,7 +63,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     user = auth_user.find_and_update!
 
     if auth_user.valid_sign_in?
-      remember_me(user)
+      set_remember_me(user)
 
       sign_in_and_redirect(user)
     else
@@ -79,6 +79,17 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     error_message = user.errors.full_messages.to_sentence
 
     redirect_to omniauth_error_path(oauth['provider'], error: error_message)
+  end
+
+  def set_remember_me(user)
+    return unless remember_me?
+
+    remember_me(user)
+  end
+
+  def remember_me?
+    request_params = request.env['omniauth.params']
+    (request_params['remember_me'] == '1') if request_params.present?
   end
 
   # More info at:
