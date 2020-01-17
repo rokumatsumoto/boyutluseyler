@@ -40,7 +40,11 @@ Rails.application.routes.draw do
 
   resource :profile, only: %i[show update] do
     scope module: :profiles do
-      resource :account, only: %i[show update]
+      resource :account, only: %i[show update] do
+        member do
+          delete :unlink
+        end
+      end
       resource :password, only: %i[edit update] do
         member do
           put :reset

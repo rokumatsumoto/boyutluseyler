@@ -28,4 +28,12 @@ module AuthHelper
       label
     end
   end
+
+  def display_providers_on_profile?
+    auth_providers.any?
+  end
+
+  def auth_active?(provider)
+    current_user.identities.exists?(provider: provider.to_s)
+  end
 end

@@ -5,6 +5,9 @@
         .col-8
           %h5.text-10625.font-weight-bold.mb-0 Hesap
     .card-body.pt-2
+      - if display_providers_on_profile?
+        %h6.heading-small.text-muted.mb-4 Bağlı Hesaplar
+        = render 'providers', providers: auth_providers
 
 // TODO: cancel account
 -# %h4.mt-4= t('.cancel_my_account')
