@@ -1,0 +1,16 @@
+.omniauth-container.text-center
+  - providers = auth_providers
+  - providers.each do |provider|
+    - has_icon = provider_has_icon?(provider)
+    = link_to omniauth_authorize_path(:user, provider), method: :post, class: "btn btn-neutral btn-icon oauth-login", id: "oauth-login-#{provider}" do
+      - if has_icon
+        %span.btn-inner--icon
+          = provider_image_tag(provider)
+      %span.btn-inner--text
+        = label_for_provider(provider)
+  .custom-control.custom-checkbox.mt-3
+    - if devise_mapping.rememberable?
+      = check_box_tag :remember_me, nil, false, class: 'custom-control-input'
+      %label.custom-control-label{:for => "remember_me"}
+        %span Beni hatırla
+        -# TODO: i18n

@@ -1,5 +1,15 @@
 // All authentication forms
 
+.omniauth-container {
+  a {
+    @extend .mr-4;
+
+    &:last-of-type {
+      @extend .mr-0;
+    }
+  }
+}
+
 %text-auth-form {
   color: $dusty-gray-2;
 }

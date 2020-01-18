@@ -20,6 +20,7 @@ gem 'client_side_validations-simple_form', '~> 9.0'
 gem 'counter_culture', '~> 2.2', '>= 2.2.4'
 gem 'devise', '~> 4.7', '>= 4.7.1' # Authentication
 gem 'devise-i18n', '~> 1.7', '>= 1.7.1'
+gem 'down', '~> 5.1'
 gem 'fast_jsonapi', '~> 1.5'
 gem 'finite_machine', '~> 0.12.1'
 gem 'friendly_id', '~> 5.3' # Clean URL
@@ -30,6 +31,10 @@ gem 'hiredis', '~> 0.6.3'
 gem 'jbuilder', '~> 2.5'
 gem 'local_time', '~> 2.1'
 gem 'mini_mime', '~> 1.0', '>= 1.0.1'
+gem 'omniauth', '~> 1.9'
+gem 'omniauth-facebook', '~> 5.0'
+gem 'omniauth-google-oauth2', '~> 0.8.0'
+gem 'omniauth-rails_csrf_protection', '~> 0.1.2' # remove once https://github.com/omniauth/omniauth/pull/809 is resolved
 gem 'oj', '~> 3.9', '>= 3.9.2' # Speed up JSON processes
 gem 'pagy', '~> 3.7' # Update pagy.js file also
 gem 'pg', '>= 0.18', '< 2.0'

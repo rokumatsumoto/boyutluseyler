@@ -21,21 +21,30 @@ Rails.application.routes.draw do
 
   get '/3d-model/:category/:id', to: 'designs#show', as: :design_show, constraints: { id: /.*\D+.*/ }
   get '/design/download/:id', to: 'designs#download', as: :design_download, constraints: { id: /.*\D+.*/ }
-  match '/design/like/:id', to: 'designs#like', via: [:post, :delete], as: :design_like, constraints: { id: /.*\D+.*/ }
+  match '/design/like/:id', to: 'designs#like', via: %i[post delete], as: :design_like, constraints: { id: /.*\D+.*/ }
 
-
-  devise_for :users, path: '', controllers: { registrations: :registrations,
-                                              passwords: :passwords,
+  devise_for :users, path: '', controllers: { omniauth_callbacks: :omniauth_callbacks,
+                                              registrations: :registrations,
                                               sessions: :sessions,
                                               confirmations: :confirmations,
+                                              passwords: :passwords,
                                               unlocks: :unlocks }
+
+  devise_scope :user do
+    get '/auth/:provider/omniauth_error' => 'omniauth_callbacks#omniauth_error', as: :omniauth_error
+  end
 
   get 'exists/:username', to: 'users#exists',
                           username: /(?:[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\.\%][a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\-\.\%]*[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\-\%]|[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_])/
+  # TODO: Boyutluseyler::PathRegex
 
   resource :profile, only: %i[show update] do
     scope module: :profiles do
-      resource :account, only: %i[show update]
+      resource :account, only: %i[show update] do
+        member do
+          delete :unlink
+        end
+      end
       resource :password, only: %i[edit update] do
         member do
           put :reset

@@ -1,0 +1,4 @@
+en:
+  oauth:
+    failed: "Authentication failed: %{error_message}"
+    updated: Authentication method updated

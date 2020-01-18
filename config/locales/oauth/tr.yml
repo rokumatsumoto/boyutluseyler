@@ -1,0 +1,4 @@
+tr:
+  oauth:
+    failed: "Kimlik doğrulama başarısız oldu: %{error_message}"
+    updated: Kimlik doğrulama yöntemi güncellendi

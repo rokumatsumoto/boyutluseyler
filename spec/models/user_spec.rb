@@ -26,6 +26,7 @@
 #  events_count           :integer          default(0), not null
 #  avatar_thumb_url       :string           default(""), not null
 #  avatar_url             :string           default(""), not null
+#  external               :boolean          default(FALSE)
 #
 
 require 'spec_helper'
@@ -42,7 +43,8 @@ RSpec.describe User, type: :model do
                                                                 :validatable,
                                                                 :confirmable,
                                                                 :lockable,
-                                                                :trackable)
+                                                                :trackable,
+                                                                :omniauthable)
     end
     # rubocop:enable RSpec/ExampleLength
   end

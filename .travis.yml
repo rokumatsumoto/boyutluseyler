@@ -76,6 +76,7 @@ script:
   - "./cc-test-reporter format-coverage -t simplecov -o coverage/codeclimate.simplecov.json"
   - "./cc-test-reporter sum-coverage coverage/codeclimate.*.json"
   - "./cc-test-reporter upload-coverage"
-  - "bundle exec bundle-audit check --update --ignore CVE-2019-16782"
+  # TODO: remove CVE-2015-9284 once https://github.com/omniauth/omniauth/pull/809 is resolved
+  - "bundle exec bundle-audit check --update --ignore CVE-2019-16782 CVE-2015-9284"
 services:
   - postgresql

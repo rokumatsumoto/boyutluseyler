@@ -28,6 +28,7 @@
 #  events_count           :integer          default(0), not null
 #  avatar_thumb_url       :string           default(""), not null
 #  avatar_url             :string           default(""), not null
+#  external               :boolean          default(FALSE)
 #
 
 class User < ApplicationRecord
@@ -36,10 +37,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable, :trackable,
-         email_regexp: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+         :omniauthable, omniauth_providers: %i[google_oauth2 facebook],
+                        email_regexp: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
 
   has_many :designs
   has_many :events, class_name: 'Ahoy::Event', dependent: :destroy
+  has_many :identities, dependent: :destroy, autosave: true
 
   # Virtual attribute for authenticating by either username or email
   attr_accessor :login
@@ -81,9 +84,36 @@ class User < ApplicationRecord
     def avatar_content_length_range
       Range.new(1, 2_097_152)
     end
+
+    def find_by_username(username)
+      find_by('lower(username) = :username', username: username.downcase(:turkic))
+    end
+
+    def clean_username(username)
+      username = username.dup
+      # Get the email username by removing everything after an `@` sign.
+      username.gsub!(/@.*\z/, '')
+      # Remove everything that's not in the list of allowed characters.
+      username.gsub!(/[^a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\-\.]/, '')
+      # Remove trailing violations ('.')
+      username.gsub!(/(\.)*\z/, '')
+      # Remove leading violations ('-')
+      username.gsub!(/\A\-+/, '')
+
+      # Users with the great usernames of "." or ".." would end up with a blank username.
+      # Work around that by setting their username to "blank", followed by a counter.
+      username = 'blank' if username.blank?
+
+      uniquify = Uniquify.new
+      uniquify.string(username) { |s| find_by_username(s) } # rubocop:disable Rails/DynamicFindBy
+    end
   end
 
   def recently_sent_password_reset?
     reset_password_sent_at.present? && reset_password_sent_at >= 1.minute.ago
+  end
+
+  def skip_confirmation=(bool)
+    skip_confirmation! if bool
   end
 end
