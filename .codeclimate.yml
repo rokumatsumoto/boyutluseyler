@@ -2,6 +2,8 @@ version: "2"
 plugins:
   rubocop:
     enabled: true
+    channel: rubocop-0-76
+    # Available channels https://github.com/codeclimate/codeclimate-rubocop/branches/all?utf8=%E2%9C%93&query=channel%2Frubocop
   brakeman:
     enabled: true
   bundler-audit:
