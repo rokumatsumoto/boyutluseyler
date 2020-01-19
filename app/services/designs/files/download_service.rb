@@ -10,7 +10,7 @@ module Designs
       private
 
       def function_name
-        'aws-node-s3-zipper-stage-s3Zipper'
+        'aws-node-s3-zipper-dev-s3Zipper'
       end
 
       def payload
