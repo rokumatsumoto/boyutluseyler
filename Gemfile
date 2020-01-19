@@ -77,7 +77,7 @@ group :development, :test do
   gem 'rubocop', '~> 0.77.0', require: false
   gem 'rubocop-rails', '~> 2.4', require: false
   gem 'rubocop-rspec', '~> 1.34', require: false
-  gem 'simplecov', '~> 0.16.1', require: false
+  gem 'simplecov', '~> 0.17.1', require: false
   # gem 'vcr', '~> 4.0'
   # gem 'rspec_profiling', '~> 0.0.5'
   # gem 'rspec-set', '~> 0.1.3'
