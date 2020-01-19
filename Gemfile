@@ -69,7 +69,7 @@ group :development, :test do
   gem 'guard-rspec', '~> 4.7', '>= 4.7.3', require: false
   gem 'guard-rubocop', '~> 1.3', require: false
   gem 'haml_lint', '~> 0.28.0', require: false
-  gem 'parallel_tests', '~> 2.7', '>= 2.7.1'
+  gem 'parallel_tests', '~> 2.30', '>= 2.30.1'
   gem 'pry-byebug', '~> 3.6', platform: :mri
   gem 'pry-rails', '~> 0.3.9', require: false # call `rails r pry-rails` instead `rails console r pry-rails`
   gem 'rspec-parameterized', '~> 0.4.2', require: false
