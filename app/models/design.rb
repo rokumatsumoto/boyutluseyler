@@ -96,6 +96,8 @@ class Design < ApplicationRecord
       case method.to_s
       when 'downloads_count_desc' then reorder(downloads_count: :desc)
       when 'downloads_count_asc'  then reorder(downloads_count: :asc)
+      when 'likes_count_desc'     then reorder(likes_count: :desc)
+      when 'likes_count_asc'      then reorder(likes_count: :asc)
       when 'home_popular_at_desc' then reorder(home_popular_at: :desc)
       when 'home_popular_at_asc'  then reorder(home_popular_at: :asc)
       else order_by(method)
