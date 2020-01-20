@@ -43,6 +43,7 @@ gem 'pundit', '~> 2.0', '>= 2.0.1' # Authorization
 gem 'rails', '5.2.3'
 gem 'recaptcha', '~> 4.14' # Spam and anti-bot protection
 gem 'redis', '~> 4.1', '>= 4.1.3', require: ['redis', 'redis/connection/hiredis']
+gem 'rolify', '~> 5.2'
 gem 'sail', '~> 3.3'
 gem 'sanitize', '~> 5.0'
 # A portability issue in the sassc gem exists on several platforms.
