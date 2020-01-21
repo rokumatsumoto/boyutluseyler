@@ -39,7 +39,7 @@ gem 'oj', '~> 3.9', '>= 3.9.2' # Speed up JSON processes
 gem 'pagy', '~> 3.7' # Update pagy.js file also
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.3', '>= 4.3.1'
-gem 'pundit', '~> 2.0', '>= 2.0.1' # Authorization
+gem 'pundit', '~> 2.1' # Authorization
 gem 'rails', '5.2.3'
 gem 'recaptcha', '~> 4.14' # Spam and anti-bot protection
 gem 'redis', '~> 4.1', '>= 4.1.3', require: ['redis', 'redis/connection/hiredis']
