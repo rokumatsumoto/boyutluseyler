@@ -81,10 +81,6 @@ class User < ApplicationRecord
                                  :value', value: login.downcase(:turkic).strip)
     end
 
-    def avatar_content_length_range
-      Range.new(1, 2_097_152)
-    end
-
     def find_by_username(username)
       find_by('lower(username) = :username', username: username.downcase(:turkic))
     end
