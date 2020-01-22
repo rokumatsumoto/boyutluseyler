@@ -11,7 +11,7 @@ class AvatarDirectUploadPolicy < BaseDirectUploadPolicy
   end
 
   def content_length_range
-    model.avatar_content_length_range
+    Range.new(1, 2_097_152)
   end
 
   def content_type_starts_with
