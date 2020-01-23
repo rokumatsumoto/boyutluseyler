@@ -1,0 +1,4 @@
+en:
+  pundit:
+    errors:
+      default: 'You cannot perform this action'

@@ -1,0 +1,4 @@
+tr:
+  pundit:
+    errors:
+      default: 'Bu eylemi gerçekleştiremezsiniz'

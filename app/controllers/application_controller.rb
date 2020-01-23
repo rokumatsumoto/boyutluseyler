@@ -1,14 +1,13 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  include ApplicationHelper
   include Boyutluseyler::GonHelper
+  include Pagy::Backend
+  include Pundit
 
   protect_from_forgery with: :exception, prepend: true
   # protect_from_forgery with: :null_session # for postman
-
-  include ApplicationHelper
-  include Pagy::Backend
-  include Pundit
 
   before_action :add_gon_variables, unless: [:json_request?]
   before_action :configure_permitted_parameters, if: :devise_controller?
@@ -16,8 +15,11 @@ class ApplicationController < ActionController::Base
   # The callback which stores the current location must be added before you authenticate
   # the user as `authenticate_user!` (or whatever your resource is) will halt the filter
   # chain and redirect before the location can be stored.
+  after_action :verify_authorized, unless: :devise_controller?
 
   protected
+
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   rescue_from ActionController::ParameterMissing do |e|
     render json: e.message, status: :unprocessable_entity
@@ -46,6 +48,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def render_403
+    respond_to do |format|
+      format.html { render file: Rails.root.join('public/403'), layout: false, status: 403 }
+      format.any { head :forbidden }
+    end
+  end
+
   # https://github.com/plataformatec/devise#strong-parameters
   def configure_permitted_parameters
     added_attrs = %i[username email password password_confirmation]
@@ -57,6 +66,12 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def user_not_authorized(e)
+    message = e.reason || :default
+    flash[:alert] = I18n.t("errors.#{message}", scope: 'pundit', default: :default)
+    redirect_to(request.referer || root_path)
+ end
 
   # Its important that the location is NOT stored if:
   # - The request method is not GET (non idempotent)
