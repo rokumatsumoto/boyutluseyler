@@ -22,6 +22,8 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def omniauth_flow(auth_module, identity_linker: nil)
     if current_user
+      return unless link_provider_allowed?(oauth['provider'])
+
       identity_linker ||= auth_module::IdentityLinker.new(current_user, oauth)
 
       link_identity(identity_linker)
