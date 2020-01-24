@@ -18,9 +18,8 @@ require 'rspec/rails'
 require 'shoulda/matchers'
 require 'zonebie/rspec'
 require 'sidekiq/testing'
-# TODO: Activate when they are needed
-# require 'pundit/matchers'
-# require 'pundit/rspec'
+require 'pundit/matchers'
+require 'pundit/rspec'
 
 # Check for pending migrations before tests are run
 ActiveRecord::Migration.maintain_test_schema!
