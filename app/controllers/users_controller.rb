@@ -2,7 +2,8 @@
 
 class UsersController < ApplicationController
   def exists
-    authorize User
+    skip_authorization
+
     if User.find_by_username(params[:username]) # rubocop:disable Rails/DynamicFindBy
       render json: { exists: true }
     else

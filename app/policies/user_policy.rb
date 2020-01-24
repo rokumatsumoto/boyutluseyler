@@ -2,24 +2,30 @@
 
 class UserPolicy < ApplicationPolicy
   def show?
-    user == record || is_admin? # TODO: rolify
+    current_user? || is_admin? # TODO: rolify
+  end
+
+  def edit?
+    current_user? || is_admin? # TODO: rolify
   end
 
   def update?
-    user == record || is_admin? # TODO: rolify
-  end
-
-  def exists?
-    true
+    current_user? || is_admin? # TODO: rolify
   end
 
   def reset?
-    user == record || is_admin? # TODO: rolify
+    current_user? || is_admin? # TODO: rolify
   end
 
   class Scope < Scope
     def resolve
       scope.all
     end
+  end
+
+  private
+
+  def current_user?
+    user == record
   end
 end

@@ -2,3 +2,5 @@ en:
   pundit:
     errors:
       default: 'You cannot perform this action'
+      user:
+        unauthenticated: 'You need to sign in before continuing'
