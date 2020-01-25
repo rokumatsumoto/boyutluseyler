@@ -5,7 +5,13 @@ RSpec.describe IdentityProviderPolicy, type: :policy do
 
   let(:existing_user) { create(:user) }
 
-  context 'when a user manage connected accounts' do
+  context 'when user is not signed-in' do
+    let(:user) { nil }
+
+    it { within_block_is_expected.to raise_error(Pundit::NotAuthorizedError) }
+  end
+
+  context 'when user is signed-in to manage connected accounts' do
     permitted_actions = %i[link unlink]
 
     context 'with user role' do
