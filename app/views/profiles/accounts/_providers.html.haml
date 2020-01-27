@@ -2,16 +2,27 @@
   - providers.each do |provider|
     - image_tag = provider_image_tag(provider)
     - label_provider = label_for_provider(provider)
-    .col-lg-6.col-md-12.mb-3
+    - unlink_allowed = policy(:identity_provider).unlink?
+    - link_allowed = policy(:identity_provider).link?
+    - if unlink_allowed || link_allowed
       - if auth_active?(provider)
-        = link_to unlink_profile_account_path(provider: provider), method: :delete, class: 'btn btn-block btn-secondary btn-icon' do
-          %span.btn-inner--icon
-            = image_tag
-          %span.btn-inner--text
-            = "#{label_provider} Hesabını Çıkar"
-      - else
-        = link_to omniauth_authorize_path(:user, provider), method: :post, class: 'btn btn-block btn-secondary btn-icon' do
-          %span.btn-inner--icon
-            = image_tag
-          %span.btn-inner--text
-            = "#{label_provider} ile Bağlan"
+        .col-lg-6.col-md-12.mb-3
+          - if unlink_allowed
+            = link_to unlink_profile_account_path(provider: provider), method: :delete, class: 'btn btn-block btn-secondary btn-icon' do
+              %span.btn-inner--icon
+                = image_tag
+              %span.btn-inner--text
+                = "#{label_provider} Hesabını Çıkar"
+          - else
+            %a.btn.btn-block.btn-secondary.btn-icon
+              %span.btn-inner--icon
+                = image_tag
+              %span.btn-inner--text
+                = "#{label_provider} Hesabı Bağlı"
+      - elsif link_allowed
+        .col-lg-6.col-md-12.mb-3
+          = link_to omniauth_authorize_path(:user, provider), method: :post, class: 'btn btn-block btn-secondary btn-icon' do
+            %span.btn-inner--icon
+              = image_tag
+            %span.btn-inner--text
+              = "#{label_provider} ile Bağlan"
