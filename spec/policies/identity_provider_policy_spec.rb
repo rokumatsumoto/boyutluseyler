@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe IdentityProviderPolicy, type: :policy do
-  subject { described_class.new(user, 'provider') }
+  subject { described_class.new(user, :identity_provider) }
 
   let(:existing_user) { create(:user) }
 
