@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class IdentityProviderPolicy < Struct.new(:user, :provider)
+class IdentityProviderPolicy < Struct.new(:user, :identity_provider)
   def initialize(*)
     super
     raise Pundit::NotAuthorizedError, reason: 'user.unauthenticated' unless user

@@ -37,11 +37,11 @@ module AuthHelper
     current_user.identities.exists?(provider: provider.to_s)
   end
 
-  def unlink_provider_allowed?(provider)
-    authorize provider, :unlink?, policy_class: IdentityProviderPolicy
+  def unlink_provider_allowed?
+    authorize :identity_provider, :unlink?
   end
 
-  def link_provider_allowed?(provider)
-    authorize provider, :link?, policy_class: IdentityProviderPolicy
+  def link_provider_allowed?
+    authorize :identity_provider, :link?
   end
 end

@@ -14,7 +14,7 @@ class Profiles::AccountsController < ApplicationController
 
     return render_404 unless identity
 
-    identity.destroy if unlink_provider_allowed?(provider)
+    identity.destroy if unlink_provider_allowed?
 
     redirect_to profile_account_path
   end
