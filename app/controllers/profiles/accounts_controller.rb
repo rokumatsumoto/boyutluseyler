@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Profiles::AccountsController < ApplicationController
-  include AuthHelper
-
   before_action :authenticate_user!
   before_action :set_user, except: %i[unlink]
 
@@ -14,7 +12,9 @@ class Profiles::AccountsController < ApplicationController
 
     return render_404 unless identity
 
-    identity.destroy if unlink_provider_allowed?
+    authorize :identity_provider, :unlink?
+
+    identity.destroy
 
     redirect_to profile_account_path
   end
