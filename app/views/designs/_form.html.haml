@@ -26,29 +26,36 @@
           %label.ml-2{ for: 'cb_allow_comments' }= t('simple_form.labels.design.allow_comments')
 
       .twin.col-md-6
+        - direct_upload_allowed = policy(:direct_upload).new?
         %label.form-control-label Dosyalar
-        .js-connected-uploader{ data: { behavior: 'vue' } }
-          %connected-uploader{ accept: '.stl,.obj,.ply,.zip,.STL,.OBJ,.ZIP',
-            'add-button-text' => 'STL, OBJ, PLY, ZIP dosyaları ekleyin veya sürükleyin…',
-            'remove-button-text' => 'Kaldır',
-            'direct-url' => Boyutluseyler.config[:direct_upload_endpoint],
-            'uploader-url' => '/uploads/new?policy_name=blueprint',
-            'create-url' => '/blueprints',
-            'input-name' => 'design[blueprint_ids][]',
-            'data-type' => 'blueprint',
-            ':files' => @blueprints }
+        - if direct_upload_allowed
+          .js-connected-uploader{ data: { behavior: 'vue' } }
+            %connected-uploader{ accept: '.stl,.obj,.ply,.zip,.STL,.OBJ,.ZIP',
+              'add-button-text' => 'STL, OBJ, PLY, ZIP dosyaları ekleyin veya sürükleyin…',
+              'remove-button-text' => 'Kaldır',
+              'direct-url' => Boyutluseyler.config[:direct_upload_endpoint],
+              'uploader-url' => '/uploads/new?policy_name=blueprint',
+              'create-url' => '/blueprints',
+              'input-name' => 'design[blueprint_ids][]',
+              'data-type' => 'blueprint',
+              ':files' => @blueprints }
+        - else
+          %p.description.font-weight-400.mt-3= t('pundit.errors.design.direct_upload')
 
         %label.form-control-label.mt-3 Fotoğraflar
-        .js-connected-uploader{ data: { behavior: 'vue' } }
-          %connected-uploader{ accept: '.jpg,.jpeg,.gif,.png,.JPG,.JPEG,.GIF,.PNG',
-            'add-button-text' => 'JPG, GIF veya PNG dosyaları ekleyin veya sürükleyin…',
-            'remove-button-text' => 'Kaldır',
-            'direct-url' => Boyutluseyler.config[:direct_upload_endpoint],
-            'uploader-url' => '/uploads/new?policy_name=illustration',
-            'create-url' => '/illustrations',
-            'input-name' => 'design[illustration_ids][]',
-            'data-type' => 'illustration',
-            ':files' => @illustrations }
+        - if direct_upload_allowed
+          .js-connected-uploader{ data: { behavior: 'vue' } }
+            %connected-uploader{ accept: '.jpg,.jpeg,.gif,.png,.JPG,.JPEG,.GIF,.PNG',
+              'add-button-text' => 'JPG, GIF veya PNG dosyaları ekleyin veya sürükleyin…',
+              'remove-button-text' => 'Kaldır',
+              'direct-url' => Boyutluseyler.config[:direct_upload_endpoint],
+              'uploader-url' => '/uploads/new?policy_name=illustration',
+              'create-url' => '/illustrations',
+              'input-name' => 'design[illustration_ids][]',
+              'data-type' => 'illustration',
+              ':files' => @illustrations }
+        - else
+          %p.description.font-weight-400.mt-3= t('pundit.errors.design.direct_upload')
 
         %p.description.font-weight-400.mt-3 Dosyalar üzerinde sürükle bırak yaparak sıralamayı belirleyebilirsiniz..
         %p.description.opacity-8.font-weight-400 Fotoğraflar için ilk sıradaki resim tasarımınızı temsil eder.

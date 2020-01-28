@@ -4,3 +4,5 @@ tr:
       default: 'Bu eylemi gerçekleştiremezsiniz'
       user:
         unauthenticated: 'Devam etmeden önce giriş yapmanız gereklidir'
+      design:
+        direct_upload: 'Dosya yükleme yetkiniz bulunmamaktadır'
