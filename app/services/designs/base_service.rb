@@ -50,11 +50,11 @@ module Designs
     end
 
     def blueprint_ids
-      params[:blueprint_ids]
+      @blueprint_ids ||= (params[:blueprint_ids] || [])
     end
 
     def illustration_ids
-      params[:illustration_ids]
+      @illustration_ids ||= params[:illustration_ids] || []
     end
   end
 end
