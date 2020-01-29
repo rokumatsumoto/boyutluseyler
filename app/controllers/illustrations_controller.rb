@@ -2,6 +2,8 @@
 
 class IllustrationsController < ApplicationController
   def create
+    authorize Illustration
+
     @illustration = Illustrations::CreateService.new(illustration_params).execute
 
     if @illustration.persisted?
