@@ -14,10 +14,9 @@
 
 FactoryBot.define do
   factory :blueprint do
-    url { 'MyString' }
-    url_path { 'MyString' }
-    size { 1 }
-    content_type { 'MyString' }
-    thumb_url { 'MyString' }
+    url { 'https://example.com/blueprint.stl' }
+    url_path { 'blueprint.stl' }
+    size { 32_484 }
+    content_type { 'application/vnd.ms-pki.stl' }
   end
 end
