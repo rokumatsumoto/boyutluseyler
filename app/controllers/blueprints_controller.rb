@@ -2,6 +2,8 @@
 
 class BlueprintsController < ApplicationController
   def create
+    authorize Blueprint
+
     @blueprint = Blueprints::CreateService.new(blueprint_params).execute
 
     if @blueprint.persisted?
