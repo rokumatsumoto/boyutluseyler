@@ -55,9 +55,8 @@
           %li
             %a{ class: 'badge badge-pill badge-primary', href: "/tags/#{t}" }= t
 
-      - if @design.license_type != 'license_none'
-        .license.float-right.mt-3
-          %h6.text-primary Telif Hakkı
-          = render partial: 'designs/shared/license', locals: { license_type: @design.license_type }
+      .license.float-right.mt-3
+        %h6.text-primary= license_title_for(@design)
+        = render partial: 'designs/shared/license', locals: { license_type: @design.license_type }
 
 

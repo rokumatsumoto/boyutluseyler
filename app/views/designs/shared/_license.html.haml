@@ -1,7 +1,11 @@
 - link_title = human_enum_name(Design, :license_types, license_type)
 - locale = I18n.locale
 
-- if license_type == 'cc_by'
+- if license_type == 'license_none'
+  %a{ target: '_blank', rel: 'noopener', href: "https://choosealicense.com/no-permission", title: 'Telif Hakkı' }
+    -# TODO: i18n
+    %i.far.fa-copyright.fa-lg
+- elsif license_type == 'cc_by'
   %a{ target: '_blank', rel: 'noopener', href: "https://creativecommons.org/licenses/by/4.0/deed.#{locale}", title: link_title }
     %i.fab.fa-creative-commons.fa-lg
     %i.fab.fa-creative-commons-by.fa-lg
