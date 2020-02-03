@@ -4,7 +4,6 @@ if Rails.env.development? || Rails.env.test?
     desc 'Sample data for local development environment'
     task :prime do
       Faker::UniqueGenerator.clear
-      Faker::Config.locale = :en
 
       steps = 9
 
@@ -119,8 +118,8 @@ if Rails.env.development? || Rails.env.test?
             "Hız: #{rand(50..150)}mm / s",
             "#{Faker::Construction.heavy_equipment} üzerinde #{Faker::Science.element} ile basılmıştır."
           ].map { |pr| "<p>#{pr}</p>" }.join,
-          model_file_format: i % 5 == 0 ? 'STL ve ZIP' : blueprint_extensions[rand(0..3)],
-          license_type: Design.license_types.keys[rand(0..6)],
+          model_file_format: i % 5 == 0 ? 'STL ve ZIP' : blueprint_extensions.sample,
+          license_type: Design.license_types.keys.sample,
           allow_comments: i % 11 != 0,
           user_id: user_ids[rand(0..user_ids.count - 1)],
           category_id: category_ids[rand(0..category_ids.count - 1)],
