@@ -50,6 +50,7 @@ RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :feature
   config.include AbstractController::Translation
   config.include BackgroundJobs, type: :feature
+  config.include StubSailSettings
 
   config.before(:suite) do
     Timecop.safe_mode = true
