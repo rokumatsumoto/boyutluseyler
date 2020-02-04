@@ -16,7 +16,9 @@ RSpec.describe IllustrationPolicy, type: :policy do
     end
 
     context 'with admin role' do
-      xit { is_expected.to permit_action(:create) }
+      let(:user) { create(:user, :admin) }
+
+      it { is_expected.to permit_action(:create) }
     end
   end
 end

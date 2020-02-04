@@ -28,6 +28,8 @@ RSpec.describe DesignPolicy, type: :policy do
   end
 
   context 'when user is an admin' do
-    xit { is_expected.to permit_actions(%i[show new create edit update destroy download like latest popular]) }
+    let(:user) { create(:user, :admin) }
+
+    it { is_expected.to permit_actions(%i[show new create edit update destroy download like latest popular]) }
   end
 end

@@ -15,7 +15,9 @@ RSpec.describe DirectUploadPolicy, type: :policy do
     end
 
     context 'with admin role' do
-      xit { is_expected.to permit_action(:new) }
+      let(:user) { create(:user, :admin) }
+
+      it { is_expected.to permit_action(:new) }
     end
   end
 end
