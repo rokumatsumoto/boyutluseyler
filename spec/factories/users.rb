@@ -39,6 +39,11 @@ FactoryBot.define do
     avatar_url { 'https://example.com/avatar_medium.png' }
     avatar_thumb_url { 'https://example.com/avatar_thumb.png' }
 
+    # Traits
+    trait :admin do
+      after(:create) { |user| user.add_role(:admin) }
+    end
+
     trait :unconfirmed do
       confirmed_at { nil }
     end
