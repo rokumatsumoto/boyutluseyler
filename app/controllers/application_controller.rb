@@ -25,6 +25,11 @@ class ApplicationController < ActionController::Base
     render json: e.message, status: :unprocessable_entity
   end
 
+  rescue_from ActiveRecord::RecordNotFound do |_exception|
+    # TODO: log exception
+    render_404
+  end
+
   rescue_from Pagy::OverflowError, with: :redirect_to_last_page
 
   def json_request?
