@@ -2,19 +2,19 @@
 
 class UserPolicy < ApplicationPolicy
   def show?
-    current_user? || is_admin? # TODO: rolify
+    current_user? || is_admin?
   end
 
   def edit?
-    current_user? || is_admin? # TODO: rolify
+    current_user? || is_admin?
   end
 
   def update?
-    current_user? || is_admin? # TODO: rolify
+    current_user? || is_admin?
   end
 
   def reset?
-    current_user? || is_admin? # TODO: rolify
+    current_user? || is_admin?
   end
 
   class Scope < Scope

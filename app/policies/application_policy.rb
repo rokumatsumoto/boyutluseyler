@@ -46,9 +46,8 @@ class ApplicationPolicy
   #   admin role on
   # @return [Boolean] Whether the current user has the admin role for the
   #   requested scope
-  def is_admin?(_scope = record) # rubocop:disable Style/PredicateName
-    # user&.has_role?(:admin, scope) # TODO: rolify
-    false
+  def is_admin?(scope = record) # rubocop:disable Style/PredicateName
+    user&.has_role?(:admin, scope)
   end
 
   # Check the record.user association to see if it's owned by the current user.

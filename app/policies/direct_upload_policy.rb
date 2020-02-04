@@ -7,7 +7,7 @@ class DirectUploadPolicy < Struct.new(:user, :direct_upload)
   end
 
   def new?
-    user || is_admin? # TODO: rolify
+    user || is_admin?
   end
 
   private
@@ -16,7 +16,6 @@ class DirectUploadPolicy < Struct.new(:user, :direct_upload)
   #
   # @return [Boolean] Whether the current user has the admin role
   def is_admin? # rubocop:disable Style/PredicateName
-    # user&.has_role?(:admin) # TODO: rolify
-    false
+    user&.has_role?(:admin)
   end
 end

@@ -2,7 +2,7 @@
 
 class BlueprintPolicy < ApplicationPolicy
   def create?
-    user || is_admin? # TODO: rolify
+    user || is_admin?
   end
 
   class Scope < Scope
