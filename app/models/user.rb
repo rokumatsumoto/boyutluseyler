@@ -33,6 +33,7 @@
 
 class User < ApplicationRecord
   include BlocksJsonSerialization
+  rolify
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
@@ -43,6 +44,8 @@ class User < ApplicationRecord
   has_many :designs
   has_many :events, class_name: 'Ahoy::Event', dependent: :destroy
   has_many :identities, dependent: :destroy, autosave: true
+  has_many :users_roles, dependent: :destroy
+  has_many :roles, through: :users_roles
 
   # Virtual attribute for authenticating by either username or email
   attr_accessor :login
