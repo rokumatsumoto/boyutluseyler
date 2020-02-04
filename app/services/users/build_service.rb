@@ -19,7 +19,7 @@ module Users
     private
 
     def can_create_user?
-      current_user.nil? || current_user&.admin?
+      current_user.nil? || current_user.has_role? :admin
     end
 
     def signup_params
