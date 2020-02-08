@@ -27,4 +27,11 @@ module DesignsHelper
 
     Ahoy::Event.cached_any_events_for?(Ahoy::Event::LIKED_DESIGN, current_user, design_id: design_id)
   end
+
+  def license_title_for(design)
+    # TODO: i18n
+    return 'Telif Hakkı' if design.license_type == 'license_none'
+
+    'Lisans'
+  end
 end

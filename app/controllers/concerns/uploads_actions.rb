@@ -2,12 +2,16 @@
 
 module UploadsActions
   def new
+    authorize :direct_upload, :new?
+
     presigned_post = Files::DirectUpload::CreatePresignedPostService
-                     .new(policy, direct_upload_context).execute
+                     .new(direct_upload_policy, direct_upload_context).execute
 
     render json: presigned_post.fields, status: :ok
   rescue Aws::S3::Errors::ServiceError => e
     render json: e.message, status: :internal_server_error
+  rescue Pundit::NotAuthorizedError
+    render json: t('pundit.errors.design.direct_upload'), status: :forbidden
   end
 
   private
@@ -18,12 +22,12 @@ module UploadsActions
     }
   end
 
-  def find_policy
+  def find_upload_policy
     nil
   end
 
-  def policy
-    find_policy
+  def direct_upload_policy
+    @direct_upload_policy ||= find_upload_policy
   end
 
   def upload_params

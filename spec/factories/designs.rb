@@ -23,12 +23,33 @@
 
 FactoryBot.define do
   factory :design do
-    name { 'MyString' }
-    description { 'MyText' }
-    printing_settings { 'MyText' }
-    model_file_format { 'MyString' }
-    category { 1 }
-    license { 1 }
-    activate_comments { false }
+    name { generate(:title) }
+    description { Faker::Hipster.paragraph(sentence_count: 1)[0..100] }
+    license_type { Design.license_types.keys[rand(1..6)] }
+
+    # Transient Attributes
+    transient do
+      illustrations_count { 3 }
+      blueprints_count { 3 }
+    end
+
+    # Associations
+    user
+    category
+
+    # Callbacks
+    before(:create) do |design, evaluator|
+      design.illustrations = create_list(:illustration, evaluator.illustrations_count)
+      design.blueprints = create_list(:blueprint, evaluator.blueprints_count)
+    end
+
+    # Traits
+    trait :no_license do
+      license_type { Design.license_types[:license_none] }
+    end
+
+    trait :comments_disabled do
+      allow_comments { false }
+    end
   end
 end

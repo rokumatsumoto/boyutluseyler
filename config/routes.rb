@@ -55,9 +55,10 @@ Rails.application.routes.draw do
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 
-  mount Sail::Engine => '/sail'
-
-  mount Sidekiq::Web => '/sidekiq'
+  constraints(Boyutluseyler::AdminConstraint) do
+    mount Sail::Engine => '/sail'
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   # this should be last route
   # TODO: redirect 404 page (customize 404 page)

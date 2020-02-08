@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
 class DesignsController < ApplicationController
-  include Boyutluseyler::Utils::StrongMemoize
   include AhoyActions
 
   before_action :authenticate_user!, except: %i[show latest popular]
   before_action :design, only: %i[show edit update destroy download like]
 
   def new
+    authorize Design
+
     @design = Design.new
     @illustrations = {}
     @blueprints = {}
@@ -29,6 +30,8 @@ class DesignsController < ApplicationController
   end
 
   def create
+    authorize Design
+
     @design = Designs::CreateService.new(nil, current_user, design_params).execute
 
     if @design.persisted?
@@ -56,7 +59,7 @@ class DesignsController < ApplicationController
     end
   end
 
-  # TODO: soft deletion
+  # TODO: soft delete by request via form + slack integration
   def destroy
     design.destroy
 
@@ -78,10 +81,14 @@ class DesignsController < ApplicationController
   end
 
   def latest
+    authorize Design
+
     @pagy, @designs = pagy(DesignsFinder.new(design_list_params).execute)
   end
 
   def popular
+    authorize Design
+
     params[:popularity] = true
     @pagy, @designs = pagy(DesignsFinder.new(design_list_params).execute)
   end
@@ -119,7 +126,8 @@ class DesignsController < ApplicationController
   end
 
   def design
-    strong_memoize(:design) { Design.friendly.find(params[:id]) }
+    @design ||= Design.friendly.find(params[:id])
+    authorize @design
   end
 
   def design_params

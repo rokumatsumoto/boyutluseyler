@@ -26,6 +26,7 @@ class ProfilesController < ApplicationController
 
   def user
     @user = current_user
+    authorize @user
   end
 
   def user_params

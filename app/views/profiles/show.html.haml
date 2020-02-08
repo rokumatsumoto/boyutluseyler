@@ -15,10 +15,13 @@
       html: { method: :put }) do |f|
         -# TODO: i18n
         %h6.heading-small.text-muted.mb-4 Profil Resmi
-        .js-avatar-uploader{ data: { behavior: 'vue' } }
-          %avatar-uploader{ 'input-name' => 'user[avatar_url]', 'src' => @user.avatar_url,
-            'direct-url' => Boyutluseyler.config[:direct_upload_endpoint],
-            'uploader-url' => '/uploads/new?policy_name=user_avatar' }
+        - if policy(:direct_upload).new?
+          .js-avatar-uploader{ data: { behavior: 'vue' } }
+            %avatar-uploader{ 'input-name' => 'user[avatar_url]', 'src' => @user.avatar_url,
+              'direct-url' => Boyutluseyler.config[:direct_upload_endpoint],
+              'uploader-url' => '/uploads/new?policy_name=user_avatar' }
+        - else
+          %p.description.font-weight-400.mt-3= t('pundit.errors.design.direct_upload')
         %hr.my-4
         %h6.heading-small.text-muted.mb-4 Kullanıcı Bilgisi
         .row

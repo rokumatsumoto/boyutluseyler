@@ -28,6 +28,9 @@ class Design < ApplicationRecord
   include Taggable
   include Sortable
 
+  friendly_id :name, use: %i[slugged history]
+  resourcify
+
   HOURLY_DOWNLOAD_CALCULATE_INTERVAL = 1.hour
   MOST_DOWNLOADED_LIMIT = 8
   POPULAR_LIMIT = 12
@@ -54,8 +57,6 @@ class Design < ApplicationRecord
   validates :category_id, presence: true
   validates :design_illustrations, presence: true
   validates :design_blueprints, presence: true
-
-  friendly_id :name, use: %i[slugged history]
 
   scope :with_tags, -> { includes(:taggings, :tags) }
   scope :home_popular, -> { order(popularity_score: :desc).limit(POPULAR_LIMIT) }

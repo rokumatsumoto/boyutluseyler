@@ -16,9 +16,9 @@
 class Category < ApplicationRecord
   extend FriendlyId
 
-  has_many :designs
-
   friendly_id :name, use: %i[slugged history]
+
+  has_many :designs
 
   def should_generate_new_friendly_id?
     name_changed?

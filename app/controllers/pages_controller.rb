@@ -5,6 +5,10 @@ class PagesController < ApplicationController
   include DesignsHelper
 
   def home
+    skip_authorization
+
+    # TODO: refactor action
+
     @random_categories = fetch_random_categories
 
     @most_downloaded = fetch_most_downloaded

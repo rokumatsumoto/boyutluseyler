@@ -16,11 +16,12 @@
 
 FactoryBot.define do
   factory :illustration do
-    filename { 'MyString' }
-    size { 1 }
-    url { 'MyString' }
-    url_path { 'MyString' }
-    content_type { 'MyString' }
-    thumb_url { 'MyString' }
+    url { 'https://example.com/illustration.jpg' }
+    url_path { 'illustration.jpg' }
+    size { 35_029 }
+    content_type { 'image/jpeg' }
+    large_url { 'https://example.com/illustration_large.jpg' }
+    medium_url { 'https://example.com/illustration_medium.jpg' }
+    thumb_url { 'https://example.com/illustration_thumb.jpg' }
   end
 end

@@ -14,8 +14,10 @@ module FileValidations
 
   class_methods do
     def content_length_range
-      Range.new(Sail.get('direct_upload_content_length_range_min'),
-                Sail.get('direct_upload_content_length_range_max'))
+      # Default values needed for testing factories in rails console
+      # For test env use this `stub_sail_direct_upload_settings` method
+      Range.new((Sail.get('direct_upload_content_length_range_min') || 1),
+                (Sail.get('direct_upload_content_length_range_max') || 104_857_600))
     end
   end
 
