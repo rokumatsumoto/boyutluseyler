@@ -1,76 +1,78 @@
 - content_for :head do
   %meta{ content: 'no-cache', name: 'turbolinks-cache-control' }/
   = javascript_pack_tag 'session/create'
-= render hero('default_dark_blue', 'default_dark_blue') do
-  .container.pt-lg-md
-    .row.justify-content-center
-      .col-lg-5
-        .card.bg-secondary.shadow.border-0
-          .card-header.bg-white.pb-5
-            .text-muted.text-center.mb-3
-              %small Giriş yap
-            - if devise_mapping.omniauthable?
-              = render 'devise/shared/omniauth_box'
-          .card-body.px-lg-5.py-lg-5
-            .text-center.text-muted.mb-4
-              %small Veya e-posta adresinle kaydol
-              -# TODO: i18n
-            = simple_form_for(resource, validate: true, as: resource_name,
-            url: registration_path(resource_name)) do |f|
-              .username{ data: { behavior: 'vue' } }
+%main.page
+  %section.section.section-shaped
+    .shape.shape-style-1.bg-gradient-default
+    .container.pt-lg-md
+      .row.justify-content-center
+        .col-lg-5
+          .card.bg-secondary.shadow.border-0
+            .card-header.bg-white.pb-5
+              .text-muted.text-center.mb-3
+                %small Giriş yap
+              - if devise_mapping.omniauthable?
+                = render 'devise/shared/omniauth_box'
+            .card-body.px-lg-5.py-lg-5
+              .text-center.text-muted.mb-4
+                %small Veya e-posta adresinle kaydol
+                -# TODO: i18n
+              = simple_form_for(resource, validate: true, as: resource_name,
+              url: registration_path(resource_name)) do |f|
+                .username{ data: { behavior: 'vue' } }
+                  .form-group
+                    .input-group.input-group-alternative.mb-3
+                      .input-group-prepend
+                        %span.input-group-text
+                          %i.ni.ni-single-02
+                      = f.input_field :username, required: true, validate: true,
+                      class: 'form-control', autocomplete: 'username'
+                      .validation-error.hide= t('activerecord.errors.models.user.attributes.username.taken')
+                      .validation-success.hide= t('activerecord.errors.models.user.attributes.username.available')
+                      .validation-pending.hide= t('activerecord.errors.models.user.attributes.username.checking_availability')
                 .form-group
                   .input-group.input-group-alternative.mb-3
                     .input-group-prepend
                       %span.input-group-text
-                        %i.ni.ni-single-02
-                    = f.input_field :username, required: true, validate: true,
-                    class: 'form-control', autocomplete: 'username'
-                    .validation-error.hide= t('activerecord.errors.models.user.attributes.username.taken')
-                    .validation-success.hide= t('activerecord.errors.models.user.attributes.username.available')
-                    .validation-pending.hide= t('activerecord.errors.models.user.attributes.username.checking_availability')
-              .form-group
-                .input-group.input-group-alternative.mb-3
-                  .input-group-prepend
-                    %span.input-group-text
-                      %i.ni.ni-email-83
-                  -# https://github.com/twbs/bootstrap/issues/23454
-                  -# https://github.com/DavyJonesLocker/client_side_validations/issues/762
-                  = f.input_field :email, required: true, validate: true,
-                  class: "form-control #{resource.errors[:email].present? ? 'is-invalid': ''}", autocomplete: 'email'
-                  - if resource.errors[:email].present?
-                    .invalid-feedback= resource.errors[:email].first
+                        %i.ni.ni-email-83
+                    -# https://github.com/twbs/bootstrap/issues/23454
+                    -# https://github.com/DavyJonesLocker/client_side_validations/issues/762
+                    = f.input_field :email, required: true, validate: true,
+                    class: "form-control #{resource.errors[:email].present? ? 'is-invalid': ''}", autocomplete: 'email'
+                    - if resource.errors[:email].present?
+                      .invalid-feedback= resource.errors[:email].first
 
-              .form-group
-                .input-group.input-group-alternative
-                  .input-group-prepend
-                    %span.input-group-text
-                      %i.ni.ni-lock-circle-open
-                  -# https://github.com/plataformatec/devise/wiki/Disable-password-confirmation-during-registration
-                  -# https://stackoverflow.com/a/6040520/2015025
-                  -# https://github.com/plataformatec/devise/blob/master/lib/devise/models/validatable.rb
-                  = f.input_field :password, required: true, class: 'form-control',
-                  validate: { presence: true, length: true, confirmation: false },
-                  autocomplete: 'new-password',
-                  hint: (t('devise.shared.minimum_password_length',
-                  count: @minimum_password_length) if @minimum_password_length)
-              .form-group
-                .input-group
-                  = recaptcha_tags hl: 'tr'
-              -# .row.my-4
-              -#   .col-12
-              -#     .custom-control.custom-control-alternative.custom-checkbox
-              -#       %input#customCheckRegister.custom-control-input{:type => "checkbox"}/
-              -#       %label.custom-control-label{:for => "customCheckRegister"}
-              -#         %span
-              -#           I agree with the
-              -#           %a{:href => "#"} Privacy Policy
-              -# TODO: terms of use
-              .text-center
-                = f.button :submit, t('devise.registrations.new.sign_up'), class: 'btn btn-primary mt-4', id: 'btn_sign_up'
-        .row.mt-3
-          .col.text-right
-            -# TODO: i18n
-            -# Already have an account? Login
-            %small.text-light Hesabın var mı?
-            = link_to new_session_path(resource_name), class: 'text-white' do
-              %small= t('devise.sessions.new.sign_in_link')
+                .form-group
+                  .input-group.input-group-alternative
+                    .input-group-prepend
+                      %span.input-group-text
+                        %i.ni.ni-lock-circle-open
+                    -# https://github.com/plataformatec/devise/wiki/Disable-password-confirmation-during-registration
+                    -# https://stackoverflow.com/a/6040520/2015025
+                    -# https://github.com/plataformatec/devise/blob/master/lib/devise/models/validatable.rb
+                    = f.input_field :password, required: true, class: 'form-control',
+                    validate: { presence: true, length: true, confirmation: false },
+                    autocomplete: 'new-password',
+                    hint: (t('devise.shared.minimum_password_length',
+                    count: @minimum_password_length) if @minimum_password_length)
+                .form-group
+                  .input-group
+                    = recaptcha_tags hl: 'tr'
+                -# .row.my-4
+                -#   .col-12
+                -#     .custom-control.custom-control-alternative.custom-checkbox
+                -#       %input#customCheckRegister.custom-control-input{:type => "checkbox"}/
+                -#       %label.custom-control-label{:for => "customCheckRegister"}
+                -#         %span
+                -#           I agree with the
+                -#           %a{:href => "#"} Privacy Policy
+                -# TODO: terms of use
+                .text-center
+                  = f.button :submit, t('devise.registrations.new.sign_up'), class: 'btn btn-primary mt-4', id: 'btn_sign_up'
+          .row.mt-3
+            .col.text-right
+              -# TODO: i18n
+              -# Already have an account? Login
+              %small.text-light Hesabın var mı?
+              = link_to new_session_path(resource_name), class: 'text-white' do
+                %small= t('devise.sessions.new.sign_in_link')

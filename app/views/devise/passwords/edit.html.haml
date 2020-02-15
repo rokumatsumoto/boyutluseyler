@@ -1,30 +1,32 @@
-= render hero('default_dark_blue', 'default_dark_blue') do
-  .container.pt-lg-md.pb-5
-    .row.justify-content-center
-      .col-lg-6.col-md-8
-        .card.bg-secondary.border-0
-          .card-body.p-lg-5
-            = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }, validate: true) do |f|
-              %h5.mb-4= t('devise.passwords.edit.change_password')
-              = f.input :reset_password_token, as: :hidden, error: false
-              = f.full_error :reset_password_token
-              .form-group
-                .input-group.input-group-alternative
-                  .input-group-prepend
-                    %span.input-group-text
-                      %i.fas.fa-key
-                  = f.input_field :password, required: true, autofocus: true, autocomplete: 'new-password', class: 'form-control', validate: true, placeholder: t('devise.passwords.edit.new_password')
-              .form-group
-                .input-group.input-group-alternative
-                  .input-group-prepend
-                    %span.input-group-text
-                      %i.fas.fa-key
-                  = f.input_field :password_confirmation, required: true,
-                  class: 'form-control', placeholder: t('devise.passwords.edit.re_enter_new_password')
-              .text-center
-                = f.button :submit, t('devise.passwords.edit.change_password'), id: 'btn_reset_password', class: 'btn btn-primary mt-4'
-              .text-center.text-sm.mt-3
-                = link_to t('devise.sessions.new.sign_in_link'), new_session_path(resource_name)
-                veya
-                -# TODO: i18n
-                = link_to t('devise.registrations.new.sign_up'), new_registration_path(resource_name)
+%main.page
+  %section.section.section-shaped
+    .shape.shape-style-1.bg-gradient-default
+    .container.pt-lg-md.pb-5
+      .row.justify-content-center
+        .col-lg-6.col-md-8
+          .card.bg-secondary.border-0
+            .card-body.p-lg-5
+              = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }, validate: true) do |f|
+                %h5.mb-4= t('devise.passwords.edit.change_password')
+                = f.input :reset_password_token, as: :hidden, error: false
+                = f.full_error :reset_password_token
+                .form-group
+                  .input-group.input-group-alternative
+                    .input-group-prepend
+                      %span.input-group-text
+                        %i.fas.fa-key
+                    = f.input_field :password, required: true, autofocus: true, autocomplete: 'new-password', class: 'form-control', validate: true, placeholder: t('devise.passwords.edit.new_password')
+                .form-group
+                  .input-group.input-group-alternative
+                    .input-group-prepend
+                      %span.input-group-text
+                        %i.fas.fa-key
+                    = f.input_field :password_confirmation, required: true,
+                    class: 'form-control', placeholder: t('devise.passwords.edit.re_enter_new_password')
+                .text-center
+                  = f.button :submit, t('devise.passwords.edit.change_password'), id: 'btn_reset_password', class: 'btn btn-primary mt-4'
+                .text-center.text-sm.mt-3
+                  = link_to t('devise.sessions.new.sign_in_link'), new_session_path(resource_name)
+                  veya
+                  -# TODO: i18n
+                  = link_to t('devise.registrations.new.sign_up'), new_registration_path(resource_name)
