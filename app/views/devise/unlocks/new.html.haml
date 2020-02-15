@@ -1,26 +1,28 @@
-= render hero('default_dark_blue', 'default_dark_blue') do
-  .container.pt-lg-md.pb-5
-    .row.justify-content-center
-      .col-lg-6.col-md-8
-        .card.bg-secondary.border-0
-          .card-body.p-lg-5
-            = simple_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }, validate: true) do |f|
-              %h5.mb-3= t('devise.unlocks.new.didn_t_receive_unlock_email')
-              -# TODO: i18n
-              %p.mt-0
-                %small E-posta adresini gir ve sana hesabını yeniden açabilmen için bir bağlantı gönderelim.
-              .form-group
-                .input-group.input-group-alternative
-                  .input-group-prepend
-                    %span.input-group-text
-                      %i.fas.fa-at
-                  = f.input_field :email, required: true, class: "form-control #{ resource.errors[:email].present? ? 'is-invalid': ''}", autofocus: true, validate: true, autocomplete: 'email', value: params[:user_email]
-                  - if resource.errors[:email].present?
-                    .invalid-feedback= resource.errors[:email].first
-              .text-center
-                = f.button :submit, t('devise.unlocks.new.send_login_link'), class: 'btn btn-primary mt-4', id: 'btn_resend_unlock'
-              .text-center.text-sm.mt-3
-                = link_to t('devise.sessions.new.sign_in_link'), new_session_path(resource_name)
-                veya
+%main.page
+  %section.section.section-shaped
+    .shape.shape-style-1.bg-gradient-default
+    .container.pt-lg-md.pb-5
+      .row.justify-content-center
+        .col-lg-6.col-md-8
+          .card.bg-secondary.border-0
+            .card-body.p-lg-5
+              = simple_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }, validate: true) do |f|
+                %h5.mb-3= t('devise.unlocks.new.didn_t_receive_unlock_email')
                 -# TODO: i18n
-                = link_to t('devise.registrations.new.sign_up'), new_registration_path(resource_name)
+                %p.mt-0
+                  %small E-posta adresini gir ve sana hesabını yeniden açabilmen için bir bağlantı gönderelim.
+                .form-group
+                  .input-group.input-group-alternative
+                    .input-group-prepend
+                      %span.input-group-text
+                        %i.fas.fa-at
+                    = f.input_field :email, required: true, class: "form-control #{ resource.errors[:email].present? ? 'is-invalid': ''}", autofocus: true, validate: true, autocomplete: 'email', value: params[:user_email]
+                    - if resource.errors[:email].present?
+                      .invalid-feedback= resource.errors[:email].first
+                .text-center
+                  = f.button :submit, t('devise.unlocks.new.send_login_link'), class: 'btn btn-primary mt-4', id: 'btn_resend_unlock'
+                .text-center.text-sm.mt-3
+                  = link_to t('devise.sessions.new.sign_in_link'), new_session_path(resource_name)
+                  veya
+                  -# TODO: i18n
+                  = link_to t('devise.registrations.new.sign_up'), new_registration_path(resource_name)
