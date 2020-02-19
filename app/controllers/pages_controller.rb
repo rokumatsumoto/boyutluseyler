@@ -9,8 +9,6 @@ class PagesController < ApplicationController
 
     # TODO: refactor action
 
-    @random_categories = fetch_random_categories
-
     @most_downloaded = fetch_most_downloaded
 
     @popular_designs = fetch_popular_designs
