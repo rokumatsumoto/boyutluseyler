@@ -150,7 +150,7 @@ tr:
       accepted: kabul edilmeli
       blank: Bu alan gereklidir.
       confirmation: "%{attribute} teyidiyle uyuşmuyor"
-      empty: doldurulmalı.
+      empty: Bu alan gereklidir.
       equal_to: tam olarak %{count} olmalı
       even: çift olmalı
       exclusion: kullanılamaz
@@ -166,7 +166,7 @@ tr:
       odd: tek olmalı
       other_than: "%{count} karakterden oluşamaz"
       present: boş bırakılmalı
-      required: doldurulmalı.
+      required: Bu alan gereklidir.
       taken: hali hazırda kullanılmakta
       too_long:
         one: çok uzun (en fazla 1 karakter)

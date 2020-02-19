@@ -149,7 +149,7 @@ en:
       accepted: must be accepted
       blank: This field is required.
       confirmation: doesn't match %{attribute}
-      empty: can't be empty
+      empty: This field is required.
       equal_to: must be equal to %{count}
       even: must be even
       exclusion: is reserved
@@ -165,7 +165,7 @@ en:
       odd: must be odd
       other_than: must be other than %{count}
       present: must be blank
-      required: must exist
+      required: This field is required.
       taken: has already been taken
       too_long:
         one: is too long (maximum is 1 character)
