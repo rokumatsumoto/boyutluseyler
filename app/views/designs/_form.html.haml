@@ -11,7 +11,7 @@
 
         = f.input :printing_settings, input_html: { rows: 5 }
 
-        = f.association :category, collection: Category.order(:list_order), required: true
+        = f.association :category, collection: fetch_categories.map { |c| [c['name'], c['id']] }, required: true
 
         = f.input :tags_as_string
 
