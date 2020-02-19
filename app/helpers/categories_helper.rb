@@ -9,10 +9,6 @@ module CategoriesHelper
     JSON.parse(category_list)
   end
 
-  def fetch_random_categories(count = 4)
-    fetch_categories.shuffle.sample(count)
-  end
-
   def category_list_cache_key
     last_modified = Category.order(:updated_at).last
 
