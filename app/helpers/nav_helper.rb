@@ -13,12 +13,12 @@ module NavHelper
 
   def collect_header_links
     links = if current_user
-              %i[user_dropdown]
+              %i[user_dropdown library]
             else
-              [:sign_in]
+              %i[sign_in]
             end
 
-    links += %i[search upload designs collections]
+    links += %i[search upload explore category groups]
     links
   end
 end
