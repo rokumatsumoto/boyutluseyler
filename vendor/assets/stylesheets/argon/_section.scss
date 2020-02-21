@@ -19,6 +19,11 @@
     padding-bottom: $spacer * 2;
 }
 
+.section-xs {
+    padding-top: $spacer;
+    padding-bottom: $spacer;
+}
+
 // Hero sections
 .section-hero {
     @include media-breakpoint-up(md) {

@@ -1,6 +1,6 @@
 - content_for :head do
   = javascript_pack_tag 'home'
-%main.page
+%main
   %section.section.section-sm
     .container
       = render partial: 'designs/most_downloaded', locals: { most_downloaded: @most_downloaded }

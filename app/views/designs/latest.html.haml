@@ -6,16 +6,18 @@
 - downloads = 'downloads_count'
 - likes = 'likes_count'
 
-.container
-  .grid.grid--full--large
-    .grid-cell
-      %h6.mt-3.text-primary En Yeni 3D Modeller
-    .grid-cell.grid-cell--fit
-      = render partial: 'designs/nav_sort', locals: { url_path: url_path, date: date, downloads: downloads, likes: likes }
-  .designs-group
-    - @designs.each do |d|
-      = render partial: 'designs/box', locals: { design: d }
-  %nav{ 'aria-label' => 'pagination' }
-    %ul.pagination.justify-content-center
-      = pagy_bootstrap_nav_js(@pagy).html_safe
+%main
+  %section.section.section-xs
+    .container
+      .grid.grid--full--large
+        .grid-cell
+          %h6.mt-3.font-weight-600.mb-0 En Yeni 3D Modeller
+        .grid-cell.grid-cell--fit
+          = render partial: 'designs/nav_sort', locals: { url_path: url_path, date: date, downloads: downloads, likes: likes }
+      .designs-group.mb-3
+        - @designs.each do |d|
+          = render partial: 'designs/box', locals: { design: d }
+      %nav{ 'aria-label' => 'pagination' }
+        %ul.pagination.justify-content-center
+          = pagy_bootstrap_nav_js(@pagy).html_safe
 

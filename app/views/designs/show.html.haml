@@ -45,13 +45,13 @@
           .js-page-counters{ data: { behavior: 'vue' } }
             %page-counters.page-counters{ ':views': { count: @page_views_count,  min: 0, textPlural: 'Toplam Görüntülenme', textSingular: 'Toplam Görüntülenme' }.to_json, ':downloads': { count: @design.downloads_count, min: 1, textPlural: 'İndirme', textSingular: 'İndirme' }.to_json, ':likes': { count: @design.likes_count, min: 1, textPlural: 'Beğeni', textSingular: 'Beğeni' }.to_json, locale: I18n.locale }
       %h6.d-inline.text-primary.mt-3 Kategori:
-      .d-inline.rich.content= @design.category.name
+      .d-inline.opacity-8= @design.category.name
       %h6.text-primary.mt-3 3D Model Açıklama
       .rich.content= simple_format(@design.description)
       %h6.text-primary.mt-3 3D Baskı Ayarları
       .rich.content= simple_format(@design.printing_settings)
       %h6.d-inline.text-primary.mt-3 3D Model Formatı:
-      .d-inline.rich.content= @design.model_file_format
+      .d-inline.opacity-8= @design.model_file_format
       %h6.text-primary.mt-3 Etiketler
       %ul.inline-list
         - @design.tag_names.each do |t|

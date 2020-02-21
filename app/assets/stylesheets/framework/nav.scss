@@ -2,6 +2,9 @@ nav.sort {
   margin: .75rem 0;
   display: flex;
   flex-wrap: wrap;
+  font-size: $font-size-sm;
+  font-weight: 600;
+
 
   .sort-text {
     padding: .375rem .75rem .375rem 0;

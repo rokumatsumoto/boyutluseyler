@@ -1,13 +1,7 @@
-%section#most-downloaded.group.mt-3
-  .group-title.group-title-linked
-    %a.mb-3{href: '/designs/latest?direction=desc&sort=downloads_count', title: 'En Çok İndirilenler'}
-      %i.fas.fa-cloud-download-alt
-      %span.ml-2 En Çok İndirilenler
-    %p.group-title-link
-      %a.btn.btn-icon.btn-outline-primary.btn-sm{ title: 'En Çok İndirilenler', href: '/designs/latest?direction=desc&sort=downloads_count' }
-        %span.btn-inner--icon
-          %span Tümü
-          %i.ni.ni-bold-right
+%section#most-downloaded.explore-section
+  %h6.font-weight-600.mb-0 En Çok İndirilenler
   .designs-group
     - @most_downloaded.each do |d|
       = render partial: 'designs/box', locals: { design: d }
+  .explore-section-more
+    %a{ title: 'En Çok İndirilenler', href: '/designs/latest?direction=desc&sort=downloads_count' } Daha fazla
