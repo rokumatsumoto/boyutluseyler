@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: designs
@@ -40,7 +41,7 @@ class Design < ApplicationRecord
   has_many :illustrations, through: :design_illustrations
   has_many :design_blueprints, -> { order(position: :asc) }, inverse_of: 'design'
   has_many :blueprints, through: :design_blueprints
-  has_one :design_downloads, dependent: :destroy
+  has_one :design_download, dependent: :destroy
 
   # OPTIONAL
   # has_many :view_events, -> { where(name: Ahoy::Event::VIEWED_DESIGN) },
