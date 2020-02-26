@@ -28,10 +28,14 @@ module Designs
     end
 
     def in_most_downloaded_cache_list?
+      return false if temp_design.hourly_downloads_count_at.nil?
+
       temp_design.hourly_downloads_count_at >= Time.current - Design::HOURLY_DOWNLOAD_INTERVAL
     end
 
     def in_popular_designs_cache_list?
+      return false if temp_design.home_popular_at.nil?
+
       temp_design.home_popular_at >= Time.current - Design::POPULAR_INTERVAL
     end
 
