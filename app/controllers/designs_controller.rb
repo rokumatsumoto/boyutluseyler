@@ -59,9 +59,8 @@ class DesignsController < ApplicationController
     end
   end
 
-  # TODO: soft delete by request via form + slack integration
   def destroy
-    design.destroy
+    Designs::DestroyService.new(design, current_user).execute
 
     redirect_to root_path
   end

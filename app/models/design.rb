@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: designs
@@ -32,7 +33,8 @@ class Design < ApplicationRecord
   friendly_id :name, use: %i[slugged history]
   resourcify
 
-  HOURLY_DOWNLOAD_CALCULATE_INTERVAL = 1.hour
+  HOURLY_DOWNLOAD_INTERVAL = 1.hour
+  POPULAR_INTERVAL = 1.hour
   MOST_DOWNLOADED_LIMIT = 8
   POPULAR_LIMIT = 12
   POPULARITY_EFFECT = 0.02
@@ -120,7 +122,7 @@ class Design < ApplicationRecord
 
     def most_downloaded
       where('downloads_count > :min_count AND  designs.created_at < :date',
-            min_count: 0, date: Time.current - HOURLY_DOWNLOAD_CALCULATE_INTERVAL)
+            min_count: 0, date: Time.current - HOURLY_DOWNLOAD_INTERVAL)
         .order(hourly_downloads_count: :desc, created_at: :desc)
         .limit(MOST_DOWNLOADED_LIMIT)
     end
@@ -137,6 +139,14 @@ class Design < ApplicationRecord
 
     def popular
       where.not(home_popular_at: nil)
+    end
+
+    def invalidate_most_downloaded_cache
+      Rails.cache.delete('most_downloaded')
+    end
+
+    def invalidate_popular_designs_cache
+      Rails.cache.delete('popular_designs')
     end
   end
 end
