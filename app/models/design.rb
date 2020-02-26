@@ -1,25 +1,27 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: designs
 #
-#  id                     :bigint(8)        not null, primary key
-#  name                   :string(120)      not null
-#  description            :text             not null
-#  printing_settings      :text
-#  model_file_format      :string
-#  license_type           :string           not null
-#  allow_comments         :boolean          default(TRUE), not null
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
-#  user_id                :bigint(8)        not null
-#  category_id            :bigint(8)        not null
-#  slug                   :string
-#  downloads_count        :integer          default(0), not null
-#  hourly_downloads_count :float            default(0.0), not null
-#  popularity_score       :float            default(0.0), not null
-#  home_popular_at        :datetime
-#  likes_count            :integer          default(0), not null
+#  id                        :bigint(8)        not null, primary key
+#  name                      :string(120)      not null
+#  description               :text             not null
+#  printing_settings         :text
+#  model_file_format         :string
+#  license_type              :string           not null
+#  allow_comments            :boolean          default(TRUE), not null
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
+#  user_id                   :bigint(8)        not null
+#  category_id               :bigint(8)        not null
+#  slug                      :string
+#  downloads_count           :integer          default(0), not null
+#  hourly_downloads_count    :float            default(0.0), not null
+#  popularity_score          :float            default(0.0), not null
+#  home_popular_at           :datetime
+#  likes_count               :integer          default(0), not null
+#  hourly_downloads_count_at :datetime
 #
 
 class Design < ApplicationRecord
@@ -31,7 +33,8 @@ class Design < ApplicationRecord
   friendly_id :name, use: %i[slugged history]
   resourcify
 
-  HOURLY_DOWNLOAD_CALCULATE_INTERVAL = 1.hour
+  HOURLY_DOWNLOAD_INTERVAL = 1.hour
+  POPULAR_INTERVAL = 1.hour
   MOST_DOWNLOADED_LIMIT = 8
   POPULAR_LIMIT = 12
   POPULARITY_EFFECT = 0.02
@@ -40,7 +43,7 @@ class Design < ApplicationRecord
   has_many :illustrations, through: :design_illustrations
   has_many :design_blueprints, -> { order(position: :asc) }, inverse_of: 'design'
   has_many :blueprints, through: :design_blueprints
-  has_one :design_downloads, dependent: :destroy
+  has_one :design_download, dependent: :destroy
 
   # OPTIONAL
   # has_many :view_events, -> { where(name: Ahoy::Event::VIEWED_DESIGN) },
@@ -119,7 +122,7 @@ class Design < ApplicationRecord
 
     def most_downloaded
       where('downloads_count > :min_count AND  designs.created_at < :date',
-            min_count: 0, date: Time.current - HOURLY_DOWNLOAD_CALCULATE_INTERVAL)
+            min_count: 0, date: Time.current - HOURLY_DOWNLOAD_INTERVAL)
         .order(hourly_downloads_count: :desc, created_at: :desc)
         .limit(MOST_DOWNLOADED_LIMIT)
     end
@@ -136,6 +139,14 @@ class Design < ApplicationRecord
 
     def popular
       where.not(home_popular_at: nil)
+    end
+
+    def invalidate_most_downloaded_cache
+      Rails.cache.delete('most_downloaded')
+    end
+
+    def invalidate_popular_designs_cache
+      Rails.cache.delete('popular_designs')
     end
   end
 end

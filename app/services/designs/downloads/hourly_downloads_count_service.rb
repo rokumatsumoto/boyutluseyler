@@ -10,6 +10,8 @@ module Designs
 
         design_list.each do |design|
           execute_for_design(design)
+
+          update_hourly_downloads_count_at_for_design(design)
         end
       end
 
@@ -20,6 +22,10 @@ module Designs
       end
 
       private
+
+      def update_hourly_downloads_count_at_for_design(design)
+        design.update(hourly_downloads_count_at: Time.current)
+      end
 
       def calculate_and_save
         design.update(hourly_downloads_count: calculate)
@@ -42,7 +48,7 @@ module Designs
       end
 
       def hourly
-        Design::HOURLY_DOWNLOAD_CALCULATE_INTERVAL
+        Design::HOURLY_DOWNLOAD_INTERVAL
       end
     end
   end
