@@ -40,7 +40,7 @@ module Ahoy
 
     class << self
       def cached_any_events_for?(event_name, user, event_properties)
-        event_fk, event_id = event_properties.first
+        event_id = event_properties.first
 
         cache_name = "any_events_for-#{event_name.parameterize.underscore}-#{event_id}-#{user.updated_at}"
         Rails.cache.fetch(cache_name, expires_in: 1.week) do

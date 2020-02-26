@@ -99,6 +99,6 @@ RSpec.describe 'User edit profile' do
   #     expect(User.exists?(user.id)).to be_falsy
   #   end
   # end
-  # rubocop:enable RSpec/PredicateMatcher
+  
 end
 # rubocop:enable RSpec/DescribeClass
