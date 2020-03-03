@@ -1,12 +1,12 @@
 - content_for :head do
   %meta{ content: 'no-cache', name: 'turbolinks-cache-control' }/
   = javascript_pack_tag 'session/create'
-%main.page
-  %section.section.section-shaped
-    .shape.shape-style-1.bg-gradient-default
-    .container.pt-lg-md
+%main.page.bg-default
+  = render 'devise/shared/separator'
+  %section.section.section-lg.pb-5.mt--300
+    .container
       .row.justify-content-center
-        .col-lg-5
+        .col-lg-6.col-md-8
           .card.bg-secondary.shadow.border-0
             .card-header.bg-white.pb-5
               .text-muted.text-center.mb-3
