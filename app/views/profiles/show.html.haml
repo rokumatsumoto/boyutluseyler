@@ -11,6 +11,8 @@
           -# TODO: i18n
           %h5.text-10625.font-weight-bold.mb-0 Profili Düzenle
     .card-body.pt-2
+      .mt-2
+        = render 'layouts/flash'
       = simple_form_for(@user, validate: true, url: profile_path,
       html: { method: :put }) do |f|
         -# TODO: i18n

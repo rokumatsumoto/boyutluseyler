@@ -16,6 +16,7 @@
               .text-center.text-muted.mb-4
                 %small Veya e-posta adresinle giriş yap
                 -# TODO: i18n (Or sign in with credentials)
+              = render 'layouts/flash'
               = simple_form_for(resource, as: resource_name, html: { id: 'form_sign_in' }, url: session_path(resource_name)) do |f|
                 .form-group.mb-3
                   .input-group.input-group-alternative

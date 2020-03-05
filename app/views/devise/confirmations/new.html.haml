@@ -8,6 +8,7 @@
             .card-body.p-lg-5
               = simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }, validate: true) do |f|
                 %h5.mb-3= t('devise.confirmations.new.didn_t_receive_confirmation_email')
+                = render 'layouts/flash'
                 -# TODO: i18n
                 %p.mt-0
                   %small E-posta adresini gir ve sana hesabını onaylayabilmen için bir bağlantı gönderelim.

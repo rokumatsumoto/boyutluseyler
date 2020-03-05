@@ -3,6 +3,7 @@
 .container.mt-4.mb-4
   = simple_form_for(@design, validate: true) do |f|
     = render 'layouts/errors_inline', object: @design
+    = render 'layouts/flash'
     .twins.row.grid-divider
       .twin.col-md-6
         = f.input :name, required: true, validate: true

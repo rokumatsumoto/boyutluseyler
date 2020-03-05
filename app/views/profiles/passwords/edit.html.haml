@@ -8,6 +8,8 @@
         .col-8
           %h5.text-10625.font-weight-bold.mb-0 Şifreyi Değiştir
     .card-body.pt-2
+      .mt-2
+        = render 'layouts/flash'
       = simple_form_for(@user, validate: true, url: profile_password_path,
       html: { method: :put }) do |f|
         .row.mt-3
