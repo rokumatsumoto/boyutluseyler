@@ -33,8 +33,8 @@ RSpec.describe 'Login' do
     it 'allows basic login' do
       boyutluseyler_sign_in(user)
 
+      expect(page).to have_css('a#user-dropdown')
       expect(page).to have_current_path root_path
-      expect(page).to have_content(t('devise.sessions.signed_in'))
     end
   end
 
