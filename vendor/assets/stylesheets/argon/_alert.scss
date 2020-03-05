@@ -2,9 +2,7 @@
     padding: $alert-padding-y $alert-padding-x;
     border: 0;
     font-size: $font-size-sm;
-    margin-bottom: 0;
-    border-radius: 0;
-    // @include border-radius($alert-border-radius);
+    @include border-radius($alert-border-radius);
 
     .alert-inner--icon {
         font-size: 1.25rem;
