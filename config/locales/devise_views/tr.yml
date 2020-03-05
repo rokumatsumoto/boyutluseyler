@@ -62,7 +62,7 @@ tr:
       send_instructions: Birkaç dakika içinde hesabınızı nasıl onaylayacağınızı anlatan bir e-posta alacaksınız.
       send_paranoid_instructions: Eğer e-posta adresiniz sistemimizde kayıtlı ise, birkaç dakika içinde hesabınızı nasıl onaylayacağınızı anlatan bir e-posta alacaksınız.
     failure:
-      already_authenticated: Zaten giriş yaptınız.
+      already_authenticated: '' # Zaten giriş yaptınız.
       inactive: Hesabınız daha aktifleştirilmemiş.
       invalid: Geçersiz kullanıcı adı veya şifre.
       last_attempt: Hesabınız askıya alınmadan önce son bir deneme hakkınız kaldı.
@@ -151,8 +151,8 @@ tr:
         sign_in_link: Giriş yap
       destroy:
         log_out: Çıkış Yap
-      signed_in: Başarıyla giriş yapıldı.
-      signed_out: Başarıyla çıkış yapıldı.
+      signed_in: '' # Başarıyla giriş yapıldı.
+      signed_out: '' # Başarıyla çıkış yapıldı.
     shared:
       links:
         back: Geri
