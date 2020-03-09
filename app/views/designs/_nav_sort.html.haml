@@ -3,7 +3,7 @@
 - sort_by_download = "#{url_path}?#{d_desc}&sort=#{downloads}"
 - sort_by_like = "#{url_path}?#{d_desc}&sort=#{likes}"
 
-%nav.sort
+%nav.sort.font-roboto
   .sort-text Sırala:
   - active = active_class_for(date)
   - link = toggle_sort_link(sort_by_date, active)
