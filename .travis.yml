@@ -31,13 +31,13 @@ deploy:
   provider: elasticbeanstalk
   edge: true
   access_key_id:
-    secure: $AWS_ACCESS_KEY_ID
+    secure: "$AWS_ACCESS_KEY_ID"
   app: boyutluseyler
   bucket_name: "elasticbeanstalk-eu-central-1-760282670217"
   env: boyutluseyler-stage
   region: eu-central-1
   secret_access_key:
-    secure: $AWS_SECRET_ACCESS_KEY
+    secure: "$AWS_SECRET_ACCESS_KEY"
   on:
     repo: rokumatsumoto/boyutluseyler
     branch: staging
