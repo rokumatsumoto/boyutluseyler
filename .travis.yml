@@ -28,12 +28,13 @@ cache:
     - node_modules
     - $HOME/.nvm
 deploy:
+  provider: elasticbeanstalk
+  edge: true
   access_key_id:
     secure: $AWS_ACCESS_KEY_ID
   app: boyutluseyler
   bucket_name: "elasticbeanstalk-eu-central-1-760282670217"
   env: boyutluseyler-stage
-  provider: elasticbeanstalk
   region: eu-central-1
   secret_access_key:
     secure: $AWS_SECRET_ACCESS_KEY
