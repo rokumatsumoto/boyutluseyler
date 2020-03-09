@@ -1,22 +1,21 @@
----
 addons:
   chrome: stable
   postgresql: 9.6
 after_deploy:
-  - "echo \"done deploying\""
+- echo "done deploying"
 before_install:
-  - "nvm install 12.13.1"
-  - "node --version"
-  - "curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.19.2"
-  - "export PATH=$HOME/.yarn/bin:$PATH"
-  - "yarn --version"
-  - "sudo locale-gen tr_TR.UTF-8"
-  - "sudo /etc/init.d/postgresql stop"
-  - "sudo /etc/init.d/postgresql start 9.6"
-  - "gem update --system 3.0.6"
-  - "gem install bundler -v 1.17.3"
+- nvm install 12.13.1
+- node --version
+- curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.19.2
+- export PATH=$HOME/.yarn/bin:$PATH
+- yarn --version
+- sudo locale-gen tr_TR.UTF-8
+- sudo /etc/init.d/postgresql stop
+- sudo /etc/init.d/postgresql start 9.6
+- gem update --system 3.0.6
+- gem install bundler -v 1.17.3
 before_script:
-  - "bundle exec rake db:create"
+- bundle exec rake db:create
 branches:
   only:
   - master
@@ -24,36 +23,37 @@ branches:
 cache:
   yarn: true
   directories:
-    - vendor/bundle
-    - node_modules
-    - $HOME/.nvm
+  - vendor/bundle
+  - node_modules
+  - "$HOME/.nvm"
 deploy:
-  access_key_id:
-    secure: $AWS_ACCESS_KEY_ID
-  app: boyutluseyler
-  bucket_name: "elasticbeanstalk-eu-central-1-760282670217"
-  env: boyutluseyler-stage
   provider: elasticbeanstalk
+  edge: true
+  access_key_id:
+    secure: SdvpxMZ7XIofI5xALMu/i4bgN3s08QXTWB3z+ey1X7pao+8qXboNclxl/mp7h5lsMY2AjfEUP1Ze2SYD+vwJSkS8mOOrJCVbbcg/+xodl+BaTrslzS1kpC8qhwIlThKpvw5XUW2/VZLGT+afxUpn8p6fP0kH7hBDeoMT8jCgD7OlOm/BztSp1K3nMx7NC8wtsj9N3PEOPJXFMzciiN7N+ALfh9URtdrk3d0GCTRmlXDfLeHjJrOSXO+cQRGcD/jOtoCkUrYQRdkfecp+151qGN3jhDr6L2cd9ZgbhCVEXJRspaRP3OzxibaBn2OvinLs0viTACvh/uUAKbV97pZjU0FlF1WGH3Cg4WmhEQIMSk8twzuSkngN8ZZLwfaMo4WuGiOs9JVw/YxvbunZQh0GlPoIV2+4eRq3wtkPVDdKeox2c8++T8BEpTdpGYHDXnCwL1nPeLHf4QguiddVtH+YL0QAKASN0Q93D0J7Zv5pBj0zloQEqRy2cfKdW/zNGH+81XB/XGiFjxqAYPg7wIsteshnJGk5IDM6vFo+6jc0RU0LZjoLlNSHgONs25P+fgiT77F6unSy3wY9usg/0wW2RFNIIzo1NYphzEjoDYdb3LKA9APW3CqeTPq/aVfL5cw5cQSqDuF+MMi3HrQHQEWUrEkcsiH0mczKD+vpZlDTBUQ=
+  app: boyutluseyler
+  bucket_name: elasticbeanstalk-eu-central-1-760282670217
+  env: boyutluseyler-stage
   region: eu-central-1
   secret_access_key:
-    secure: $AWS_SECRET_ACCESS_KEY
+    secure: jGGyBrU4ygRDK5mt5kYPHDl82OLOAC6PEX1GYQhdvSpe4SAvaKs5rquFrJaCiYQgA0Bo2devQ4C7C4XO/p18+aVM2DkqLgETYeVWpvJge3DIq1JzUsasQVvQrGgWc29qBSkyV6yqjtdv/e2rXWGHc/F3/GQAweBaUEM3VMgBiiljnOd0ik/YFjljK76LA1AFI2dcBUseO8sFFHSZOzcmLtu5pR9Oe0FCLfehXQrDP6R1DxRcPbtmksptU9YxQ5/9uOTS3+2Hl6GtnN53AoCK6IEVoQNTfk60RJpS9qzVThQzgc5M77xoUq3D1Q8gW0aaYOzdQMoteYcJQ/2EIQv2RL//QDzrl5H7WGQCC+c8Ugj818fqvV8Eq5pjjS2E+E4GTTApRksbcFzSAvC5qBHltp8MrAZ/2NF3MWrzOwmGzOyjZoqQAd23rZFc82tCXciuVpqY8njensH40E5GKdelAy3JRjlkY703vCxwGHh22bwsOU361gigr2jfXDBxei4h/Sr1XI7IZLZMnJSYI8XVNEr9FbROx1FDRhPHHFBywpgJ2I2wevN5Oszlp43tkDo4lZirPpP3fPjB3q8oAwJTSrKCgwd4ME9eSZkbSLpB5C5QJmFAc7DBHeEq/oMAbebuB6s18ztC5sgS40d9iD8uz9BCjhJ7hzQ0qKLZv/dSnaA=
   on:
     repo: rokumatsumoto/boyutluseyler
     branch: staging
 dist: xenial
 env:
   global:
-    - CI=true
-    - RAILS_ENV=test
-    - SIMPLECOV=true
-    - secure: "HE2LRbbYPXO1QHjgrKy7BYMIg8tFDjuZ4RUI0peKlUp/SQc6ibxiXNxCcMoIUl210VckLvpWXZgQYfuMwDsyafO4DWrn10opjsEfMSoQL73JV4VCpg3q/xtLzgBw3iCfz9Zu0U4J2maiSDcLPSzXQawfG10qzjDumf2q7h0+FWjTrVDs1JF0e6n/X1P/vLzsA0sVQFGfANWD9BrMnC9X3r2J0yFnuQu+rHkrfxeAGfUudH2tX5JJSL5DzWhXHP6ZI6zQOLy3QP17ZUvxClCsBqhVrO7Bj0EoJ4UGTqOeI+cZj9PfTTLnu9LCF1EPpayuRtkg7wuMguEEujcs1DIZ3skIUnEv2iHVczjKCzuAxMyqDbZCA++G7muKLFw9EbvD6zpnp9yuibGpaQL3NBUbg39wiUOq6S2y+EdMw+3oAiI1Z2rCgwZdzhGWboK2Hvm19OobuS6kk9r8RTIica5GwQRVyTdxJ0oo1DYLclEmGNWfqyPTbnH9vX8zBbe/YMIQg+hwnzNNfHlSpSDmuW04V8h4zJFEgOU5JOM96U7VvROg2nSDwzSxTQ091YFh54fAWtGxEBmFXR/kXBJA5ygz5xX8ZOFAZ0HMNgciW69K/CCqeYuiN3B4jD9ONOoyUm9IsR3mYZ9MM+izFzxAZINvFJX79RdtWWO4r1EHJwrbc44="
-# https://github.com/travis-ci/travis-ci/issues/8051#issuecomment-335517982
+  - CI=true
+  - RAILS_ENV=test
+  - SIMPLECOV=true
+  - secure: HE2LRbbYPXO1QHjgrKy7BYMIg8tFDjuZ4RUI0peKlUp/SQc6ibxiXNxCcMoIUl210VckLvpWXZgQYfuMwDsyafO4DWrn10opjsEfMSoQL73JV4VCpg3q/xtLzgBw3iCfz9Zu0U4J2maiSDcLPSzXQawfG10qzjDumf2q7h0+FWjTrVDs1JF0e6n/X1P/vLzsA0sVQFGfANWD9BrMnC9X3r2J0yFnuQu+rHkrfxeAGfUudH2tX5JJSL5DzWhXHP6ZI6zQOLy3QP17ZUvxClCsBqhVrO7Bj0EoJ4UGTqOeI+cZj9PfTTLnu9LCF1EPpayuRtkg7wuMguEEujcs1DIZ3skIUnEv2iHVczjKCzuAxMyqDbZCA++G7muKLFw9EbvD6zpnp9yuibGpaQL3NBUbg39wiUOq6S2y+EdMw+3oAiI1Z2rCgwZdzhGWboK2Hvm19OobuS6kk9r8RTIica5GwQRVyTdxJ0oo1DYLclEmGNWfqyPTbnH9vX8zBbe/YMIQg+hwnzNNfHlSpSDmuW04V8h4zJFEgOU5JOM96U7VvROg2nSDwzSxTQ091YFh54fAWtGxEBmFXR/kXBJA5ygz5xX8ZOFAZ0HMNgciW69K/CCqeYuiN3B4jD9ONOoyUm9IsR3mYZ9MM+izFzxAZINvFJX79RdtWWO4r1EHJwrbc44=
 if: tag IS blank
 install:
-  - "bundle install --path vendor/bundle"
-  - "yarn"
-  - "curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter"
-  - "chmod +x ./cc-test-reporter"
+- bundle install --path vendor/bundle
+- yarn
+- curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
+  > ./cc-test-reporter
+- chmod +x ./cc-test-reporter
 language: ruby
 notifications:
   email: false
@@ -63,22 +63,22 @@ notifications:
     rooms:
       secure: OfIFa1u7oAsBLrtlNVa8UTnNUmzG/xO627Zcs7+gV8mZcyoP5pue83GNlZ9qAxGBEA1LOeFo7PkmguDYohe1mbhYbWrNGOUSaekF/6H5NV7lruY7NWdcIfE/5qsgIdDq8wwBKUaoMRcD6EQxodTkpMfK1J69QRfIM1WAN6KASZIMcsspcF/rXUPT4+lAboS5sdfcQsbVd0wvYC8ZnK7r88zHPeJ+bYZl95Yf6uQ/vr080P+fXtK5rUhjCWyI813c++Te75O+Ac/GD8uBlq9qiCOGKSX/mkqexTUbpOXySmj5IoBruNuRjcA8QK+VtjcvJs1iXMXPmPY338mFiFmwvJlpsKQr/VCr0dLW9sCFh/YIBDJooIdBVbiN2+t3VXnzyEXFR4WrAcr//kob3/F6v2ZsN1LBWh9uuXwxc3flJuGIdDYpZwWYwTYNv6z4eYF54ASA9EgpCyUjSRq8pzpO9ZonUcgV0q9R1wn5tWsHUO2LzmmjmQ3nXld9T7DoazKJU+WHTx8zmo653mXo/in/PBWTbo0g+5hfihVWKbHI3ZxpKiUD+nHigvbzlFgWEui75d++7BgmYOYJtXIzykdx1U+H8KPyES2XCKSL2NTPdjsXqfAMYjO6qQn23e9lmFzbaxLxYKZlkQfxgHTCwVSxYY7DltBzZvJTYZXHlxPJHuo=
     template:
-      - "Repo `%{repository_slug}` *%{result}* build (<%{build_url}|#%{build_number}>) for commit (<%{compare_url}|%{commit}>) on branch `%{branch}`."
-      - "Execution time: *%{duration}*"
-      - "Message: %{message}"
+    - Repo `%{repository_slug}` *%{result}* build (<%{build_url}|#%{build_number}>)
+      for commit (<%{compare_url}|%{commit}>) on branch `%{branch}`.
+    - 'Execution time: *%{duration}*'
+    - 'Message: %{message}'
 rvm:
-  - "2.5.5"
+- 2.5.5
 script:
-  - "bundle exec rails webpacker:compile"
-  - "bundle exec rake db:schema:load"
-  - "./cc-test-reporter before-build"
-  - "bundle exec rspec spec"
-  - "./cc-test-reporter format-coverage -t simplecov -o coverage/codeclimate.simplecov.json"
-  - "./cc-test-reporter sum-coverage coverage/codeclimate.*.json"
-  - "./cc-test-reporter upload-coverage"
-  # TODO: remove CVE-2015-9284 once https://github.com/omniauth/omniauth/pull/809 is resolved
-  - "bundle exec bundle-audit check --update --ignore CVE-2019-16782 CVE-2015-9284"
+- bundle exec rails webpacker:compile
+- bundle exec rake db:schema:load
+- "./cc-test-reporter before-build"
+- bundle exec rspec spec
+- "./cc-test-reporter format-coverage -t simplecov -o coverage/codeclimate.simplecov.json"
+- "./cc-test-reporter sum-coverage coverage/codeclimate.*.json"
+- "./cc-test-reporter upload-coverage"
+- bundle exec bundle-audit check --update --ignore CVE-2019-16782 CVE-2015-9284
 after_script:
-  - "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT"
+- "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT"
 services:
-  - postgresql
+- postgresql
