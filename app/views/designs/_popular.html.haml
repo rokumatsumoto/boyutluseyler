@@ -1,13 +1,7 @@
-%section#popular-designs.group.mt-3
-  .group-title.group-title-linked
-    %a.mb-3{href: '/designs/popular?direction=desc&sort=home_popular_at', title: 'Popüler Tasarımlar'}
-      %i.fas.fa-heart
-      %span.ml-2 Popüler Tasarımlar
-    %p.group-title-link
-      %a.btn.btn-icon.btn-outline-primary.btn-sm{ title: 'Popüler Tasarımlar', href: '/designs/popular?direction=desc&sort=home_popular_at' }
-        %span.btn-inner--icon
-          %span Tümü
-          %i.ni.ni-bold-right
+%section#popular-designs.explore-section.mt-5
+  %h6.font-roboto.font-weight-700.mb-0 Popüler Tasarımlar
   .designs-group
     - @popular_designs.each do |d|
       = render partial: 'designs/box', locals: { design: d }
+  .explore-section-more
+    %a{ title: 'Popüler Tasarımlar', href: '/designs/popular?direction=desc&sort=home_popular_at' } Daha fazla

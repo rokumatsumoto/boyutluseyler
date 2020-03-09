@@ -21,11 +21,12 @@
 // Image cropper
 @import 'cropperjs/dist/cropper';
 
-// Open Sans Fonts
+// Open Sans and Roboto Fonts
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap');
 
 // boyutluseyler UI framework
 @import 'framework';
 
-// Page specific styles (login, upload etc):
+// Page specific styles
 @import "pages/**/*";

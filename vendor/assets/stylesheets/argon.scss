@@ -64,38 +64,38 @@
 
 // argon components
 
-@import "argon/reboot.scss";
-@import "argon/global.scss";
-@import "argon/utilities.scss";
+@import "argon/reboot";
+@import "argon/global";
+@import "argon/utilities";
 
-@import "argon/accordion.scss";
-@import "argon/alert.scss";
-@import "argon/avatar.scss";
-@import "argon/badge.scss";
-@import "argon/buttons.scss";
-@import "argon/card.scss";
-@import "argon/carousel.scss";
-@import "argon/close.scss";
-@import "argon/custom-forms.scss";
-@import "argon/dropdown.scss";
-@import "argon/footer.scss";
-@import "argon/forms.scss";
-@import "argon/grid.scss";
-@import "argon/icons.scss";
-@import "argon/input-group.scss";
-@import "argon/list-group.scss";
-@import "argon/modal.scss";
-@import "argon/nav.scss";
-@import "argon/navbar.scss";
-@import "argon/pagination.scss";
-@import "argon/popover.scss";
-@import "argon/progress.scss";
-@import "argon/section.scss";
-@import "argon/separator.scss";
-@import "argon/type.scss";
+@import "argon/accordion";
+@import "argon/alert";
+@import "argon/avatar";
+@import "argon/badge";
+@import "argon/buttons";
+@import "argon/card";
+@import "argon/carousel";
+@import "argon/close";
+@import "argon/custom-forms";
+@import "argon/dropdown";
+@import "argon/footer";
+@import "argon/forms";
+@import "argon/grid";
+@import "argon/icons";
+@import "argon/input-group";
+@import "argon/list-group";
+@import "argon/modal";
+@import "argon/nav";
+@import "argon/navbar";
+@import "argon/pagination";
+@import "argon/popover";
+@import "argon/progress";
+@import "argon/section";
+@import "argon/separator";
+@import "argon/type";
 
 // Vendor
 
-// @import "argon/vendor/bootstrap/scss-datepicker.scss";
-@import "argon/vendor/headroom.scss"; // TODO: use with yarn package
-// @import "argon/vendor/nouislider.scss";
+// @import "argon/vendor/bootstrap/scss-datepicker";
+@import "argon/vendor/headroom";
+// @import "argon/vendor/nouislider";

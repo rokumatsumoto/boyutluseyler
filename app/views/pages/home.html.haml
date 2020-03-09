@@ -1,10 +1,9 @@
 - content_for :head do
   = javascript_pack_tag 'home'
+%main
+  %section.section.section-sm
+    .container
+      = render 'layouts/flash'
+      = render partial: 'designs/most_downloaded', locals: { most_downloaded: @most_downloaded }
 
-- add_header_links([:sign_in], %i[upload])
-= render hero('anonymous', 'logged_in')
-
-.container
-  = render partial: 'designs/most_downloaded', locals: { most_downloaded: @most_downloaded }
-
-  = render partial: 'designs/popular', locals: { popular: @popular_designs }
+      = render partial: 'designs/popular', locals: { popular: @popular_designs }

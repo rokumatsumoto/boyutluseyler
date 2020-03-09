@@ -1,9 +1,7 @@
 - flash.each do |key, value|
   -# Don't show a flash message if the message is nil
-  - if value
-    %div{ class: "alert alert-#{key} alert-dismissible fade show",
+  - if value.present?
+    %div{ class: "alert alert-#{key} alert-dismissible fade show ",
     role: 'alert' }
       - if value.is_a?(String)
         %span.alert-inner--text= sanitize(value)
-      %button.close{ 'aria-label': 'Kapat', 'data-dismiss': 'alert', type: 'button' }
-        %span{ 'aria-hidden': 'true' } &times;

@@ -3,14 +3,10 @@
 module CategoriesHelper
   def fetch_categories
     category_list = Rails.cache.fetch(category_list_cache_key) do
-      Category.all.to_json
+      Category.order(:list_order).to_json
     end
 
     JSON.parse(category_list)
-  end
-
-  def fetch_random_categories(count = 4)
-    fetch_categories.shuffle.sample(count)
   end
 
   def category_list_cache_key

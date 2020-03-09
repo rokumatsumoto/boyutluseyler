@@ -24,11 +24,11 @@ module WaitForRequests
   # Waits until the passed block returns true
   def wait_for(condition_name, max_wait_time: Capybara.default_max_wait_time,
                polling_interval: 0.01)
-    wait_until = Time.now + max_wait_time.seconds
+    wait_until = Time.current + max_wait_time.seconds
     loop do
       break if yield
 
-      raise "Condition not met: #{condition_name}" if Time.now > wait_until
+      raise "Condition not met: #{condition_name}" if Time.current > wait_until
 
       sleep(polling_interval)
     end

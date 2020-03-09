@@ -17,7 +17,7 @@
 */
 
 "use strict";
-import Headroom from 'headroom.min' // TODO: use with yarn package
+import Headroom from 'headroom.js/dist/headroom.min';
 
 document.addEventListener('turbolinks:load', () => {
 
@@ -37,7 +37,7 @@ document.addEventListener('turbolinks:load', () => {
 
         $this.addClass('close');
 
-        setTimeout(function(){
+        setTimeout(function () {
             $this.removeClass('close');
         }, 200);
 
@@ -63,7 +63,7 @@ document.addEventListener('turbolinks:load', () => {
     }
 
     // Datepicker
-    $('.datepicker')[0] && $('.datepicker').each(function() {
+    $('.datepicker')[0] && $('.datepicker').each(function () {
         $('.datepicker').datepicker({
             disableTouchKeyboard: true,
             autoclose: false
@@ -74,14 +74,14 @@ document.addEventListener('turbolinks:load', () => {
     $('[data-toggle="tooltip"]').tooltip();
 
     // Popover
-    $('[data-toggle="popover"]').each(function() {
+    $('[data-toggle="popover"]').each(function () {
         var popoverClass = '';
-        if($(this).data('color')) {
-            popoverClass = 'popover-'+$(this).data('color');
+        if ($(this).data('color')) {
+            popoverClass = 'popover-' + $(this).data('color');
         }
         $(this).popover({
             trigger: 'focus',
-            template: '<div class="popover '+ popoverClass +'" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
+            template: '<div class="popover ' + popoverClass + '" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
         })
     });
 
@@ -92,7 +92,7 @@ document.addEventListener('turbolinks:load', () => {
 
     // NoUI Slider
     if ($(".input-slider-container")[0]) {
-        $('.input-slider-container').each(function() {
+        $('.input-slider-container').each(function () {
 
             var slider = $(this).find('.input-slider');
             var sliderId = slider.attr('id');
@@ -116,7 +116,7 @@ document.addEventListener('turbolinks:load', () => {
                 }
             });
 
-            c.noUiSlider.on('update', function(a, b) {
+            c.noUiSlider.on('update', function (a, b) {
                 d.textContent = a[b];
             });
         })
@@ -135,7 +135,7 @@ document.addEventListener('turbolinks:load', () => {
                 min: parseInt(c.getAttribute('data-range-value-min')),
                 max: parseInt(c.getAttribute('data-range-value-max'))
             }
-        }), c.noUiSlider.on("update", function(a, b) {
+        }), c.noUiSlider.on("update", function (a, b) {
             f[b].textContent = a[b]
         })
     }
@@ -145,10 +145,10 @@ document.addEventListener('turbolinks:load', () => {
     $('[data-toggle="on-screen"]')[0] && $('[data-toggle="on-screen"]').onScreen({
         container: window,
         direction: 'vertical',
-        doIn: function() {
+        doIn: function () {
             //alert();
         },
-        doOut: function() {
+        doOut: function () {
             // Do something to the matched elements as they get off scren
         },
         tolerance: 200,
@@ -158,7 +158,7 @@ document.addEventListener('turbolinks:load', () => {
     });
 
     // Scroll to anchor with scroll animation
-    $('[data-toggle="scroll"]').on('click', function(event) {
+    $('[data-toggle="scroll"]').on('click', function (event) {
         var hash = $(this).attr('href');
         var offset = $(this).data('offset') ? $(this).data('offset') : 0;
 
@@ -169,7 +169,7 @@ document.addEventListener('turbolinks:load', () => {
 
         event.preventDefault();
     });
- });
+});
 
 
 if (typeof Turbolinks === 'undefined' || Turbolinks === null) {

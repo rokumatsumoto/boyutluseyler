@@ -1,51 +1,54 @@
 - content_for :head do
   = javascript_pack_tag 'session/new'
-= render hero('default_dark_blue', 'default_dark_blue') do
-  .container.pt-lg-md
-    .row.justify-content-center
-      .col-lg-5
-        .card.bg-secondary.shadow.border-0
-          .card-header.bg-white.pb-5
-            .text-muted.text-center.mb-3
-              %small Giriş yap
-            - if devise_mapping.omniauthable?
-              = render 'devise/shared/omniauth_box'
-          .card-body.px-lg-5.py-lg-5
-            .text-center.text-muted.mb-4
-              %small Veya e-posta adresinle giriş yap
-              -# TODO: i18n (Or sign in with credentials)
-            = simple_form_for(resource, as: resource_name, html: { id: 'form_sign_in' }, url: session_path(resource_name)) do |f|
-              .form-group.mb-3
-                .input-group.input-group-alternative
-                  .input-group-prepend
-                    %span.input-group-text
-                      %i.ni.ni-email-83
-                  = f.input_field :login, autofocus: true, class: 'form-control',
-                  autocomplete: 'email'
-              .form-group
-                .input-group.input-group-alternative
-                  .input-group-prepend
-                    %span.input-group-text
-                      %i.ni.ni-lock-circle-open
-                  = f.input_field :password, class: 'form-control',
-                  autocomplete: 'current-password'
-              .custom-control.custom-control-alternative.custom-checkbox
-                = f.input_field :remember_me, id: 'user_remember_me',
-                class: 'custom-control-input',
-                as: :boolean if devise_mapping.rememberable?
-                %label.custom-control-label{:for => "user_remember_me"}
-                  %span Beni hatırla
-                  -# TODO: i18n
-              .text-center
-                = f.button :submit, t('devise.sessions.new.sign_in'), class: 'btn btn-primary my-4', id: 'btn_sign_in'
-        .row.mt-3
-          .col-6
-            = link_to new_password_path(resource_name), class: 'text-light',
-            id: 'link-forgot-your-password' do
-              %small= t('devise.passwords.new.forgot_your_password')
-          .col-6.text-right
-            -# TODO: i18n
-            -# Don’t have an account? Register
-            %small.text-light Hesabın yok mu?
-            = link_to new_registration_path(resource_name), class: 'text-white' do
-              %small= t('devise.registrations.new.sign_up')
+%main.page.bg-default
+  = render 'devise/shared/separator'
+  %section.section.section-lg.pb-5.mt--300
+    .container
+      .row.justify-content-center
+        .col-lg-6.col-md-8
+          .card.bg-secondary.shadow.border-0
+            .card-header.bg-white.pb-5
+              .text-muted.text-center.mb-3
+                %small Giriş yap
+              - if devise_mapping.omniauthable?
+                = render 'devise/shared/omniauth_box'
+            .card-body.px-lg-5.py-lg-5
+              .text-center.text-muted.mb-4
+                %small Veya e-posta adresinle giriş yap
+                -# TODO: i18n (Or sign in with credentials)
+              = render 'layouts/flash'
+              = simple_form_for(resource, as: resource_name, html: { id: 'form_sign_in' }, url: session_path(resource_name)) do |f|
+                .form-group.mb-3
+                  .input-group.input-group-alternative
+                    .input-group-prepend
+                      %span.input-group-text
+                        %i.ni.ni-email-83
+                    = f.input_field :login, autofocus: true, class: 'form-control',
+                    autocomplete: 'email'
+                .form-group
+                  .input-group.input-group-alternative
+                    .input-group-prepend
+                      %span.input-group-text
+                        %i.ni.ni-lock-circle-open
+                    = f.input_field :password, class: 'form-control',
+                    autocomplete: 'current-password'
+                .custom-control.custom-control-alternative.custom-checkbox
+                  = f.input_field :remember_me, id: 'user_remember_me',
+                  class: 'custom-control-input',
+                  as: :boolean if devise_mapping.rememberable?
+                  %label.custom-control-label{:for => "user_remember_me"}
+                    %span Beni hatırla
+                    -# TODO: i18n
+                .text-center
+                  = f.button :submit, t('devise.sessions.new.sign_in'), class: 'btn btn-primary my-4', id: 'btn_sign_in'
+          .row.mt-3
+            .col-6
+              = link_to new_password_path(resource_name), class: 'text-light',
+              id: 'link-forgot-your-password' do
+                %small= t('devise.passwords.new.forgot_your_password')
+            .col-6.text-right
+              -# TODO: i18n
+              -# Don’t have an account? Register
+              %small.text-light Hesabın yok mu?
+              = link_to new_registration_path(resource_name), class: 'text-white' do
+                %small= t('devise.registrations.new.sign_up')

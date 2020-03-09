@@ -1,7 +1,5 @@
 - if object.errors.any?
-  %div{ class: "alert alert-danger-border alert-dismissible fade show mb-4",
+  %div{ class: "alert alert-alert alert-dismissible fade show mb-4",
     role: 'alert' }
     - messages = object.errors.full_messages
     %span.alert-inner--text= messages.uniq.join('. ')
-    %button.close{ 'aria-label': 'Kapat', 'data-dismiss': 'alert', type: 'button' }
-      %span{ 'aria-hidden': 'true' } &times;

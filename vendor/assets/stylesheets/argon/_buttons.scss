@@ -6,7 +6,7 @@
     transition: $transition-base;
     will-change: transform;
     letter-spacing: $btn-letter-spacing;
-    font-size: $input-btn-font-size-sm;
+    font-size: $input-btn-font-size;
 
     &:hover {
         @include box-shadow($btn-hover-box-shadow);

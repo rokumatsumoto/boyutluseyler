@@ -1,14 +1,6 @@
 // scss-lint:disable PlaceholderInExtend
-.alert-danger-border {
-  @extend .alert-danger;
-  @include border-radius($alert-border-radius);
-
-  background-color: $danger;
-  border-color: $danger;
-}
-
 .alert-notice {
-  @extend .alert-info;
+  @extend .alert-primary;
 }
 
 .alert-alert {

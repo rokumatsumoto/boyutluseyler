@@ -41,7 +41,7 @@ gem 'oj', '~> 3.9', '>= 3.9.2' # Speed up JSON processes
 gem 'pagy', '~> 3.7' # Update pagy.js file also
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.3'
-gem 'pundit', '~> 2.1', github: 'varvet/pundit', branch: "master" # Authorization
+gem 'pundit', '~> 2.1', github: 'varvet/pundit', branch: 'master' # Authorization
 # remove pointing to master once new version is released https://github.com/varvet/pundit/issues/637#issuecomment-576350613
 gem 'rails', '5.2.3'
 gem 'recaptcha', '~> 4.14' # Spam and anti-bot protection
