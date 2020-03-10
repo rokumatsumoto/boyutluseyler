@@ -154,6 +154,27 @@ class Design < ApplicationRecord
       where.not(home_popular_at: nil)
     end
 
+    def cached_most_downloaded
+      design_list = Rails.cache.fetch('most_downloaded',
+                                      expires_in: HOURLY_DOWNLOAD_INTERVAL) do
+        Designs::Downloads::HourlyDownloadsCountService.new.execute
+
+        most_downloaded_with_illustrations.to_json
+      end
+
+      JSON.parse(design_list)
+    end
+
+    def cached_popular_designs
+      design_list = Rails.cache.fetch('popular_designs', expires_in: POPULAR_INTERVAL) do
+        Designs::BecomePopularService.new.execute
+
+        home_popular_with_illustrations.to_json
+      end
+
+      JSON.parse(design_list)
+    end
+
     def invalidate_most_downloaded_cache
       Rails.cache.delete('most_downloaded')
     end
