@@ -37,14 +37,14 @@ class Category < ApplicationRecord
   class << self
     def cached_categories
       category_list = Rails.cache.fetch(category_list_cache_key) do
-        Category.order(:list_order).to_json
+        order(:list_order).to_json
       end
 
       JSON.parse(category_list)
     end
 
     def category_list_cache_key
-      last_modified = Category.order(:updated_at).last
+      last_modified = order(:updated_at).last
 
       return nil if last_modified.nil?
 
