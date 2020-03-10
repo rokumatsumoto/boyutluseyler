@@ -39,7 +39,7 @@
               %a.nav-link{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
                 %span.nav-link-inner--text Kategori
               .dropdown-menu.dropdown-menu-left
-                - fetch_categories.each do |c|
+                - Category.cached_categories.each do |c|
                   = link_to c['name'], "/categories/#{c['slug']}", class: 'dropdown-item'
           - if header_link?(:upload)
             %li.nav-item

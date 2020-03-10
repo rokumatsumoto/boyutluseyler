@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class PagesController < ApplicationController
-  include CategoriesHelper
   include DesignsHelper
 
   def home
