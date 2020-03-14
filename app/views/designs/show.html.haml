@@ -54,7 +54,7 @@
       .d-inline.opacity-8= @design.model_file_format
       %h6.text-primary.mt-3 Etiketler
       %ul.inline-list
-        - @design.tag_names.each do |t|
+        - @design.cached_tag_name_list.each do |t|
           %li
             %a{ class: 'badge badge-pill badge-primary', href: "/tags/#{t}" }= t
 

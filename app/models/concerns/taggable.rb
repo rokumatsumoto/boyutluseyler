@@ -15,5 +15,10 @@ module Taggable
   # Split up the provided value by commas and (optional) spaces.
   def tags_as_string=(string)
     self.tag_names = string.split(/,\s*/)
+    self.cached_tag_names = string
+  end
+
+  def cached_tag_name_list
+    cached_tag_names.split(/,\s*/)
   end
 end
