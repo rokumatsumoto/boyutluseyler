@@ -93,6 +93,19 @@ class Design < ApplicationRecord
     illustrations.select(:id, :thumb_url, 'large_url as url')
   end
 
+  def cached_category_name
+    Rails.cache.fetch(['Design', id, 'Category', category_id], expires_in: 1.month) do
+      category.name
+    end
+  end
+
+  def cached_user
+    Rails.cache.fetch(['Design', id, 'User', user_id], expires_in: 1.month) do
+      OpenStruct.new(username: user.username, avatar_url: user.avatar_url)
+    end
+  end
+
+
   # Class methods
   #
   class << self
