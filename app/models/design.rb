@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: designs
@@ -22,6 +21,7 @@
 #  home_popular_at           :datetime
 #  likes_count               :integer          default(0), not null
 #  hourly_downloads_count_at :datetime
+#  cached_tag_names          :text
 #
 
 class Design < ApplicationRecord
