@@ -9,9 +9,9 @@ module Designs
         design_list = Design.most_downloaded
 
         design_list.each do |design|
-          execute_for_design(design)
+          @design = design
 
-          update_hourly_downloads_count_at_for_design(design)
+          calculate_and_save_for_list
         end
       end
 
@@ -23,12 +23,13 @@ module Designs
 
       private
 
-      def update_hourly_downloads_count_at_for_design(design)
-        design.update_column(:hourly_downloads_count_at, Time.current)
-      end
-
       def calculate_and_save
         design.update_column(:hourly_downloads_count, calculate)
+      end
+
+      def calculate_and_save_for_list
+        design.update_columns(hourly_downloads_count: calculate,
+                              hourly_downloads_count_at: Time.current)
       end
 
       def calculate
