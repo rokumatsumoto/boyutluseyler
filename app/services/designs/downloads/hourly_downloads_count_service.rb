@@ -24,11 +24,11 @@ module Designs
       private
 
       def update_hourly_downloads_count_at_for_design(design)
-        design.update(hourly_downloads_count_at: Time.current)
+        design.update_column(:hourly_downloads_count_at, Time.current)
       end
 
       def calculate_and_save
-        design.update(hourly_downloads_count: calculate)
+        design.update_column(:hourly_downloads_count, calculate)
       end
 
       def calculate

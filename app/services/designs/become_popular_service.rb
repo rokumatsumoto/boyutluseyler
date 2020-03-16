@@ -6,7 +6,7 @@ module Designs
       design_list = Design.home_popular
 
       design_list.reverse.each do |design|
-        design.update(home_popular_at: Time.current)
+        design.update_column(:home_popular_at, Time.current)
       end
     end
   end
