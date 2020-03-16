@@ -121,7 +121,7 @@ ActiveRecord::Schema.define(version: 2020_03_14_103108) do
     t.datetime "home_popular_at"
     t.integer "likes_count", default: 0, null: false
     t.datetime "hourly_downloads_count_at"
-    t.string "cached_tag_names"
+    t.text "cached_tag_names"
     t.index ["category_id"], name: "index_designs_on_category_id"
     t.index ["slug"], name: "index_designs_on_slug", unique: true
     t.index ["user_id"], name: "index_designs_on_user_id"
