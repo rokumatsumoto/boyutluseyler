@@ -10,7 +10,7 @@ module Designs
       end
 
       def execute
-        design.update(popularity_score: calculate)
+        design.update_column(:popularity_score, calculate)
       end
 
       private
@@ -43,7 +43,7 @@ module Designs
       end
 
       def popularity_score
-        design.popularity_score == 0 ? design.created_at.to_i : design.popularity_score
+        design.popularity_score.zero? ? design.created_at.to_i : design.popularity_score
       end
     end
   end

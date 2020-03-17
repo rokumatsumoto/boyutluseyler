@@ -1,8 +1,8 @@
-if Rails.env.development? || Rails.env.test?
+if Rails.env.development? || Rails.env.test? || ENV['ADMIN']
 
   namespace :dev do
     desc 'Sample data for local development environment'
-    task :prime do
+    task prime: :environment do
       Faker::UniqueGenerator.clear
 
       steps = 9
@@ -29,6 +29,9 @@ if Rails.env.development? || Rails.env.test?
 
       p "1/#{steps} Creating Users"
 
+      UsersRole.delete_all
+      Role.delete_all
+      Identity.delete_all
       User.delete_all
 
       10.times do
@@ -103,6 +106,10 @@ if Rails.env.development? || Rails.env.test?
       Gutentag::Tagging.where(taggable_type: 'Design').delete_all
       Gutentag::Tag.delete_all
 
+      Design.invalidate_most_downloaded_cache
+      Design.invalidate_popular_designs_cache
+      # Category.invalidate_all_categories_cache # TODO: activate after this PR https://github.com/rokumatsumoto/boyutluseyler/pull/97
+
       blueprint_extensions = %i[STL OBJ PLY ZIP]
       user_ids = User.ids
       category_ids = Category.ids
@@ -123,7 +130,7 @@ if Rails.env.development? || Rails.env.test?
           allow_comments: i % 11 != 0,
           user_id: user_ids[rand(0..user_ids.count - 1)],
           category_id: category_ids[rand(0..category_ids.count - 1)],
-          tag_names: Faker::Hipster.words(number: rand(1..10)),
+          tags_as_string: Faker::Hipster.words(number: rand(1..10)).join(', '),
           created_at: Faker::Time.backward(days: 60),
           illustration_ids: design_illustrations[i],
           blueprint_ids: design_blueprints[i]
@@ -171,6 +178,8 @@ if Rails.env.development? || Rails.env.test?
         rand(1..100).times do
           ahoy = Ahoy::Tracker.new(user: User.order('RANDOM()').first)
           ahoy.track(event_name, design_id: design.id)
+
+          Designs::PageViews::PopularityScoreService.new(design).execute
         end
       end
 

@@ -65,3 +65,5 @@ Metrics/MethodLength:
   Max: 100
 Style/AsciiComments:
   Enabled: false
+Rails/SkipsModelValidations:
+  Enabled: false

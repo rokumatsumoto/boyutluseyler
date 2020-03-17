@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: designs
@@ -22,6 +21,7 @@
 #  home_popular_at           :datetime
 #  likes_count               :integer          default(0), not null
 #  hourly_downloads_count_at :datetime
+#  cached_tag_names          :text
 #
 
 class Design < ApplicationRecord
@@ -57,7 +57,7 @@ class Design < ApplicationRecord
   validates :name, presence: true
   validates :description, presence: true
   validates :license_type, presence: true
-  validates :category_id, presence: true
+  validates :category, presence: true
   validates :design_illustrations, presence: true
   validates :design_blueprints, presence: true
 
@@ -92,6 +92,19 @@ class Design < ApplicationRecord
   def preview_illustrations
     illustrations.select(:id, :thumb_url, 'large_url as url')
   end
+
+  def cached_category_name
+    Rails.cache.fetch(['Design', id, 'Category', category_id], expires_in: 1.month) do
+      category.name
+    end
+  end
+
+  def cached_user
+    Rails.cache.fetch(['Design', id, 'User', user_id], expires_in: 1.month) do
+      OpenStruct.new(username: user.username, avatar_url: user.avatar_url)
+    end
+  end
+
 
   # Class methods
   #
