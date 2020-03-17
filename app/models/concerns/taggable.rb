@@ -19,6 +19,6 @@ module Taggable
   end
 
   def cached_tag_name_list
-    cached_tag_names.split(/,\s*/)
+    cached_tag_names.try(:split, /,\s*/) || []
   end
 end
