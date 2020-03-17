@@ -2,7 +2,7 @@ if Rails.env.development? || Rails.env.test? || ENV['ADMIN']
 
   namespace :dev do
     desc 'Sample data for local development environment'
-    task :prime do
+    task prime: :environment do
       Faker::UniqueGenerator.clear
 
       steps = 9
