@@ -23,6 +23,7 @@ gem 'counter_culture', '~> 2.2', '>= 2.2.4'
 gem 'devise', '~> 4.7', '>= 4.7.1' # Authentication
 gem 'devise-i18n', '~> 1.7', '>= 1.7.1'
 gem 'down', '~> 5.1'
+gem 'faker', '~> 2.7'
 gem 'fast_jsonapi', '~> 1.5'
 gem 'finite_machine', '~> 0.12.1'
 gem 'friendly_id', '~> 5.3' # Clean URL
@@ -67,7 +68,6 @@ group :development, :test do
   gem 'bundler-audit', '~> 0.6.1', require: false
   gem 'database_cleaner', '~> 1.7', require: false
   gem 'factory_bot_rails', '~> 5.0'
-  gem 'faker', '~> 2.7'
   gem 'fivemat', '~> 1.3', '>= 1.3.7' # RSpec Formatter
   gem 'guard', '~> 2.15' # Handle events on file system modifications.
   gem 'guard-rspec', '~> 4.7', '>= 4.7.3', require: false
