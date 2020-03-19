@@ -8,7 +8,7 @@ module Designs
 
         design_download.set_step_as(design_download.next_step) # :requested
 
-        success = design_download.save
+        design_download.save
 
         design_download
       end

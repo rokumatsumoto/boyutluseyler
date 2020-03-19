@@ -29,7 +29,7 @@ module Boyutluseyler
           Users::UpdateService.new(bs_user, user: bs_user).execute!
 
           bs_user
-        rescue ActiveRecord::RecordInvalid => e
+        rescue ActiveRecord::RecordInvalid
           # TODO: log
           puts "(#{provider}) Error saving user #{auth_hash.uid} (#{auth_hash.email}): #{bs_user.errors.full_messages}"
         end
@@ -62,7 +62,7 @@ module Boyutluseyler
           return unless bs_user
 
           # find_or_initialize_by doesn't update `bs_user.identities`, and isn't autosaved.
-          identity = bs_user.identities.find { |identity| identity.provider == auth_hash.provider }
+          identity = bs_user.identities.find { |i| i.provider == auth_hash.provider }
 
           identity ||= bs_user.identities.build(provider: auth_hash.provider)
           identity.uid = auth_hash.uid

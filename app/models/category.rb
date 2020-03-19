@@ -27,9 +27,9 @@ class Category < ApplicationRecord
   end
 
   def invalidate_all_categories_cache
-    unless self.class.category_list_cache_key.nil?
-      Rails.cache.delete(self.class.category_list_cache_key)
-    end
+    return if self.class.category_list_cache_key.nil?
+
+    Rails.cache.delete(self.class.category_list_cache_key)
   end
 
   # Class methods

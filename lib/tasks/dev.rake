@@ -115,7 +115,7 @@ if Rails.env.development? || Rails.env.test? || ENV['ADMIN']
       category_ids = Category.ids
 
       100.times do |i|
-        design = Design.create!(
+        Design.create!(
           name: Faker::Book.unique.title,
           description: Faker::Hipster.unique.paragraphs(number: rand(1..5)).map { |pr| "<p>#{pr}</p>" }.join,
           printing_settings:
