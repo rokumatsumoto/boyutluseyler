@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: designs
@@ -68,7 +69,6 @@ class Design < ApplicationRecord
     cc_by_nc_nd: 'cc_by_nc_nd'
   }
 
-  # TODO: add concern for friendlyid
   def should_generate_new_friendly_id?
     name_changed?
   end
@@ -98,7 +98,6 @@ class Design < ApplicationRecord
       OpenStruct.new(username: user.username, avatar_url: user.avatar_url)
     end
   end
-
 
   # Class methods
   #
