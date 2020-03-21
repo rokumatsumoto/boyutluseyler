@@ -45,12 +45,6 @@ class Design < ApplicationRecord
   has_many :blueprints, through: :design_blueprints
   has_one :design_download, dependent: :destroy
 
-  # OPTIONAL
-  # has_many :view_events, -> { where(name: Ahoy::Event::VIEWED_DESIGN) },
-  #          class_name: 'Ahoy::Event', foreign_store: :properties
-  # has_many :download_events, -> { where(name: Ahoy::Event::DOWNLOADED_DESIGN) },
-  #          class_name: 'Ahoy::Event', foreign_store: :properties
-
   belongs_to :user
   belongs_to :category
 
