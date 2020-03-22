@@ -69,8 +69,9 @@ class Design < ApplicationRecord
     cc_by_nc_nd: 'cc_by_nc_nd'
   }
 
+  # https://github.com/norman/friendly_id/blob/984dac788d106faf60313cd0e51593474a513078/lib/friendly_id/slugged.rb#L191
   def should_generate_new_friendly_id?
-    name_changed?
+    name_changed? || super
   end
 
   # TODO: remove 3ds format, add ply format
