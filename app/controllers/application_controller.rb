@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  include ApplicationHelper
   include Boyutluseyler::GonHelper
   include Pagy::Backend
   include Pundit
@@ -76,7 +75,7 @@ class ApplicationController < ActionController::Base
     message = e.reason || :default
     flash[:alert] = I18n.t("errors.#{message}", scope: 'pundit', default: :default)
     redirect_to(request.referer || root_path)
- end
+  end
 
   # Its important that the location is NOT stored if:
   # - The request method is not GET (non idempotent)
