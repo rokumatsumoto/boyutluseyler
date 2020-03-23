@@ -111,7 +111,7 @@ group :test do
   gem 'pundit-matchers', '~> 1.6'
   gem 'rails-controller-testing'
   gem 'selenium-webdriver', '~> 3.142', '>= 3.142.5'
-  gem 'shoulda-matchers', '4.0.0.rc1', require: false
+  gem 'shoulda-matchers', '~> 4.3', require: false
   gem 'timecop', '~> 0.9.1'
   gem 'webdrivers', '~> 4.1', '>= 4.1.2', require: false # Easy installation and use of selenium webdriver browsers to run system tests
   gem 'zonebie', '~> 0.6.1'
