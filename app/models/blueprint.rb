@@ -17,8 +17,7 @@
 class Blueprint < ApplicationRecord
   include FileValidations
 
-  has_one :design_blueprint, inverse_of: :blueprint
-  has_one :design, through: :design_blueprint
+  has_one :design_blueprint
 
   #
   # Validations

@@ -19,9 +19,7 @@
 class Illustration < ApplicationRecord
   include FileValidations
 
-  has_one :design_illustration, inverse_of: :illustration
-  has_one :design, through: :design_illustration
-
+  has_one :design_illustration
   #
   # Validations
   # FileValidations (concern)
