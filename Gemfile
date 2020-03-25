@@ -64,7 +64,7 @@ gem 'webpacker', '~> 4.2'
 # gem 'turkish_support', '~> 1.1', '>= 1.1.3'
 
 group :development, :test do
-  gem 'bullet', '~> 5.9' # n+1 Queries
+  gem 'bullet', '~> 5.9', require: !!ENV['ENABLE_BULLET'] # n+1 Queries
   gem 'bundler-audit', '~> 0.6.1', require: false
   gem 'database_cleaner', '~> 1.7', require: false
   gem 'factory_bot_rails', '~> 5.0'
