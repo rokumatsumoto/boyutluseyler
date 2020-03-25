@@ -23,8 +23,55 @@
 #  cached_tag_names          :text
 #
 
-require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe Design, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'modules' do
+    subject { described_class }
+
+    it { is_expected.to include_module(FriendlyId::History) }
+    it { is_expected.to include_module(FriendlyId::Slugged) }
+    it { is_expected.to include_module(Rolify::Resource) }
+    it { is_expected.to include_module(Taggable) }
+    it { is_expected.to include_module(Sortable) }
+
+    context 'with FriendlyId config' do
+      let(:friendly_id_config) { described_class.friendly_id_config }
+
+      it 'uses a column named name to generate slug' do
+        expect(friendly_id_config.base).to eq(:name)
+      end
+    end
+  end
+
+  describe 'constants' do
+    subject { described_class }
+
+    # rubocop:disable Metrics/LineLength
+    it { is_expected.to have_constant(:HOURLY_DOWNLOAD_INTERVAL, ActiveSupport::Duration).with_value(1.hour) }
+    it { is_expected.to have_constant(:POPULAR_INTERVAL, ActiveSupport::Duration).with_value(1.hour) }
+    # rubocop:enable Metrics/LineLength
+    it { is_expected.to have_constant(:MOST_DOWNLOADED_LIMIT, Integer).with_value(8) }
+    it { is_expected.to have_constant(:POPULAR_LIMIT, Integer).with_value(12) }
+    it { is_expected.to have_constant(:POPULARITY_EFFECT, Float).with_value(0.02) }
+  end
+
+  describe 'associations' do
+    it { is_expected.to belong_to(:user) }
+    it { is_expected.to belong_to(:category) }
+    it { is_expected.to have_many(:design_illustrations).order(position: :asc).inverse_of(:design) }
+    it { is_expected.to have_many(:illustrations).through(:design_illustrations) }
+    it { is_expected.to have_many(:design_blueprints).order(position: :asc).inverse_of(:design) }
+    it { is_expected.to have_many(:blueprints).through(:design_blueprints) }
+    it { is_expected.to have_one(:design_download).dependent(:destroy) }
+  end
+
+  describe 'validation' do
+    it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_length_of(:name).is_at_most(120) }
+    it { is_expected.to validate_presence_of(:description) }
+    it { is_expected.to validate_presence_of(:license_type) }
+    it { is_expected.to validate_presence_of(:design_illustrations) }
+    it { is_expected.to validate_presence_of(:design_blueprints) }
+  end
 end
