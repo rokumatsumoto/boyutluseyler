@@ -40,23 +40,21 @@ class Design < ApplicationRecord
   POPULAR_LIMIT = 12
   POPULARITY_EFFECT = 0.02
 
-  has_many :design_illustrations, -> { order(position: :asc) }, inverse_of: 'design'
+  has_many :design_illustrations, -> { order(position: :asc) }, inverse_of: :design
   has_many :illustrations, through: :design_illustrations
-  has_many :design_blueprints, -> { order(position: :asc) }, inverse_of: 'design'
+  has_many :design_blueprints, -> { order(position: :asc) }, inverse_of: :design
   has_many :blueprints, through: :design_blueprints
   has_one :design_download, dependent: :destroy
 
   belongs_to :user
   belongs_to :category
 
-  validates :name, presence: true
+  validates :name, presence: true, length: { maximum: 120 }
   validates :description, presence: true
   validates :license_type, presence: true
-  validates :category, presence: true
   validates :design_illustrations, presence: true
   validates :design_blueprints, presence: true
 
-  scope :with_tags, -> { includes(:taggings, :tags) }
   scope :home_popular, -> { order(popularity_score: :desc).limit(POPULAR_LIMIT) }
 
   enum license_type: {
@@ -120,8 +118,7 @@ class Design < ApplicationRecord
     end
 
     def with_illustrations
-      with_tags
-        .with_first_illustration
+      with_first_illustration
         .joins(:category)
         .select('designs.id, designs.name, designs.slug, illustrations.medium_url, categories.slug
                  as category_slug')
@@ -153,7 +150,8 @@ class Design < ApplicationRecord
                                       expires_in: HOURLY_DOWNLOAD_INTERVAL) do
         Designs::Downloads::HourlyDownloadsCountService.new.execute
 
-        most_downloaded_with_illustrations.to_json
+        # TODO: use fast_jsonapi serializer
+        most_downloaded_with_illustrations.to_json(except: :tag_names)
       end
 
       JSON.parse(design_list)
@@ -163,7 +161,8 @@ class Design < ApplicationRecord
       design_list = Rails.cache.fetch('popular_designs', expires_in: POPULAR_INTERVAL) do
         Designs::BecomePopularService.new.execute
 
-        home_popular_with_illustrations.to_json
+        # TODO: use fast_jsonapi serializer
+        home_popular_with_illustrations.to_json(except: :tag_names)
       end
 
       JSON.parse(design_list)
