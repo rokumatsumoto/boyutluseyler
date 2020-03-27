@@ -26,6 +26,20 @@
 require 'spec_helper'
 
 RSpec.describe Design, type: :model do
+  specify do
+    expect(described_class.new).to define_enum_for(:license_type)
+      .with_values(
+        license_none: 'license_none',
+        cc_by: 'cc_by',
+        cc_by_sa: 'cc_by_sa',
+        cc_by_nd: 'cc_by_nd',
+        cc_by_nc: 'cc_by_nc',
+        cc_by_nc_sa: 'cc_by_nc_sa',
+        cc_by_nc_nd: 'cc_by_nc_nd'
+      )
+      .backed_by_column_of_type(:string)
+  end
+
   describe 'modules' do
     subject { described_class }
 
@@ -47,10 +61,9 @@ RSpec.describe Design, type: :model do
   describe 'constants' do
     subject { described_class }
 
-    # rubocop:disable Metrics/LineLength
     it { is_expected.to have_constant(:HOURLY_DOWNLOAD_INTERVAL, ActiveSupport::Duration).with_value(1.hour) }
     it { is_expected.to have_constant(:POPULAR_INTERVAL, ActiveSupport::Duration).with_value(1.hour) }
-    # rubocop:enable Metrics/LineLength
+
     it { is_expected.to have_constant(:MOST_DOWNLOADED_LIMIT, Integer).with_value(8) }
     it { is_expected.to have_constant(:POPULAR_LIMIT, Integer).with_value(12) }
     it { is_expected.to have_constant(:POPULARITY_EFFECT, Float).with_value(0.02) }
@@ -73,5 +86,47 @@ RSpec.describe Design, type: :model do
     it { is_expected.to validate_presence_of(:license_type) }
     it { is_expected.to validate_presence_of(:design_illustrations) }
     it { is_expected.to validate_presence_of(:design_blueprints) }
+  end
+
+  describe '.home_popular' do
+    let!(:popular2) { create(:design, popularity_score: 2) }
+    let!(:popular1) { create(:design, popularity_score: 3) }
+    let!(:popular3) { create(:design, popularity_score: 1) }
+
+    it 'orders designs by the popularity score in descending order' do
+      expect(described_class.home_popular).to eq([popular1, popular2, popular3])
+    end
+
+    it 'limits designs based on a POPULAR_LIMIT value' do
+      stub_const("#{described_class}::POPULAR_LIMIT", 2)
+
+      expect(described_class.home_popular.count).to eq(2)
+    end
+  end
+
+  describe '#should_generate_new_friendly_id?' do
+    subject(:design) { build_stubbed(:design, :with_slug) }
+
+    context 'when name attribute is changed' do
+      it 'generates matching slug' do
+        design.name += ' updated'
+
+        expect(design.should_generate_new_friendly_id?).to be true
+      end
+    end
+
+    context 'when name attribute is not changed' do
+      it 'does not generate matching slug' do
+        expect(design.should_generate_new_friendly_id?).to be false
+      end
+    end
+
+    context 'if record is new' do
+      subject(:design) { build(:design) }
+
+      it 'generates matching slug' do
+        expect(design.should_generate_new_friendly_id?).to be true
+      end
+    end
   end
 end
