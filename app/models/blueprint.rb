@@ -17,13 +17,30 @@
 class Blueprint < ApplicationRecord
   include FileValidations
 
+  MODEL_EXTS = %w[stl obj].freeze
+  ALLOWED_EXTS = %w[stl obj zip].freeze
+
+  # TODO: move to Boyutluseyler::Regex module
+  # * Output: .(stl|obj)$
+  # * Test: https://rubular.com/r/TpMmjKDY60eIOv
+  # * No escape characters
+  # * No variables
+  # * . Any single character
+  # * a|b a or b
+  # * $ End of line
+  MODEL_EXTS_QUERY_REGEX = ".(#{MODEL_EXTS.join('|')})$"
+
+  # * Output: /.(stl|obj|zip)\z/i
+  # * Test: https://rubular.com/r/3CdveqBY4b1mrK
+  # * No escape characters
+  # * No variables
+  # * . Any single character
+  # * a|b a or b
+  # * \z End of string
+  # * i Case insensitive
+  ALLOWED_EXTS_REGEX = /.(#{ALLOWED_EXTS.join("|")})\z/i.freeze
+
   has_one :design_blueprint
 
-  #
-  # Validations
-  # FileValidations (concern)
-  #
-
-  # TODO: remove 3ds format, add ply format
-  validates :url_path, format: { with: /\.(stl|3ds|obj|zip)\z/i }
+  validates :url_path, format: { with: ALLOWED_EXTS_REGEX }
 end
