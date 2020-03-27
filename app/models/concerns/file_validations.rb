@@ -53,7 +53,6 @@ module FileValidations
     self.content_type = content_type_by_filename(url_path) if invalid
   end
 
-  # TODO: remove 3ds format, add ply format
   def allowed_content_types
     case model_name.name
     when 'Illustration'
@@ -61,7 +60,6 @@ module FileValidations
     when 'Blueprint'
       %w[application/vnd.ms-pki.stl
          model/stl
-         image/x-3ds
          application/x-tgif
          application/zip]
     else

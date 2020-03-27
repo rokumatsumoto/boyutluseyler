@@ -20,10 +20,6 @@ class Illustration < ApplicationRecord
   include FileValidations
 
   has_one :design_illustration
-  #
-  # Validations
-  # FileValidations (concern)
-  #
 
   validates :url_path, format: { with: /\.(png|jpg|jpeg|gif)\z/i }
 end
