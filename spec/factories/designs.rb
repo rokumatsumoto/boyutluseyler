@@ -53,5 +53,9 @@ FactoryBot.define do
     trait :comments_disabled do
       allow_comments { false }
     end
+
+    trait :with_slug do
+      slug { 'slug' }
+    end
   end
 end
