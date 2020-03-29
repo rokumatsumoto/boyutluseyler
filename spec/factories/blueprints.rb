@@ -18,5 +18,13 @@ FactoryBot.define do
     url_path { 'blueprint.stl' }
     size { 32_484 }
     content_type { 'application/vnd.ms-pki.stl' }
+    preview { true }
+  end
+
+  factory :blueprint_no_preview, parent: :blueprint do
+    url { 'https://example.com/blueprint.zip' }
+    url_path { 'blueprint.zip' }
+    content_type { 'application/zip' }
+    preview { false }
   end
 end
