@@ -17,19 +17,16 @@
 class Blueprint < ApplicationRecord
   include FileValidations
 
-  MODEL_EXTS = %w[stl obj].freeze
+  before_validation :set_preview
+
+  PREVIEW_CONTENT_TYPES = %w[
+    application/vnd.ms-pki.stl
+    model/stl
+    application/x-tgif
+  ].freeze
   ALLOWED_EXTS = %w[stl obj zip].freeze
 
   # TODO: move to Boyutluseyler::Regex module
-  # * Output: .(stl|obj)$
-  # * Test: https://rubular.com/r/TpMmjKDY60eIOv
-  # * No escape characters
-  # * No variables
-  # * . Any single character
-  # * a|b a or b
-  # * $ End of line
-  MODEL_EXTS_QUERY_REGEX = ".(#{MODEL_EXTS.join('|')})$"
-
   # * Output: /.(stl|obj|zip)\z/i
   # * Test: https://rubular.com/r/3CdveqBY4b1mrK
   # * No escape characters
@@ -43,4 +40,12 @@ class Blueprint < ApplicationRecord
   has_one :design_blueprint
 
   validates :url_path, format: { with: ALLOWED_EXTS_REGEX }
+
+  private
+
+  def set_preview
+    return if content_type.nil?
+
+    self.preview = PREVIEW_CONTENT_TYPES.include?(content_type)
+  end
 end
