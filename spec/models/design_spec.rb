@@ -129,4 +129,42 @@ RSpec.describe Design, type: :model do
       end
     end
   end
+
+  describe '#preview_blueprints' do
+    context 'with blueprints that support preview' do
+      subject(:blueprints) { design.preview_blueprints }
+
+      let(:design) { create(:design, blueprint_preview: true) }
+
+      it 'returns blueprints' do
+        expect(blueprints.exists?).to be true
+      end
+
+      it 'returns proper attributes for preview' do
+        expect(blueprints.first.attributes.keys).to match_array(%w[id url thumb_url])
+      end
+    end
+
+    context 'with blueprints that do not support preview' do
+      let(:design) { create(:design, blueprint_preview: false) }
+
+      it 'does not return blueprints' do
+        expect(design.preview_blueprints.empty?).to be true
+      end
+    end
+  end
+
+  describe '#preview_illustrations' do
+    subject(:illustrations) { design.preview_illustrations }
+
+    let(:design) { create(:design) }
+
+    it 'returns illustrations' do
+      expect(illustrations.exists?).to be true
+    end
+
+    it 'returns proper attributes for preview' do
+      expect(illustrations.first.attributes.keys).to match_array(%w[id thumb_url url])
+    end
+  end
 end
