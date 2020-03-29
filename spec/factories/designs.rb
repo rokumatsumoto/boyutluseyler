@@ -33,6 +33,7 @@ FactoryBot.define do
     transient do
       illustrations_count { 3 }
       blueprints_count { 3 }
+      blueprint_preview { true }
     end
 
     # Associations
@@ -42,7 +43,12 @@ FactoryBot.define do
     # Callbacks
     before(:create) do |design, evaluator|
       design.illustrations = create_list(:illustration, evaluator.illustrations_count)
-      design.blueprints = create_list(:blueprint, evaluator.blueprints_count)
+
+      design.blueprints = if evaluator.blueprint_preview
+                            create_list(:blueprint, evaluator.blueprints_count)
+                          else
+                            create_list(:blueprint_no_preview, evaluator.blueprints_count)
+                          end
     end
 
     # Traits
