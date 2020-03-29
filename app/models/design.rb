@@ -55,8 +55,6 @@ class Design < ApplicationRecord
   validates :design_illustrations, presence: true
   validates :design_blueprints, presence: true
 
-  scope :home_popular, -> { order(popularity_score: :desc).limit(POPULAR_LIMIT) }
-
   enum license_type: {
     license_none: 'license_none',
     cc_by: 'cc_by',
@@ -72,14 +70,8 @@ class Design < ApplicationRecord
     name_changed? || super
   end
 
-  # TODO: remove 3ds format, add ply format
-  # TODO: create method for model extensions (stl|3ds|obj)
   def preview_blueprints
-    Blueprint.joins(:design_blueprint)
-             .where(design_blueprints: { design_id: id })
-             .where('url_path ~* ?', '.(stl|3ds|obj)$')
-             .select(:url, :thumb_url)
-             .order('design_blueprints.position')
+    blueprints.where(preview: true).select(:url, :thumb_url)
   end
 
   def preview_illustrations
@@ -98,8 +90,6 @@ class Design < ApplicationRecord
     end
   end
 
-  # Class methods
-  #
   class << self
     def sort_by_attribute(method)
       case method.to_s
@@ -133,6 +123,10 @@ class Design < ApplicationRecord
 
     def most_downloaded_with_illustrations
       with_illustrations.most_downloaded
+    end
+
+    def home_popular
+      order(popularity_score: :desc).limit(POPULAR_LIMIT)
     end
 
     def home_popular_with_illustrations
