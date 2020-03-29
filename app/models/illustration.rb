@@ -19,7 +19,20 @@
 class Illustration < ApplicationRecord
   include FileValidations
 
+  ALLOWED_EXTS = %w[png jpg jpeg gif].freeze
+
+  # TODO: move to Boyutluseyler::Regex module
+  # * Output: /.(png|jpg|jpeg|gif)\z/i
+  # * Test: https://rubular.com/r/zmGjZaI8J8QMFN
+  # * No escape characters
+  # * No variables
+  # * . Any single character
+  # * a|b a or b
+  # * \z End of string
+  # * i Case insensitive
+  ALLOWED_EXTS_REGEX = /.(#{ALLOWED_EXTS.join("|")})\z/i.freeze
+
   has_one :design_illustration
 
-  validates :url_path, format: { with: /\.(png|jpg|jpeg|gif)\z/i }
+  validates :url_path, format: { with: ALLOWED_EXTS_REGEX }
 end
