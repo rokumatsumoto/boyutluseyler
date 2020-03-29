@@ -1,14 +1,5 @@
 # frozen_string_literal: true
 
-# Required fields
-#  url          :string           not null
-#  url_path     :string           not null
-#  size         :integer          not null
-#  content_type :string           not null
-
-# Consider these methods
-# allowed_content_types
-
 module FileValidations
   extend ActiveSupport::Concern
 
