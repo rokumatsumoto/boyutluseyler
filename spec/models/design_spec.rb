@@ -89,9 +89,9 @@ RSpec.describe Design, type: :model do
   end
 
   describe '.home_popular' do
-    let!(:popular2) { create(:design, popularity_score: 2) }
-    let!(:popular1) { create(:design, popularity_score: 3) }
-    let!(:popular3) { create(:design, popularity_score: 1) }
+    let!(:popular2) { create(:design, popularity_score: 1) }
+    let!(:popular1) { create(:design, popularity_score: 2) }
+    let!(:popular3) { create(:design) }
 
     it 'orders designs by the popularity score in descending order' do
       expect(described_class.home_popular).to eq([popular1, popular2, popular3])
@@ -141,7 +141,7 @@ RSpec.describe Design, type: :model do
       end
 
       it 'returns proper attributes for preview' do
-        expect(blueprints.first.attributes.keys).to match_array(%w[id url thumb_url])
+        expect(blueprints.take.attributes.keys).to match_array(%w[id url thumb_url])
       end
     end
 
@@ -164,7 +164,113 @@ RSpec.describe Design, type: :model do
     end
 
     it 'returns proper attributes for preview' do
-      expect(illustrations.first.attributes.keys).to match_array(%w[id thumb_url url])
+      expect(illustrations.take.attributes.keys).to match_array(%w[id thumb_url url])
     end
   end
+
+  describe '#cached_category_name' do
+    it 'returns the category name of design' do
+      design = build(:design)
+      category = instance_double(Category, name: 'name')
+
+      allow(design).to receive(:category).and_return(category)
+
+      expect(design.cached_category_name).to eq(category.name)
+    end
+  end
+
+  describe '#cached_user' do
+    it 'returns the profile info of design creator' do
+      design = build(:design)
+      user = instance_double(User, username: 'username', avatar_url: 'avatar_url')
+
+      allow(design).to receive(:user).and_return(user)
+
+      attributes = design.cached_user.instance_variable_get('@table').keys
+      expect(attributes).to match_array(%i[username avatar_url])
+      expect(design.cached_user.username).to eq(user.username)
+    end
+  end
+
+  # rubocop:disable RSpec/NestedGroups
+  describe '.sort_by_attribute' do
+    context 'when order by downloads_count' do
+      let!(:design2) { create(:design, downloads_count: 1) }
+      let!(:design1) { create(:design, downloads_count: 2) }
+      let!(:design3) { create(:design) }
+
+      context 'with descending' do
+        it 'sorts by downloads count descending' do
+          designs = described_class.sort_by_attribute('downloads_count_desc')
+
+          expect(designs).to eq([design1, design2, design3])
+        end
+      end
+
+      context 'with ascending' do
+        it 'sorts by downloads count ascending' do
+          designs = described_class.sort_by_attribute('downloads_count_asc')
+
+          expect(designs).to eq([design3, design2, design1])
+        end
+      end
+    end
+
+    context 'when order by likes_count' do
+      let!(:design2) { create(:design, likes_count: 1) }
+      let!(:design1) { create(:design, likes_count: 2) }
+      let!(:design3) { create(:design) }
+
+      context 'with descending' do
+        it 'sorts by likes count descending' do
+          designs = described_class.sort_by_attribute('likes_count_desc')
+
+          expect(designs).to eq([design1, design2, design3])
+        end
+      end
+
+      context 'with ascending' do
+        it 'sorts by likes count ascending' do
+          designs = described_class.sort_by_attribute('likes_count_asc')
+
+          expect(designs).to eq([design3, design2, design1])
+        end
+      end
+    end
+
+    context 'when order by home_popular_at' do
+      let!(:design2) { create(:design, home_popular_at: 5.days.ago) }
+      let!(:design1) { create(:design, home_popular_at: 1.day.ago) }
+      let!(:design3) { create(:design, home_popular_at: 7.days.ago) }
+
+      context 'with descending' do
+        it 'sorts designs according to descending popularity' do
+          designs = described_class.sort_by_attribute('home_popular_at_desc')
+
+          expect(designs).to eq([design1, design2, design3])
+        end
+      end
+
+      context 'with ascending' do
+        it 'sorts designs according to ascending popularity' do
+          designs = described_class.sort_by_attribute('home_popular_at_asc')
+
+          expect(designs).to eq([design3, design2, design1])
+        end
+      end
+    end
+
+    context 'when order by descending created date' do
+      let!(:design2) { create(:design, created_at: 5.days.ago) }
+      let!(:design1) { create(:design, created_at: 1.day.ago) }
+      let!(:design3) { create(:design, created_at: 7.days.ago) }
+
+      it 'sorts by descending created date using default simple sorts' do
+        designs = described_class.sort_by_attribute('created_desc')
+
+        expect(designs).to eq([design1, design2, design3])
+      end
+    end
+  end
+  # rubocop:enable RSpec/NestedGroups
 end
