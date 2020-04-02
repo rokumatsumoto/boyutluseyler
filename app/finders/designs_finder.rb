@@ -18,14 +18,14 @@ class DesignsFinder
   attr_reader :params
 
   def filter_designs(collection)
-    collection = with_illustrations(collection)
+    collection = with_illustration(collection)
     collection = by_popularity(collection)
 
     collection
   end
 
-  def with_illustrations(items)
-    params[:with_illustrations].present? ? items.with_illustrations : items
+  def with_illustration(items)
+    params[:with_illustration].present? ? items.with_illustration : items
   end
 
   def by_popularity(items)

@@ -65,11 +65,6 @@ class Design < ApplicationRecord
     cc_by_nc_nd: 'cc_by_nc_nd'
   }
 
-  # https://github.com/norman/friendly_id/blob/984dac788d106faf60313cd0e51593474a513078/lib/friendly_id/slugged.rb#L191
-  def should_generate_new_friendly_id?
-    name_changed? || super
-  end
-
   def preview_blueprints
     blueprints.where(preview: true).select(:url, :thumb_url)
   end
@@ -103,17 +98,6 @@ class Design < ApplicationRecord
       end
     end
 
-    def with_first_illustration
-      joins(:illustrations).where('design_illustrations.position = ?', 1)
-    end
-
-    def with_illustrations
-      with_first_illustration
-        .joins(:category)
-        .select('designs.id, designs.name, designs.slug, illustrations.medium_url, categories.slug
-                 as category_slug')
-    end
-
     def most_downloaded
       where('downloads_count > :min_count AND  designs.created_at < :date',
             min_count: 0, date: Time.current - HOURLY_DOWNLOAD_INTERVAL)
@@ -121,22 +105,19 @@ class Design < ApplicationRecord
         .limit(MOST_DOWNLOADED_LIMIT)
     end
 
-    def most_downloaded_with_illustrations
-      with_illustrations.most_downloaded
-    end
-
-    def home_popular
+    def most_popular
       order(popularity_score: :desc).limit(POPULAR_LIMIT)
-    end
-
-    def home_popular_with_illustrations
-      with_illustrations
-        .order(popularity_score: :desc)
-        .limit(POPULAR_LIMIT)
     end
 
     def popular
       where.not(home_popular_at: nil)
+    end
+
+    def with_illustration
+      first_illustration
+        .joins(:category)
+        .select('designs.id, designs.name, designs.slug, illustrations.medium_url, categories.slug
+                 as category_slug')
     end
 
     def cached_most_downloaded
@@ -145,7 +126,7 @@ class Design < ApplicationRecord
         Designs::Downloads::HourlyDownloadsCountService.new.execute
 
         # TODO: use fast_jsonapi serializer
-        most_downloaded_with_illustrations.to_json(except: :tag_names)
+        most_downloaded.with_illustration.to_json(except: :tag_names)
       end
 
       JSON.parse(design_list)
@@ -156,7 +137,7 @@ class Design < ApplicationRecord
         Designs::BecomePopularService.new.execute
 
         # TODO: use fast_jsonapi serializer
-        home_popular_with_illustrations.to_json(except: :tag_names)
+        most_popular.with_illustration.to_json(except: :tag_names)
       end
 
       JSON.parse(design_list)
@@ -169,5 +150,18 @@ class Design < ApplicationRecord
     def invalidate_popular_designs_cache
       Rails.cache.delete('popular_designs')
     end
+
+    private
+
+    def first_illustration
+      joins(:illustrations).where('design_illustrations.position = ?', 1)
+    end
+  end
+
+  private
+
+  # https://github.com/norman/friendly_id/blob/984dac788d106faf60313cd0e51593474a513078/lib/friendly_id/slugged.rb#L191
+  def should_generate_new_friendly_id?
+    name_changed? || super
   end
 end
