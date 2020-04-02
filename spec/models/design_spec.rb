@@ -88,22 +88,6 @@ RSpec.describe Design, type: :model do
     it { is_expected.to validate_presence_of(:design_blueprints) }
   end
 
-  describe '.home_popular' do
-    let!(:popular2) { create(:design, popularity_score: 1) }
-    let!(:popular1) { create(:design, popularity_score: 2) }
-    let!(:popular3) { create(:design) }
-
-    it 'orders designs by the popularity score in descending order' do
-      expect(described_class.home_popular).to eq([popular1, popular2, popular3])
-    end
-
-    it 'limits designs based on a POPULAR_LIMIT value' do
-      stub_const("#{described_class}::POPULAR_LIMIT", 2)
-
-      expect(described_class.home_popular.count).to eq(2)
-    end
-  end
-
   describe '#should_generate_new_friendly_id?' do
     subject(:design) { build_stubbed(:design, :with_slug) }
 
@@ -111,13 +95,13 @@ RSpec.describe Design, type: :model do
       it 'generates matching slug' do
         design.name += ' updated'
 
-        expect(design.should_generate_new_friendly_id?).to be true
+        expect(design.send(:should_generate_new_friendly_id?)).to be true
       end
     end
 
     context 'when name attribute is not changed' do
       it 'does not generate matching slug' do
-        expect(design.should_generate_new_friendly_id?).to be false
+        expect(design.send(:should_generate_new_friendly_id?)).to be false
       end
     end
 
@@ -125,7 +109,7 @@ RSpec.describe Design, type: :model do
       subject(:design) { build(:design) }
 
       it 'generates matching slug' do
-        expect(design.should_generate_new_friendly_id?).to be true
+        expect(design.send(:should_generate_new_friendly_id?)).to be true
       end
     end
   end
@@ -273,4 +257,20 @@ RSpec.describe Design, type: :model do
     end
   end
   # rubocop:enable RSpec/NestedGroups
+
+  describe '.most_popular' do
+    let!(:popular2) { create(:design, popularity_score: 1) }
+    let!(:popular1) { create(:design, popularity_score: 2) }
+    let!(:popular3) { create(:design) }
+
+    it 'orders designs by the popularity score in descending order' do
+      expect(described_class.most_popular).to eq([popular1, popular2, popular3])
+    end
+
+    it 'limits designs based on a POPULAR_LIMIT value' do
+      stub_const("#{described_class}::POPULAR_LIMIT", 2)
+
+      expect(described_class.most_popular.count).to eq(2)
+    end
+  end
 end
