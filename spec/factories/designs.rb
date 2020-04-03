@@ -63,5 +63,31 @@ FactoryBot.define do
     trait :with_slug do
       slug { 'slug' }
     end
+
+    trait :downloaded do
+      downloads_count { 1 }
+    end
+
+    trait :not_downloaded do
+      downloads_count { 0 }
+    end
+
+    trait :high_download_per_hour do
+      downloads_count { 1000 }
+      hourly_downloads_count { 0.22 }
+      created_at { 6.months.ago }
+    end
+
+    trait :normal_download_per_hour do
+      downloads_count { 500 }
+      hourly_downloads_count { 0.11 }
+      created_at { 6.months.ago }
+    end
+
+    trait :low_download_per_hour do
+      downloads_count { 100 }
+      hourly_downloads_count { 0.022 }
+      created_at { 6.months.ago }
+    end
   end
 end
