@@ -55,6 +55,11 @@ class Design < ApplicationRecord
   validates :design_illustrations, presence: true
   validates :design_blueprints, presence: true
 
+  scope :downloaded, -> { where('downloads_count > 0') }
+  scope :eligible_for_hourly_download_calculation, (lambda do
+    where('designs.created_at < ?', Time.current - HOURLY_DOWNLOAD_INTERVAL)
+  end)
+
   enum license_type: {
     license_none: 'license_none',
     cc_by: 'cc_by',
@@ -99,10 +104,9 @@ class Design < ApplicationRecord
     end
 
     def most_downloaded
-      where('downloads_count > :min_count AND  designs.created_at < :date',
-            min_count: 0, date: Time.current - HOURLY_DOWNLOAD_INTERVAL)
-        .order(hourly_downloads_count: :desc, created_at: :desc)
-        .limit(MOST_DOWNLOADED_LIMIT)
+      downloaded.eligible_for_hourly_download_calculation
+                .order(hourly_downloads_count: :desc, created_at: :desc)
+                .limit(MOST_DOWNLOADED_LIMIT)
     end
 
     def most_popular
@@ -114,10 +118,8 @@ class Design < ApplicationRecord
     end
 
     def with_illustration
-      first_illustration
-        .joins(:category)
-        .select('designs.id, designs.name, designs.slug, illustrations.medium_url, categories.slug
-                 as category_slug')
+      first_illustration.joins(:category).select('designs.id, designs.name, designs.slug,
+        illustrations.medium_url, categories.slug as category_slug')
     end
 
     def cached_most_downloaded
