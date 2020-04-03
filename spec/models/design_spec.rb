@@ -258,13 +258,66 @@ RSpec.describe Design, type: :model do
   end
   # rubocop:enable RSpec/NestedGroups
 
+  describe '.most_downloaded' do
+    before do
+      stub_const("#{described_class}::HOURLY_DOWNLOAD_INTERVAL", 1.hour)
+    end
+
+    context 'when there are designs that have never been downloaded' do
+      let!(:design) { create(:design, :not_downloaded) }
+
+      it 'does not return these ones' do
+        expect(described_class.most_downloaded).not_to include(design)
+      end
+    end
+
+    context 'for hourly download calculation' do
+      let!(:design1) { create(:design, :downloaded, created_at: 30.minutes.ago) }
+      let!(:design2) { create(:design, :downloaded, created_at: 2.hours.ago) }
+      let!(:design3) { create(:design, :downloaded) }
+
+      it 'does not return designs not eligible for hourly download calculation' do
+        expect(described_class.most_downloaded).not_to include(design1, design3)
+      end
+
+      it 'returns designs eligible for hourly download calculation' do
+        expect(described_class.most_downloaded).to eq([design2])
+      end
+    end
+
+    context 'when designs have different hourly download count' do
+      let!(:design2) { create(:design, :normal_download_per_hour) }
+      let!(:design1) { create(:design, :high_download_per_hour) }
+      let!(:design3) { create(:design, :low_download_per_hour) }
+
+      it 'orders designs by hourly download count in descending order' do
+        expect(described_class.most_downloaded).to eq([design1, design2, design3])
+      end
+
+      it 'limits designs based on a MOST_DOWNLOADED_LIMIT value' do
+        stub_const("#{described_class}::MOST_DOWNLOADED_LIMIT", 2)
+
+        expect(described_class.most_downloaded.count).to eq(2)
+      end
+    end
+
+    context 'when multiple designs have the same hourly download count' do
+      let!(:design2) { create(:design, :normal_download_per_hour, created_at: 6.months.ago) }
+      let!(:design1) { create(:design, :normal_download_per_hour, created_at: 2.months.ago) }
+
+      it 'orders designs by descending created date' do
+        expect(described_class.most_downloaded).to eq([design1, design2])
+      end
+    end
+  end
+
   describe '.most_popular' do
-    let!(:popular2) { create(:design, popularity_score: 1) }
-    let!(:popular1) { create(:design, popularity_score: 2) }
-    let!(:popular3) { create(:design) }
+    let!(:design2) { create(:design, popularity_score: 1) }
+    let!(:design1) { create(:design, popularity_score: 2) }
+    let!(:design3) { create(:design) }
 
     it 'orders designs by the popularity score in descending order' do
-      expect(described_class.most_popular).to eq([popular1, popular2, popular3])
+      expect(described_class.most_popular).to eq([design1, design2, design3])
     end
 
     it 'limits designs based on a POPULAR_LIMIT value' do
