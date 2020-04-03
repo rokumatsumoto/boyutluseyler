@@ -10,6 +10,7 @@
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  thumb_url    :string           default(""), not null
+#  preview      :boolean          default(FALSE)
 #
 
 FactoryBot.define do
