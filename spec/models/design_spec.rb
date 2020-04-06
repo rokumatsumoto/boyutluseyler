@@ -88,32 +88,6 @@ RSpec.describe Design, type: :model do
     it { is_expected.to validate_presence_of(:design_blueprints) }
   end
 
-  describe '#should_generate_new_friendly_id?' do
-    subject(:design) { build_stubbed(:design, :with_slug) }
-
-    context 'when name attribute is changed' do
-      it 'generates matching slug' do
-        design.name += ' updated'
-
-        expect(design.send(:should_generate_new_friendly_id?)).to be true
-      end
-    end
-
-    context 'when name attribute is not changed' do
-      it 'does not generate matching slug' do
-        expect(design.send(:should_generate_new_friendly_id?)).to be false
-      end
-    end
-
-    context 'if record is new' do
-      subject(:design) { build(:design) }
-
-      it 'generates matching slug' do
-        expect(design.send(:should_generate_new_friendly_id?)).to be true
-      end
-    end
-  end
-
   describe '#preview_blueprints' do
     context 'with blueprints that support preview' do
       subject(:blueprints) { design.preview_blueprints }
@@ -154,7 +128,7 @@ RSpec.describe Design, type: :model do
 
   describe '#cached_category_name' do
     it 'returns the category name of design' do
-      design = build(:design)
+      design = build_stubbed(:design)
       category = instance_double(Category, name: 'name')
 
       allow(design).to receive(:category).and_return(category)
@@ -165,7 +139,7 @@ RSpec.describe Design, type: :model do
 
   describe '#cached_user' do
     it 'returns the profile info of design creator' do
-      design = build(:design)
+      design = build_stubbed(:design)
       user = instance_double(User, username: 'username', avatar_url: 'avatar_url')
 
       allow(design).to receive(:user).and_return(user)
@@ -173,6 +147,30 @@ RSpec.describe Design, type: :model do
       attributes = design.cached_user.instance_variable_get('@table').keys
       expect(attributes).to match_array(%i[username avatar_url])
       expect(design.cached_user.username).to eq(user.username)
+    end
+  end
+
+  describe '.most_downloaded_with_illustration' do
+    it 'returns most downloaded designs with the first illustration' do
+      allow(described_class).to receive(:most_downloaded).and_call_original
+      allow(described_class).to receive(:with_illustration).and_call_original
+
+      described_class.most_downloaded_with_illustration
+
+      expect(described_class).to have_received(:most_downloaded)
+      expect(described_class).to have_received(:with_illustration)
+    end
+  end
+
+  describe '.most_popular_with_illustration' do
+    it 'returns most popular designs with the first illustration' do
+      allow(described_class).to receive(:most_popular).and_call_original
+      allow(described_class).to receive(:with_illustration).and_call_original
+
+      described_class.most_popular_with_illustration
+
+      expect(described_class).to have_received(:most_popular)
+      expect(described_class).to have_received(:with_illustration)
     end
   end
 
@@ -324,6 +322,151 @@ RSpec.describe Design, type: :model do
       stub_const("#{described_class}::POPULAR_LIMIT", 2)
 
       expect(described_class.most_popular.count).to eq(2)
+    end
+  end
+
+  describe '.popular' do
+    let!(:design1) { create(:design, :unpopular) }
+    let!(:design2) { create(:design, :popular) }
+
+    context 'when there are popular designs' do
+      it 'returns these ones' do
+        expect(described_class.popular).to eq([design2])
+      end
+    end
+
+    context 'when there are unpopular designs' do
+      it 'does not return these ones' do
+        expect(described_class.popular).not_to include(design1)
+      end
+    end
+  end
+
+  describe '.with_illustration' do
+    let!(:design) { create(:design) }
+
+    context 'with first illustration' do
+      it 'returns the first illustration of design' do
+        result = described_class.with_illustration.select('illustrations.id as illustration_id')
+        # TODO: get rid of select if you can
+
+        expect(result.first.illustration_id).to eq(design.illustrations.first.id)
+      end
+
+      it 'does not return noninitial illustration of design' do
+        expect(described_class.with_illustration.count(:all)).to eq(1)
+      end
+    end
+
+    it 'returns proper attributes' do
+      keys = described_class.with_illustration.take.attributes.keys
+
+      expect(keys).to match_array(%w[id name slug medium_url category_slug tag_names])
+    end
+  end
+
+  describe '.cached_most_downloaded' do
+    it 'calculates most downloaded designs and returns them' do
+      hourly_downloads_count_service = instance_spy(Designs::Downloads::HourlyDownloadsCountService)
+      allow(described_class).to receive(:hourly_downloads_count_service)
+        .and_return(hourly_downloads_count_service)
+      allow(described_class).to receive(:most_downloaded_with_illustration)
+
+      described_class.cached_most_downloaded
+
+      expect(hourly_downloads_count_service).to have_received(:execute)
+      expect(described_class).to have_received(:most_downloaded_with_illustration)
+    end
+
+    context 'for caching' do
+      let(:design_list) do
+        build_stubbed(:design)
+        build_stubbed(:design)
+      end
+
+      it 'stores most downloaded design list in JSON format and parse when it needs' do
+        allow(described_class).to receive(:most_downloaded_with_illustration).and_return(design_list)
+        cached_data = design_list.to_json(except: :tag_names)
+
+        expect(described_class.cached_most_downloaded).to eq(JSON.parse(cached_data))
+      end
+    end
+  end
+
+  describe '.cached_popular_designs' do
+    it 'finds the most popular designs for the homepage' do
+      become_popular_service = instance_spy(Designs::BecomePopularService)
+      allow(described_class).to receive(:become_popular_service).and_return(become_popular_service)
+      allow(described_class).to receive(:most_popular_with_illustration)
+
+      described_class.cached_popular_designs
+
+      expect(become_popular_service).to have_received(:execute)
+      expect(described_class).to have_received(:most_popular_with_illustration)
+    end
+
+    context 'for caching' do
+      let(:design_list) do
+        build_stubbed(:design)
+        build_stubbed(:design)
+      end
+
+      it 'stores most popular design list in JSON format and parse when it needs' do
+        allow(described_class).to receive(:most_popular_with_illustration).and_return(design_list)
+        cached_data = design_list.to_json(except: :tag_names)
+
+        expect(described_class.cached_popular_designs).to eq(JSON.parse(cached_data))
+      end
+    end
+  end
+
+  describe '.invalidate_most_downloaded_cache' do
+    it 'invalidates cache for most downloaded design list' do
+      cache_mock = spy
+
+      allow(Rails).to receive(:cache).and_return(cache_mock)
+
+      described_class.invalidate_most_downloaded_cache
+
+      expect(cache_mock).to have_received(:delete).with('most_downloaded')
+    end
+  end
+
+  describe '.invalidate_popular_designs_cache' do
+    it 'invalidates cache for most popular design list' do
+      cache_mock = spy
+
+      allow(Rails).to receive(:cache).and_return(cache_mock)
+
+      described_class.invalidate_popular_designs_cache
+
+      expect(cache_mock).to have_received(:delete).with('popular_designs')
+    end
+  end
+
+  describe '#should_generate_new_friendly_id?' do
+    subject(:design) { build_stubbed(:design, :with_slug) }
+
+    context 'when name attribute is changed' do
+      it 'generates matching slug' do
+        design.name += ' updated'
+
+        expect(design.send(:should_generate_new_friendly_id?)).to be true
+      end
+    end
+
+    context 'when name attribute is not changed' do
+      it 'does not generate matching slug' do
+        expect(design.send(:should_generate_new_friendly_id?)).to be false
+      end
+    end
+
+    context 'if record is new' do
+      subject(:design) { build(:design) }
+
+      it 'generates matching slug' do
+        expect(design.send(:should_generate_new_friendly_id?)).to be true
+      end
     end
   end
 end
