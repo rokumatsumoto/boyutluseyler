@@ -89,5 +89,13 @@ FactoryBot.define do
       hourly_downloads_count { 0.022 }
       created_at { 6.months.ago }
     end
+
+    trait :popular do
+      home_popular_at { 6.months.ago }
+    end
+
+    trait :unpopular do
+      home_popular_at { nil }
+    end
   end
 end
