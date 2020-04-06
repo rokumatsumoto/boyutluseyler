@@ -91,6 +91,9 @@ class Design < ApplicationRecord
   end
 
   class << self
+    delegate :with_illustration, to: :most_downloaded, prefix: true
+    delegate :with_illustration, to: :most_popular, prefix: true
+
     def sort_by_attribute(method)
       case method.to_s
       when 'downloads_count_desc' then reorder(downloads_count: :desc)
@@ -125,10 +128,10 @@ class Design < ApplicationRecord
     def cached_most_downloaded
       design_list = Rails.cache.fetch('most_downloaded',
                                       expires_in: HOURLY_DOWNLOAD_INTERVAL) do
-        Designs::Downloads::HourlyDownloadsCountService.new.execute
+        hourly_downloads_count_service.execute
 
         # TODO: use fast_jsonapi serializer
-        most_downloaded.with_illustration.to_json(except: :tag_names)
+        most_downloaded_with_illustration.to_json(except: :tag_names)
       end
 
       JSON.parse(design_list)
@@ -136,10 +139,10 @@ class Design < ApplicationRecord
 
     def cached_popular_designs
       design_list = Rails.cache.fetch('popular_designs', expires_in: POPULAR_INTERVAL) do
-        Designs::BecomePopularService.new.execute
+        become_popular_service.execute
 
         # TODO: use fast_jsonapi serializer
-        most_popular.with_illustration.to_json(except: :tag_names)
+        most_popular_with_illustration.to_json(except: :tag_names)
       end
 
       JSON.parse(design_list)
@@ -157,6 +160,14 @@ class Design < ApplicationRecord
 
     def first_illustration
       joins(:illustrations).where('design_illustrations.position = ?', 1)
+    end
+
+    def hourly_downloads_count_service
+      Designs::Downloads::HourlyDownloadsCountService.new
+    end
+
+    def become_popular_service
+      Designs::BecomePopularService.new
     end
   end
 
