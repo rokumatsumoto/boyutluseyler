@@ -10,6 +10,7 @@
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  thumb_url    :string           default(""), not null
+#  preview      :boolean          default(FALSE)
 #
 
 FactoryBot.define do
@@ -18,5 +19,13 @@ FactoryBot.define do
     url_path { 'blueprint.stl' }
     size { 32_484 }
     content_type { 'application/vnd.ms-pki.stl' }
+    preview { true }
+  end
+
+  factory :blueprint_no_preview, parent: :blueprint do
+    url { 'https://example.com/blueprint.zip' }
+    url_path { 'blueprint.zip' }
+    content_type { 'application/zip' }
+    preview { false }
   end
 end

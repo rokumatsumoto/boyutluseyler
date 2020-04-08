@@ -23,7 +23,7 @@ class Category < ApplicationRecord
   after_destroy :invalidate_all_categories_cache # TODO: delegate to service
 
   def should_generate_new_friendly_id?
-    name_changed?
+    name_changed? || super
   end
 
   def invalidate_all_categories_cache

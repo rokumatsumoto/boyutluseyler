@@ -25,6 +25,8 @@ en:
               blank: Photos must be added
             design_blueprints:
               blank: Files must be added
+            user:
+              required: Creator cannot be empty
         illustration:
           attributes:
               url_path:
