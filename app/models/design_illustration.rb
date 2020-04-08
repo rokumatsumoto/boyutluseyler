@@ -13,7 +13,7 @@
 #
 
 class DesignIllustration < ApplicationRecord
-  belongs_to :design
+  belongs_to :design, inverse_of: :design_illustrations
   belongs_to :illustration
   acts_as_list scope: :design
 end

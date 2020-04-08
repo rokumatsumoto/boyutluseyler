@@ -3,7 +3,7 @@
 module Designs
   class BecomePopularService
     def execute
-      design_list = Design.home_popular
+      design_list = Design.most_popular
 
       design_list.reverse.each do |design|
         design.update_column(:home_popular_at, Time.current)

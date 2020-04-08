@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: blueprints
@@ -12,6 +11,7 @@
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  thumb_url    :string           default(""), not null
+#  preview      :boolean          default(FALSE)
 #
 
 class BlueprintSerializer < BaseSerializer

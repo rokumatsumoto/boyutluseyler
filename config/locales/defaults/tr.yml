@@ -25,6 +25,8 @@ tr:
               blank: Fotoğraflar eklenmeli
             design_blueprints:
               blank: Dosyalar eklenmeli
+            user:
+              required: Oluşturan kişi boş olamaz
         illustration:
           attributes:
               url_path:

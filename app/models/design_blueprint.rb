@@ -13,7 +13,7 @@
 #
 
 class DesignBlueprint < ApplicationRecord
-  belongs_to :design
+  belongs_to :design, inverse_of: :design_blueprints
   belongs_to :blueprint
   acts_as_list scope: :design
 end
