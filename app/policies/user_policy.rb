@@ -6,21 +6,15 @@ class UserPolicy < ApplicationPolicy
   end
 
   def edit?
-    current_user? || is_admin?
+    show?
   end
 
   def update?
-    current_user? || is_admin?
+    show?
   end
 
   def reset?
-    current_user? || is_admin?
-  end
-
-  class Scope < Scope
-    def resolve
-      scope.all
-    end
+    show?
   end
 
   private

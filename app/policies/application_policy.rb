@@ -10,32 +10,12 @@ class ApplicationPolicy
     @record = record
   end
 
-  def index?
-    false
-  end
-
-  def show?
-    false
-  end
-
-  def create?
-    false
-  end
-
   def new?
     create?
   end
 
-  def update?
-    false
-  end
-
   def edit?
     update?
-  end
-
-  def destroy?
-    false
   end
 
   # Politely ask if the user has an admin role for the record.  If your "scope"
@@ -59,18 +39,5 @@ class ApplicationPolicy
     return false if record.user_id_was && record.user_id_was != user.id
 
     true
-  end
-
-  class Scope
-    attr_reader :user, :scope
-
-    def initialize(user, scope)
-      @user = user
-      @scope = scope
-    end
-
-    def resolve
-      scope.all
-    end
   end
 end
