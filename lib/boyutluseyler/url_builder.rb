@@ -29,7 +29,11 @@ module Boyutluseyler
     end
 
     def extension(url)
-      Boyutluseyler::FilenameHelpers.extname(url)
+      ext = Boyutluseyler::FilenameHelpers.extname(url)
+
+      return '' if ext.blank?
+
+      ext
     end
   end
 end
