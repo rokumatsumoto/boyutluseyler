@@ -20,7 +20,7 @@ RSpec.describe Category, type: :model do
     it { is_expected.to include_module(FriendlyId::History) }
     it { is_expected.to include_module(FriendlyId::Slugged) }
 
-    context 'with FriendlyId config' do
+    context 'for FriendlyId config' do
       let(:friendly_id_config) { described_class.friendly_id_config }
 
       it 'uses a column named name to generate slug' do
