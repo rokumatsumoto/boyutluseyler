@@ -30,23 +30,46 @@
 #
 
 require 'spec_helper'
-
-# rubocop:disable Metrics/BlockLength
 RSpec.describe User, type: :model do
   describe 'modules' do
-    # rubocop:disable RSpec/ExampleLength
-    it 'does include all required devise modules' do
-      expect(described_class.devise_modules).to contain_exactly(:database_authenticatable,
-                                                                :rememberable,
-                                                                :recoverable,
-                                                                :registerable,
-                                                                :validatable,
-                                                                :confirmable,
-                                                                :lockable,
-                                                                :trackable,
-                                                                :omniauthable)
+    it { is_expected.to include_module(BlocksJsonSerialization) }
+    it { is_expected.to include_module(Rolify::Role) }
+
+    context 'for Devise config' do
+      it 'does include all required devise modules' do
+        devise_modules = %i[database_authenticatable registerable recoverable rememberable
+                            validatable confirmable lockable trackable omniauthable]
+
+        expect(described_class.devise_modules).to match_array(devise_modules)
+      end
+
+      it 'uses given OmniAuth strategies' do
+        expect(described_class.omniauth_providers).to eq(described_class::OMNIAUTH_PROVIDERS)
+      end
+
+      it 'has a compatible email regex with Javascript' do
+        email_regexp = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+
+        expect(described_class.email_regexp).to eq(email_regexp)
+      end
     end
-    # rubocop:enable RSpec/ExampleLength
+  end
+
+  describe 'constants' do
+    subject { described_class }
+
+    let(:omniauth_providers) { %i[google_oauth2 facebook] }
+
+    it { is_expected.to have_constant(:OMNIAUTH_PROVIDERS, Array).with_value(omniauth_providers) }
+    it { is_expected.to have_constant(:USERNAME_REGEX, Regexp) }
+  end
+
+  describe 'associations' do
+    it { is_expected.to have_many(:designs) }
+    it { is_expected.to have_many(:events).class_name('Ahoy::Event').dependent(:destroy) }
+    it { is_expected.to have_many(:identities).dependent(:destroy).autosave(true) }
+    it { is_expected.to have_many(:users_roles).dependent(:destroy) }
+    it { is_expected.to have_many(:roles).through(:users_roles) }
   end
 
   it { is_expected.to have_accessor_attribute(:login) }
@@ -59,8 +82,6 @@ RSpec.describe User, type: :model do
       it 'validates presence' do
         expect(user).to validate_presence_of(:username)
       end
-
-      # rubocop:disable RSpec/NestedGroups
       context 'when in use by another user' do
         let(:username) { 'foo' }
 
@@ -80,14 +101,32 @@ RSpec.describe User, type: :model do
                                                            .with_message(taken_message_for_username)
         end
       end
-      # rubocop:enable RSpec/NestedGroups
 
-      # rubocop:disable RSpec/NestedGroups
+      context 'when contains ASCII letters / digits' do
+        it { is_expected.to allow_value('Username').for(:username) }
+        it { is_expected.to allow_value('username1').for(:username) }
+      end
+
+      context 'when contains Turkish characters' do
+        it { is_expected.to allow_value('İmamBayıldı').for(:username) }
+        it { is_expected.to allow_value('fıstıkçı-şahap').for(:username) }
+        it { is_expected.to allow_value('çağatay.börülce').for(:username) }
+      end
+
+      context 'when contains punctuation marks (in English grammar and computing)' do
+        it { is_expected.to allow_value('user_name').for(:username) }
+        it { is_expected.to allow_value('user.name').for(:username) }
+        it { is_expected.to allow_value('user-name').for(:username) }
+
+        it { is_expected.not_to allow_value('user__name').for(:username) }
+        it { is_expected.not_to allow_value('.username').for(:username) }
+        it { is_expected.not_to allow_value('username_').for(:username) }
+      end
+
       context 'when contains special characters' do
         it { is_expected.not_to allow_value('user@example.org').for(:username) }
         it { is_expected.not_to allow_value('new$user!username').for(:username) }
       end
-      # rubocop:enable RSpec/NestedGroups
 
       it 'validates minimum length' do
         expect(user).to validate_length_of(:username)
@@ -106,11 +145,9 @@ RSpec.describe User, type: :model do
       )
     end
 
-    it 'has a compatible email regex with Javascript' do
-      expect(described_class.email_regexp).to eq(/\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i)
-    end
+    it { is_expected.to validate_presence_of(:avatar_url).on(:update) }
 
-    it_behaves_like 'an object with email-formated attributes', :email do
+    it_behaves_like 'an object with email-formatted attributes', :email do
       subject { build_stubbed(:user) }
     end
   end
@@ -141,4 +178,3 @@ RSpec.describe User, type: :model do
     t('activerecord.attributes.user.password'))
   end
 end
-# rubocop:enable Metrics/BlockLength
