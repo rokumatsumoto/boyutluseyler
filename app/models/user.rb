@@ -33,13 +33,30 @@
 
 class User < ApplicationRecord
   include BlocksJsonSerialization
+
   rolify
 
+  OMNIAUTH_PROVIDERS = %i[google_oauth2 facebook].freeze
+
+  # TODO: move to Boyutluseyler::Regex module
+  # TODO: https://github.com/presidentbeef/brakeman/wiki/How-to-Report-a-Brakeman-Issue#false-positivesfalse-negatives
+  # * Output: /\A[a-zA-ZğüşıöçĞÜŞİÖÇ0-9]+(?:[._-][a-zA-ZğüşıöçĞÜŞİÖÇ0-9]+)*\z/
+  # * Test: https://rubular.com/r/NVt4RvIc6c4ZEL
+  USERNAME_REGEX =
+    /
+    \A                                 # start of string
+    [a-zA-ZğüşıöçĞÜŞİÖÇ0-9]+           # one or more ASCII letters digits with TR characters support
+    (?:[._-][a-zA-ZğüşıöçĞÜŞİÖÇ0-9]+)* # 0+ sequences of:
+                                         # [._-] a . or _ or -
+                                         # [a-zA-ZğüşıöçĞÜŞİÖÇ0-9]+ one or more ASCII letters digits
+    \z                                 # end of string
+    /x.freeze
+
+  # validatable adds validations for email and password
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable, :trackable,
-         :omniauthable, omniauth_providers: %i[google_oauth2 facebook],
-                        email_regexp: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+         :omniauthable, omniauth_providers: OMNIAUTH_PROVIDERS
 
   has_many :designs
   has_many :events, class_name: 'Ahoy::Event', dependent: :destroy
@@ -49,25 +66,21 @@ class User < ApplicationRecord
 
   # Virtual attribute for authenticating by either username or email
   attr_accessor :login
-  # Add an accessor so you can have a field to validate
-  # that is seperate from password, password_confirmation or
-  # password_digest...
+  # Add an accessor so you can have a field to validate that is seperate from
+  # password, password_confirmation or password_digest...
   attr_accessor :current_password
-  # Validations
-  #
-  # Note: devise :validatable above adds validations for :email and :password
 
-  validates :username, presence: true,
-                       uniqueness: { case_sensitive: false },
-                       length: { in: 3..30 }
-
+  validates :username, presence: true, uniqueness: { case_sensitive: false },
+                       length: { in: 3..30 }, format: { with: USERNAME_REGEX }
   validates :password, confirmation: true
-  # Only allow letter, number, underscore, hyphen and punctuation.
-  validates :username,
-            format: { with: /\A(?:[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\.][a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\-\.]*[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\-]|[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_])\z/ }
   validates :avatar_url, presence: true, on: :update
   validates :avatar_url, format: { with: /\.(png|jpg|jpeg|gif)\z/i }, on: :update
   validate :avatar_filename_is_blank, on: :update
+
+  # Confidence: High
+  # Category: Format Validation
+  # Check: ValidationRegex
+  # Message: Insufficient validation for `avatar_url` using `/\.(png|jpg|jpeg|gif)\z/i`. Use `\A` and `\z` as anchors
 
   def avatar_filename_is_blank
     # user input: '.png'
@@ -104,7 +117,7 @@ class User < ApplicationRecord
       username = 'blank' if username.blank?
 
       uniquify = Uniquify.new
-      uniquify.string(username) { |s| find_by_username(s) } # rubocop:disable Rails/DynamicFindBy
+      uniquify.string(username) { |s| find_by(username: s) }
     end
   end
 
