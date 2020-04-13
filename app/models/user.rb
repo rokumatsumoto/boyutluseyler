@@ -52,6 +52,19 @@ class User < ApplicationRecord
     \z                                 # end of string
     /x.freeze
 
+  IMG_EXTS = %w[png jpg jpeg gif].freeze
+
+  # TODO: move to Boyutluseyler::Regex module
+  # * Output: /.(png|jpg|jpeg|gif)\z/i
+  # * Test: https://rubular.com/r/zmGjZaI8J8QMFN
+  # * No escape characters
+  # * No variables
+  # * . Any single character
+  # * a|b a or b
+  # * \z End of string
+  # * i Case insensitive
+  IMG_EXTS_REGEX = /.(#{IMG_EXTS.join("|")})\z/i.freeze
+
   # validatable adds validations for email and password
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
@@ -73,20 +86,8 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: { case_sensitive: false },
                        length: { in: 3..30 }, format: { with: USERNAME_REGEX }
   validates :password, confirmation: true
-  validates :avatar_url, presence: true, on: :update
-  validates :avatar_url, format: { with: /\.(png|jpg|jpeg|gif)\z/i }, on: :update
+  validates :avatar_url, presence: true, format: { with: IMG_EXTS_REGEX }, on: :update
   validate :avatar_filename_is_blank, on: :update
-
-  # Confidence: High
-  # Category: Format Validation
-  # Check: ValidationRegex
-  # Message: Insufficient validation for `avatar_url` using `/\.(png|jpg|jpeg|gif)\z/i`. Use `\A` and `\z` as anchors
-
-  def avatar_filename_is_blank
-    # user input: '.png'
-    filename = Boyutluseyler::FilenameHelpers.filename(avatar_url)
-    errors.add(:avatar_url, :blank) if filename.blank?
-  end
 
   class << self
     # Devise method overridden to allow sign in with email or username
@@ -107,17 +108,16 @@ class User < ApplicationRecord
       username.gsub!(/@.*\z/, '')
       # Remove everything that's not in the list of allowed characters.
       username.gsub!(/[^a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\-\.]/, '')
-      # Remove trailing violations ('.')
-      username.gsub!(/(\.)*\z/, '')
-      # Remove leading violations ('-')
-      username.gsub!(/\A\-+/, '')
-
+      # Remove trailing violations ('.', '_', '-)
+      username.gsub!(/(\.|\_|\-)*\z/, '')
+      # Remove leading violations ('.', '_', '-)
+      username.gsub!(/\A(\.|\_|\-)*/, '')
       # Users with the great usernames of "." or ".." would end up with a blank username.
       # Work around that by setting their username to "blank", followed by a counter.
       username = 'blank' if username.blank?
 
       uniquify = Uniquify.new
-      uniquify.string(username) { |s| find_by(username: s) }
+      uniquify.string(username) { |s| find_by_username(s) } # rubocop:disable Rails/DynamicFindBy
     end
   end
 
@@ -127,5 +127,14 @@ class User < ApplicationRecord
 
   def skip_confirmation=(bool)
     skip_confirmation! if bool
+  end
+
+  private
+
+  def avatar_filename_is_blank
+    # user input: '.png'
+    filename = Boyutluseyler::FilenameHelpers.filename(avatar_url)
+
+    errors.add(:avatar_url, :blank) if filename.blank?
   end
 end
