@@ -59,9 +59,12 @@ RSpec.describe User, type: :model do
     subject { described_class }
 
     let(:omniauth_providers) { %i[google_oauth2 facebook] }
+    let(:image_extensions) { %w[png jpg jpeg gif] }
 
     it { is_expected.to have_constant(:OMNIAUTH_PROVIDERS, Array).with_value(omniauth_providers) }
     it { is_expected.to have_constant(:USERNAME_REGEX, Regexp) }
+    it { is_expected.to have_constant(:IMG_EXTS, Array).with_value(image_extensions) }
+    it { is_expected.to have_constant(:IMG_EXTS_REGEX, Regexp) }
   end
 
   describe 'associations' do
@@ -145,7 +148,31 @@ RSpec.describe User, type: :model do
       )
     end
 
-    it { is_expected.to validate_presence_of(:avatar_url).on(:update) }
+    describe 'avatar_url' do
+      it { is_expected.to validate_presence_of(:avatar_url).on(:update) }
+
+      context 'when contains allowed image extensions' do
+        it { is_expected.to allow_value('http://foo.com/img.png').for(:avatar_url).on(:update) }
+        it { is_expected.to allow_value('http://foo.com/img.jpg').for(:avatar_url).on(:update) }
+        it { is_expected.to allow_value('http://foo.com/img.jpeg').for(:avatar_url).on(:update) }
+        it { is_expected.to allow_value('http://foo.com/img.gif').for(:avatar_url).on(:update) }
+      end
+
+      context 'when contains not allowed file extensions' do
+        it { is_expected.not_to allow_value('http://foo.com/img.pdf').for(:avatar_url).on(:update) }
+        it { is_expected.not_to allow_value('http://foo.com/img.psd').for(:avatar_url).on(:update) }
+      end
+
+      context 'when filename is blank on update' do
+        let!(:user) { create(:user) }
+
+        it 'shows an error message' do
+          user.update(avatar_url: '.png')
+
+          expect(user.errors.full_messages.first).to eq(blank_message_for_avatar_url)
+        end
+      end
+    end
 
     it_behaves_like 'an object with email-formatted attributes', :email do
       subject { build_stubbed(:user) }
@@ -159,10 +186,20 @@ RSpec.describe User, type: :model do
       expect(described_class.find_for_database_authentication(login:
       " #{user.username} ")).to eq user
     end
+
+    it 'supports Turkish characters' do
+      user = create(:user, username: 'İçel')
+
+      expect(described_class.find_for_database_authentication(login: user.username)).to eq user
+    end
   end
 
   def taken_message_for_username
     t('activerecord.errors.models.user.attributes.username.taken')
+  end
+
+  def blank_message_for_avatar_url
+    t('activerecord.errors.models.user.attributes.avatar_url.blank')
   end
 
   def too_short_message_for_username
