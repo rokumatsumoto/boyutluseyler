@@ -194,6 +194,39 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe '.clean_username' do
+    before do
+      create(:user, username: 'sametboyutluseyler-etc')
+      create(:user, username: 'sametboyutluseyler-etc1')
+    end
+
+    it "cleans the username and makes sure it's available" do
+      expect(described_class.clean_username('-samet+boyutluseyler-ETC%.@gmail.com')).to eq('sametboyutluseyler-ETC2')
+      expect(described_class.clean_username('--_.%+--geçerli_*&%isim=._-@email.com')).to eq('geçerli_isim')
+      # "geçerli isim" means "valid name" in English
+    end
+  end
+
+  describe '#recently_sent_password_reset?' do
+    it 'is false when reset_password_sent_at is nil' do
+      user = build_stubbed(:user, reset_password_sent_at: nil)
+
+      expect(user.recently_sent_password_reset?).to eq false
+    end
+
+    it 'is false when sent more than one minute ago' do
+      user = build_stubbed(:user, reset_password_sent_at: 5.minutes.ago)
+
+      expect(user.recently_sent_password_reset?).to eq false
+    end
+
+    it 'is true when sent less than one minute ago' do
+      user = build_stubbed(:user, reset_password_sent_at: Time.current)
+
+      expect(user.recently_sent_password_reset?).to eq true
+    end
+  end
+
   def taken_message_for_username
     t('activerecord.errors.models.user.attributes.username.taken')
   end
