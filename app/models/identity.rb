@@ -18,8 +18,10 @@ class Identity < ApplicationRecord
 
   serialize :auth_data_dump
 
+  validates :provider, presence: true
+  validates :uid, presence: true
+  validates :user, uniqueness: { scope: :provider }
+
   scope :with_provider, ->(provider) { where(provider: provider) }
-  scope :with_uid, lambda { |provider, uid|
-    where(uid: uid).with_provider(provider)
-  }
+  scope :with_uid, ->(provider, uid) { where(uid: uid).with_provider(provider) }
 end
