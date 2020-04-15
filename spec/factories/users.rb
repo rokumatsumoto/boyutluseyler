@@ -51,5 +51,21 @@ FactoryBot.define do
     trait :locked do
       locked_at { Time.current }
     end
+
+    factory :omniauth_user do
+      transient do
+        uid { '123456' }
+        provider { 'twitter' }
+      end
+
+      after(:create) do |user, evaluator|
+        identity_attrs = {
+          provider: evaluator.provider,
+          uid: evaluator.uid
+        }
+
+        user.identities << build(:identity, identity_attrs)
+      end
+    end
   end
 end
