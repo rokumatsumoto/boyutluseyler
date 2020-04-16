@@ -6,7 +6,7 @@ module FileValidations
   class_methods do
     def content_length_range
       # Default values needed for testing factories in rails console
-      # For test env use this `stub_sail_direct_upload_settings` method
+      # For test env we use this `stub_sail_direct_upload_settings` method
       Range.new((Sail.get('direct_upload_content_length_range_min') || 1),
                 (Sail.get('direct_upload_content_length_range_max') || 104_857_600))
     end
@@ -17,6 +17,7 @@ module FileValidations
     validates :url, presence: true
     validates :url_path, presence: true
     validates :size, inclusion: { in: content_length_range }
+    validates :content_type, presence: true
     before_validation :sanitize_attrs
     before_validation :ensure_content_type_correct
   end
