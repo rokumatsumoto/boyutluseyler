@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: blueprints
@@ -24,6 +25,7 @@ class Blueprint < ApplicationRecord
     model/stl
     application/x-tgif
   ].freeze
+
   ALLOWED_EXTS = %w[stl obj zip].freeze
 
   # TODO: move to Boyutluseyler::Regex module
@@ -44,8 +46,6 @@ class Blueprint < ApplicationRecord
   private
 
   def set_preview
-    return if content_type.nil?
-
     self.preview = PREVIEW_CONTENT_TYPES.include?(content_type)
   end
 end
