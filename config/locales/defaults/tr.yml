@@ -41,6 +41,8 @@ tr:
                 blank: Dosya adı boş olamaz
               size:
                 inclusion: Dosya boyutu geçersiz
+              content_type:
+                blank: İçerik türü boş olamaz
         user:
           attributes:
               avatar_url:

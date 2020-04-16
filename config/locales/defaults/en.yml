@@ -41,6 +41,8 @@ en:
                 blank: Filename cannot be empty
               size:
                 inclusion: File size is invalid
+              content_type:
+                blank: Content type cannot be empty
         user:
           attributes:
               avatar_url:
