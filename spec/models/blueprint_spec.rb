@@ -27,7 +27,7 @@ RSpec.describe Blueprint, type: :model do
 
     let(:preview_content_types) { %w[application/vnd.ms-pki.stl model/stl application/x-tgif] }
     let(:allowed_exts) { %w[stl obj zip] }
-    let(:allowed_exts_regex) { /.(stl|obj|zip)\z/i }
+    let(:allowed_exts_regex) { /.[.](stl|obj|zip)\z/i }
 
     it { is_expected.to have_constant(:PREVIEW_CONTENT_TYPES, Array).with_value(preview_content_types) }
     it { is_expected.to have_constant(:ALLOWED_EXTS, Array).with_value(allowed_exts) }
@@ -41,13 +41,19 @@ RSpec.describe Blueprint, type: :model do
   describe 'validations' do
     describe 'url_path' do
       context 'when contains allowed file extensions' do
-        it { is_expected.to allow_value('http://foo.com/blueprint.stl').for(:url_path) }
-        it { is_expected.to allow_value('http://foo.com/blueprint.obj').for(:url_path) }
-        it { is_expected.to allow_value('http://foo.com/blueprint.zip').for(:url_path) }
+        it { is_expected.to allow_value('uploads/blueprint.stl').for(:url_path) }
+        it { is_expected.to allow_value('uploads/blueprint.obj').for(:url_path) }
+        it { is_expected.to allow_value('uploads/blueprint.zip').for(:url_path) }
+        it { is_expected.to allow_value('uploads/blueprint.STL.STL').for(:url_path) }
       end
 
       context 'when contains not allowed file extensions' do
-        it { is_expected.not_to allow_value('http://foo.com/blueprint.ogex').for(:url_path) }
+        it { is_expected.not_to allow_value('uploads/blueprint.ogex').for(:url_path) }
+      end
+
+      context 'when contains not allowed filename' do
+        it { is_expected.not_to allow_value('uploads/blueprintstl').for(:url_path) }
+        it { is_expected.not_to allow_value('.stl').for(:url_path) }
       end
     end
   end
@@ -73,7 +79,7 @@ RSpec.describe Blueprint, type: :model do
       end
     end
 
-    context 'when content_type is not known' do
+    context 'when content type is not known' do
       let(:blueprint) { build_stubbed(:blueprint, content_type: nil, preview: nil) }
 
       before do
