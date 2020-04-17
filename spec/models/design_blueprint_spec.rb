@@ -10,8 +10,27 @@
 #  position     :integer
 #
 
-require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe DesignBlueprint, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'modules' do
+    subject { described_class }
+
+    context 'for Acts As List config' do
+      subject(:design_blueprint) { described_class.new }
+
+      it 'uses a column named position' do
+        expect(design_blueprint.position_column).to eq('position')
+      end
+
+      it 'uses a scope named design_id' do
+        expect(design_blueprint.scope_name).to eq(:design_id)
+      end
+    end
+  end
+
+  describe 'associations' do
+    it { is_expected.to belong_to(:design).inverse_of(:design_blueprints) }
+    it { is_expected.to belong_to(:blueprint) }
+  end
 end
