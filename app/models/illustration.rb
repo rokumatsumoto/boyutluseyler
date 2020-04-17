@@ -22,15 +22,18 @@ class Illustration < ApplicationRecord
   ALLOWED_EXTS = %w[png jpg jpeg gif].freeze
 
   # TODO: move to Boyutluseyler::Regex module
-  # * Output: /.(png|jpg|jpeg|gif)\z/i
-  # * Test: https://rubular.com/r/zmGjZaI8J8QMFN
+  # TODO: improve regex for app/javascript/connected_uploader/constants.js
+  # https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html
+  # * Output: /.[.](png|jpg|jpeg|gif)\z/i
+  # * Test: https://rubular.com/r/J9pG880I9WxJUP
   # * No escape characters
   # * No variables
   # * . Any single character
+  # * [.] A single character of: .
   # * a|b a or b
   # * \z End of string
   # * i Case insensitive
-  ALLOWED_EXTS_REGEX = /.(#{ALLOWED_EXTS.join("|")})\z/i.freeze
+  ALLOWED_EXTS_REGEX = /.[.](#{ALLOWED_EXTS.join("|")})\z/i.freeze
 
   has_one :design_illustration
 
