@@ -12,7 +12,8 @@
 
 FactoryBot.define do
   factory :design_download do
-    download_step { 'MyString' }
-    download_url { 'MyString' }
+
+    # Associations
+    design
   end
 end
