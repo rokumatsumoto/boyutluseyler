@@ -31,8 +31,9 @@ Sidekiq::Testing.fake!
 # in spec/support/ and its subdirectories.
 # Requires helpers, and shared contexts/examples first since they're used in other support files
 Dir[Rails.root.join('spec/support/helpers/*.rb')].each { |f| require f }
-Dir[Rails.root.join('spec/support/shared_contexts/*.rb')].each { |f| require f }
 Dir[Rails.root.join('spec/support/shared_examples/*.rb')].each { |f| require f }
+Dir[Rails.root.join('spec/support/shared_contexts/*.rb')].each { |f| require f }
+Dir[Rails.root.join('spec/support/state_machines/*.rb')].each { |f| require f }
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
