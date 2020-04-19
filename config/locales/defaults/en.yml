@@ -48,6 +48,10 @@ en:
               avatar_url:
                 invalid: Invalid file extension
                 blank: Filename cannot be empty
+        user_avatar:
+          attributes:
+              user:
+                taken: You can add only one avatar to your account
   date:
     abbr_day_names:
     - Sun
