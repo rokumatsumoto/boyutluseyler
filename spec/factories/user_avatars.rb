@@ -12,8 +12,10 @@
 
 FactoryBot.define do
   factory :user_avatar do
-    letter_avatar_url { "MyString" }
-    letter_avatar_thumb_url { "MyString" }
-    user { nil }
+    letter_avatar_url { 'https://foo.com/avatar.png' }
+    letter_avatar_thumb_url { 'https://foo.com/avatar_thumb.png' }
+
+    # Associations
+    user
   end
 end
