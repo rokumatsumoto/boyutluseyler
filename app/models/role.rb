@@ -12,8 +12,9 @@
 #  updated_at    :datetime         not null
 #
 
-
 class Role < ApplicationRecord
+  scopify
+
   ROLES = %w[
     admin
   ].freeze
@@ -34,16 +35,11 @@ class Role < ApplicationRecord
              polymorphic: true,
              optional: true
 
+  validates :resource_type, inclusion: { in: Rolify.resource_types }, allow_nil: true
+
+  validates :name, inclusion: { in: ROLES }
+
   before_destroy :cancel
-
-  validates :resource_type,
-            inclusion: { in: Rolify.resource_types },
-            allow_nil: true
-
-  validates :name,
-            inclusion: { in: ROLES }
-
-  scopify
 
   private
 
