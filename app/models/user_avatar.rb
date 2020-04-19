@@ -11,5 +11,12 @@
 #
 
 class UserAvatar < ApplicationRecord
+  # TODO: Add regex constraints for url fields
+  # TODO: move to Boyutluseyler::Regex module
+
   belongs_to :user
+
+  validates :letter_avatar_url, presence: true
+  validates :letter_avatar_thumb_url, presence: true
+  validates :user, uniqueness: true
 end
