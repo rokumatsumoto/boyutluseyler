@@ -5,7 +5,7 @@
 #  id                      :bigint(8)        not null, primary key
 #  letter_avatar_url       :string           not null
 #  letter_avatar_thumb_url :string           not null
-#  user_id                 :bigint(8)
+#  user_id                 :bigint(8)        not null
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #
