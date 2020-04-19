@@ -73,6 +73,7 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_many(:identities).dependent(:destroy).autosave(true) }
     it { is_expected.to have_many(:users_roles).dependent(:destroy) }
     it { is_expected.to have_many(:roles).through(:users_roles) }
+    it { is_expected.to have_one(:user_avatar).dependent(:destroy) }
   end
 
   it { is_expected.to have_accessor_attribute(:login) }
