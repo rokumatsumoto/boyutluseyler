@@ -76,6 +76,7 @@ class User < ApplicationRecord
   has_many :identities, dependent: :destroy, autosave: true
   has_many :users_roles, dependent: :destroy
   has_many :roles, through: :users_roles
+  has_one :user_avatar, dependent: :destroy
 
   # Virtual attribute for authenticating by either username or email
   attr_accessor :login
