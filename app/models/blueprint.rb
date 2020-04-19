@@ -18,8 +18,6 @@
 class Blueprint < ApplicationRecord
   include FileValidations
 
-  before_validation :set_preview
-
   PREVIEW_CONTENT_TYPES = %w[
     application/vnd.ms-pki.stl
     model/stl
@@ -45,6 +43,8 @@ class Blueprint < ApplicationRecord
   has_one :design_blueprint
 
   validates :url_path, format: { with: ALLOWED_EXTS_REGEX }
+
+  before_validation :set_preview
 
   private
 
