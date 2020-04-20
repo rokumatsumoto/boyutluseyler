@@ -2,8 +2,8 @@
 #
 # Table name: users_roles
 #
-#  user_id :bigint(8)
-#  role_id :bigint(8)
+#  user_id :bigint(8)        not null
+#  role_id :bigint(8)        not null
 #
 
 class UsersRole < ApplicationRecord
