@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: ahoy_events
+#
+#  id         :bigint(8)        not null, primary key
+#  visit_id   :bigint(8)
+#  user_id    :bigint(8)
+#  name       :string
+#  properties :jsonb
+#  time       :datetime
+#
+
 FactoryBot.define do
   factory :ahoy_event, class: 'Ahoy::Event' do
     # Associations
