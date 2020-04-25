@@ -16,7 +16,7 @@
 #
 
 class Blueprint < ApplicationRecord
-  include FileValidations
+  include ValidatableFile
 
   PREVIEW_CONTENT_TYPES = %w[
     application/vnd.ms-pki.stl

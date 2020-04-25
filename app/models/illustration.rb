@@ -17,7 +17,7 @@
 #
 
 class Illustration < ApplicationRecord
-  include FileValidations
+  include ValidatableFile
 
   ALLOWED_EXTS = %w[png jpg jpeg gif].freeze
 

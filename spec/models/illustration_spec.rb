@@ -20,7 +20,7 @@ RSpec.describe Illustration, type: :model do
   describe 'modules' do
     subject { described_class }
 
-    it { is_expected.to include_module(FileValidations) }
+    it { is_expected.to include_module(ValidatableFile) }
   end
 
   describe 'constants' do
