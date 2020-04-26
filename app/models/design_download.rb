@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: design_downloads
@@ -17,8 +18,9 @@ class DesignDownload < ApplicationRecord
 
   belongs_to :design
 
-  before_validation :preserve_current_step
   validate :step_defined_in_state_machines
+
+  before_validation :preserve_current_step
 
   def state_machine
     @state_machine ||= StepMachine.new(
