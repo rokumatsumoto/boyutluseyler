@@ -18,10 +18,19 @@
 class Blueprint < ApplicationRecord
   include ValidatableFile
 
+  # MIME types
+  # stl - application/vnd.ms-pki.stl, model/stl
+  # obj - application/x-tgif
+  # zip - application/zip
+
   PREVIEW_CONTENT_TYPES = %w[
     application/vnd.ms-pki.stl
     model/stl
     application/x-tgif
+  ].freeze
+
+  ALLOWED_CONTENT_TYPES = PREVIEW_CONTENT_TYPES + %w[
+    application/zip
   ].freeze
 
   ALLOWED_EXTS = %w[stl obj zip].freeze
