@@ -22,6 +22,8 @@ module ValidatableFile
     end
   end
 
+  private
+
   def filename_is_blank
     # user input: '.stl', '.png', '  .zip'
     errors.add(:url_path, :blank) if filename.blank?
