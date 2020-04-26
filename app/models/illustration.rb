@@ -19,6 +19,17 @@
 class Illustration < ApplicationRecord
   include ValidatableFile
 
+  # MIME types
+  # png - image/png
+  # gif - image/gif
+  # jpeg jpg - image/jpeg
+
+  ALLOWED_CONTENT_TYPES = %w[
+    image/png
+    image/gif
+    image/jpeg
+  ].freeze
+
   ALLOWED_EXTS = %w[png jpg jpeg gif].freeze
 
   # TODO: move to Boyutluseyler::Regex module
