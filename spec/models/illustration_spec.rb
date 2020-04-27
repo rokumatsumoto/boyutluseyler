@@ -26,9 +26,12 @@ RSpec.describe Illustration, type: :model do
   describe 'constants' do
     subject { described_class }
 
+
+    let(:allowed_content_types) { %w[image/png image/gif image/jpeg] }
     let(:allowed_exts) { %w[png jpg jpeg gif] }
     let(:allowed_exts_regex) { /.[.](png|jpg|jpeg|gif)\z/i }
 
+    it { is_expected.to have_constant(:ALLOWED_CONTENT_TYPES, Array).with_value(allowed_content_types) }
     it { is_expected.to have_constant(:ALLOWED_EXTS, Array).with_value(allowed_exts) }
     it { is_expected.to have_constant(:ALLOWED_EXTS_REGEX, Regexp).with_value(allowed_exts_regex) }
   end
