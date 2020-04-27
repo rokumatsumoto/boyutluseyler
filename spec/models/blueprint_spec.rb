@@ -26,10 +26,12 @@ RSpec.describe Blueprint, type: :model do
     subject { described_class }
 
     let(:preview_content_types) { %w[application/vnd.ms-pki.stl model/stl application/x-tgif] }
+    let(:allowed_content_types) { preview_content_types + %w[application/zip] }
     let(:allowed_exts) { %w[stl obj zip] }
     let(:allowed_exts_regex) { /.[.](stl|obj|zip)\z/i }
 
     it { is_expected.to have_constant(:PREVIEW_CONTENT_TYPES, Array).with_value(preview_content_types) }
+    it { is_expected.to have_constant(:ALLOWED_CONTENT_TYPES, Array).with_value(allowed_content_types) }
     it { is_expected.to have_constant(:ALLOWED_EXTS, Array).with_value(allowed_exts) }
     it { is_expected.to have_constant(:ALLOWED_EXTS_REGEX, Regexp).with_value(allowed_exts_regex) }
   end
