@@ -27,6 +27,12 @@ RSpec.describe DesignDownload, type: :model do
   let(:design_download) { create(:design_download) }
   let(:initial_step) { steps[0] }
 
+  describe 'modules' do
+    it 'has a default state machine' do
+      expect(described_class.default_state_machine).to eq(DownloadStateMachine)
+    end
+  end
+
   describe 'associations' do
     it { is_expected.to belong_to(:design) }
   end
