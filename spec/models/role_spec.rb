@@ -33,10 +33,11 @@ RSpec.describe Role, type: :model do
   end
 
   describe 'cancel destroying the role' do
+    let(:role) { create(:role) }
+    let(:user) { build_stubbed(:user) }
+
     it 'ensures that removing all user from role does not remove role' do
       allow(Rolify).to receive(:remove_role_if_empty).and_return(true)
-      role = create(:role)
-      user = build_stubbed(:user)
       user.add_role(role.name)
 
       expect { user.remove_role(role.name) }.not_to change(described_class, :count)
