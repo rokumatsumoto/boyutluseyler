@@ -7,12 +7,12 @@ module Taggable
     Gutentag::ActiveRecord.call self
   end
 
-  # Return the tag names separated by a comma and space
+  # Return the tag names separated by commas and spaces
   def tags_as_string
     tag_names.join(', ')
   end
 
-  # Split up the provided value by commas and (optional) spaces.
+  # Split up the provided value by commas and spaces
   def tags_as_string=(string)
     self.tag_names = string.split(/,\s*/).map(&:strip)
 
