@@ -8,7 +8,7 @@ RSpec.describe Taggable do
     let(:tags_as_string) { 'tag1, tag2, tag3' }
 
     describe '#tags_as_string' do
-      it 'returns the tag names separated by a comma and space' do
+      it 'returns the tag names separated by commas and spaces' do
         allow(model).to receive(:tag_names).and_return(tag_names)
 
         expect(model.tags_as_string). to eq(tags_as_string)
@@ -16,7 +16,7 @@ RSpec.describe Taggable do
     end
 
     describe '#tags_as_string=' do
-      it 'splits up the provided value by commas and (optional) spaces' do
+      it 'splits up the provided value by commas and spaces' do
         model.tags_as_string = tags_as_string
 
         expect(model.tag_names). to eq(tag_names)
