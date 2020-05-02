@@ -46,14 +46,14 @@ RSpec.describe Ahoy::Event, type: :model do
     describe '#events_count' do
       it 'counts liked design event for user' do
         pending('https://github.com/rokumatsumoto/boyutluseyler/issues/105')
-        create_list(:ahoy_event, 2, :liked_design, user: user)
+        create_pair(:ahoy_event, :liked_design, user: user)
 
         expect(user.reload.events_count).to eq(2)
       end
 
       it 'counts downloaded design event for user' do
         pending('https://github.com/rokumatsumoto/boyutluseyler/issues/105')
-        create_list(:ahoy_event, 2, :downloaded_design, user: user)
+        create_pair(:ahoy_event, :downloaded_design, user: user)
 
         expect(user.reload.events_count).to eq(2)
       end
@@ -73,7 +73,7 @@ RSpec.describe Ahoy::Event, type: :model do
     describe '#downloads_count' do
       it 'counts downloaded design event for design' do
         pending('https://github.com/rokumatsumoto/boyutluseyler/issues/105')
-        create_list(:ahoy_event, 2, :downloaded_design, properties: { design_id: design.id })
+        create_pair(:ahoy_event, :downloaded_design, properties: { design_id: design.id })
 
         expect(design.reload.downloads_count).to eq(2)
       end
@@ -82,7 +82,7 @@ RSpec.describe Ahoy::Event, type: :model do
     describe '#likes_count' do
       it 'counts liked design event for design' do
         pending('https://github.com/rokumatsumoto/boyutluseyler/issues/105')
-        create_list(:ahoy_event, 2, :liked_design, properties: { design_id: design.id })
+        create_pair(:ahoy_event, :liked_design, properties: { design_id: design.id })
 
         expect(design.reload.likes_count).to eq(2)
       end
