@@ -3,6 +3,7 @@
 module Blueprints
   class BuildService < Blueprints::BaseService
     def execute
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Object.html#exists%3F-instance_method
       raise_no_such_key unless blueprint.exists?
 
       Blueprint.new.tap do |b|
@@ -23,7 +24,7 @@ module Blueprints
     end
 
     def blueprint
-      strong_memoize(:blueprint) { bucket.object(params[:key]) }
+      @blueprint ||= bucket.object(params[:key])
     end
 
     def bucket
