@@ -17,11 +17,12 @@ module ObjectStorage
     private
 
     def bucket
-      DIRECT_UPLOAD_AWS_S3_BUCKET
+      DIRECT_UPLOAD_BUCKET
     end
 
     def presigned_post_options
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Bucket.html#presigned_post-instance_method
+      # TODO: consider moving Boyutluseyler.config policies into related policy class
       {
         key: generate_key(policy.key_prefix),
         key_starts_with: key_starts_with(policy.key_prefix),

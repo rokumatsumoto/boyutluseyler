@@ -31,11 +31,12 @@ module Blueprints
     end
 
     def blueprint
+      # TODO: Add a wrapper class for bucket methods
       @blueprint ||= bucket.object(params[:key])
     end
 
     def bucket
-      DIRECT_UPLOAD_AWS_S3_BUCKET
+      DIRECT_UPLOAD_BUCKET
     end
 
     # TODO: don't store bucket endpoint in DB or store but don't rely on that data

@@ -29,7 +29,7 @@ module Illustrations
     end
 
     def bucket
-      DIRECT_UPLOAD_AWS_S3_BUCKET
+      DIRECT_UPLOAD_BUCKET
     end
 
     def url_for_size(size)

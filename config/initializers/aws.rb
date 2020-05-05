@@ -9,7 +9,7 @@ if Boyutluseyler.config[:direct_upload_provider] == 'AWS'
     credentials: credentials
   )
 
-  DIRECT_UPLOAD_AWS_S3_BUCKET = resource.bucket(Boyutluseyler.config[:direct_upload_bucket_name])
+  DIRECT_UPLOAD_BUCKET = resource.bucket(Boyutluseyler.config[:direct_upload_bucket_name])
 
   DIRECT_UPLOAD_AWS_S3_CLIENT = Aws::S3::Client.new(
     region: Boyutluseyler.config[:direct_upload_region],
