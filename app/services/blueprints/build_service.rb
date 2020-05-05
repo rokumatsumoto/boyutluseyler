@@ -3,8 +3,7 @@
 module Blueprints
   class BuildService < Blueprints::BaseService
     def execute
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Object.html#exists%3F-instance_method
-      raise_no_such_key unless blueprint.exists?
+      validate!
 
       Blueprint.new.tap do |b|
         b.url = public_url
@@ -17,10 +16,18 @@ module Blueprints
 
     private
 
-    def raise_no_such_key
-      # TODO: log and i18n exception
-      raise Aws::S3::Errors::NoSuchKey.new 'Error', 'Dosya bulunamadı, site
-        yönetimiyle irtibata geçiniz.'
+    def raise_error(message)
+      raise ValidationError, message
+    end
+
+    def validate!
+      validate_object_existence!
+    end
+
+    def validate_object_existence!
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Object.html#exists%3F-instance_method
+      # TODO: add i18n, slack integration and "site administrator has been informed" message
+      raise_error('File not found') unless blueprint.exists?
     end
 
     def blueprint
@@ -31,6 +38,8 @@ module Blueprints
       DIRECT_UPLOAD_AWS_S3_BUCKET
     end
 
+    # TODO: don't store bucket endpoint in DB or store but don't rely on that data
+    # public_url (url column) should be used to quick access by administrators
     def public_url
       "#{Boyutluseyler.config[:direct_upload_endpoint]}/#{blueprint.key}"
     end

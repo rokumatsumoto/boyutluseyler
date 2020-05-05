@@ -2,5 +2,6 @@
 
 module Blueprints
   class BaseService < ::BaseService
+    ValidationError = Class.new(StandardError)
   end
 end
