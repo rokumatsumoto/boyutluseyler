@@ -4,12 +4,14 @@ if Boyutluseyler.config[:direct_upload_provider] == 'AWS'
     Boyutluseyler.config[:direct_upload_secret_access_key]
   )
 
-  resource = Aws::S3::Resource.new(
+  # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Resource.html
+  DIRECT_UPLOAD_RESOURCE = Aws::S3::Resource.new(
+    stub_responses: Rails.env.test?,
     region: Boyutluseyler.config[:direct_upload_region],
     credentials: credentials
   )
 
-  DIRECT_UPLOAD_BUCKET = resource.bucket(Boyutluseyler.config[:direct_upload_bucket_name])
+  DIRECT_UPLOAD_BUCKET = DIRECT_UPLOAD_RESOURCE.bucket(Boyutluseyler.config[:direct_upload_bucket_name])
 
   DIRECT_UPLOAD_AWS_S3_CLIENT = Aws::S3::Client.new(
     region: Boyutluseyler.config[:direct_upload_region],
