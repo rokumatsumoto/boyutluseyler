@@ -52,6 +52,7 @@ RSpec.configure do |config|
   config.include AbstractController::Translation
   config.include BackgroundJobs, type: :feature
   config.include StubSailSettings
+  config.include StubAWSResponses
 
   config.before(:suite) do
     Timecop.safe_mode = true
