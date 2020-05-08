@@ -2,47 +2,33 @@
 
 module Blueprints
   class BuildService < Blueprints::BaseService
+    prepend ValidatesRemoteObject
+
     def execute
       validate!
 
       Blueprint.new.tap do |b|
-        b.url = public_url
-        b.url_path = blueprint.key
-        b.size = blueprint.size
-        b.content_type = blueprint.content_type
+        # TODO: don't store bucket endpoint in DB or store but don't rely on that data.
+        # the object may have been moved to a different bucket or
+        # bucket endpoint may have been changed
+        # public_url (url) should be used for quick access by administrators
+        b.url = remote_object.public_url
+        b.url_path = remote_object.key
+        b.size = remote_object.size
+        b.content_type = remote_object.content_type
         b.thumb_url = ''
       end
     end
 
     private
 
-    def raise_error(message)
-      raise ValidationError, message
-    end
-
     def validate!
-      validate_object_existence!
-    end
-
-    def validate_object_existence!
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Object.html#exists%3F-instance_method
       # TODO: add i18n, slack integration and "site administrator has been informed" message
-      raise_error('File not found') unless blueprint.exists?
-    end
-
-    def blueprint
-      # TODO: Add a wrapper class for bucket methods
-      @blueprint ||= bucket.object(params[:key])
+      raise ValidationError, 'File not found' unless remote_object_exists?
     end
 
     def bucket
-      DIRECT_UPLOAD_BUCKET
-    end
-
-    # TODO: don't store bucket endpoint in DB or store but don't rely on that data
-    # public_url (url column) should be used to quick access by administrators
-    def public_url
-      "#{Boyutluseyler.config[:direct_upload_endpoint]}/#{blueprint.key}"
+      ObjectStorage::DirectUpload::Bucket
     end
   end
 end
