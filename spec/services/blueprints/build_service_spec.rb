@@ -20,7 +20,7 @@ RSpec.describe Blueprints::BuildService do
       end
 
       after do
-        stub_direct_upload_bucket_object_exists # default stub behaviour
+        stub_direct_upload_bucket_object_exists # default stub behavior
       end
 
       it 'raises a file not found error' do
@@ -30,12 +30,13 @@ RSpec.describe Blueprints::BuildService do
 
     context 'when the remote object exists' do
       it 'builds a blueprint without saving it' do
-        direct_upload_bucket = class_double(ObjectStorage::DirectUpload::Bucket).as_stubbed_const
-        # stubbing Aws::S3::Object
+        direct_upload_bucket = instance_double(ObjectStorage::DirectUpload::Bucket)
         # rubocop:disable RSpec/VerifiedDoubles
+        # stubbing Aws::S3::Object
         remote_object = double(key: 'model.stl', size: 1, content_type: 'model/stl',
                                public_url: 'http://foo.com/model.stl', exists?: true)
         # rubocop:enable RSpec/VerifiedDoubles
+        allow(ObjectStorage::DirectUpload::Bucket).to receive(:new).and_return(direct_upload_bucket)
         allow(direct_upload_bucket).to receive(:object).and_return(remote_object)
 
         result = service.execute
