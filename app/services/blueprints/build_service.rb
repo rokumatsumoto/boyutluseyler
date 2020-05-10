@@ -28,7 +28,7 @@ module Blueprints
     end
 
     def bucket
-      ObjectStorage::DirectUpload::Bucket
+      ObjectStorage::DirectUpload::Bucket.new
     end
   end
 end

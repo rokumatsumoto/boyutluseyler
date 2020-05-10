@@ -16,7 +16,7 @@ module Files
       private
 
       def direct_upload_bucket
-        ObjectStorage::DirectUpload::Bucket
+        ObjectStorage::DirectUpload::Bucket.new
       end
     end
   end
