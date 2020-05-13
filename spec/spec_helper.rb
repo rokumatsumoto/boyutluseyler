@@ -53,6 +53,7 @@ RSpec.configure do |config|
   config.include BackgroundJobs, type: :feature
   config.include StubSailSettings
   config.include StubAWSResponses
+  config.include StubDirectUploadBucket
 
   config.before(:suite) do
     Timecop.safe_mode = true
