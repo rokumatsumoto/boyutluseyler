@@ -30,14 +30,12 @@ RSpec.describe Blueprints::BuildService do
 
     context 'when the remote object exists' do
       it 'builds a blueprint without saving it' do
-        direct_upload_bucket = instance_double(ObjectStorage::DirectUpload::Bucket)
         # rubocop:disable RSpec/VerifiedDoubles
         # stubbing Aws::S3::Object
         remote_object = double(key: 'model.stl', size: 1, content_type: 'model/stl',
                                public_url: 'http://foo.com/model.stl', exists?: true)
         # rubocop:enable RSpec/VerifiedDoubles
-        allow(ObjectStorage::DirectUpload::Bucket).to receive(:new).and_return(direct_upload_bucket)
-        allow(direct_upload_bucket).to receive(:object).and_return(remote_object)
+        stub_direct_upload_bucket_object(remote_object)
 
         result = service.execute
 
