@@ -4,7 +4,9 @@ class BlueprintsController < ApplicationController
   def create
     authorize Blueprint
 
-    result = Blueprints::CreateService.new(current_user, blueprint_params).execute
+    result = create_service.new(ObjectStorage::DirectUpload::Bucket.new,
+                                current_user,
+                                blueprint_params).execute
 
     if result[:status] == :success
       render json: { id: result[:blueprint].id }, status: :created
@@ -18,6 +20,10 @@ class BlueprintsController < ApplicationController
   end
 
   private
+
+  def create_service
+    Blueprints::CreateFromDirectUploadService
+  end
 
   def blueprint_params
     params.require(:blueprint).permit(:key)
