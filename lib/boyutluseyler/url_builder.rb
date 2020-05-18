@@ -11,7 +11,7 @@ module Boyutluseyler
     def url
       case object
       when Illustration, User, UserAvatar
-        add_suffix_to_url_before_extension
+        append_suffix_before_extension
       end
     end
 
@@ -22,14 +22,14 @@ module Boyutluseyler
       @params = params.dup
     end
 
-    def add_suffix_to_url_before_extension
+    def append_suffix_before_extension
       filename = params[:url].delete_suffix(extension(params[:url]))
       filename << params[:suffix]
       filename << extension(params[:url])
     end
 
     def extension(url)
-      ext = Boyutluseyler::FilenameHelpers.extname(url)
+      ext = Boyutluseyler::FilenameHelper.extname(url)
 
       return '' if ext.blank?
 
