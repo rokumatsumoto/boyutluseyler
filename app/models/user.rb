@@ -134,7 +134,7 @@ class User < ApplicationRecord
 
   def avatar_filename_is_blank
     # user input: '.png'
-    filename = Boyutluseyler::FilenameHelper.filename(avatar_url)
+    filename = Boyutluseyler::PathHelper.info(avatar_url, :filename)
 
     errors.add(:avatar_url, :blank) if filename.blank?
   end

@@ -4,7 +4,7 @@ module ValidatableFile
   extend ActiveSupport::Concern
 
   included do
-    validates :url, presence: true
+    validates :url, presence: true, format: URI.regexp(%w[http https])
     validates :size, inclusion: { in: content_length_range }
     validates :content_type, presence: true
     validate :filename_is_blank
@@ -52,7 +52,7 @@ module ValidatableFile
   end
 
   def filename
-    Boyutluseyler::FilenameHelpers.filename(url_path)
+    Boyutluseyler::PathHelper.info(url_path, :filename)
   end
 
   def allowed_content_types
