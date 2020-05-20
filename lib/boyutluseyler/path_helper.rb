@@ -4,14 +4,16 @@ module Boyutluseyler
   class PathHelper
     class << self
       def info(path, options = nil)
-        return specific_info(path, options) if options
+        return nil if path.blank?
+        return specific_info(path, options).to_s if options
 
         info = {}
 
-        info[:dirname_with_filename] = dirname_with_filename(path)
-        info[:basename] = basename(path)
-        info[:filename] = filename(path)
-        info[:extension] = extension(path)
+        info[:dirname_with_filename] = dirname_with_filename(path).to_s
+        info[:dirname] = dirname(path).to_s
+        info[:basename] = basename(path).to_s
+        info[:filename] = filename(path).to_s
+        info[:extension] = extension(path).to_s
 
         info
       end
@@ -25,50 +27,39 @@ module Boyutluseyler
       private
 
       def specific_info(path, options)
-        return send(options, path) if options&.is_a?(Symbol) && respond_to?(options, true)
-
-        raise NotImplementedError,
-              "#{name} does not implement #{options}"
+        self.__send__(options, path)
       end
 
       # input: /path/to/filename.jpg
       # output: /path/to/filename
       def dirname_with_filename(path)
-        return nil if path.blank?
-
-        "#{dirname(path)}/#{filename(path)}"
+        Pathname(path).sub_ext('')
       end
 
       # input: /path/to/filename.jpg
       # output: /path/to
       def dirname(path)
-        return nil if path.blank?
-
-        File.dirname(path)
+        Pathname(path).dirname
       end
 
       # input: /path/to/filename.jpg
       # output: filename.jpg
       def basename(path)
-        return nil if path.blank?
-
-        File.basename(path)
+        Pathname(path).basename
       end
 
       # input: /path/to/filename.jpg
       # output: filename
       def filename(path)
-        return nil if path.blank?
+        return nil if path.starts_with?('.')
 
-        File.basename(path, '.*').split('.')[0]
+        Pathname(path).basename.sub_ext('')
       end
 
       # input: /path/to/filename.jpg
       # output: .jpg
       def extension(path)
-        return nil if path.blank?
-
-        File.extname(path)
+        Pathname(path).extname
       end
     end
   end
