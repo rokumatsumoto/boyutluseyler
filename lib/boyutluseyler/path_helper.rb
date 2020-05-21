@@ -5,7 +5,7 @@ module Boyutluseyler
     class << self
       def info(path, options = nil)
         return nil if path.blank?
-        return specific_info(path, options).to_s if options
+        return info_for_options(options, path).to_s if options
 
         info = {}
 
@@ -26,8 +26,8 @@ module Boyutluseyler
 
       private
 
-      def specific_info(path, options)
-        self.__send__(options, path)
+      def info_for_options(options, path)
+        __send__(options, path)
       end
 
       # input: /path/to/filename.jpg
@@ -51,7 +51,7 @@ module Boyutluseyler
       # input: /path/to/filename.jpg
       # output: filename
       def filename(path)
-        return nil if path.starts_with?('.')
+        return nil if path.start_with?('.')
 
         Pathname(path).basename.sub_ext('')
       end
