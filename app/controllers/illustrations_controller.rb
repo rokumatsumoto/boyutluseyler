@@ -4,12 +4,14 @@ class IllustrationsController < ApplicationController
   def create
     authorize Illustration
 
-    @illustration = Illustrations::CreateService.new(illustration_params).execute
+    result = create_service.new(ObjectStorage::DirectUpload::Bucket.new,
+                                current_user,
+                                illustration_params).execute
 
-    if @illustration.persisted?
-      render json: { id: @illustration.id }, status: :created
+    if result[:status] == :success
+      render json: { id: result[:illustration].id }, status: :created
     else
-      render json: @illustration.errors.full_messages, status: :unprocessable_entity
+      render json: result[:message], status: result[:http_status]
     end
   rescue ArgumentError => e
     render json: e.message, status: :bad_request
@@ -18,6 +20,10 @@ class IllustrationsController < ApplicationController
   end
 
   private
+
+  def create_service
+    Illustrations::CreateFromDirectUploadService
+  end
 
   def illustration_params
     params.require(:illustration).permit(:key)
