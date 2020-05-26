@@ -26,7 +26,7 @@ module Illustrations
 
     private
 
-    attr_reader :bucket, :key
+    attr_reader :bucket, :current_user, :key
 
     def find_remote_object!
       # TODO: add i18n, slack integration and "site administrator has been informed" message
@@ -34,18 +34,18 @@ module Illustrations
     end
 
     def build_illustration
-      Illustration.new.tap do |i|
+      Illustration.new.tap do |illustration|
         # TODO: don't store bucket endpoint in DB or store but don't rely on that data.
         # the object may have been moved to a different bucket or
         # bucket endpoint may have been changed
         # public_url (url) should be used for quick access by administrators
-        i.url = remote_object.public_url
-        i.url_path = remote_object.key
-        i.size = remote_object.size
-        i.content_type = remote_object.content_type
-        i.large_url = public_url_for_size(:large)
-        i.medium_url = public_url_for_size(:medium)
-        i.thumb_url = public_url_for_size(:thumb)
+        illustration.url = remote_object.public_url
+        illustration.url_path = remote_object.key
+        illustration.size = remote_object.size
+        illustration.content_type = remote_object.content_type
+        illustration.large_url = public_url_for_size(:large)
+        illustration.medium_url = public_url_for_size(:medium)
+        illustration.thumb_url = public_url_for_size(:thumb)
       end
     end
 
