@@ -26,7 +26,7 @@ module Blueprints
 
     private
 
-    attr_reader :bucket, :key
+    attr_reader :bucket, :current_user, :key
 
     def find_remote_object!
       # TODO: add i18n, slack integration and "site administrator has been informed" message
@@ -34,16 +34,16 @@ module Blueprints
     end
 
     def build_blueprint
-      Blueprint.new.tap do |b|
+      Blueprint.new.tap do |blueprint|
         # TODO: don't store bucket endpoint in DB or store but don't rely on that data.
         # the object may have been moved to a different bucket or
         # bucket endpoint may have been changed
         # public_url (url) should be used for quick access by administrators
-        b.url = remote_object.public_url
-        b.url_path = remote_object.key
-        b.size = remote_object.size
-        b.content_type = remote_object.content_type
-        b.thumb_url = ''
+        blueprint.url = remote_object.public_url
+        blueprint.url_path = remote_object.key
+        blueprint.size = remote_object.size
+        blueprint.content_type = remote_object.content_type
+        blueprint.thumb_url = ''
       end
     end
 
