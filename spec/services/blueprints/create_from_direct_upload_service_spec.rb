@@ -24,7 +24,7 @@ RSpec.describe Blueprints::CreateFromDirectUploadService do
         expect(response[:blueprint]).to be_an_instance_of Blueprint
       end
 
-      context 'with invalid remote object' do
+      context 'with an invalid remote object' do
         it 'returns an error' do
           # rubocop:disable RSpec/VerifiedDoubles
           remote_object = double(key: 'model.ogex', size: 1, content_type: 'model/vnd.opengex',
