@@ -14,14 +14,24 @@ module Designs
       design
     end
 
+    private
+
     def before_create(design)
       design.model_file_format = model_file_format_for(design)
     end
 
     def after_create(design)
-      Designs::PageViews::PopularityScoreService.new(design).execute
+      popularity_score_service_for_design(design).execute
 
-      Designs::Files::MoveService.new(design, current_user, params).execute
+      file_move_service_for_design(design).execute
+    end
+
+    def popularity_score_service_for_design(design)
+      Designs::PageViews::PopularityScoreService.new(design)
+    end
+
+    def file_move_service_for_design(design)
+      Designs::Files::MoveService.new(design, current_user, params)
     end
   end
 end
