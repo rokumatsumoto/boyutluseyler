@@ -2,9 +2,7 @@
 
 module Designs
   class BaseService
-    include Boyutluseyler::Utils::StrongMemoize
-
-    protected
+    private
 
     attr_accessor :design, :current_user, :params
 
@@ -18,6 +16,7 @@ module Designs
       return if blueprint_ids_identical?(design)
 
       file_formats = Set.new
+
       blueprint_ids.each do |id|
         file_formats << MiniMime.lookup_by_content_type(Blueprint.find(id)
                                 .content_type).extension.downcase
@@ -54,7 +53,7 @@ module Designs
     end
 
     def illustration_ids
-      @illustration_ids ||= params[:illustration_ids] || []
+      @illustration_ids ||= (params[:illustration_ids] || [])
     end
   end
 end
