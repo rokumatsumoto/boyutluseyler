@@ -7,7 +7,7 @@ require_relative 'presigned_post'
 module ObjectStorage
   module DirectUpload
     class Bucket
-      def initialize(bucket = nil)
+      def initialize(bucket: DIRECT_UPLOAD_BUCKET)
         @bucket = bucket
       end
 
@@ -15,12 +15,6 @@ module ObjectStorage
 
       def presigned_post(policy)
         PresignedPost.new(bucket, policy).create
-      end
-
-      private
-
-      def bucket
-        @bucket ||= DIRECT_UPLOAD_BUCKET
       end
     end
   end
