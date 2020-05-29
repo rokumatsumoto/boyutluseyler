@@ -7,6 +7,8 @@ require_relative 'presigned_post'
 module ObjectStorage
   module DirectUpload
     class Bucket
+      attr_reader :bucket
+
       def initialize(bucket: DIRECT_UPLOAD_BUCKET)
         @bucket = bucket
       end
