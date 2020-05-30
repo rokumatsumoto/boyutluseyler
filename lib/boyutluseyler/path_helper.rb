@@ -1,66 +1,66 @@
 # frozen_string_literal: true
 
 module Boyutluseyler
-  class PathHelper
-    class << self
-      def info(path, options = nil)
-        return nil if path.blank?
-        return info_for_options(options, path).to_s if options
+  module PathHelper
+    extend self
 
-        info = {}
+    def info(path, options = nil)
+      return nil if path.blank?
+      return info_for_options(options, path).to_s if options
 
-        info[:dirname_with_filename] = dirname_with_filename(path).to_s
-        info[:dirname] = dirname(path).to_s
-        info[:basename] = basename(path).to_s
-        info[:filename] = filename(path).to_s
-        info[:extension] = extension(path).to_s
+      info = {}
 
-        info
-      end
+      info[:dirname_with_filename] = dirname_with_filename(path).to_s
+      info[:dirname] = dirname(path).to_s
+      info[:basename] = basename(path).to_s
+      info[:filename] = filename(path).to_s
+      info[:extension] = extension(path).to_s
 
-      def append_suffix_before_extension(path, suffix)
-        parts = info(path)
+      info
+    end
 
-        "#{parts[:dirname_with_filename]}#{suffix}#{parts[:extension]}"
-      end
+    def append_suffix_before_extension(path, suffix)
+      parts = info(path)
 
-      private
+      "#{parts[:dirname_with_filename]}#{suffix}#{parts[:extension]}"
+    end
 
-      def info_for_options(options, path)
-        __send__(options, path)
-      end
+    private
 
-      # input: /path/to/filename.jpg
-      # output: /path/to/filename
-      def dirname_with_filename(path)
-        Pathname(path).sub_ext('')
-      end
+    def info_for_options(options, path)
+      __send__(options, path)
+    end
 
-      # input: /path/to/filename.jpg
-      # output: /path/to
-      def dirname(path)
-        Pathname(path).dirname
-      end
+    # input: /path/to/filename.jpg
+    # output: /path/to/filename
+    def dirname_with_filename(path)
+      Pathname(path).sub_ext('')
+    end
 
-      # input: /path/to/filename.jpg
-      # output: filename.jpg
-      def basename(path)
-        Pathname(path).basename
-      end
+    # input: /path/to/filename.jpg
+    # output: /path/to
+    def dirname(path)
+      Pathname(path).dirname
+    end
 
-      # input: /path/to/filename.jpg
-      # output: filename
-      def filename(path)
-        return nil if path.start_with?('.')
+    # input: /path/to/filename.jpg
+    # output: filename.jpg
+    def basename(path)
+      Pathname(path).basename
+    end
 
-        Pathname(path).basename.sub_ext('')
-      end
+    # input: /path/to/filename.jpg
+    # output: filename
+    def filename(path)
+      return nil if path.start_with?('.')
 
-      # input: /path/to/filename.jpg
-      # output: .jpg
-      def extension(path)
-        Pathname(path).extname
-      end
+      Pathname(path).basename.sub_ext('')
+    end
+
+    # input: /path/to/filename.jpg
+    # output: .jpg
+    def extension(path)
+      Pathname(path).extname
     end
   end
 end
