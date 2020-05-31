@@ -36,6 +36,18 @@ class DesignDownload < ApplicationRecord
     to: :state_machine
   )
 
+  def file_updated?
+    step == 'file_updated'
+  end
+
+  def ready?
+    step == 'ready'
+  end
+
+  def requested?
+    step == 'requested'
+  end
+
   private
 
   def preserve_current_step
