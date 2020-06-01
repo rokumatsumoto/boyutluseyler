@@ -4,7 +4,7 @@ class BaseDirectUploadPolicy
   protected
 
   def initialize(**direct_upload_context)
-    @current_user_id = direct_upload_context.values_at(:current_user_id)
+    @current_user_id = direct_upload_context[:current_user_id]
   end
 
   def key_prefix
