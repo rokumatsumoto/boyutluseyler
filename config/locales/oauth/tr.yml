@@ -2,3 +2,10 @@ tr:
   oauth:
     failed: "Kimlik doğrulama başarısız oldu: %{error_message}"
     updated: Kimlik doğrulama yöntemi güncellendi
+  activerecord:
+    errors:
+      models:
+        identity:
+          attributes:
+            user:
+              taken: Hesabınıza aynı sağlayıcıdan sadece bir tane ekleyebilirsiniz

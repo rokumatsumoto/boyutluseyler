@@ -27,7 +27,7 @@ module Designs
       def illustration_list
         case action
         when :create_error, :update_error
-          if illustration_ids_empty?
+          if collection_ids_empty?(params_illustration_ids)
             design.illustrations.reload
           else
             illustrations_with_no_relation
@@ -40,7 +40,7 @@ module Designs
       def blueprint_list
         case action
         when :create_error, :update_error
-          if blueprint_ids_empty?
+          if collection_ids_empty?(params_blueprint_ids)
             design.blueprints.reload
           else
             blueprints_with_no_relation
@@ -52,20 +52,12 @@ module Designs
 
       def illustrations_with_no_relation
         Illustration.left_outer_joins(:design_illustration)
-                    .where(id: illustration_ids.map(&:to_i))
+                    .where(id: params_illustration_ids.map(&:to_i))
       end
 
       def blueprints_with_no_relation
         Blueprint.left_outer_joins(:design_blueprint)
-                 .where(id: blueprint_ids.map(&:to_i))
-      end
-
-      def illustration_ids_empty?
-        illustration_ids.all?(&:blank?)
-      end
-
-      def blueprint_ids_empty?
-        blueprint_ids.all?(&:blank?)
+                 .where(id: params_blueprint_ids.map(&:to_i))
       end
     end
   end

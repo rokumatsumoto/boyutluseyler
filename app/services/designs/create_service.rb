@@ -5,8 +5,6 @@ module Designs
     def execute
       design = BuildService.new(nil, current_user, params).execute
 
-      before_create(design)
-
       success = design.save
 
       after_create(design) if success
@@ -14,14 +12,14 @@ module Designs
       design
     end
 
-    def before_create(design)
-      design.model_file_format = model_file_format_for(design)
-    end
+    private
 
     def after_create(design)
-      Designs::PageViews::PopularityScoreService.new(design).execute
+      after_create_service(design).execute
+    end
 
-      Designs::Files::MoveService.new(design, current_user, params).execute
+    def after_create_service(design)
+      AfterCreateService.new(design, current_user, params)
     end
   end
 end

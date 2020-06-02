@@ -4,12 +4,14 @@ class BlueprintsController < ApplicationController
   def create
     authorize Blueprint
 
-    @blueprint = Blueprints::CreateService.new(blueprint_params).execute
+    result = create_service.new(ObjectStorage::DirectUpload::Bucket.new,
+                                current_user,
+                                blueprint_params).execute
 
-    if @blueprint.persisted?
-      render json: { id: @blueprint.id }, status: :created
+    if result[:status] == :success
+      render json: { id: result[:blueprint].id }, status: :created
     else
-      render json: @blueprint.errors.full_messages, status: :unprocessable_entity
+      render json: result[:message], status: result[:http_status]
     end
   rescue ArgumentError => e
     render json: e.message, status: :bad_request
@@ -18,6 +20,10 @@ class BlueprintsController < ApplicationController
   end
 
   private
+
+  def create_service
+    Blueprints::CreateFromDirectUploadService
+  end
 
   def blueprint_params
     params.require(:blueprint).permit(:key)

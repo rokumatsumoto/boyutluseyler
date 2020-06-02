@@ -15,21 +15,26 @@ module Designs
       end
 
       def reorder_illustrations
-        return if illustration_ids_identical?(design)
+        return unless illustrations_changed?
 
-        illustration_ids.each_with_index do |id, index|
+        params_illustration_ids.each_with_index do |id, index|
           design.design_illustrations.where(illustration_id: id)
                 .update_all(position: index + 1)
         end
       end
 
       def reorder_blueprints
-        return if blueprint_ids_identical?(design)
+        return unless blueprints_changed?
 
-        blueprint_ids.each_with_index do |id, index|
+        params_blueprint_ids.each_with_index do |id, index|
           design.design_blueprints.where(blueprint_id: id)
                 .update_all(position: index + 1)
         end
+      end
+
+      def illustrations_changed?
+        return true if collection_ids_changed?(design.illustration_ids.map(&:to_s),
+                                               params_illustration_ids)
       end
     end
   end

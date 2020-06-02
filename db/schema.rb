@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_29_103117) do
+ActiveRecord::Schema.define(version: 2020_04_20_090123) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,9 +85,9 @@ ActiveRecord::Schema.define(version: 2020_03_29_103117) do
   end
 
   create_table "design_downloads", force: :cascade do |t|
-    t.string "step", limit: 50
+    t.string "step", limit: 50, null: false
     t.string "url"
-    t.bigint "design_id"
+    t.bigint "design_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["design_id"], name: "index_design_downloads_on_design_id"
@@ -223,7 +223,7 @@ ActiveRecord::Schema.define(version: 2020_03_29_103117) do
   create_table "user_avatars", force: :cascade do |t|
     t.string "letter_avatar_url", null: false
     t.string "letter_avatar_thumb_url", null: false
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_user_avatars_on_user_id"
@@ -262,8 +262,8 @@ ActiveRecord::Schema.define(version: 2020_03_29_103117) do
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "role_id"
+    t.bigint "user_id", null: false
+    t.bigint "role_id", null: false
     t.index ["role_id"], name: "index_users_roles_on_role_id"
     t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
     t.index ["user_id"], name: "index_users_roles_on_user_id"

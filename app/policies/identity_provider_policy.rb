@@ -7,19 +7,10 @@ class IdentityProviderPolicy < Struct.new(:user, :identity_provider)
   end
 
   def unlink?
-    user || is_admin?
+    user
   end
 
   def link?
-    user || is_admin?
-  end
-
-  private
-
-  # Politely ask if the user has an admin role.
-  #
-  # @return [Boolean] Whether the current user has the admin role
-  def is_admin? # rubocop:disable Style/PredicateName
-    user&.has_role?(:admin)
+    user
   end
 end

@@ -97,6 +97,7 @@ module Boyutluseyler
             avatar_url: medium_image_url,
             avatar_thumb_url: thumb_image_url
           }
+          # TODO: Extract class (avatar)
         end
 
         def provider_module

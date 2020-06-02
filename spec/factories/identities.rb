@@ -13,9 +13,7 @@
 
 FactoryBot.define do
   factory :identity do
-    uid { "MyString" }
-    provider { "MyString" }
-    auth_data_dump { "MyText" }
-    user { nil }
+    uid { '123456' }
+    provider { 'twitter' }
   end
 end

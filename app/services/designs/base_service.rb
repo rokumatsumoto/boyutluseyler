@@ -2,9 +2,10 @@
 
 module Designs
   class BaseService
-    include Boyutluseyler::Utils::StrongMemoize
+    include Boyutluseyler::FileFormat
+    include Boyutluseyler::CollectionIdListHelper
 
-    protected
+    private
 
     attr_accessor :design, :current_user, :params
 
@@ -14,47 +15,23 @@ module Designs
       @params = params.dup
     end
 
-    def model_file_format_for(design)
-      return if blueprint_ids_identical?(design)
-
-      file_formats = Set.new
-      blueprint_ids.each do |id|
-        file_formats << MiniMime.lookup_by_content_type(Blueprint.find(id)
-                                .content_type).extension.downcase
-      end
-
-      file_formats.to_a.join(', ')
+    def model_file_format
+      file_format_for_collection_ids(params_blueprint_ids, Blueprint)
     end
 
-    def blueprint_ids_identical?(design)
-      return true if blueprint_ids.all?(&:blank?)
-
-      return true if !design.new_record? &&
-                     design.blueprint_ids.map(&:to_s) == blueprint_ids
+    def blueprints_changed?
+      return true if collection_ids_changed?(design.blueprint_ids.map(&:to_s),
+                                             params_blueprint_ids)
     end
 
-    def illustration_ids_identical?(design)
-      return true if illustration_ids.all?(&:blank?)
+    alias model_file_format_changed? blueprints_changed?
 
-      return true if !design.new_record? &&
-                     design.illustration_ids.map(&:to_s) == illustration_ids
+    def params_blueprint_ids
+      @params_blueprint_ids ||= (params[:blueprint_ids] || [])
     end
 
-    # TODO: with ruby 2.6 use difference method
-    # https://ruby-doc.org/core-2.6/Array.html#method-i-difference
-    # design.blueprint_ids.difference(blueprint_ids).any?
-    # add or remove
-    def blueprint_ids_different?(design)
-      return true if !design.new_record? &&
-                     design.blueprint_ids.sort.map(&:to_s) != blueprint_ids.sort
-    end
-
-    def blueprint_ids
-      @blueprint_ids ||= (params[:blueprint_ids] || [])
-    end
-
-    def illustration_ids
-      @illustration_ids ||= params[:illustration_ids] || []
+    def params_illustration_ids
+      @params_illustration_ids ||= (params[:illustration_ids] || [])
     end
   end
 end

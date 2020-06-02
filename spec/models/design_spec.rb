@@ -49,7 +49,7 @@ RSpec.describe Design, type: :model do
     it { is_expected.to include_module(Taggable) }
     it { is_expected.to include_module(Sortable) }
 
-    context 'with FriendlyId config' do
+    context 'for FriendlyId config' do
       let(:friendly_id_config) { described_class.friendly_id_config }
 
       it 'uses a column named name to generate slug' do
@@ -444,29 +444,5 @@ RSpec.describe Design, type: :model do
     end
   end
 
-  describe '#should_generate_new_friendly_id?' do
-    subject(:design) { build_stubbed(:design, :with_slug) }
-
-    context 'when name attribute is changed' do
-      it 'generates matching slug' do
-        design.name += ' updated'
-
-        expect(design.send(:should_generate_new_friendly_id?)).to be true
-      end
-    end
-
-    context 'when name attribute is not changed' do
-      it 'does not generate matching slug' do
-        expect(design.send(:should_generate_new_friendly_id?)).to be false
-      end
-    end
-
-    context 'if record is new' do
-      subject(:design) { build(:design) }
-
-      it 'generates matching slug' do
-        expect(design.send(:should_generate_new_friendly_id?)).to be true
-      end
-    end
-  end
+  it_behaves_like 'generates new friendly_id when attribute changed on model', :design, :name
 end
