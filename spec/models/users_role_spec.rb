@@ -2,12 +2,15 @@
 #
 # Table name: users_roles
 #
-#  user_id :bigint(8)
-#  role_id :bigint(8)
+#  user_id :bigint(8)        not null
+#  role_id :bigint(8)        not null
 #
 
-require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe UsersRole, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'associations' do
+    it { is_expected.to belong_to(:user) }
+    it { is_expected.to belong_to(:role) }
+  end
 end

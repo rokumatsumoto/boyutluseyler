@@ -5,6 +5,7 @@ require 'spec_helper'
 # rubocop:disable Metrics/BlockLength
 RSpec.describe 'Unlock' do
   include UnlockHelpers
+
   context 'with errors' do
     let(:unregistered_user) { build_stubbed(:user) }
     let(:user) { create(:user) }
@@ -57,8 +58,12 @@ RSpec.describe 'Unlock' do
     end
   end
 
-  describe 'in' do
-    specify '10 minutes' do
+  context 'when the account is locked' do
+    before do
+      allow(Devise).to receive(:unlock_in).and_return(10.minutes)
+    end
+
+    it 'unlocks locked down account automatically after 10 minutes' do
       user = create(:user, :locked)
 
       Timecop.travel(10.minutes.from_now) do

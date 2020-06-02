@@ -10,13 +10,13 @@ module Files
       end
 
       def execute
-        direct_upload.presigned_post
+        direct_upload_bucket.presigned_post(policy)
       end
 
       private
 
-      def direct_upload
-        ObjectStorage::DirectUpload.new(policy)
+      def direct_upload_bucket
+        ObjectStorage::DirectUpload::Bucket.new
       end
     end
   end

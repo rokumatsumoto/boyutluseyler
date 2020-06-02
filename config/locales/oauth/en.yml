@@ -2,3 +2,10 @@ en:
   oauth:
     failed: "Authentication failed: %{error_message}"
     updated: Authentication method updated
+  activerecord:
+    errors:
+      models:
+        identity:
+          attributes:
+            user:
+              taken: You can add only one from the same provider to your account

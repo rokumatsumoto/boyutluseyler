@@ -7,48 +7,34 @@ class DesignPolicy < ApplicationPolicy
   end
 
   def show?
-    true || is_admin?
+    true
   end
 
   def create?
-    user || is_admin?
-  end
-
-  def new?
-    user || is_admin?
+    user
   end
 
   def update?
     is_owner? || is_admin?
   end
 
-  def edit?
-    is_owner? || is_admin?
-  end
-
   def destroy?
-    is_owner? || is_admin?
+    update?
   end
 
   def download?
-    user || is_admin?
+    user
   end
 
   def like?
-    user || is_admin?
+    user
   end
 
   def latest?
-    true || is_admin?
+    true
   end
 
   def popular?
-    true || is_admin?
-  end
-
-  class Scope < Scope
-    def resolve
-      scope.all
-    end
+    true
   end
 end

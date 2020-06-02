@@ -33,47 +33,62 @@
 
 class User < ApplicationRecord
   include BlocksJsonSerialization
+
   rolify
 
+  OMNIAUTH_PROVIDERS = %i[google_oauth2 facebook].freeze
+
+  # TODO: move to Boyutluseyler::Regex module
+  # TODO: https://github.com/presidentbeef/brakeman/wiki/How-to-Report-a-Brakeman-Issue#false-positivesfalse-negatives
+  # * Output: /\A[a-zA-ZğüşıöçĞÜŞİÖÇ0-9]+(?:[._-][a-zA-ZğüşıöçĞÜŞİÖÇ0-9]+)*\z/
+  # * Test: https://rubular.com/r/NVt4RvIc6c4ZEL
+  USERNAME_REGEX =
+    /
+    \A                                 # start of string
+    [a-zA-ZğüşıöçĞÜŞİÖÇ0-9]+           # one or more ASCII letters digits with TR characters support
+    (?:[._-][a-zA-ZğüşıöçĞÜŞİÖÇ0-9]+)* # 0+ sequences of:
+                                         # [._-] a . or _ or -
+                                         # [a-zA-ZğüşıöçĞÜŞİÖÇ0-9]+ one or more ASCII letters digits
+    \z                                 # end of string
+    /x.freeze
+
+  IMG_EXTS = %w[png jpg jpeg gif].freeze
+
+  # TODO: move to Boyutluseyler::Regex module
+  # * Output: /.(png|jpg|jpeg|gif)\z/i
+  # * Test: https://rubular.com/r/zmGjZaI8J8QMFN
+  # * No escape characters
+  # * No variables
+  # * . Any single character
+  # * a|b a or b
+  # * \z End of string
+  # * i Case insensitive
+  IMG_EXTS_REGEX = /.(#{IMG_EXTS.join("|")})\z/i.freeze
+
+  # validatable adds validations for email and password
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable, :trackable,
-         :omniauthable, omniauth_providers: %i[google_oauth2 facebook],
-                        email_regexp: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+         :omniauthable, omniauth_providers: OMNIAUTH_PROVIDERS
 
   has_many :designs
   has_many :events, class_name: 'Ahoy::Event', dependent: :destroy
   has_many :identities, dependent: :destroy, autosave: true
   has_many :users_roles, dependent: :destroy
   has_many :roles, through: :users_roles
+  has_one :user_avatar, dependent: :destroy
 
   # Virtual attribute for authenticating by either username or email
   attr_accessor :login
-  # Add an accessor so you can have a field to validate
-  # that is seperate from password, password_confirmation or
-  # password_digest...
+  # Add an accessor so you can have a field to validate that is seperate from
+  # password, password_confirmation or password_digest...
   attr_accessor :current_password
-  # Validations
-  #
-  # Note: devise :validatable above adds validations for :email and :password
 
-  validates :username, presence: true,
-                       uniqueness: { case_sensitive: false },
-                       length: { in: 3..30 }
-
+  validates :username, presence: true, uniqueness: { case_sensitive: false },
+                       length: { in: 3..30 }, format: { with: USERNAME_REGEX }
   validates :password, confirmation: true
-  # Only allow letter, number, underscore, hyphen and punctuation.
-  validates :username,
-            format: { with: /\A(?:[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\.][a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\-\.]*[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\-]|[a-zA-ZğüşıöçĞÜŞİÖÇ0-9_])\z/ }
-  validates :avatar_url, presence: true, on: :update
-  validates :avatar_url, format: { with: /\.(png|jpg|jpeg|gif)\z/i }, on: :update
+  validates :avatar_url, presence: true, format: { with: IMG_EXTS_REGEX }, on: :update
   validate :avatar_filename_is_blank, on: :update
-
-  def avatar_filename_is_blank
-    # user input: '.png'
-    filename = Boyutluseyler::FilenameHelpers.filename(avatar_url)
-    errors.add(:avatar_url, :blank) if filename.blank?
-  end
 
   class << self
     # Devise method overridden to allow sign in with email or username
@@ -94,11 +109,10 @@ class User < ApplicationRecord
       username.gsub!(/@.*\z/, '')
       # Remove everything that's not in the list of allowed characters.
       username.gsub!(/[^a-zA-ZğüşıöçĞÜŞİÖÇ0-9_\-\.]/, '')
-      # Remove trailing violations ('.')
-      username.gsub!(/(\.)*\z/, '')
-      # Remove leading violations ('-')
-      username.gsub!(/\A\-+/, '')
-
+      # Remove trailing violations ('.', '_', '-)
+      username.gsub!(/(\.|\_|\-)*\z/, '')
+      # Remove leading violations ('.', '_', '-)
+      username.gsub!(/\A(\.|\_|\-)*/, '')
       # Users with the great usernames of "." or ".." would end up with a blank username.
       # Work around that by setting their username to "blank", followed by a counter.
       username = 'blank' if username.blank?
@@ -114,5 +128,14 @@ class User < ApplicationRecord
 
   def skip_confirmation=(bool)
     skip_confirmation! if bool
+  end
+
+  private
+
+  def avatar_filename_is_blank
+    # user input: '.png'
+    filename = Boyutluseyler::PathHelper.info(avatar_url, :filename)
+
+    errors.add(:avatar_url, :blank) if filename.blank?
   end
 end

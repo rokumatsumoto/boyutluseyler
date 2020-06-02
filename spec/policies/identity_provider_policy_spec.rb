@@ -15,11 +15,5 @@ RSpec.describe IdentityProviderPolicy, type: :policy do
 
       it { is_expected.to permit_actions(permitted_actions) }
     end
-
-    context 'with admin role' do
-      let(:user) { create(:user, :admin) }
-
-      it { is_expected.to permit_actions(permitted_actions) }
-    end
   end
 end

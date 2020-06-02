@@ -9,25 +9,22 @@ module Designs
         return '' if requested?
 
         AvailableDownloadBroadcastWorker.perform_async(design.id)
+
         ''
       end
 
+      private
+
       def ready?
-        step == 'ready'
+        design_download.ready?
       end
 
       def requested?
-        step == 'requested'
+        design_download.requested?
       end
 
       def presigned_url
         PresignedUrlService.new(nil, key: design_download.url).execute
-      end
-
-      def step
-        return design_download.step if design_download
-
-        nil
       end
 
       def design_download

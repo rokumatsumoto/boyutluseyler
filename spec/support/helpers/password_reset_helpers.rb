@@ -20,6 +20,10 @@ module PasswordResetHelpers
     click_button 'btn_reset_password'
   end
 
+  def reset_password_within_two_days
+    allow(Devise).to receive(:reset_password_within).and_return(2.days)
+  end
+
   def expired_message_for_reset_password_token
     t('errors.messages.expired', attribute:
       t('activerecord.attributes.user.reset_password_token'))

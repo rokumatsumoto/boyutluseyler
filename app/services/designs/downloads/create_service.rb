@@ -4,11 +4,9 @@ module Designs
   module Downloads
     class CreateService < Designs::BaseService
       def execute
-        design_download = BuildService.new(design, params).execute
+        design_download = Downloads::BuildService.new(design, params).execute
 
-        design_download.set_step_as(design_download.next_step) # :requested
-
-        success = design_download.save
+        design_download.save
 
         design_download
       end

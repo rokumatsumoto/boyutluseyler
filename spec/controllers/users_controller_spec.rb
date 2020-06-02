@@ -28,6 +28,17 @@ RSpec.describe UsersController, type: :controller do
           expect(response.body).to eq(expected_json)
         end
       end
+
+      context 'when contains Turkish characters' do
+        let(:user) { create(:user, username: 'İçel') }
+
+        it 'returns JSON indicating the user exists' do
+          get :exists, params: { username: user.username }
+
+          expected_json = { exists: true }.to_json
+          expect(response.body).to eq(expected_json)
+        end
+      end
       # rubocop:enable RSpec/NestedGroups
     end
 

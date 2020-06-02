@@ -61,7 +61,7 @@ class PasswordsController < Devise::PasswordsController
 
   def resource_from_email
     email = resource_params[:email]
-    self.resource = resource_class.find_by_email(email)
+    self.resource = resource_class.find_by(email: email)
   end
 
   def throttle_reset

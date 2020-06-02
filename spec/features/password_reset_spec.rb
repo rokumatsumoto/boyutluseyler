@@ -5,6 +5,11 @@ require 'spec_helper'
 # rubocop:disable Metrics/BlockLength
 RSpec.describe 'Password reset' do
   include PasswordResetHelpers
+
+  before do
+    reset_password_within_two_days
+  end
+
   describe 'throttling' do
     let(:user) { create(:user) }
 
@@ -59,7 +64,7 @@ RSpec.describe 'Password reset' do
     context 'with expired token' do
       before do
         token = user.send_reset_password_instructions
-        user.update_attribute(:reset_password_sent_at, 3.days.ago)
+        user.update_attribute(:reset_password_sent_at, 2.days.ago)
 
         visit(edit_user_password_path(reset_password_token: token))
       end
@@ -95,11 +100,11 @@ RSpec.describe 'Password reset' do
       let(:user) { create(:user) }
 
       # rubocop:disable RSpec/NestedGroups
-      context 'with token expires while filling in the form' do
+      context 'when the token expires while filling the form' do
         before do
           render_change_password_with_valid_token(user)
 
-          user.update_attribute(:reset_password_sent_at, 3.days.ago)
+          user.update_attribute(:reset_password_sent_at, 2.days.ago)
 
           change_password(user)
         end

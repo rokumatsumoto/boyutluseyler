@@ -3,6 +3,7 @@
 module Users
   class UpdateAvatarService
     attr_accessor :user
+
     def initialize(user)
       @user = user
     end
@@ -10,8 +11,8 @@ module Users
     def execute
       return oauth_avatar if oauth_avatar?
 
-      user.avatar_thumb_url = url_for_size(:thumb)
-      user.avatar_url = url_for_size(:medium)
+      user.avatar_thumb_url = avatar_url_for_size(:thumb)
+      user.avatar_url = avatar_url_for_size(:medium)
 
       user
     end
@@ -26,13 +27,11 @@ module Users
       Users::OAuthAvatarService.new(user).execute
     end
 
-    def url_for_size(size)
-      Boyutluseyler::UrlBuilder.build(User.new,
-                                      url: processed_public_url,
-                                      suffix: "_#{size}")
+    def avatar_url_for_size(size)
+      Boyutluseyler::PathHelper.append_suffix_before_extension(processed_avatar_url, "_#{size}")
     end
 
-    def processed_public_url
+    def processed_avatar_url
       "#{Boyutluseyler.config[:processed_endpoint]}/#{user.avatar_url}"
     end
   end

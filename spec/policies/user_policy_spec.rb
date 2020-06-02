@@ -10,10 +10,16 @@ RSpec.describe UserPolicy, type: :policy do
   context 'when user is signed-in' do
     permitted_actions = %i[show edit update reset]
 
-    context 'with user role' do
+    context 'with own user account' do
       let(:user) { existing_user }
 
       it { is_expected.to permit_actions(permitted_actions) }
+    end
+
+    context 'with the user role to take action on a different user account' do
+      let(:user) { create(:user) }
+
+      it { is_expected.to forbid_actions(%i[show edit update reset]) }
     end
 
     context 'with admin role' do

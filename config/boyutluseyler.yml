@@ -15,6 +15,10 @@ shared: &shared
   processed_bucket_name: <%= Boyutluseyler.credentials[:aws_s3][:processed_bucket_name] %>
   processed_endpoint: <%= Boyutluseyler.credentials[:aws_s3][:processed_endpoint] %>
 
+
+test:
+  <<: *shared
+
 development:
   <<: *shared
 

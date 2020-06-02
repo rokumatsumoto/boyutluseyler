@@ -5,9 +5,9 @@
 # Table name: design_downloads
 #
 #  id         :bigint(8)        not null, primary key
-#  step       :string(50)
+#  step       :string(50)       not null
 #  url        :string
-#  design_id  :bigint(8)
+#  design_id  :bigint(8)        not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -18,8 +18,9 @@ class DesignDownload < ApplicationRecord
 
   belongs_to :design
 
-  before_validation :preserve_current_step
   validate :step_defined_in_state_machines
+
+  before_validation :preserve_current_step
 
   def state_machine
     @state_machine ||= StepMachine.new(
@@ -34,6 +35,18 @@ class DesignDownload < ApplicationRecord
     :defined_steps, :initial_step, :go_back, :go_back!, :can?,
     to: :state_machine
   )
+
+  def file_updated?
+    step == 'file_updated'
+  end
+
+  def ready?
+    step == 'ready'
+  end
+
+  def requested?
+    step == 'requested'
+  end
 
   private
 

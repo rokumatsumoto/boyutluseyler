@@ -3,8 +3,9 @@
 module Designs
   class BuildService < Designs::BaseService
     def execute
-      Design.new(params).tap do |d|
-        d.user = current_user
+      Design.new(params).tap do |design|
+        design.user = current_user
+        design.model_file_format = model_file_format
       end
     end
   end
