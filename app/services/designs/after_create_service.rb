@@ -3,6 +3,8 @@
 module Designs
   class AfterCreateService < Designs::BaseService
     def execute
+      return if design.blank? || params.blank?
+
       calculate_popularity_score_of_design
       move_design_files
       set_design_download_step_to_not_ready
@@ -19,7 +21,7 @@ module Designs
     end
 
     def set_design_download_step_to_not_ready
-      Designs::Downloads::CreateService.new(design).execute
+      Designs::Downloads::CreateService.new(design, current_user).execute
     end
   end
 end
