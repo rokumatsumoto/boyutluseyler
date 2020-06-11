@@ -8,10 +8,6 @@ RSpec.describe Designs::AfterCreateService do
   end
 
   shared_examples 'does not call services' do
-    it 'does not calculate popularity score of design' do
-      expect(popularity_score_service).not_to have_received(:execute)
-    end
-
     it 'does not move design files' do
       expect(design_files_move_service).not_to have_received(:execute)
     end
@@ -26,15 +22,10 @@ RSpec.describe Designs::AfterCreateService do
     let(:user) { instance_double(User) }
     let(:params) { { param1: 'value' } }
 
-    let(:popularity_score_service) { instance_double(Designs::PageViews::PopularityScoreService) }
     let(:design_files_move_service) { instance_double(Designs::Files::MoveService) }
     let(:design_download_create_service) { instance_double(Designs::Downloads::CreateService) }
 
     before do
-      allow(Designs::PageViews::PopularityScoreService).to receive(:new)
-        .with(design).and_return(popularity_score_service)
-      allow(popularity_score_service).to receive(:execute)
-
       allow(Designs::Files::MoveService).to receive(:new)
         .with(design, user, params).and_return(design_files_move_service)
       allow(design_files_move_service).to receive(:execute)
@@ -47,10 +38,6 @@ RSpec.describe Designs::AfterCreateService do
     end
 
     context 'with design and design params' do
-      it 'calculates popularity score of design' do
-        expect(popularity_score_service).to have_received(:execute)
-      end
-
       it 'moves design files' do
         expect(design_files_move_service).to have_received(:execute)
       end
