@@ -24,7 +24,7 @@ module Designs
     end
 
     def blueprints_updated?
-      return false if collection_ids_match?(design.blueprint_ids.map(&:to_s), params_blueprint_ids)
+      return false if array_match?(design.blueprint_ids.map(&:to_s), params_blueprint_ids)
 
       true
     end

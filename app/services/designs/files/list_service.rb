@@ -27,7 +27,7 @@ module Designs
       def illustration_list
         case action
         when :create_error, :update_error
-          if collection_ids_empty?(params_illustration_ids)
+          if array_empty?(params_illustration_ids)
             design.illustrations.reload
           else
             illustrations_with_no_relation
@@ -40,7 +40,7 @@ module Designs
       def blueprint_list
         case action
         when :create_error, :update_error
-          if collection_ids_empty?(params_blueprint_ids)
+          if array_empty?(params_blueprint_ids)
             design.blueprints.reload
           else
             blueprints_with_no_relation

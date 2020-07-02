@@ -3,7 +3,7 @@
 module Designs
   class BaseService
     include Boyutluseyler::FileFormat
-    include Boyutluseyler::CollectionIdListHelper
+    include Boyutluseyler::ArrayHelper
 
     private
 
@@ -20,15 +20,15 @@ module Designs
     end
 
     def blueprints_changed?
-      @blueprints_changed ||= collection_ids_changed?(design.blueprint_ids.map(&:to_s),
-                                                      params_blueprint_ids)
+      @blueprints_changed ||= array_changed?(design.blueprint_ids.map(&:to_s),
+                                             params_blueprint_ids)
     end
 
     alias model_file_format_changed? blueprints_changed?
 
     def illustrations_changed?
-      @illustrations_changed ||= collection_ids_changed?(design.illustration_ids.map(&:to_s),
-                                                         params_illustration_ids)
+      @illustrations_changed ||= array_changed?(design.illustration_ids.map(&:to_s),
+                                                params_illustration_ids)
     end
 
     def params_blueprint_ids
