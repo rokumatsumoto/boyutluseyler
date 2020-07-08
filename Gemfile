@@ -49,7 +49,7 @@ gem 'recaptcha', '~> 4.14' # Spam and anti-bot protection
 gem 'redis', '~> 4.1', '>= 4.1.3', require: ['redis', 'redis/connection/hiredis']
 gem 'rolify', '~> 5.2'
 gem 'sail', '~> 3.3'
-gem 'sanitize', '~> 5.0'
+gem 'sanitize', '~> 5.2'
 # A portability issue in the sassc gem exists on several platforms.
 # https://github.com/sass/sassc-ruby/issues/146
 gem 'sassc', '2.1.0', require: false # TODO: Remove when we upgrade Rails to 6.0
