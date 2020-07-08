@@ -1,6 +1,4 @@
 require 'spec_helper'
-# rubocop:disable RSpec/DescribeClass
-# rubocop:disable Metrics/BlockLength
 RSpec.describe 'Signup' do
   let(:new_user) { build_stubbed(:user) }
 
@@ -14,18 +12,19 @@ RSpec.describe 'Signup' do
   end
 
   context 'with no errors' do
-    lambda_functions = {
-      'serverless-initials-avatar-dev-initials': {
-        payload: '{"statusCode": 200,"body":"{\"message\":\"avatar.png\"}"}'
+    if defined?(AWS_LAMBDA)
+      lambda_functions = {
+        'serverless-initials-avatar-dev-initials': {
+          payload: '{"statusCode": 200,"body":"{\"message\":\"avatar.png\"}"}'
+        }
       }
-    }
-    AWS_LAMBDA.stub_responses(:invoke, lambda { |context|
-      lambda_functions[context.params[:function_name].to_sym]
-    })
+
+      AWS_LAMBDA.stub_responses(:invoke, lambda { |context|
+        lambda_functions[context.params[:function_name].to_sym]
+      })
+    end
 
     context 'when sending confirmation email' do
-      # rubocop:disable RSpec/ExampleLength
-      # rubocop:disable RSpec/MultipleExpectations
       it 'creates the user account and sends a confirmation email' do
         fill_in 'user_username',              with: new_user.username
         fill_in 'user_email',                 with: new_user.email
@@ -36,9 +35,6 @@ RSpec.describe 'Signup' do
         expect(page).to have_current_path root_path
         expect(page).to have_content(unconfirmed_message_for_user)
       end
-
-      # rubocop:enable RSpec/MultipleExpectations
-      # rubocop:enable RSpec/ExampleLength
     end
   end
 
@@ -52,7 +48,6 @@ RSpec.describe 'Signup' do
       click_button 'btn_sign_up'
     end
 
-    # rubocop:disable RSpec/MultipleExpectations
     it 'displays the errors' do
       expect(page).to have_current_path user_registration_path
       expect(page).to have_content(taken_message_for_email)
@@ -62,12 +57,9 @@ RSpec.describe 'Signup' do
       expect(page).to have_current_path user_registration_path
       expect(page.body).not_to match(/#{new_user.password}/)
     end
-    # rubocop:enable RSpec/MultipleExpectations
   end
 
   def unconfirmed_message_for_user
     t('devise.registrations.signed_up_but_unconfirmed')
   end
 end
-# rubocop:enable Metrics/BlockLength
-# rubocop:enable RSpec/DescribeClass
