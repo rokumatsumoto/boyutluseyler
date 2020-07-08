@@ -11,6 +11,8 @@ module Boyutluseyler
     end
 
     def call
+      return unless defined?(AWS_LAMBDA)
+
       response = AWS_LAMBDA.invoke(function_name: function_name, payload: payload)
       JSON.parse(JSON.parse(response.payload.as_json[0])['body'])['message']
     end
