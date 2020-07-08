@@ -18,8 +18,9 @@ module Designs
         return unless illustrations_changed?
 
         params_illustration_ids.each_with_index do |id, index|
-          design.design_illustrations.where(illustration_id: id)
-                .update_all(position: index + 1)
+          design_illustration = design.design_illustrations.find_by(illustration_id: id)
+
+          design_illustration&.update_column(:position, index + 1)
         end
       end
 
@@ -27,14 +28,10 @@ module Designs
         return unless blueprints_changed?
 
         params_blueprint_ids.each_with_index do |id, index|
-          design.design_blueprints.where(blueprint_id: id)
-                .update_all(position: index + 1)
-        end
-      end
+          design_blueprint = design.design_blueprints.find_by(blueprint_id: id)
 
-      def illustrations_changed?
-        return true if collection_ids_changed?(design.illustration_ids.map(&:to_s),
-                                               params_illustration_ids)
+          design_blueprint&.update_column(:position, index + 1)
+        end
       end
     end
   end

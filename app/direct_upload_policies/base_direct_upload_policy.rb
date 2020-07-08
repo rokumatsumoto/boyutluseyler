@@ -3,6 +3,8 @@
 class BaseDirectUploadPolicy
   protected
 
+  attr_reader :current_user_id
+
   def initialize(**direct_upload_context)
     @current_user_id = direct_upload_context[:current_user_id]
   end
@@ -16,7 +18,7 @@ class BaseDirectUploadPolicy
       'uploads',
       'design',
       "#{model.name.downcase}-file",
-      @current_user_id,
+      current_user_id,
       SecureRandom.uuid
     ].join('/')
   end
@@ -31,5 +33,9 @@ class BaseDirectUploadPolicy
 
   def content_type_starts_with_image
     'image/'
+  end
+
+  def model
+    nil
   end
 end

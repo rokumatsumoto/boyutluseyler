@@ -12,6 +12,8 @@ module Designs
       design
     end
 
+    private
+
     def before_update
       before_update_service.execute
     end
@@ -21,8 +23,8 @@ module Designs
     end
 
     def ensure_update(design)
-      # it must be executed whether update successful or not
-      # for already saved files
+      # there might be moved files on UI so it must be executed whether update successful or not
+
       Designs::Files::MoveService.new(design, current_user, params).execute
     end
   end

@@ -16,15 +16,15 @@ module Designs
     end
 
     def set_design_download_step_to_file_updated
-      return unless blueprints_changed?
+      return unless blueprints_updated?
 
       design_download.set_step_as(:file_updated)
 
       design_download_update_service.execute(design_download)
     end
 
-    def blueprints_changed?
-      return false if collection_ids_match?(design.blueprint_ids.map(&:to_s), params_blueprint_ids)
+    def blueprints_updated?
+      return false if array_match?(design.blueprint_ids.map(&:to_s), params_blueprint_ids)
 
       true
     end

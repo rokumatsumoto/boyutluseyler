@@ -6,7 +6,7 @@ class AvatarDirectUploadPolicy < BaseDirectUploadPolicy
       'uploads',
       'user',
       'avatar-file',
-      @current_user_id
+      current_user_id
     ].join('/')
   end
 
@@ -16,11 +16,5 @@ class AvatarDirectUploadPolicy < BaseDirectUploadPolicy
 
   def content_type_starts_with
     content_type_starts_with_image
-  end
-
-  private
-
-  def model
-    User
   end
 end
