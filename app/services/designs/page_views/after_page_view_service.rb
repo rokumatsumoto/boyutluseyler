@@ -14,6 +14,7 @@ module Designs
       end
 
       def execute
+        # TODO: Use AhoyEventService
         ahoy.track Ahoy::Event::VIEWED_DESIGN, design_id: design.id
 
         PopularityScoreService.new(design).execute
@@ -21,6 +22,7 @@ module Designs
 
       private
 
+      # TODO: Create a module?
       def ahoy
         @ahoy ||= controller.present? ? controller.ahoy : service_ahoy
       end
