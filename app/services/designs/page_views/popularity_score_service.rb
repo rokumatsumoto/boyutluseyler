@@ -31,19 +31,19 @@ module Designs
       # to be gradually adjusted over time.
 
       def calculate
-        (effect * timestamp) + ((1 - effect) * popularity_score)
+        (effect * current_timestamp) + ((1 - effect) * popularity_score)
       end
 
       def effect
         Design::POPULARITY_EFFECT
       end
 
-      def timestamp
+      def current_timestamp
         Time.current.to_i
       end
 
       def popularity_score
-        design.popularity_score.zero? ? design.created_at.to_i : design.popularity_score
+        design.popularity_score.zero? ? current_timestamp : design.popularity_score
       end
     end
   end
