@@ -303,4 +303,4 @@ The contributing file is currently in the planning phase.
 
 ## License
 
-See [LICENSE](LICENSE.md)
+See [LICENSE](LICENSE)
