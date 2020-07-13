@@ -10,8 +10,7 @@
 
 Yet another 3D model repository
 
-"boyutlu şeyler" is a Turkish word that means "dimensional things".
-This is a [3D model repository](https://en.wikipedia.org/wiki/3D_printing_marketplace) web application powered by Ruby on Rails and Vue.js that provides the basic functions you'd expect from a repository, such as add, filter, list, preview, download, like, etc.
+"boyutlu şeyler" with English translation "dimensional things" is a [3D model repository](https://en.wikipedia.org/wiki/3D_printing_marketplace) web application powered by Ruby on Rails and Vue.js that provides the basic functions you'd expect from a repository, such as add, filter, list, preview, download, like, etc.
 
 Its goals are: Having an easy to use and simple user interface, ensuring active participation of users, and providing a codebase for users to contribute to the app. The project is still in its infancy but the codebase can be a reference for your web development journey.
 
@@ -143,7 +142,7 @@ There is a `doc/development` folder in the project, which you can see some conve
 
 ### Code Coverage
 
-At this stage, I do not add new features to the application. My priority is to handle existing scenarios in all aspects and complete their tests. I like to act like a detective and a murderer at the same time.
+At this stage, I do not add new features to the application. My priority is to handle existing scenarios in all aspects and complete their tests.
 
 Although I haven't written all the tests yet, I believe the codebase is clean and understandable so it won't be hard to write tests for each scenario.
 
