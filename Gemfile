@@ -27,7 +27,7 @@ gem 'faker', '~> 2.7'
 gem 'fast_jsonapi', '~> 1.5'
 gem 'finite_machine', '~> 0.12.1'
 gem 'friendly_id', '~> 5.3' # Clean URL
-gem 'gon', '~> 6.2', '>= 6.2.1'
+gem 'gon', '~> 6.4'
 gem 'gutentag', '~> 2.5', '>= 2.5.1'
 gem 'hamlit', '~> 2.9', '>= 2.9.2'
 gem 'hiredis', '~> 0.6.3'
