@@ -24,7 +24,7 @@
     "rails-ujs": "^5.2.3",
     "regenerator-runtime": "^0.13.3",
     "resolve-url-loader": "^3.1.0",
-    "sanitize-html": "^1.20.1",
+    "sanitize-html": "^2.3.2",
     "turbolinks": "^5.2.0",
     "vue": "^2.6.10",
     "vue-3d-model": "^1.1.0-aplha.0",
