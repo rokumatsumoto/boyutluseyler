@@ -88,7 +88,7 @@ group :development, :test do
 end
 
 group :development do
-  gem 'better_errors', '~> 2.5'
+  gem 'better_errors', '~> 2.8'
   gem 'binding_of_caller', '~> 0.8.0'
   gem 'guard-annotate', '~> 2.3'
   gem 'guard-brakeman', '~> 0.8.3', require: false # Security
